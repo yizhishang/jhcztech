@@ -69,7 +69,7 @@ public class BaseInterceptor
 		return "error";
 	}
 	
-	@Pointcut("execution(* com.jhcz.web.controller.*.*(..))")
+	@Pointcut("execution(* com.jhcz.cms.controller.*.*(..))")
 	public void pointCut()
 	{
 		logger.info("pointCut");

@@ -18,72 +18,72 @@ public class Constants extends HashMap
     /**
     * 登录验证码图片
     */
-    public final static String TICKET = "com.jhcz.plat.system.admin.ticket";
+    public final static String TICKET = "com.jhcz.cms.base.admin.ticket";
     
     /**
     * 后管理管理用的UID
     */
-    public final static String ADMIN_UID = "com.jhcz.plat.system.admin.uid";
+    public final static String ADMIN_UID = "com.jhcz.cms.base.admin.uid";
     
     /**
     * 后台管理用户的userId
     */
-    public final static String ADMIN_USER_ID = "com.jhcz.plat.system.admin.userId";
+    public final static String ADMIN_USER_ID = "com.jhcz.cms.base.admin.userId";
     
     /**
     * 后台管理用户的用户名称
     */
-    public final static String ADMIN_USER_NAME = "com.jhcz.plat.system.admin.userName";
+    public final static String ADMIN_USER_NAME = "com.jhcz.cms.base.admin.userName";
     
     /**
     * 后台管理用户是否是超级管理员,超级管理员拥有所有权限
     */
-    public final static String ADMIN_IS_SYSTEM = "com.jhcz.plat.system.admin.isSystem";
+    public final static String ADMIN_IS_SYSTEM = "com.jhcz.cms.base.admin.isSystem";
     
     /**
     * 当前登录的站点
     */
-    public final static String ADMIN_SITENO = "com.jhcz.plat.system.admin.siteNo";
+    public final static String ADMIN_SITENO = "com.jhcz.cms.base.admin.siteNo";
     
     /**
     * 后台用户所拥有的站点
     */
-    public final static String USER_ALL_SITENO = "com.jhcz.plat.system.admin.userSiteNo";
+    public final static String USER_ALL_SITENO = "com.jhcz.cms.base.admin.userSiteNo";
     
     /**
     * 后台用户登录的站点是否是主站
     */
-    public final static String ADMIN_SITE_IS_MAIN = "com.jhcz.plat.system.admin.siteIsMain";
+    public final static String ADMIN_SITE_IS_MAIN = "com.jhcz.cms.base.admin.siteIsMain";
     
     /**
     * 用户登录拥有的权限
     */
-    public final static String USER_RIGHT = "com.jhcz.plat.system.admin.userRight";
+    public final static String USER_RIGHT = "com.jhcz.cms.base.admin.userRight";
     
     /**
     * 用户拥有的功能权限
     */
-    public final static String USER_CATALOG_RIGHT = "com.jhcz.plat.system.admin.userCatalogRight";
+    public final static String USER_CATALOG_RIGHT = "com.jhcz.cms.base.admin.userCatalogRight";
     
     /**
     * 用户拥有的角色
     */
-    public final static String USER_ROLE = "com.jhcz.plat.system.admin.userRole";
+    public final static String USER_ROLE = "com.jhcz.cms.base.admin.userRole";
     
     /**
     * 超级管理员选择登陆的站点
     */
-    public final static String SUPER_ADMIN_SITENO = "com.jhcz.plat.system.admin.selectSiteNo";
+    public final static String SUPER_ADMIN_SITENO = "com.jhcz.cms.base.admin.selectSiteNo";
     
     /**
     * 用户所在营业部
     */
-    public final static String USER_BRANCHNO = "com.jhcz.plat.system.admin.userBranch";
+    public final static String USER_BRANCHNO = "com.jhcz.cms.base.admin.userBranch";
     
     /**
     * 用户的应用功能栏目集合
     */
-    public final static String USER_MENU_CATALOGS = "com.jhcz.plat.system.user.menuCatalogs";
+    public final static String USER_MENU_CATALOGS = "com.jhcz.cms.base.user.menuCatalogs";
     
     /**
     * session中保存弹出修改密码提示框时的对话
