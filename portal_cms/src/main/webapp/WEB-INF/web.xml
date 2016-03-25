@@ -6,9 +6,12 @@
 	<display-name>portal_cms</display-name>
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>login.action</welcome-file>
 	</welcome-file-list>
-	
+   <context-param>  
+        <param-name>webAppRootKey</param-name>   
+        <param-value>ctxPath</param-value>  
+    </context-param>	
 	<context-param>  
 		<param-name>log4jConfigLocation</param-name>  
 		<param-value>classpath:log4j.properties</param-value>  
@@ -16,6 +19,9 @@
 	<listener>    
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>    
 	</listener>
+    <listener>
+        <listener-class>org.springframework.web.util.WebAppRootListener</listener-class>   
+    </listener>
 	<listener>  
 	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
 	</listener>
@@ -61,5 +67,24 @@
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
-
+	
+    <jsp-config>
+        <taglib>
+            <taglib-uri>oscache</taglib-uri>
+            <taglib-location>/WEB-INF/tlds/oscache.tld</taglib-location>
+        </taglib>
+        <taglib>
+            <taglib-uri>/tags/jstl-core</taglib-uri>
+            <taglib-location>/WEB-INF/tlds/c.tld</taglib-location>
+        </taglib>
+        <taglib>
+            <taglib-uri>/tags/jstl-format</taglib-uri>
+            <taglib-location>/WEB-INF/tlds/fmt.tld</taglib-location>
+        </taglib>
+        <taglib>
+            <taglib-uri>/tags/jstl-function</taglib-uri>
+            <taglib-location>/WEB-INF/tlds/fn.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+    
 </web-app>
