@@ -6,31 +6,28 @@
 <meta charset="UTF-8">
 <%@ include file="/admin/common/meta.jsp" %>
 <title>CMS后台管理系统</title>
-    <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/ajax.js"></script>
-    <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.form.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidator.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidatorRegex.js"></script>
-
-<link rel="stylesheet" href="/admin/styles/normalize.css">
-<link rel="stylesheet" href="/admin/styles/alogin.css">
-
+<script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/ajax.js"></script>
+<script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.form.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidator.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidatorRegex.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/admin/styles/normalize.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/admin/styles/alogin.css">
 </head>
-
 <body>
 
 <div class="login">
 	<h1>登录</h1>
 	<form method="post" id="loginForm">
 		<select name="siteno" id="siteno">
-        <c:forEach var="siteItem" items="${data.list }">
-            <option value="${siteItem.siteNo }">${siteItem.name }</option>
+        <c:forEach var="siteItem" items="${list }">
+            <option value="${siteItem.siteno }">${siteItem.name }</option>
         </c:forEach>
        	</select>
 		<input type="text" id="name" name="name" placeholder="请输入用户名"/>
 		<input type="password" name="password" placeholder="密码" />
 		<div style="float:left;"><input type="txt" id="ticket" name="ticket" placeholder="请输入验证码" maxLength="4" size="10" style="width:200px;"/></div>
-		<img id="randomImg" src="${ctxPath }/ticketAdmin/getTicket.action"  style="margin:5px;"/>
+		<img id="randomImg" src="${ctxPath }/getTicket.action"  style="margin:5px;"/>
 		<button type="button" id="loginBtn" class="btn btn-primary btn-block btn-large">登录</button>
 	</form>
 </div>
@@ -52,7 +49,7 @@
 			}
 		});
 		
-		var randomImgSrc="${ctxPath }/ticketAdmin/getTicket.action?rand=";
+		var randomImgSrc="<%=request.getContextPath()%>/getTicket.action?rand=";
 		$("#randomImg").click(function() {
 				$("#randomImg").attr("src",randomImgSrc+Math.random());
 			}
