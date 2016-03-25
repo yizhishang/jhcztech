@@ -1,3 +1,3 @@
 <script language="javascript">
-	 window.location.href="<%=request.getContextPath()%>/loginAdmin/login.action";
+	 window.location.href="<%=request.getContextPath()%>/login.action";
 </script>	
