@@ -10,14 +10,12 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
-import com.jhcz.cms.controller.HelloController;
-
 public class CaseControllerTest
 {
     
     private static final Log logger = LogFactory.getLog(CaseControllerTest.class);
     
-    private HelloController controller = null;
+    private LoginController controller = null;
     
     private XmlWebApplicationContext ctx;
     
@@ -42,27 +40,12 @@ public class CaseControllerTest
     @Test
     public void loginValidate()
     {
-    	controller = (HelloController) ctx.getBean("helloController");
+    	controller = (LoginController) ctx.getBean("loginController");
         logger.info("*****testloginValidate start**********");
-        MockHttpServletRequest request = new MockHttpServletRequest("POST", "/admin/loginAdmin/loginValidate.action");
-        request.setRequestURI("/admin/loginAdmin/loginValidate.action");
-        request.addParameter("name", "name");
-        controller.greeting();
+        MockHttpServletRequest request = new MockHttpServletRequest("POST", "/login.action");
+        request.setRequestURI("/login.action");
+//        request.addParameter("name", "name");
+        controller.doLogin();
         logger.info("*****testloginValidate end**********");
     }
-    
-    //	@Test
-    //	public void testList()
-    //	{
-    //		logger.info("*****testList start**********");
-    //		MockHttpServletResponse response = new MockHttpServletResponse();
-    //		MockHttpServletRequest request = new MockHttpServletRequest("POST", "");
-    //		request.setRequestURI("/case/list");
-    //		request.addParameter("name", "name");
-    //		String returnStr = controller.list(request, response);
-    //		List<String> result = (List<String>) request.getAttribute("result");
-    //		logger.info("*****result:" + result);
-    //		logger.info("*****returnStr:" + returnStr);
-    //		logger.info("*****testList end**********");
-    //	}
 }
