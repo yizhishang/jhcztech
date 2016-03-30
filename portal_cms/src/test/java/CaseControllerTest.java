@@ -13,7 +13,6 @@ import com.jhcz.cms.controller.HelloController;
 
 public class CaseControllerTest
 {
-    
     private static final Log logger = LogFactory.getLog(CaseControllerTest.class);
     
     private HelloController controller = null;
@@ -23,7 +22,7 @@ public class CaseControllerTest
     @Before
     public void setUp() throws Exception
     {
-        String[] paths = { "classpath:spring-context.xml" };
+        String[] paths = { "classpath:spring-context.xml", "classpath:spring-mvc.xml" };
         ctx = new XmlWebApplicationContext();
         ctx.setConfigLocations(paths);
         ctx.setServletContext(new MockServletContext(""));
