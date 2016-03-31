@@ -1,6 +1,5 @@
 package com.jhcz.cms.service.impl;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +19,9 @@ public class UserServiceImpl implements UserService
 		return userDao.getUserById(userId);
 	}
 
-	public User login(String uid, String password) throws BusinessException
+	public User login(String username, String password) throws BusinessException
 	{
-		User user = userDao.findUserByUID(uid);
-		
-		return user;
+		return userDao.findUserByUID(username);
 	}
 	
 }
