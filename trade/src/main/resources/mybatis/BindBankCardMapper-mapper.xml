@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhcz.trade.bankcard.dao.BindBankCardMapper">
+	<insert id="saveBankCardInfo" parameterType="com.jhcz.trade.common.base.DataRow">
+		 
+		insert into t_os_user_bank_card(
+             fc_id_tuserbankcard,  
+             fc_cashaccountid,        
+             fc_transactionaccountid,
+             fc_branch_code,          
+             fc_cust_no,              
+             fc_bank_acct,            
+             fc_bank_acct_name,      
+             fc_bank_no ,             
+             fc_capital_mode ,        
+             fc_main_flag,           
+             fc_card_type,            
+             fc_auth_flag,           
+             fc_state,               
+             fc_province_code,      
+             fc_city_no,             
+             fc_county,               
+             fc_area_code ,          
+             fd_last_date,            
+             fc_fcu ,                
+             fd_fcd,                 
+             fc_lmu ,                
+             fd_lmd                   
+        )
+        values(
+           sys_guid(),
+           #{cashaccountid},
+           #{transactionaccountid},
+           #{branch_code},
+           #{cust_no},
+           #{bank_acct},
+           #{bank_acct_name},
+           #{bank_no},
+           #{capital_mode},
+           #{main_flag},
+           #{card_type},
+           #{auth_flag},
+           #{state},
+           #{province_code},
+           #{city_no},
+           #{county},
+           #{area_code},
+           sysdate,
+           'system',
+           sysdate,
+           'system',
+           sysdate 
+        )
+	</insert>
+	
+	<insert id="insertLogger" parameterType="com.jhcz.trade.common.base.DataRow">
+		 
+		insert into t_os_bussiness_logger(
+			       logger_id,  
+			       model_name,        
+			       logger_content,
+			       error_info,          
+			       loggin_id,              
+			       create_date           
+			                   
+		    )
+		    values(
+		       sys_guid(),
+		       #{model_name},
+		       #{logger_content},
+		       #{error_info},
+		       #{login_id},
+		       sysdate
+		    )
+	</insert>
+</mapper>
