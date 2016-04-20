@@ -1,0 +1,278 @@
+<!-- 头部导入 start -->
+<!--#include virtual="/main/include/header.html"-->
+<!-- 头部导入 end -->
+		<!-- 图片切换区域 -->
+		<div id="bannerBox" class="banners">
+			<div class="banner_num">
+											<span class="current"></span>
+							<span class=""></span>
+
+			</div>
+		
+			<div class="banner_list">
+				<ul>
+							<a href="/main/products/index.shtml"><li style="background-image:url(/upload/ueditor/image/20160331/1459406180372096253.jpg)"></li></a>
+					<a href="/main/about/index.shtml"><li style="background-image:url(/upload/ueditor/image/20160331/1459406210726038684.jpg)"></li></a>
+
+				</ul>
+			</div>
+			<a class="banner_prev" href="javascript:void(0);"></a>
+			<a class="banner_next" href="javascript:void(0);"></a>
+		</div>
+		<!-- content -->
+		<div class="center_content">
+			<!-- 解决方案展示图片 -->
+			<div class="container">
+				<div class="productBox_content">
+					<div class="content_title">
+						<div class="content_cn">产品与解决方案</div>
+						<div class="content_underline"></div>
+						<div class="content_en">Products Solutions</div>
+					</div>
+					<div class="row">
+									<div class="col-md-3 productBoxs">
+							<div class="product_box">
+								<img src="/upload/ueditor/image/20160326/1458963437060092751.png" alt="券商资产管理方案">
+								<dl>
+									<dd>
+										<h3>券商资产管理方案</h3>
+										<p><p>基于总体规划分步实施的具有先进管理思想的解决方案...<br></p></p>
+									</dd>
+								</dl>
+								<div class="product_a">
+		                            <a href="/main/products/index.shtml?cont=security">查看详情</a>
+		                            <div class="hover_img">
+		                                <img src="/component/app/images/jiantou-gray.png">
+		                            </div>
+		                        </div>
+							</div>
+							<div class="hover" style="display: none;">
+								<img src="/upload/ueditor/image/20160326/1458963453541028012.png" alt="券商资产管理方案">
+								<dl>
+									<dd>
+										<h3>券商资产管理方案</h3>
+										<p><p>基于总体规划分步实施的具有先进管理思想的解决方案...<br></p></p>
+									</dd>
+								</dl>
+								<div class="product_a">
+		                            <a href="/main/products/index.shtml?cont=security">查看详情</a>
+		                            <div class="hover_img">
+		                                <img src="/component/app/images/index_jiantou.png">
+		                            </div>
+		                        </div>
+							</div>
+						</div>
+						
+						<div class="col-md-3 productBoxs">
+							<div class="product_box">
+								<img src="/upload/ueditor/image/20160326/1458963475445027588.png" alt="保险资产管理方案">
+								<dl>
+									<dd>
+										<h3>保险资产管理方案</h3>
+										<p><p>符合公司多种需求, 高效率、系统化的综合服务平台...<br></p></p>
+									</dd>
+								</dl>
+								<div class="product_a">
+		                            <a href="/main/products/index.shtml?cont=insurance">查看详情</a>
+		                            <div class="hover_img">
+		                                <img src="/component/app/images/jiantou-gray.png">
+		                            </div>
+		                        </div>
+							</div>
+							<div class="hover" style="display: none;">
+								<img src="/upload/ueditor/image/20160326/1458963486728082849.png" alt="保险资产管理方案">
+								<dl>
+									<dd>
+										<h3>保险资产管理方案</h3>
+										<p><p>符合公司多种需求, 高效率、系统化的综合服务平台...<br></p></p>
+									</dd>
+								</dl>
+								<div class="product_a">
+		                            <a href="/main/products/index.shtml?cont=insurance">查看详情</a>
+		                            <div class="hover_img">
+		                                <img src="/component/app/images/index_jiantou.png">
+		                            </div>
+		                        </div>
+							</div>
+						</div>
+						
+						<div class="col-md-3 productBoxs">
+							<div class="product_box">
+								<img src="/upload/ueditor/image/20160326/1458963517268036910.png" alt="银行资产管理方案">
+								<dl>
+									<dd>
+										<h3>银行资产管理方案</h3>
+										<p><p>针对银行理财业务的运作模式，开发符合监管要求...<br></p></p>
+									</dd>
+								</dl>
+								<div class="product_a">
+		                            <a href="/main/products/index.shtml?cont=bank">查看详情</a>
+		                            <div class="hover_img">
+		                                <img src="/component/app/images/jiantou-gray.png">
+		                            </div>
+		                        </div>
+							</div>
+							<div class="hover" style="display: none;">
+								<img src="/upload/ueditor/image/20160326/1458963536951049755.png" alt="银行资产管理方案">
+								<dl>
+									<dd>
+										<h3>银行资产管理方案</h3>
+										<p><p>针对银行理财业务的运作模式，开发符合监管要求...<br></p></p>
+									</dd>
+								</dl>
+								<div class="product_a">
+		                            <a href="/main/products/index.shtml?cont=bank">查看详情</a>
+		                            <div class="hover_img">
+		                                <img src="/component/app/images/index_jiantou.png">
+		                            </div>
+		                        </div>
+							</div>
+						</div>
+						
+						<div class="col-md-3 productBoxs">
+							<div class="product_box">
+								<img src="/upload/ueditor/image/20160326/1458963554054099336.png" alt="信托资产管理方案">
+								<dl>
+									<dd>
+										<h3>信托资产管理方案</h3>
+										<p><p>信托资产解决方案是以市场为导向，对信托综合业务...<br></p></p>
+									</dd>
+								</dl>
+								<div class="product_a">
+		                            <a href="/main/products/index.shtml?cont=trust">查看详情</a>
+		                            <div class="hover_img">
+		                                <img src="/component/app/images/jiantou-gray.png">
+		                            </div>
+		                        </div>
+							</div>
+							<div class="hover" style="display: none;">
+								<img src="/upload/ueditor/image/20160326/1458963562743087651.png" alt="信托资产管理方案">
+								<dl>
+									<dd>
+										<h3>信托资产管理方案</h3>
+										<p><p>信托资产解决方案是以市场为导向，对信托综合业务...<br></p></p>
+									</dd>
+								</dl>
+								<div class="product_a">
+		                            <a href="/main/products/index.shtml?cont=trust">查看详情</a>
+		                            <div class="hover_img">
+		                                <img src="/component/app/images/index_jiantou.png">
+		                            </div>
+		                        </div>
+							</div>
+						</div>
+						
+
+					</div>
+				</div>
+			</div>
+
+			<!-- 新闻中心 -->
+			<div class="jhcz_news_content">
+				<div class="container">
+					<div class="content_title">
+						<div class="content_cn">新闻中心</div>
+						<div class="content_underline"></div>
+						<div class="content_en">News</div>
+					</div>
+					<div id="jhcz_news_content_row">
+						<div class="news_jpg"><img src="/component/app/images/news_zone3.jpg" alt="新闻1"></div>
+						<div id="index_news_content">
+		                    <ul class="news_title">
+															<li class="news_util" liIndex="0">		
+									<div id="news_zone1">
+										<div class="news_text">
+											<a href="/main/a/20160324/10000078.shtml" target="_blank"><div class="h2_color">金恒创智人才理念</div>
+											<p class="p_color">公司顺应互联网金融时代发展之趋势，立足市场，前途光明。</p>
+											</a>
+										</div>
+										<div class="news_date">
+											<div class="news_day">24</div>
+											<div class="news_year_month">2016.03</div>
+										</div>
+									</div>
+								</li>
+								<li class="" liIndex="1">		
+									<div id="news_zone2">
+										<div class="news_text">
+											<a href="/main/a/20160317/10000065.shtml" target="_blank"><div class="h2_color">落座讯美科技广场</div>
+											<p class="p_color">公司与一月搬迁到南山区，落座深圳“硅谷”之称科技园内，地处科技园中心地带的讯美科技</p>
+											</a>
+										</div>
+										<div class="news_date">
+											<div class="news_day">17</div>
+											<div class="news_year_month">2016.03</div>
+										</div>
+									</div>
+								</li>
+								<li class="" liIndex="2">		
+									<div id="news_zone3">
+										<div class="news_text">
+											<a href="/main/a/20160317/10000064.shtml" target="_blank"><div class="h2_color">金恒创智“朝阳人才计划”</div>
+											<p class="p_color">我们有100多人、优秀的行业人才，我只能告诉你这里有无数的斗战神"猿"！都在为自己</p>
+											</a>
+										</div>
+										<div class="news_date">
+											<div class="news_day">17</div>
+											<div class="news_year_month">2016.03</div>
+										</div>
+									</div>
+								</li>
+                    	
+		                    </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		    <div class="control-carousel">
+		        <div id="control-carousel">
+		            <div class="content_title">
+		                <div class="content_cn">合作伙伴</div>
+		                <div class="content_underline"></div>
+		                <div class="content_en">Cooperative Partner</div>
+		            </div>
+		            <div class="carousel-inner" role="listbox">
+		                <div class="item active">
+<!-- 头部导入 start -->
+<!--#include virtual="/main/include/partners.html"-->
+<!-- 头部导入 end -->                    
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#bannerBox").slide({
+					mainCell: ".banner_list ul",
+					autoPlay: true,
+					titCell: ".banner_num span",
+					prevCell: ".banner_prev",
+					nextCell: ".banner_next",
+					titOnClassName: "current"
+				});
+	            $(".productBoxs").hover(function (event) {
+	                $(this).find(".product_box").hide();
+	                $(this).find(".hover").show();
+	            },function(){
+	                $(this).find(".hover").hide();
+	                $(this).find(".product_box").show();
+	            });
+				$(".news_title li").hover(function(event) {
+					$(".news_title li").removeClass("news_util");
+					$(this).addClass("news_util");
+					var id = $(this).find('div').eq(0).attr("id");
+					$(".news_jpg img").attr({
+						src: "/component/app/images/" + id + ".jpg",
+						alt: "新闻1"
+					});
+				});
+			});
+		</script>
+<!--
+	作者：offline
+	时间：2016-03-17
+	描述：底部导入
+-->
+<!--#include virtual="/main/include/footer.html"-->		

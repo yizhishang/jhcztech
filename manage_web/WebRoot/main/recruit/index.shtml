@@ -1,0 +1,82 @@
+<!-- 头部导入 start -->
+<!--#include virtual="/main/include/header.html"-->
+<!-- 头部导入 end -->
+
+<div class="pict_banner" style="background-image: url('/component/app/images/recruit/recruit_banner.png')">
+</div>
+<div class="container">
+	<!--position_vacant_guide-->
+	<div class="recruit_page_title ">
+		<div class="recruitpage_guide recruitpage_guide_news"></div>
+		<div class="recruitpagetileguider">
+			<span id="recruitTitle">招聘英才</span>
+		</div>
+
+		<div class="recruitpage_guide_line"></div>
+	</div>
+</div>
+<div class="product_list main">
+	<div class="sidebar fl">
+		<div class="sidebar_items">
+									<dl class="normalItem" catalogNo="0" url="/main/products/index.shtml">
+							<dd class="special_dd_outClickClass">
+								<ul>
+									<li>产品解决方案</li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="normalItem" catalogNo="1" url="/main/news/mtbd/index.shtml">
+							<dd class="special_dd_outClickClass">
+								<ul>
+									<li>新闻中心</li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="normalItem" catalogNo="2" url="/main/recruit/rcln/index.shtml">
+							<dd class="special_dd_clickClass">
+								<ul>
+									<li>招聘英才</li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="normalItem" catalogNo="3" url="/main/about/index.shtml">
+							<dd class="special_dd_outClickClass">
+								<ul>
+									<li>关于我们</li>
+								</ul>
+							</dd>
+						</dl>
+
+		</div>
+	</div>
+	<!-- 英才招聘内容-->
+	<div class="product_content recruit_content">
+		<!-- 人才理念 -->
+		<div class="flush">
+			<div class="row">
+				<div class="talent_concept_body">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/**
+		 *  菜单切换
+		 */
+		$(".normalItem").click(function(event) {
+			var url = $(this).attr("url");
+			window.location.href = url;
+		});
+	});
+</script>
+
+<!--
+	作者：offline
+	时间：2016-03-17
+	描述：底部导入
+-->
+<!--#include virtual="/main/include/footer.html"-->

@@ -1,0 +1,128 @@
+<!-- 头部导入 start -->
+<!--#include virtual="/main/include/header.html"-->
+<!-- 头部导入 end -->
+<link rel="stylesheet" href="/component/jquery/jBootsrapPage.css" type="text/css">
+<script type="text/javascript" src="/component/jquery/jBootstrapPage.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".normalItem").click(function(event) {
+			var url = $(this).attr("url");
+			window.location.href = url;
+		});
+	});
+	/*
+	 * 创建分页按钮
+	 * */
+	function createPage(id, pageSize, totalRows) {
+		var buttons = totalRows / pageSize;
+		if (buttons < 1) {
+			buttons = 1;
+		}
+		if (totalRows % pageSize > 0 && buttons > 1) {
+			buttons += 1;
+		}
+		$("#" + id).jBootstrapPage({
+			pageSize: pageSize,
+			maxPageButton: buttons,
+			total: totalRows,
+			onPageClicked: function(obj, pageIndex) {
+				$.post("/articleController/findArticlePageByCatalogId.action", {
+					catalogId: id,
+					curPage: pageIndex + 1,
+					numPerPage: pageSize
+				}, function(result) {
+					$(obj).parent("div").siblings("div.container").html(result);
+				});
+			}
+		});
+	}
+</script>
+
+<div class="pict_banner" style="background-image: url('/component/app/images/news/news_banner.jpg')">
+</div>
+<div class="container">
+	<div class="navigation_page_title">
+		<div class="page_guide page_guide_news"></div>
+		<div class="pagetileguider"><span id="newsTitle">媒体报道</span></div>
+		<div class="page_guide_line"></div>
+	</div>
+</div>
+<!-- 新闻内容 -->
+<div class="product_list main">
+	<div class="sidebar fl news_sidebar">
+		<div class="sidebar_items">
+									<dl class="normalItem" catalogNo="0" url="/main/news/mtbd/index.shtml">
+							<dd class="special_dd_clickClass">
+								<ul>
+									<li>媒体报道</li>
+								</ul>
+							</dd>
+						</dl>
+						<dl class="normalItem" catalogNo="1" url="/main/news/zxdt/index.shtml">
+							<dd class="special_dd_outClickClass">
+								<ul>
+									<li>最新动态</li>
+								</ul>
+							</dd>
+						</dl>
+
+		</div>
+	</div>
+	<!-- 新闻内容-->
+	<div id="last_news_zone" class="news_content">
+						<div class="container news_container">
+					<ul class="news_list_ul">
+							<li class="news_list_table">
+								<div class="news_list_table_jpg">
+									<a href="/main/a/20160324/10000078.shtml" target="_blank"><img src="/component/app/images/news/picture1.jpg" alt=""></a>
+									<div class="news_title">金恒创智人才理念</div>
+									<div class="news_date">2016-03-24 </div>
+									<div class="news_profile">公司顺应互联网金融时代发展之趋势，立足市场，前途光明。</div>
+									<a class="news_selectDetail" href="/main/a/20160324/10000078.shtml" target="_blank">查看详情<div class="news_iconImg"></div></a>
+								</div>
+							</li>
+								<div class="news_borderline"></div>
+							<li class="news_list_table">
+								<div class="news_list_table_jpg">
+									<a href="/main/a/20160317/10000065.shtml" target="_blank"><img src="/component/app/images/news/picture2.jpg" alt=""></a>
+									<div class="news_title">落座讯美科技广场</div>
+									<div class="news_date">2016-03-17 </div>
+									<div class="news_profile">公司与一月搬迁到南山区，落座深圳“硅谷”之称科技园内，地处科技园中心地带的讯美科技...</div>
+									<a class="news_selectDetail" href="/main/a/20160317/10000065.shtml" target="_blank">查看详情<div class="news_iconImg"></div></a>
+								</div>
+							</li>
+								<div class="news_borderline"></div>
+							<li class="news_list_table">
+								<div class="news_list_table_jpg">
+									<a href="/main/a/20160317/10000064.shtml" target="_blank"><img src="/component/app/images/news/picture3.jpg" alt=""></a>
+									<div class="news_title">金恒创智“朝阳人才计划”</div>
+									<div class="news_date">2016-03-17 </div>
+									<div class="news_profile">我们有100多人、优秀的行业人才，我只能告诉你这里有无数的斗战神"猿"！都在为自己...</div>
+									<a class="news_selectDetail" href="/main/a/20160317/10000064.shtml" target="_blank">查看详情<div class="news_iconImg"></div></a>
+								</div>
+							</li>
+								<div class="news_borderline"></div>
+							<li class="news_list_table">
+								<div class="news_list_table_jpg">
+									<a href="/main/a/20160317/10000063.shtml" target="_blank"><img src="/component/app/images/news/picture4.jpg" alt=""></a>
+									<div class="news_title">祝贺金恒创智成立</div>
+									<div class="news_date">2016-03-17 </div>
+									<div class="news_profile">我们一直秉承着以“客户至上、员工重于股东、创新和贡献价值优先于利润”的核心价值观，...</div>
+									<a class="news_selectDetail" href="/main/a/20160317/10000063.shtml" target="_blank">查看详情<div class="news_iconImg"></div></a>
+								</div>
+							</li>
+					</ul>
+					<script type="text/javascript">
+						$(function() {
+							createPage('2914', 6, 4); //创建分页按钮
+						});
+					</script>
+				</div>
+				<!-- 分页按钮 -->
+				<div class="page_button">
+					<ul class="pagination" id="2914"></ul>
+				</div>
+
+	</div>
+</div>
+<!--#include virtual="/main/include/footer.html"-->

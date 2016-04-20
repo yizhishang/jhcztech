@@ -1,0 +1,61 @@
+<!-- 头部导入 start -->
+<!--#include virtual="/main/include/header.html"-->
+<!-- 头部导入 end -->
+<script type="text/javascript">
+$(document).ready(function() {
+	/**
+	 *  菜单切换
+	 */
+	$(".normalItem").click(function(event) {
+		var url = $(this).attr("url");
+		window.location.href = url;
+	});					
+	
+});
+</script>
+
+		<div class="pict_banner" style="background-image: url('/component/app/images/news_banner.jpg')"></div>
+		<div class="container">
+			<div class="navigation_page_title">
+				<div class="page_guide page_guide_news"></div>
+				<div class="pagetileguider"><span id="newsDetailTitle">首页&gt;媒体报道&gt;正文</span></div>
+				<div class="page_guide_line"></div>
+			</div>
+		</div>
+		<!-- 新闻内容 -->
+		<div class="product_list main">
+			<div class="sidebar fl news_sidebar">
+				<div class="sidebar_items">
+							<dl class="normalItem" catalogNo="0" url="/main/news/mtbd/index.shtml">
+						<dd class="special_dd_clickClass">
+							<ul>
+								<li>媒体报道</li>
+							</ul>
+						</dd>
+					</dl>
+					<dl class="normalItem" catalogNo="1" url="/main/news/zxdt/index.shtml">
+						<dd class="special_dd_outClickClass">
+							<ul>
+								<li>最新动态</li>
+							</ul>
+						</dd>
+					</dl>
+
+				</div>
+			</div>
+			<!-- 新闻详细内容-->
+			<div id="news_detail_content" class="news_content news_detail_content" style="">
+				<div class="news_title">金恒创智“朝阳人才计划”</div>
+		        <div class="news_publish_time">2016-03-17 10:25:38</div>
+		        <div class="news_src">来源:</div>
+		        <div class="news_content_detail_border"></div>
+		        <div class="detail_content">
+		            <p><span style="color: rgb(34, 34, 34); font-family: Consolas, &#39;Lucida Console&#39;, monospace; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none; background-color: rgb(255, 255, 255);">我们有100多人、优秀的行业人才，我只能告诉你这里有无数的斗战神&quot;猿&quot;！都在为自己的梦想而战斗，加入我们把骚年让我们一起打造金恒创智的天下吧！</span><span style="color: rgb(34, 34, 34); font-family: Consolas, &#39;Lucida Console&#39;, monospace; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none; background-color: rgb(255, 255, 255);">我们有100多人、优秀的行业人才，我只能告诉你这里有无数的斗战神&quot;猿&quot;！都在为自己的梦想而战斗，加入我们把骚年让我们一起打造金恒创智的天下吧！</span><span style="color: rgb(34, 34, 34); font-family: Consolas, &#39;Lucida Console&#39;, monospace; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none; background-color: rgb(255, 255, 255);">我们有100多人、优秀的行业人才，我只能告诉你这里有无数的斗战神&quot;猿&quot;！都在为自己的梦想而战斗，加入我们把骚年让我们一起打造金恒创智的天下吧！</span><span style="color: rgb(34, 34, 34); font-family: Consolas, &#39;Lucida Console&#39;, monospace; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: auto; text-align: left; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none; background-color: rgb(255, 255, 255);">我们有100多人、优秀的行业人才，我只能告诉你这里有无数的斗战神&quot;猿&quot;！都在为自己的梦想而战斗，加入我们把骚年让我们一起打造金恒创智的天下吧！</span></p>
+		        </div>
+		        <div class="news_content_detail_border"></div>
+		        <div class="preNews"><a href="/main/a/20160317/10000063.shtml">上一条:祝贺金恒创智成立</a></div>
+		        <div class="nextNews"><a href="javascript:">下一条:没有了</a></div>
+			</div>
+		</div>
+
+<!--#include virtual="/main/include/footer.html"-->

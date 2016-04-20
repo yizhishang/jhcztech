@@ -1,0 +1,264 @@
+[金恒创智] 2016-04-15 15:00:52 [INFO ] (XmlWebApplicationContext:951) Closing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 14:43:50 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:00:52 [INFO ] (ApplicationLifecycleListener:37) Stopping application......
+[金恒创智] 2016-04-15 15:00:52 [INFO ] (XmlWebApplicationContext:951) Closing Root WebApplicationContext: startup date [Fri Apr 15 14:43:49 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:00:52 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:00:52 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:00:52 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:00:52 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:00:52 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:00:52 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:00:53 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 760 ms
+[金恒创智] 2016-04-15 15:00:53 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:00:53 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:00:53 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:00:53 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:00:53 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:00:54 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:00:54 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:00:54 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:00:54 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:00:54 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:00:54 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:00:54 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 1023 ms
+[金恒创智] 2016-04-15 15:01:54 [INFO ] (XmlWebApplicationContext:951) Closing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:00:53 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:01:54 [INFO ] (ApplicationLifecycleListener:37) Stopping application......
+[金恒创智] 2016-04-15 15:01:54 [INFO ] (XmlWebApplicationContext:951) Closing Root WebApplicationContext: startup date [Fri Apr 15 15:00:52 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:01:54 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:01:54 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:01:54 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:01:54 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:01:54 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:01:54 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:01:55 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 792 ms
+[金恒创智] 2016-04-15 15:01:55 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:01:55 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:01:55 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:01:55 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:01:55 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:01:56 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:01:56 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:01:56 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:01:56 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:01:56 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:01:56 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:01:56 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 820 ms
+[金恒创智] 2016-04-15 15:02:57 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:02:57 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:02:57 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:02:57 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:02:58 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:02:58 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:02:58 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 1317 ms
+[金恒创智] 2016-04-15 15:02:58 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:02:59 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:02:59 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:02:59 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:02:59 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:03:00 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:03:00 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:03:00 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:03:00 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:03:00 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:03:00 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:03:00 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 1105 ms
+[金恒创智] 2016-04-15 15:03:08 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:03:08 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=483 millisecond
+[金恒创智] 2016-04-15 15:27:15 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:27:15 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=15 millisecond
+[金恒创智] 2016-04-15 15:27:42 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:27:42 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=14 millisecond
+[金恒创智] 2016-04-15 15:30:00 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:30:00 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:30:00 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:30:00 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:30:00 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:30:00 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:30:01 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 951 ms
+[金恒创智] 2016-04-15 15:30:01 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:30:01 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:30:01 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:30:01 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:30:01 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:30:02 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:30:02 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:30:02 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:30:02 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:30:02 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:30:02 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:30:02 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 920 ms
+[金恒创智] 2016-04-15 15:30:07 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:30:08 [ERROR] (RegisterServiceImpl:43) org.apache.ibatis.type.TypeException: Could not set parameters for mapping: ParameterMapping{property='1', mode=IN, javaType=class java.lang.Object, jdbcType=null, numericScale=null, resultMapId='null', jdbcTypeName='null', expression='null'}. Cause: org.apache.ibatis.type.TypeException: Error setting null for parameter #2 with JdbcType OTHER . Try setting a different JdbcType for this parameter or a different jdbcTypeForNull configuration property. Cause: java.sql.SQLException: 无效的列类型: 1111
+[金恒创智] 2016-04-15 15:30:08 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=519 millisecond
+[金恒创智] 2016-04-15 15:31:02 [INFO ] (XmlWebApplicationContext:951) Closing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:30:01 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:31:02 [INFO ] (ApplicationLifecycleListener:37) Stopping application......
+[金恒创智] 2016-04-15 15:31:02 [INFO ] (XmlWebApplicationContext:951) Closing Root WebApplicationContext: startup date [Fri Apr 15 15:30:00 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:31:02 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:31:02 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:31:02 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:31:02 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:31:02 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:31:02 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:31:03 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 953 ms
+[金恒创智] 2016-04-15 15:31:03 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:31:03 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:31:03 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:31:03 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:31:03 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:31:04 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:31:04 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:31:04 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:31:04 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:31:04 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:31:04 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:31:04 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 859 ms
+[金恒创智] 2016-04-15 15:31:09 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:31:09 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=426 millisecond
+[金恒创智] 2016-04-15 15:31:26 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:31:26 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=17 millisecond
+[金恒创智] 2016-04-15 15:32:00 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:33:30 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:34:05 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=35086 millisecond
+[金恒创智] 2016-04-15 15:40:03 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:40:03 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:40:03 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:40:03 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:40:03 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:40:04 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:40:04 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 983 ms
+[金恒创智] 2016-04-15 15:40:04 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:40:04 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:40:04 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:40:04 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:40:04 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:40:05 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:40:05 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:40:05 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:40:05 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:40:05 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:40:05 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:40:05 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 963 ms
+[金恒创智] 2016-04-15 15:40:08 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:40:20 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=11962 millisecond
+[金恒创智] 2016-04-15 15:41:55 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:41:55 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:41:55 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:41:55 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:41:55 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:41:56 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:41:56 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 949 ms
+[金恒创智] 2016-04-15 15:41:56 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:41:56 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:41:56 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:41:56 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:41:56 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:41:57 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:41:57 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:41:57 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:41:57 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:41:57 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:41:57 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:41:57 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 952 ms
+[金恒创智] 2016-04-15 15:42:03 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:42:03 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=22 millisecond
+[金恒创智] 2016-04-15 15:43:51 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:43:51 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:43:51 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:43:51 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:43:51 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:43:51 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:43:52 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 951 ms
+[金恒创智] 2016-04-15 15:43:52 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:43:52 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:43:52 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:43:52 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:43:52 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:43:53 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:43:53 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:43:53 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:43:53 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:43:53 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:43:53 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:43:53 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 940 ms
+[金恒创智] 2016-04-15 15:43:56 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:43:56 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=21 millisecond
+[金恒创智] 2016-04-15 15:44:09 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:44:09 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:44:09 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:44:09 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:44:09 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:44:10 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:44:10 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 960 ms
+[金恒创智] 2016-04-15 15:44:10 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:44:10 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:44:10 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:44:10 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:44:10 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:44:11 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:44:11 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:44:11 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:44:11 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:44:11 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:44:11 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:44:11 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 921 ms
+[金恒创智] 2016-04-15 15:44:15 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:44:21 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=6012 millisecond
+[金恒创智] 2016-04-15 15:46:11 [INFO ] (XmlWebApplicationContext:951) Closing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:44:10 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:46:11 [INFO ] (ApplicationLifecycleListener:37) Stopping application......
+[金恒创智] 2016-04-15 15:46:11 [INFO ] (XmlWebApplicationContext:951) Closing Root WebApplicationContext: startup date [Fri Apr 15 15:44:09 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:46:11 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:46:11 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:46:11 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:46:11 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:46:11 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:46:12 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:46:12 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 965 ms
+[金恒创智] 2016-04-15 15:46:12 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:46:12 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:46:12 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:46:12 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:46:12 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:46:13 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:46:13 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:46:13 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:46:13 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:46:13 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:46:13 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:46:13 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 859 ms
+[金恒创智] 2016-04-15 15:48:36 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:48:36 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:48:36 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:48:36 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:48:36 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:48:36 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:48:36 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 952 ms
+[金恒创智] 2016-04-15 15:48:36 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:48:37 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:48:37 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:48:37 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:48:37 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:48:37 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:48:37 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:48:37 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:48:37 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:48:37 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:48:37 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:48:37 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 950 ms
+[金恒创智] 2016-04-15 15:48:41 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:49:07 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:49:07 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:49:07 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:49:07 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:49:08 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:49:08 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:49:08 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 932 ms
+[金恒创智] 2016-04-15 15:49:08 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:49:08 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:49:08 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:49:08 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:49:08 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:49:09 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:49:09 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:49:09 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:49:09 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:49:09 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:49:09 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:49:09 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 930 ms
+[金恒创智] 2016-04-15 15:49:12 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:49:50 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=37364 millisecond
+[金恒创智] 2016-04-15 15:50:01 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:50:03 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=2039 millisecond
+[金恒创智] 2016-04-15 15:51:56 [INFO ] (RegisterController:49) 开始执行 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言]
+[金恒创智] 2016-04-15 15:52:04 [INFO ] (RegisterController:57) 执行完成 [com.jhcz.web.controller.RegisterController.insertMessage联系我们留言] times=8114 millisecond
+[金恒创智] 2016-04-15 15:57:01 [INFO ] (ContextLoader:307) Root WebApplicationContext: initialization started
+[金恒创智] 2016-04-15 15:57:01 [INFO ] (XmlWebApplicationContext:573) Refreshing Root WebApplicationContext: startup date [Fri Apr 15 15:57:01 CST 2016]; root of context hierarchy
+[金恒创智] 2016-04-15 15:57:01 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-context.xml]
+[金恒创智] 2016-04-15 15:57:01 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-mybatis.xml]
+[金恒创智] 2016-04-15 15:57:01 [INFO ] (PropertyPlaceholderConfigurer:172) Loading properties file from class path resource [jdbc.properties]
+[金恒创智] 2016-04-15 15:57:02 [INFO ] (ContextLoader:347) Root WebApplicationContext: initialization completed in 1232 ms
+[金恒创智] 2016-04-15 15:57:02 [INFO ] (ApplicationLifecycleListener:50) Starting application......
+[金恒创智] 2016-04-15 15:57:02 [INFO ] (DispatcherServlet:488) FrameworkServlet 'springMVC': initialization started
+[金恒创智] 2016-04-15 15:57:02 [INFO ] (XmlWebApplicationContext:573) Refreshing WebApplicationContext for namespace 'springMVC-servlet': startup date [Fri Apr 15 15:57:02 CST 2016]; parent: Root WebApplicationContext
+[金恒创智] 2016-04-15 15:57:02 [INFO ] (XmlBeanDefinitionReader:317) Loading XML bean definitions from URL [file:/G:/Workspace/manage_web/WebRoot/WEB-INF/classes/spring-web.xml]
+[金恒创智] 2016-04-15 15:57:03 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/findArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:57:03 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/articleController/queryArticlePageByCatalogId.action] onto handler 'articleController'
+[金恒创智] 2016-04-15 15:57:03 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/functionCatalog/queryFunctionCatalog.action] onto handler 'functionCatalogController'
+[金恒创智] 2016-04-15 15:57:03 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/greeting.action] onto handler 'helloController'
+[金恒创智] 2016-04-15 15:57:03 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/insertMessage.action] onto handler 'registerController'
+[金恒创智] 2016-04-15 15:57:03 [INFO ] (DefaultAnnotationHandlerMapping:341) Mapped URL path [/getTicket.action] onto handler 'ticketController'
+[金恒创智] 2016-04-15 15:57:03 [INFO ] (DispatcherServlet:507) FrameworkServlet 'springMVC': initialization completed in 1089 ms
