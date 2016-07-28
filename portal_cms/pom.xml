@@ -187,17 +187,21 @@
 		</dependency>
 
 		<!-- 加载oracel jdbc驱动包  -->
+		<!-- https://mvnrepository.com/artifact/ojdbc/ojdbc -->
 		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc</artifactId>
-			<version>10.1.0.2.0</version>
+		    <groupId>ojdbc</groupId>
+		    <artifactId>ojdbc</artifactId>
+		    <version>14</version>
+		    <scope>system</scope>
+		    <systemPath>${project.basedir}/lib/ojdbc14-10.2.0.4.0.jar</systemPath>
 		</dependency>
 
 		<!-- 文件 -->
+		<!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
 		<dependency>
-			<groupId>org.dom4j</groupId>
-			<artifactId>dom4j</artifactId>
-			<version>1.6.1</version>
+		    <groupId>dom4j</groupId>
+		    <artifactId>dom4j</artifactId>
+		    <version>1.6.1</version>
 		</dependency>
 		
 		<!-- generator生成文件 -->
