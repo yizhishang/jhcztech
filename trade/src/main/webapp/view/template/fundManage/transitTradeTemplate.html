@@ -1,0 +1,24 @@
+<script type="text/html" id="transitTradeTemplate">
+{{each data as item index}}
+		<div>
+			<p>{{item.fund_name}}&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="撤单" onclick="openKillOrderDialog({{fund_code}});"/>&nbsp;<input type="button" value="详情" id="showDetail" onclick="showDetail({{index}});"/></p>
+			<p>{{item.trade_type}}|金额:{{item.occur_amount}}|申请日期:2016-03-28</p>
+			<div style="display: none;" id="transitTradeDetail_{{index}}">
+				<p>2016-03-27 15:45:32 提交申请</p>
+				<p>2016-03-28 15:00:32 发起交易清算</p>
+				<p>2016-03-27 15:45:32 提交申请</p>
+			</div>
+		</div>
+{{/each}}
+</script>
+
+
+<script type="text/html" id="killOrderDialogTemplate">
+	{{each data as item index}}
+		<p>交易金额:<input type="text" value="{{item.occur_amount}}"/></p>
+		<p>金额大写:<input type="text" value="{{item.trade_type}}"/></p>
+		<p>原申请时间:<input type="text" value="{{item.trade_time}}"/></p>
+		<p>原申申请流水号:<input type="text" value="{{item.request_no}}"/></p>
+		<p><input type="button" value="撤单" onclick="killOrder({{fund_code}});"/></p>
+	{{/each}}
+</script>

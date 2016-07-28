@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 多个页面公用  -->
+    <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/util.css" rel="stylesheet" type="text/css"/>
+    <script src="../../js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="../../bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../js/highchart/highcharts.4.2.3.js" type="text/javascript"></script>
+    <!--[if lte IE 9]>
+    <script src="../../js/html5/respond.min.js"></script>
+    <script src="../../js/html5/html5shiv.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var $obj = $("#gantt");
+            var data = [
+                {
+                    name: '基金资产',
+                    y: 70,
+                    sliced: false,
+                    selected: true,
+                    color: "#f06e00"
+                },
+                {
+                    name: '专户资产',
+                    y: 20,
+                    sliced: false,
+                    selected: true,
+                    color: "#e25192"
+                },
+                {
+                    name: '在途资产',
+                    y: 10,
+                    sliced: false,
+                    selected: true,
+                    color: "#00aaee"
+                }
+            ];
+            var assetTypeChartData = [
+                {
+                    type: 'pie',
+                    name: '占总资产',
+                    data: data
+                }
+            ];
+            if (data.length == 0) {
+                $obj.html("<div style='text-align:center;'>图表暂无数据!</div>");
+                return;
+            }
+            $obj.highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    height: 250
+                },
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: '我的总资产(元)<br/><span style="font-size:18px;color: #000000;">23569.32</span>',
+                    floating: true,
+                    align: "center",
+                    x: 0,
+                    y: 110,
+                    style: {
+                        fontSize: 14
+                    }
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                legend: {
+                    align: "left",
+                    layout: "vertical",
+                    maxHeight: 190,
+                    itemStyle: { cursor: 'pointer', align: 'left' }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: false,
+                        innerSize: '65%'
+                    }
+                },
+                series: assetTypeChartData
+            });
+        });
+    </script>
+    <title>基金直销平台</title>
+</head>
+<body>
+<!--顶层导航-->
+<div class="header_top">
+    <div class="container">
+        <ul class="navbar-nav">
+            <li>
+                <img src="../../images/member_index/phone_disabled.png"/>
+                <a href="#" class="active">移动版</a>
+            </li>
+            <li>
+                <img src="../../images/member_index/weixin_disabled.png"/>
+                <a href="#">官方微信</a>
+            </li>
+            <li>
+                <img src="../../images/member_index/qq_disabled.png"/>
+                <a href="#" target="_blank">在线客服</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-right" id="login_or_register" style="display: none;">
+            <li>
+                <a href="#" id="login" class="">登录</a>
+            </li>
+            <li>
+                |
+            </li>
+            <li>
+                <a href="#" id="register" class="">注册</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-right" id="user_info">
+            <li>
+                <div>晚上好！欢迎登录&nbsp;&nbsp;<span style="color:#f06e00;">134****3253</span></div>
+            </li>
+            <li>
+                |
+            </li>
+            <li>
+                <a href="#" id="loginout" class="">安全退出</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--导航-->
+<div class="navbar navbar-default navbar-static-top header_bottom" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="logo" href="/index.html"><img src="../../images/member_index/logo.png"/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="fund_select"><a href="#">基金精选</a></li>
+                <li class="new_guide"><a href="#">新手指引</a></li>
+                <li class="security"><a href="#">安全保障</a></li>
+                <li class="account select active"><a href="#">我的账户</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--登录的客户信息展示-->
+<div class="member_content">
+    <div class="container">
+        <div class="col-md-2 member_content_img">
+            <img src="../../images/member_index/member_head_icon.png"/>
+        </div>
+        <div class="col-md-10 member_content_content">
+            <ul>
+                <li class="content1">
+                    <div class="row1">
+                        <div class="uer_name_row">
+                            晚上好！张婷婷
+                        </div>
+                        <div class="border_img">
+                            <a href="#"><div class="img"><img src="../../images/member_index/member_state_icon01_1.png"/></div></a>
+                        </div>
+                        <div class="border_img">
+                            <a href="#"><div class="img"><img src="../../images/member_index/member_state_icon02_1.png"/></div></a>
+                        </div>
+                        <div class="border_img">
+                            <a href="#"><div class="img"><img src="../../images/member_index/member_state_icon03_1.png"/></div></a>
+                        </div>
+                        <div class="border_img">
+                            <a href="#"><div class="img"><img src="../../images/member_index/member_state_icon04_1.png"/></div></a>
+                        </div>
+                    </div>
+                </li>
+                <li class="content2">
+                    <div>
+                        <p>
+                            风险承受能力:稳健性（系统默认）
+                        </p>
+                    </div>
+                    <div>
+                        <a href="#">[重新把脉]</a>
+                    </div>
+                </li>
+                <li class="content3">
+                    <div>
+                        <p>
+                            安全等级：低&nbsp;&nbsp;<a href="#">[提升]</a>
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            上次登录时间：2016-4-22 19:30
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="member_detail">
+    <div class="container">
+        <div class="sidebar">
+            <dl class="main_content active">
+                <dt class="nonLeaf">
+                    <img src="../../images/member_index/member_leftnav_icon01.png"/>
+                    <a href="#">我的主页</a>
+                </dt>
+            </dl>
+            <dl class="fund_content">
+                <dt class="">
+                    <img src="../../images/member_index/member_leftnav_icon02_1.png"/>
+                    <span>我的投资</span>
+                </dt>
+                <dd class="">
+                    <ul class="">
+                        <li><a href="">我的基金</a></li>
+                        <li><a href="">在途交易</a></li>
+                        <li><a href="">交易记录</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl class="cards_content">
+                <dt class="">
+                    <img src="../../images/member_index/member_leftnav_icon03_1.png"/>
+                    <a href="#">我的银行卡</a>
+                </dt>
+            </dl>
+            <dl class="accounts_content">
+                <dt class="">
+                    <img src="../../images/member_index/member_leftnav_icon04_1.png"/>
+                    <span>账户管理</span>
+                </dt>
+                <dd class="">
+                    <ul>
+                        <li><a href="">个人信息</a></li>
+                        <li><a href="">密码管理</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+        <div class="member_detail_content">
+            <div class="detail_content1">
+                <p class="detail_title">资金总揽</p>
+
+                <div class="detail_content">
+                    <div class="detail">
+                        <div class="detail_top">
+                            <div>
+                                <p>昨日盈亏（元）</p>
+
+                                <p class="profit">68.5</p>
+                            </div>
+                            <div class="history_profit">
+                                <p>历史累计收益（元）<span class="amount">3000.32</span></p>
+                            </div>
+                        </div>
+                        <div class="detail_bottom">
+                            <div class="detail_bottom_content">
+                                <div class="profit_percent" style="background-image: url(images/member_index/member_bg_quan02.png);background-repeat: no-repeat;">
+                                    <p>70%</p>
+                                </div>
+                                <div class="profit_amount">
+                                    <p>基金资产（元）</p>
+
+                                    <p class="amount">9000</p>
+                                </div>
+                            </div>
+                            <div class="detail_bottom_content" style="margin-left: 11px;">
+                                <div class="profit_percent" style="background-image: url(images/member_index/member_bg_quan03.png);background-repeat: no-repeat;">
+                                    <p>20%</p>
+                                </div>
+                                <div class="profit_amount">
+                                    <p>专户资产（元）</p>
+
+                                    <p class="amount">3000</p>
+                                </div>
+                            </div>
+                            <div class="detail_bottom_content" style="margin-left: -5px;">
+                                <div class="profit_percent" style="background-image: url(images/member_index/member_bg_quan04.png);background-repeat: no-repeat;margin-left: 16px;">
+                                    <p>10%</p>
+                                </div>
+                                <div class="profit_amount" style="float:right">
+                                    <p>在途资产（元）</p>
+
+                                    <p class="amount">1500</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gantt" id="gantt">
+                        甘特图
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="detail_content2">
+                <p class="detail_title">我的基金</p>
+
+                <div class="bank_name">平安银行</div>
+                <div class="panel-heading position_vacantOne">
+                    <div class="col-md-2 col-xs-2">基金名称</div>
+                    <div class="col-md-2 col-xs-2">可用份额（份）</div>
+                    <div class="col-md-2 col-xs-2">市值（元）</div>
+                    <div class="col-md-2 col-xs-2">最新净值</div>
+                    <div class="col-md-2 col-xs-2">浮动盈亏</div>
+                    <div class="col-md-2 col-xs-2 operator text-center ">操作</div>
+                    <div>&nbsp;</div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="panel-heading position_vacantTwo">
+                    <div class="col-md-2 col-xs-2">富安达策略精选</div>
+                    <div class="col-md-2 col-xs-2">10.65</div>
+                    <div class="col-md-2 col-xs-2">19.85</div>
+                    <div class="col-md-2 col-xs-2 profit_down">1.864(-1.73%)<img class="detail_content2_img" src="../../images/member_index/down.png"/>
+                    </div>
+                    <div class="col-md-2 col-xs-2 profit_down">0.14<img class="detail_content2_img" src="../../images/member_index/down.png"/>
+                    </div>
+                    <div class="col-md-2 col-xs-2 text-center">
+                        <a href="#" class="first_a">追加</a>
+                        <a href="#">赎回</a>
+                        <a href="#">转化</a>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="panel-heading position_vacantTwo">
+                    <div class="col-md-2 col-xs-2">富安达策略精选</div>
+                    <div class="col-md-2 col-xs-2">10.65</div>
+                    <div class="col-md-2 col-xs-2">19.85</div>
+                    <div class="col-md-2 col-xs-2 profit_up">1.864(-1.73%)<img class="detail_content2_img" src="../../images/member_index/up.png"/>
+                    </div>
+                    <div class="col-md-2 col-xs-2 profit_up">0.14<img class="detail_content2_img" src="../../images/member_index/up.png"/>
+                    </div>
+                    <div class="col-md-2 col-xs-2 text-center">
+                        <a href="#" class="first_a">追加</a>
+                        <a href="#">赎回</a>
+                        <a href="#">转化</a>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="detail_content3">
+                <p class="detail_title">热门推荐</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="content3_one">
+                            <div class="content3_one1 text-center">国泰估值混合1（LOF）</div>
+                            <div class="content3_one2">债券为基股票填色 追求长期稳定增值</div>
+                            <div class="content3_one3">
+                                <div class="content3_one3_l">
+                                    <div class="profit">1.1250</div>
+                                    <div>最新净值(元)</div>
+                                </div>
+                                <div class="content3_one3_r">
+                                    <div class="profit">36.25</div>
+                                    <div>近一年涨幅(%)</div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="content3_one4">已有1360人购买 1000.0元购</div>
+                            <div class="content3_one5"><a href="#">立即购买</a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="content3_two">
+                            <div class="content3_one1  text-center">国泰估值混合2（LOF）</div>
+                            <div class="content3_one2">债券为基股票填色 追求长期稳定增值</div>
+                            <div class="content3_one3">
+                                <div class="content3_one3_l">
+                                    <div class="profit">1.1250</div>
+                                    <div>最新净值(元)</div>
+                                </div>
+                                <div class="content3_one3_r">
+                                    <div class="profit">36.25</div>
+                                    <div>近一年涨幅(%)</div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="content3_one4">已有1360人购买 1000.0元购</div>
+                            <div class="content3_one5"><a href="#">立即购买</a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="content3_three">
+                            <div class="content3_one1  text-center">国泰估值混合3（LOF）</div>
+                            <div class="content3_one2">债券为基股票填色 追求长期稳定增值</div>
+                            <div class="content3_one3">
+                                <div class="content3_one3_l">
+                                    <div class="profit">1.1250</div>
+                                    <div>最新净值(元)</div>
+                                </div>
+                                <div class="content3_one3_r">
+                                    <div class="profit">36.25</div>
+                                    <div>近一年涨幅(%)</div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="content3_one4">已有1360人购买 1000.0元购</div>
+                            <div class="content3_one5"><a href="#">立即购买</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="main">
+        <div class="navigation">
+            <dl>
+                <dt>关于我们</dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <a class="" href="javascript:void(0);">联系我们</a>
+                        </li>
+                        <li>
+                            <a class="" href="">公司简介</a>
+                        </li>
+                        <li>
+                            <a class="" href="javascript:void(0);">媒体报道</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt>新手帮助</dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <a class="disable" href="javascript:void(0);">开户演示</a>
+                        </li>
+                        <li>
+                            <a class="disable" href="javascript:void(0);">常见问题</a>
+                        </li>
+                        <li>
+                            <a class="disable" href="javascript:void(0);">账户设置</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt>安全保障</dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <a class="" href="">法律法规</a>
+                        </li>
+                        <li>
+                            <a class="" href="">风险提示</a>
+                        </li>
+                        <li>
+                            <a class="" href="">隐私条款</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="erweima-style">
+                    <img src="../../images/member_index/jhczerweima.jpg" />
+                </dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <div class="disable"><span style="color:#7e7e7e;margin-left: 15px;font-size: 12px;">扫一扫,了解更多</span></div>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            <div class="tellphoneaddr">
+                <dl>
+                    <dt class="phone24_time">服务热线&nbsp;[&nbsp;9:00-18:00&nbsp;]</dt>
+                    <dd>
+                        <ul>
+                            <li class="phone24">
+                                <img src="../../images/member_index/member_bottom_tel.png"/>
+                                <span class="tellphone">400-800-88600</span>
+                            </li>
+                            <li>
+                                <div class="mail_service">
+                                        邮箱客服：<span class="mail">service@jhcztech.com</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="copyright">
+        <div class="span1">Copyright @ 2004-2016 金恒创智JHCZTECH.com版权所有&nbsp;  |&nbsp;  粤 ICP备 15097678号</div>
+        <div class="span2">&nbsp;&nbsp;&nbsp;&nbsp;投资有风险，购买需谨慎</div>
+    </div>
+</div>
+</body>
+</html>

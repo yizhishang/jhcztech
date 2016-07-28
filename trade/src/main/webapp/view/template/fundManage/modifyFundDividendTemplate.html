@@ -1,0 +1,13 @@
+<script type="text/html" id="fundDividend">
+{{each data as item}}
+	<tr>
+		<td>&nbsp;{{item.fund_name}}&nbsp;</td>
+		<td>&nbsp;{{item.share_class}}&nbsp;</td>
+		<td>&nbsp;{{item.occur_share}}&nbsp;</td>
+		<td>&nbsp;{{item.market_value}}&nbsp;</td>
+		<td>&nbsp;{{item.occur_share}}&nbsp;</td>
+		<td>&nbsp;{{item.dividend_method}}&nbsp;</td>
+		<td>&nbsp;<input type="button" id="modifyFundDividendBtn" onclick="fundDividendDialog({{item.fund_code}})" value="修改"></input>&nbsp;</td>
+	</tr>
+{{/each}}
+</script>

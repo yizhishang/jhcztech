@@ -1,0 +1,13 @@
+<script type="text/html" id="fundTrans">
+{{each data as fundTrans}}
+	<tr>
+		<td>&nbsp;{{fundTrans.fund_name}}&nbsp;</td>
+		<td>&nbsp;{{fundTrans.share_class}}&nbsp;</td>
+		<td>&nbsp;{{fundTrans.occur_share}}&nbsp;</td>
+		<td>&nbsp;{{fundTrans.market_value}}&nbsp;</td>
+		<td>&nbsp;{{fundTrans.confirm_share}}&nbsp;</td>
+		<td>&nbsp;{{fundTrans.state}}&nbsp;</td>
+		<td>&nbsp;<input type="button" value="转换" onclick="javascript:openFundTransDialog({{fundTrans.fund_code}});"></input>&nbsp;</td>
+	</tr>
+{{/each}}
+</script>

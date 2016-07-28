@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhcz.trade.account.biz.dao.UserMapper">
+
+	<select id="generateCustNo" resultType="java.lang.String">
+		select lpad(count(1)+1,12,'0') from t_os_user_info
+	</select>
+	
+	<insert id="saveLoginUser" parameterType="java.util.Map">
+		insert into t_os_user_info(fc_cust_no,fc_cust_type,fc_is_trade,fc_mobile,fc_login_by_mobile,fc_state,fc_fcu,fd_fcd,fc_lmu,fd_lmd)
+		values(#{custNo},#{custType},'0',#{mobile},'1','0','system',sysdate,'system',sysdate)
+	</insert>
+	
+	<insert id="savePassword" parameterType="java.util.Map">
+		insert into t_os_user_pwd(fc_cust_no,fc_pwd_type,fc_pwd_value,fi_error_input_count,fd_last_date,fc_fcu,fd_fcd,fc_lmu,fd_lmd) 
+		values(#{custNo},'0',#{password},'0',sysdate,'system',sysdate,'system',sysdate)
+	</insert>
+	
+	<select id="getPwdInfo" parameterType="java.util.Map" resultType="java.util.Map">
+		select t.fc_id_tuserpwd,t.fc_pwd_value,t.fi_error_input_count,t.fd_lock_date from t_os_user_pwd t where t.fc_cust_no = #{custNo} and t.fc_pwd_type = #{pwdType}
+	</select>
+	
+	<update id="updateLockTime" parameterType="java.util.Map">
+		update t_os_user_pwd t set t.fd_lock_date = '' ,t.fi_error_input_count = 0 where t.fc_id_tuserpwd = #{FC_ID_TUSERPWD}
+	</update>
+	
+	<update id="invalidUser" parameterType="String">
+		update t_os_user_info t set t.fc_state = '3' where t.fc_cust_no = #{custNo}
+	</update>
+	
+	<update id="updateErrorCountOfAccount" parameterType="String">
+		update t_os_user_pwd t set t.fi_error_input_count = t.fi_error_input_count + 1 where t.fc_cust_no = #{custNo}
+	</update>
+	
+	<update id="deleteLoginPwd" parameterType="String">
+		delete t_os_user_pwd t where t.fc_cust_no = #{custNo} and t.fc_pwd_type = '0'
+	</update>
+	
+	<select id="queryUserByMobile" parameterType="java.lang.String" resultType="UserInfo">
+		 SELECT T.fc_CUST_NO custNo,
+	        T.fc_IDENTITY_TYPE identityType,
+	        T.fc_IDENTITY_NUM identityNum,
+	        T.fc_NAME name,
+	        T.fc_CUST_TYPE custType,
+	        T.fc_IS_TRADE isTrade,
+	        T.fc_MOBILE mobile,
+	        T.fc_LOGIN_BY_MOBILE loginByMobile, 
+	        T.fc_EMAIL email,
+	        T.fc_LOGIN_BY_EMAIL loginByEmail,
+	        T.fc_AUTHE_INFOR ,
+	        T.fc_STATE state
+	   from t_os_user_info t
+	  where t.fc_mobile = #{mobile}
+	</select>
+	
+	<select id="getUserBaseInfoByLoginId" parameterType="java.lang.String" resultType="UserInfo">
+		SELECT T.FC_CUST_NO custNo,
+	       T.FC_IDENTITY_TYPE identityType,
+	       T.FC_IDENTITY_NUM identityNum,
+	       T.FC_NAME name,
+	       T.FC_CUST_TYPE custType,
+	       T.FC_MOBILE mobile,
+	       T.FC_LOGIN_BY_MOBILE loginByMobile,
+	       T.FC_CUST_TYPE custType,
+	       T.FC_IS_TRADE isTrade,
+	       T.FC_LOGIN_BY_EMAIL loginByEmail, 
+	       T.FC_EMAIL email,
+	       T.FC_AUTHE_INFOR ,
+	       T.FC_STATE state
+	  FROM T_OS_USER_INFO T
+	 WHERE 1 = 1
+   	   and t.fc_state = '0'
+	   AND (T.FC_IDENTITY_NUM = #{loginId} OR (T.FC_MOBILE = #{loginId} AND T.FC_LOGIN_BY_MOBILE = '1') OR
+	       (T.FC_EMAIL = #{loginId} AND T.FC_LOGIN_BY_EMAIL = '1') OR T.FC_FUND_ACCOUNT = #{loginId})
+	</select>
+
+</mapper>

@@ -4,7 +4,7 @@
 	<artifactId>trade</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1</version>
-
+	
 	<properties>
 		<spring-version>3.2.3.RELEASE</spring-version>
 	</properties>

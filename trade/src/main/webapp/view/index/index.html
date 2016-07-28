@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="/trade/js/plugin/jquery-1.11.3.min.js" ></script>
+		<script type="text/javascript" src="/trade/js/plugin/template.js" ></script>
+		<script type="text/javascript" src="/trade/js/loadArticle.js" ></script>
+	</head>
+	<body>
+		<table>
+			<caption align="center">使用arttemplate.js</caption>
+			<thead>
+				<tr>
+					<td>标题</td>
+					<td>时间</td>
+					<td>简介</td>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+		<!--#include file="/trade/view/index/header.html"-->
+	</body>
+</html>
+<script>
+	$(document).ready(function(){
+		//alert("====");
+		
+		$.ajax({  
+            url : "bindBankCard.do?method=test",  
+            type : "POST",  
+            datatype:"json",  
+            data : {},  
+            success : function(result, stats) {  
+                if (stats == "success") {  
+                	var data = result.data;
+                	if (data == 0) {
+                		alert("data=="+data);
+                	}else if (data == -1){
+                		alert(data);
+                	}
+                }  
+            },  
+            error : function(result) {  
+                //alert("请求失败"); 
+            }  
+        });  
+	});
+</script>

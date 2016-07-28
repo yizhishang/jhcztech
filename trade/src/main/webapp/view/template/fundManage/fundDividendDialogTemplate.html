@@ -1,0 +1,10 @@
+<script type="text/html" id="fundDividendDialogTemplate">
+{{each data as item}}
+		<p>基金名称:<span><input type="hidden" value="{{item.fund_code}}" id="fund_code" ></input></span></p>
+		<p>基金名称:<span id="fund_name">{{item.fund_name}}</span></p>
+		<p>当前分红方式:<span id="dividend_method">{{item.dividend_method}}</span></p>
+		<p>修改分红方式:<span id="modify_dividend_method">红利再投资</span></p>
+		<p>交易密码:<span><input type="password" id="trade_pwd"></input></span></p>
+		<p><input type="button" value="下一步" onclick="modifyDividend();"></input></p>
+{{/each}}
+</script>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 多个页面公用  -->
+    <link href="../../js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/util.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/login.css" rel="stylesheet" type="text/css"/>
+    <link href="../../css/register.css" rel="stylesheet" type="text/css"/>
+    <script src="../../js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="../../js/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../../js/highchart/highcharts.4.2.3.js" type="text/javascript"></script>
+    <script src="../../js/placeholder/placeholder.js" type="text/javascript"></script>
+   <!-- [if lte IE 9]>-->
+    <script src="../../js/html5/respond.min.js"></script>
+    <script src="../../js/html5/html5shiv.min.js"></script>
+    <!--<![endif]-->
+    <script type="text/javascript">
+
+    </script>
+    <title>基金直销平台</title>
+</head>
+<body>
+<!--顶层导航-->
+<div class="header_top">
+    <div class="container">
+        <ul class="navbar-nav">
+            <li>
+                <img src="../../images/member_index/phone_disabled.png"/>
+                <a href="#" class="active">移动版</a>
+            </li>
+            <li>
+                <img src="../../images/member_index/weixin_disabled.png"/>
+                <a href="#">官方微信</a>
+            </li>
+            <li>
+                <img src="../../images/member_index/qq_disabled.png"/>
+                <a href="#" target="_blank">在线客服</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-right" id="login_or_register">
+            <li>
+                <div>你好，欢迎登录！</div>
+            </li>
+            <li>
+                <a href="#" id="login" class="">[登录]</a>
+            </li>
+            <li>
+                <a href="#" id="register" class="" style="color:#f06e00;">&nbsp;[注册]</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--导航-->
+<div class="container header_bottom">
+    <a class="logo" href="../../index.html"><img src="../../images/member_index/logo.png"/></a>
+    <div class="login_word">
+        <div class="login_title">用户注册</div>
+    </div>
+    <div class="login-register">
+        <div class="login-register_title">我已注册，现在就<a href="#">登陆</a></div>
+    </div>
+</div>
+
+
+<div class="register_content">
+    <div class="container">
+        <div class="register_content_container">
+            <ul>
+                <li>
+                    <div class="register_step">
+                        <div class="register_int step1 normal"><div class="number">1</div></div>
+                        <div class="register_word">验证手机</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="line" style="margin-left: 12px"></div>
+                </li>
+                <li>
+                    <div class="register_step">
+                        <div class="register_int step2 disable"><div class="number">2</div></div>
+                        <div class="register_word">设置登录密码</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="line" style="margin-right: 16px"></div>
+                </li>
+                <li>
+                    <div class="register_step">
+                        <div class="register_int step3 disable"><div class="number">3</div></div>
+                        <div class="register_word">注册成功</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="register_content_step1">
+            <div class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">手机号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" placeholder="请输入手机号">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 26px;">
+                    <label class="col-sm-2 control-label">验证码</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control yangzhengma" placeholder="请输入验证码">
+                        <span class="captchaImage"><img alt="验证码" src="/images/pic_yzm.gif"></span>
+                        <a href="#" class="change_other" style="color: #00abf0">换一张</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked="true">我已阅读并同意《网上交易系统注册及服务协议》
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-default">获取手机校验码</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--底层导航-->
+<div class="footer">
+    <div class="main">
+        <div class="navigation">
+            <dl>
+                <dt>关于我们</dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <a class="" href="javascript:void(0);">联系我们</a>
+                        </li>
+                        <li>
+                            <a class="" href="">公司简介</a>
+                        </li>
+                        <li>
+                            <a class="" href="javascript:void(0);">媒体报道</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt>新手帮助</dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <a class="disable" href="javascript:void(0);">开户演示</a>
+                        </li>
+                        <li>
+                            <a class="disable" href="javascript:void(0);">常见问题</a>
+                        </li>
+                        <li>
+                            <a class="disable" href="javascript:void(0);">账户设置</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt>安全保障</dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <a class="" href="">法律法规</a>
+                        </li>
+                        <li>
+                            <a class="" href="">风险提示</a>
+                        </li>
+                        <li>
+                            <a class="" href="">隐私条款</a></li>
+                    </ul>
+                </dd>
+            </dl>
+            <dl>
+                <dt class="erweima-style">
+                    <img src="../../images/member_index/jhczerweima.jpg" />
+                </dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <div class="disable"><span style="color:#7e7e7e;margin-left: 15px;font-size: 12px;">扫一扫,了解更多</span></div>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+            <div class="tellphoneaddr">
+                <dl>
+                    <dt class="phone24_time">服务热线&nbsp;[&nbsp;9:00-18:00&nbsp;]</dt>
+                    <dd>
+                        <ul>
+                            <li class="phone24">
+                                <img src="../../images/member_index/member_bottom_tel.png"/>
+                                <span class="tellphone">400-800-88600</span>
+                            </li>
+                            <li>
+                                <div class="mail_service">
+                                        邮箱客服：<span class="mail">service@jhcztech.com</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="copyright">
+        <div class="span1">Copyright @ 2004-2016 金恒创智JHCZTECH.com版权所有&nbsp;  |&nbsp;  粤 ICP备 15097678号</div>
+        <div class="span2">&nbsp;&nbsp;&nbsp;&nbsp;投资有风险，购买需谨慎</div>
+    </div>
+</div>
+</body>
+</html>

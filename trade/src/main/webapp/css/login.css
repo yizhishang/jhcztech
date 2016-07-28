@@ -1,0 +1,104 @@
+/*登录界面*/
+.header_bottom .logo{
+    float:left;
+}
+.header_bottom .login_word{
+    float:left;
+}
+.header_bottom .login_title{
+    color:#3d3d3d;
+    font-size: 30px;
+    margin-top: 15px;
+    border-left: 1px solid #e6e6e6;
+    margin-left: 26px;
+    padding-left: 20px;
+}
+
+.login_content{
+    background-color: #f5f5f5;
+}
+.login_content_container{
+    height: 580px;
+    width: 1190px;
+    margin: 0 auto;
+}
+.login_content .login_left,.login_content .login_right{
+    float:left;
+    margin-top: 72px;
+}
+.login_content .login_left{
+    width:809px;
+    height:433px;
+}
+.login_content .login_right{
+    width:360px;
+    height:433px;
+    margin-left: 20px;
+    background-color: #ffffff;
+}
+.login_content .signin-head_word{
+    font-size: 20px;
+    color: #ef6f00;
+    padding-bottom: 18px;
+    margin-top: 19px;
+    border-bottom: 1px solid #ededed;
+    padding-left: 22px;
+}
+.login_content .free_register{
+    margin-top: 36px;
+    text-align: center;
+}
+.login_content .free_register a{
+    color:#ef6f00;
+}
+.form-control:focus {
+    border-color: #d7d7d7;
+}
+.form-signin .checkbox {
+    float:left;
+    margin-left: 42px;
+}
+.form-signin .forget_pass {
+    float: right;
+    margin-right: 24px;
+    margin-top: 9px;
+    margin-bottom: 30px;
+}
+.form-signin{
+    margin-top: 30px;
+}
+.form-signin .form-control {
+    position: relative;
+    font-size: 14px;
+    height: 44px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-left: 22px;
+    border-radius: 5px;
+    width:314px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: 30px;
+    background: url(../images/login_user.png) 10px 8px #FFFFFF no-repeat;
+    padding-left: 45px;
+    color: #7f7f7f;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    background: url(../images/login_passwork.png) 10px 8px #FFFFFF no-repeat;
+    padding-left: 45px;
+    color: #7f7f7f
+}
+
+.form-signin button {
+    border-radius: 5px;
+    width:314px;
+    margin-left: 22px;
+    background-color: #ef6f00;
+}
