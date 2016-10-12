@@ -1,0 +1,66 @@
+<script type="text/javascript">
+   $(document).ready(function(){
+   var cataid = QueryString("catalogId");
+	  if($("#cid").val()!=null)
+      {
+        cataid = $("#cid").val();
+      }	 
+	  if(cataid.length>0)
+	  {
+	  if($('#'+cataid).parent().prev('a').html()==null)
+	 {
+	     $('#'+cataid).children('a').attr('class','current');
+	 }
+	 else
+	 {
+
+	     $('#'+cataid).parent('ul').show();
+	     $('#'+cataid).parent().prev('a').attr('class','current');
+	     $('#'+cataid).children('a').attr('class','current');
+	 }
+	  }
+	  
+});
+function fmenu(value)
+{
+   if($(value).parent().find('ul').is(":hidden")==true)
+   {
+       $(value).parent().find('ul').show();
+   }
+   else
+   {
+   	 $(value).parent().find('ul').hide();
+   }
+}
+</script>
+<div id="subleft">
+	<div class="side_menu mt10">
+		<h4><a href="${prop.basePath?if_exists}">${catalog.name?if_exists}</a></h4>
+		<ul class="side_nav">			  
+            <@show catalogs=data />
+		</ul>
+	</div>	
+</div>
+<#macro show catalogs>
+	<#if catalogs?has_content>
+		<#list catalogs as catalog>
+			  <#if catalog.children?has_content>
+			     <#if catalog.catalog_id = parentId>
+			      <li id="${catalog.catalog_id?if_exists}"><a  onclick="fmenu(this)" href="javascript:void(0);">${catalog.name?if_exists}</a>
+					<ul>
+						<@show catalogs=catalog.children/>
+				  	</ul>
+			      </li>
+			      <#else>
+			      <li  id="${catalog.catalog_id?if_exists}"><a onclick="fmenu(this)" href="javascript:void(0);">${catalog.name?if_exists}</a>
+					<ul style="display:none;">
+						<@show catalogs=catalog.children/>
+				  	</ul>
+			      </li>
+			      </#if>
+			    <#else>
+			          <li id="${catalog.catalog_id?if_exists}"><a href="${catalog.link_url?if_exists}" <#if catalog.catalog_id = currentlyId>class="current"</#if>>${catalog.name?if_exists}</a></li>      
+			    </#if>
+		</#list>
+	 </#if>
+</#macro>

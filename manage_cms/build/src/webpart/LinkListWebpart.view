@@ -1,0 +1,33 @@
+<#if (data?exists)&&(data?size>0)>
+<#if prop.style="1">
+    <div class="friendlink">
+     <strong>友情链接</strong>
+       <#list data as link>
+         <#if link.url=='#'>
+         <a href="javascript:void(0);">${link.name?if_exists}</a>
+         <#else>
+         <a href="${link.url?if_exists}" target="_blank">${link.name?if_exists}</a>
+         </#if>
+       </#list>
+     </div>
+<#elseif prop.style="2">
+      <div class="link">
+        <#list data as link>
+         <#if link_index==0>
+           <#if link.url=='#'>
+	         <a href="javascript:void(0);">${link.name?if_exists}</a>
+	         <#else>
+	         <a href="${link.url?if_exists}" target="_blank">${link.name?if_exists}</a>
+	         </#if>
+         <#else>
+	          --
+	         <#if link.url=='#'>
+	         <a href="javascript:void(0);">${link.name?if_exists}</a>
+	         <#else>
+	         <a href="${link.url?if_exists}" target="_blank">${link.name?if_exists}</a>
+	         </#if>
+         </#if>
+        </#list>
+     </div>
+</#if>
+</#if>
