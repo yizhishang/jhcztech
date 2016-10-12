@@ -1,0 +1,129 @@
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
+<%@ include file="/admin/common/header.jsp" %>
+<body>
+<script type="text/javascript">
+function deleteFunction(name,funcitonId){
+	if(isChecked(name)){
+		if($(":input[name='function']").length>0){
+			if(window.confirm("确定删除选中数据？")){
+				submitForm(funcitonId);
+			}
+		}
+	}else{
+		alert("请选择需要删除的数据！");
+	}
+}
+
+function deleteAllFunction(funcitonId){
+	if($(":input[name='function']").length>0){
+		if(window.confirm("确定删除所有数据？")){
+			submitForm(funcitonId);
+		}
+	}
+}
+
+function submitForm(funcitonId)
+{
+	$.ajax({
+		type:"post",
+		url:funcitonId + ".action",
+		data : encodeURI($("#qryparm").serialize()),
+		success: function(data){
+			if(data == "success")
+			{
+				location.reload();
+			}else{
+				alert(data);
+			}
+		},
+		error: function(data){
+			alert(data);
+		}
+	});	
+}
+
+function enterForm()
+{
+	$(":input[name='function']").val("");
+}
+</script>
+<form id="qryparm" name="qryparm" action="doDefault.action" method="post">
+<input type="hidden" name="form.pageUrl" value="${pageUrl}"></input>
+<input type="hidden" name="manageCatalogId" value="${param.manageCatalogId }"></input>
+<input type="hidden" name="subManageCatalogId" value="${param.subManageCatalogId }"></input>
+
+<div class="c_ie6_out">
+  <div class="c_ie6_in">
+    <div class="Wrapper">
+      <div class="inner">
+        <div class="innercontent">
+          <div class="cl"></div>
+          <div class="contentbox">
+            <div class="content">
+              <!-- 包含导航代码  -->
+              <jsp:include flush="true" page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
+			  <div class="label">
+                <a href="#" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a>
+				<a href="#" class="FourFont" onClick="deleteAllFunction('deleteAll')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除全部</a>
+              </div>
+              <div class="search">
+                <div class="space"></div>
+                <div>
+              
+                  <div style="float:left;">
+                  <span>用户标识：<input type="text" name="uid" value="${param.uid}" class="input01"/></span> 
+				  <span>&nbsp;操作名称：<input type="text" name="keyword" value="${param.keyword}" class="input01"/></span> 
+                  <span>
+                    <input type="submit" name="button" id="searchEnter" value="查询"  class="bt01" onClick="enterForm();"/>
+                    </span> </div>
+                </div>
+               
+              </div>
+              <div class="space"></div>
+              <div class="databox">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
+                  <tr>
+                    <td class="tdhead" style="width:45px;"><input name="tk_selcnt" type="checkbox" id="checkbox2" onClick="checkAll(this,'id');"/></td>
+                    <td class="tdhead" style="width:100px;">用户标识</td>
+                    <td class="tdhead" style="width:150px;">操作名称</td>
+                    <td class="tdhead">操作描述</td>
+                    <td class="tdhead" style="width:130px;">IP地址</td>
+					<td class="tdhead" style="width:180px;">操作时间</td>
+                  </tr>
+                </table>
+                </div>
+                <div class="databox2" style="height: 400px">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
+                <c:forEach var="item" items="${data.page.data}">
+		              <tr>
+	                    <td style="width:45px;">
+						<input type="checkbox" name="id" id="check_<c:out value='${item.id}'/>" value="<c:out value='${item.id}'/>" onClick="setCheck(this)">
+						</td>						
+	                    <td style="width:100px;text-align:center">&nbsp;<c:out value="${item.createBy}" /></td>
+	                    <td style="width:150px;text-align:center" class="td3">&nbsp;<c:out value="${item.operate}" /></td>
+	                    <td style="text-align:left">&nbsp;<c:out value="${item.description}" /></td>
+	                    <td style="width:130px;">&nbsp;<c:out value="${item.ip}" /></td>
+						<td style="width:180px;">&nbsp;<c:out value="${item.createDate}" /></td>
+		              </tr>
+       			 </c:forEach>
+                </table>
+                </div>
+                <!-- 包含分页代码  -->
+                <jsp:include flush="true" page="/WEB-INF/views/include/page.jsp"></jsp:include>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<!--添加角色开始-->
+<form id="addForm" action="role.action" method="post" target="">
+	<input type="hidden" name="function" value="add"/>
+	<input type="hidden" name="form.roleNo" id="roleNo"/>
+	<input type="hidden" name="form.name" id="name"/>
+</form>
+<!--添加角色结束-->
+</body>
+</html>
