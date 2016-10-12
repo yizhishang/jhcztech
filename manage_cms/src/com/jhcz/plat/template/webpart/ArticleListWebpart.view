@@ -1,0 +1,17 @@
+<table class="${prop.basePath}${prop.tableClass?if_exists}" width="100%">
+  <#if prop.style = "1">
+    <#list data as article>
+      <tr class="${prop.cellClass?if_exists}">
+        <td><a target="_blank" href="${article._url}">${article.title}</a></td>       
+      </tr>
+    </#list>
+  </#if>
+  <#if prop.style = "2">
+    <#list data as article>
+      <tr class="${prop.cellClass?if_exists}">
+        <td><a target="_blank" href="${article._url}">${article.title}</a></td>
+        <td >${article.create_date}</td>
+      </tr>
+    </#list>
+  </#if>
+</table>
