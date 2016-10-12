@@ -1,0 +1,10 @@
+<#if style?exists>
+	<div class="${style}" id="pagebar"></div>
+<#else>
+	<div id="pagebar"></div>
+</#if>
+<script language="javascript" type="text/javascript" src="${pageJsPath}"></script>
+<script>
+	var pageCutFun = new PageCutFun('${ajaxPath}','1','${numPerPage}','${pageDivId?if_exists}');
+	getLinkStr('${totalPages}','1');
+</script>
