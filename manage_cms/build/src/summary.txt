@@ -1,3 +1,0 @@
-删除功能：
-	1. jsp提交：submitForm("qryparm", funcitonId, true);
-	2. controller：返回 Result对象
