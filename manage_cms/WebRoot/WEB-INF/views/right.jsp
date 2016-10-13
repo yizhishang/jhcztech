@@ -6,7 +6,7 @@
 <div class="c_ie6_out">
   <div class="c_ie6_in">
     <div class="Wrapper">
-    	<p style="text-align:center; padding-top:80px;"><img 1src="${ctxPath }/admin/images/pic17.jpg" /></p>
+    	<p style="text-align:center; padding-top:80px;"><!-- <img src="${ctxPath }/admin/images/pic17.jpg" /> --></p>
     </div>
   </div>
 </div>

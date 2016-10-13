@@ -1,5 +1,5 @@
 <%
-//License = "2:2915:3:1:1::cms.thinkive.com:637b77100bd5b4a68d73c28ff5559b0b;2:2915:3:1:1::192.168.1.185:637b77100bd5b4a68d73c28ff5559b0b;"
+//License = "2:2915:3:1:1::cms.thinkive.com:637b77100bd5b4a68d73c28ff5559b0b;2:2915:3:1:1::127.0.0.1:637b77100bd5b4a68d73c28ff5559b0b;"
 
 //Username = "thinkcms"
 //Password = "thinkcms"
