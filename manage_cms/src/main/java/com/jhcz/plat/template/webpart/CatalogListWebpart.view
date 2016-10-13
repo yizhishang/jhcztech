@@ -1,0 +1,10 @@
+        <ul class="menu fr">
+            <li class="select">
+                <a href="http://www.jhcztech.com/index.html">首页</a>
+            </li>
+		<#list catalogList as catalog>
+			<li>
+				<a href="${catalog.link_url?if_exists}">${catalog.name}</a>
+			</li>
+		</#list>
+        </ul>

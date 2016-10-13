@@ -1,0 +1,117 @@
+﻿BODY {
+     margin: 0 0 0 0;
+     font-size: 12px;
+     FONT-FAMILY: "宋体";
+	 color:#0078cc;
+
+     SCROLLBAR-FACE-COLOR: #dfedf2;
+     SCROLLBAR-HIGHLIGHT-COLOR: #ffffff;
+     SCROLLBAR-SHADOW-COLOR: #f9f8f5;
+     SCROLLBAR-3DLIGHT-COLOR: #e5e4e0;
+     SCROLLBAR-ARROW-COLOR: #606d79;
+     SCROLLBAR-TRACK-COLOR: #f9f8f5;
+     SCROLLBAR-DARKSHADOW-COLOR: #e5e4e0
+}
+
+.menubar {
+    filter: progid: DXImageTransform . Microsoft . Gradient( gradienttype = 0, startcolorstr = #F7F7F7, endcolorstr = #DEDBD6 )
+}
+
+.bodybar {
+    filter: progid: DXImageTransform . Microsoft . Gradient( gradienttype = 1, endcolorstr = #F7F7F7, startcolorstr = #DEDBD6 )
+}
+.treebox{
+	padding:5px;
+	min-height:200px;
+	height:auto !important;
+	height:200px;
+	background:url(../images/pic12.gif) 1px -1px no-repeat;
+}
+ul.tree, ul.tree * {
+	list-style-type: none;
+	margin: 0;
+	padding: 0 0 5px 0;
+	line-height:24px;
+
+}
+ul.tree img.arrow {
+	border: 0;
+	width: 20px;
+}
+ul.tree li {
+	padding: 0;
+	clear: both;
+	line-height:24px;
+}
+ul.tree li ul {
+	padding: 0 0 0 20px;
+	margin: 0;
+}
+ul.tree label {
+	cursor: pointer;
+	padding: 0;
+	color:#0078cc;
+}
+ul.tree span.operate {
+	left:250px;
+	color:#0078cc;
+	position:absolute;
+}
+
+ul.tree label.hover {
+	color:#096491;
+}
+p {
+	margin: 5px 15px;
+}
+ul {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+ul.tree li .arrow {
+	width: 20px;
+	height: 24px;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	float: left;
+	background: transparent  left center no-repeat;
+
+}
+ul.tree li .collapsed {
+	background: url(../images/collapsed.gif) left center no-repeat;
+}
+ul.tree li .expanded {
+	background: url(../images/expanded.gif) left center no-repeat;
+}
+
+ul.tree li .checkbox {
+	width: 20px;
+	height: 24px;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+	float: left;
+	background: url(../images/check0.gif)  0px center no-repeat;
+}
+ul.tree li .checked {
+	background: url(../images/check2.gif) 0px center no-repeat;
+}
+ul.tree li .half_checked {
+	background: url(../images/check1.gif) 0px center no-repeat;
+}
+.okbox{
+	border-top:1px solid #cdeeff; padding-top:5px; padding-left:35px;
+}
+.bt04{
+	border:0;
+	text-align:center;
+	color:#005d9e;
+	line-height:22px;
+	cursor:pointer;
+	cursor:hand;
+	font-weight:bold;
+	width:60px;
+	height:22px;
+	background:url(../images/bottonbg.gif) 0 -51px no-repeat;
+}
