@@ -1,0 +1,1 @@
+imp jhcms/888888@orcl file=d:\data.dmp full=y
