@@ -10,7 +10,7 @@ import java.util.List;
  * 描述: 数字工具类
  * 版权: Copyright (c) 2010
  * 公司: 思迪
- * 作者: 李建  lijian@jhcz.com
+ * 作者:	 袁永君
  * 版本: 1.0
  * 创建日期: Mar 10, 2010
  * 创建时间: 11:47:54 AM
