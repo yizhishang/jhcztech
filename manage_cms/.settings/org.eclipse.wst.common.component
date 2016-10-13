@@ -6,6 +6,5 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <property name="context-root" value="manage_cms"/>
-        <property name="java-output-path" value="/manage_cms/WebRoot/WEB-INF/classes"/>
     </wb-module>
 </project-modules>
