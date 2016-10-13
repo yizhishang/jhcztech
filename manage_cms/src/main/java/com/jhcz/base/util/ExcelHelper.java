@@ -34,7 +34,7 @@ import com.jhcz.base.jdbc.DataRow;
  * 依赖： poi3.5.jar、sx.jar
  * 版权: Copyright (c) 2008 
  * 公司: 思迪科技 
- * 作者: 李建 
+ * 作者: 袁永君 
  * 版本: 1.0 
  * 创建日期: 2009-10-29 
  * 创建时间: 上午11:01:50
@@ -48,9 +48,10 @@ public class ExcelHelper
     private static Logger logger = Logger.getLogger(ExcelHelper.class);
     
     /**
-     * 描述：读取Excel
-     * 作者：李建
-     * 时间：Apr 14, 2011 9:49:26 AM
+     * 描述: 读取Excel
+     * 作者: 袁永君
+     * 创建日期: 2016-10-14
+     * 创建时间: 上午12:11:31
      * @param file File对象
      * @return 按sheet(工作表)来存放到Map,SheetName(工作表)名为key
      */
@@ -60,9 +61,10 @@ public class ExcelHelper
     }
     
     /**
-     * 描述：读取Excel
-     * 作者：李建
-     * 时间：Apr 14, 2011 9:49:26 AM
+     * 描述: 读取Excel
+     * 作者: 袁永君
+     * 创建日期: 2016-10-14
+     * 创建时间: 上午12:12:01
      * @param file File对象
      * @param fieldsName List中Map的键名，可为空，默认为列数索引（首列索引为0）
      * @return 按sheet(工作表)来存放到Map,SheetName(工作表)名为key
@@ -74,7 +76,7 @@ public class ExcelHelper
     
     /**
      * 描述：读取Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：Apr 14, 2011 9:49:26 AM
      * @param file File对象
      * @param fieldsName List中Map的键名，可为空，默认为列数索引（首列索引为0）
@@ -88,7 +90,7 @@ public class ExcelHelper
     
     /**
      * 描述：读取Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：Apr 14, 2011 9:49:26 AM
      * @param file File对象
      * @param columnNum 指定列（首列索引为0）
@@ -103,7 +105,7 @@ public class ExcelHelper
     
     /**
      * 描述：读取Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：Apr 14, 2011 9:49:26 AM
      * @param file File对象
      * @param columnNum 指定列（首列索引为0）
@@ -153,7 +155,7 @@ public class ExcelHelper
     
     /**
      * 描述：读取Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：Apr 14, 2011 9:49:26 AM
      * @param inputStream 输入流
      * @return 按sheet(工作表)来存放到Map,SheetName(工作表)名为key
@@ -166,7 +168,7 @@ public class ExcelHelper
     
     /**
      * 描述：读取Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：Apr 14, 2011 9:49:26 AM
      * @param inputStream 输入流
      * @param fieldsName List中Map的键名，可为空，默认为列数索引（首列索引为0）
@@ -180,7 +182,7 @@ public class ExcelHelper
     
     /**
      * 描述：读取Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：Apr 14, 2011 9:49:26 AM
      * @param inputStream 输入流
      * @param fieldsName List中Map的键名，可为空，默认为列数索引（首列索引为0）
@@ -195,7 +197,7 @@ public class ExcelHelper
     
     /**
      * 描述：读取Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：Apr 14, 2011 9:49:26 AM
      * @param inputStream 输入流
      * @param columnNum 指定列（首列索引为0）
@@ -211,7 +213,7 @@ public class ExcelHelper
     
     /**
      * 描述：读取Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：Apr 14, 2011 9:49:26 AM
      * @param inputStream 输入流
      * @param columnNum 指定列（首列索引为0）
@@ -369,7 +371,7 @@ public class ExcelHelper
     
     /**
      * 描述：获取所有的图片
-     * 作者：李建
+     * 作者：袁永君
      * 时间：Apr 14, 2011 2:56:05 PM
      * @param file File对象
      * @return java.util.List<HSSFPictureData>
@@ -415,7 +417,7 @@ public class ExcelHelper
     
     /**
      * 描述：获取所有的图片
-     * 作者：李建
+     * 作者：袁永君
      * 时间：Apr 18, 2011 2:22:19 PM
      * @param inputStream
      * @param outDirectory 输出目录
@@ -471,7 +473,7 @@ public class ExcelHelper
     
     /**
      * 描述：生成Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：2009-10-29 上午11:01:54
      * @param list 数据
      * @param titles 标题
@@ -487,7 +489,7 @@ public class ExcelHelper
     
     /**
      * 描述：生成Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：2009-10-29 上午11:01:54
      * @param workbook 工作薄
      * @param list 数据
@@ -505,7 +507,7 @@ public class ExcelHelper
     
     /**
      * 描述：生成Excel
-     * 作者：李建
+     * 作者：袁永君
      * 时间：2009-10-29 上午11:01:54
      * @param workbook 工作薄
      * @param list 数据
@@ -703,8 +705,8 @@ public class ExcelHelper
     
     /**
      * 描述：导出工作簿
-     * 作者：李建  lijian@jhcz.com
-     * 时间：Mar 10, 2010 11:32:01 AM
+     * 作者：袁永君  
+     * 时间：Mar 10, 2016 11:32:01 AM
      * @param request
      * @param response
      * @param wb 要导出的excel工作簿
@@ -740,8 +742,8 @@ public class ExcelHelper
     
     /**
      * 描述：设置title单元格样式
-     * 作者：李建
-     * 时间：2009-10-29 上午11:57:50
+     * 作者：袁永君
+     * 时间：2016-10-29 上午11:57:50
      * @param workbook 工作目录
      * @param cell 单元格
      * @param titleStyle title样式
