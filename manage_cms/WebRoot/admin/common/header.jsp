@@ -15,6 +15,7 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidator.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidatorRegex.js"></script>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/datepicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/layer/layer.js"></script>
 </head>
 <%
 	//这是主要包装了pageUrl
