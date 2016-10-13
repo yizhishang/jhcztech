@@ -6,15 +6,15 @@
     <title>jhczCMS后台管理系统</title>
     <%@ include file="/admin/common/meta.jsp" %>
     <link href="<%=request.getContextPath()%>/admin/styles/cms.css" rel="stylesheet" type="text/css" />
-    <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/ajax.js"></script>
-    <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/ajax.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.min.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.wresize.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.form.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/common.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/form_commons.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidator.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidatorRegex.js"></script>
-	<script language="javascript" type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/datepicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/datepicker/WdatePicker.js"></script>
 </head>
 <%
 	//这是主要包装了pageUrl
