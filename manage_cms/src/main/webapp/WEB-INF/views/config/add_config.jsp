@@ -57,7 +57,7 @@
                 <td class="label">&nbsp;</td>
               <td>
                 	<input type="button" name="enterForm" onclick="saveData();" id="enterForm" value="提交" class="bt04"/>&nbsp;
-                <input type="button" id="close" name="close"value="关闭" class="bt04"/>
+                	<input type="button" id="close" name="close"value="关闭" class="bt04"/>
                 </td>
               </tr>
 			  <tr>
