@@ -30,41 +30,5 @@
     	</c:forEach>
     </div>
 </div>
-<script type="text/javascript">
-<!-- 
- $(".lnd,.lns").click(function () { 
- 	  var id=$(".lns").attr("id");
-
-  	 var child=$("#sub_"+$(this).attr("id"));
-  	 if($(this).attr("id")!=id){
-  	 	$("#sub_"+$(".lns").attr("id")).hide();
-  	 	$(".lns").removeClass("lns").addClass("lnd");
- 	    $(".over").removeClass("over");
-  	 
-	 	$(this).removeClass("lnd").addClass("lns");
-	 	$("#pre_"+$(this).attr("id")).addClass("over");
-	 	if(child){
-		 	$("#sub_"+$(this).attr("id")).show();
-	 	}
-	 }else{
-	 	if(child){
-		 	if(child.css("display")=="none"){
-		 		$("#sub_"+$(this).attr("id")).show();
-		 	}else{
-		 		$("#sub_"+$(this).attr("id")).hide();
-		 	}
-	 	}
-	 }
-	 $(".sns,.snd").removeClass("sns").addClass("snd");
- });
- 
-$(".sns,.snd").click(function () { 
-  	  $(".sns,.snd").removeClass("sns").addClass("snd");
-  	  if($(this).attr("class")=="snd"){
-  	  		$(this).removeClass("snd").addClass("sns");
-  	  }
-});
-//-->
-</script>
 </body>
 </html>
