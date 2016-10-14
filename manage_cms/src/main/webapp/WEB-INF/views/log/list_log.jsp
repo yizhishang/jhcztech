@@ -2,45 +2,6 @@
 <%@ include file="/admin/common/header.jsp" %>
 <body>
 <script type="text/javascript">
-function deleteFunction(name,funcitonId){
-	if(isChecked(name)){
-		if($(":input[name='function']").length>0){
-			if(window.confirm("确定删除选中数据？")){
-				submitForm(funcitonId);
-			}
-		}
-	}else{
-		alert("请选择需要删除的数据！");
-	}
-}
-
-function deleteAllFunction(funcitonId){
-	if($(":input[name='function']").length>0){
-		if(window.confirm("确定删除所有数据？")){
-			submitForm(funcitonId);
-		}
-	}
-}
-
-function submitForm(funcitonId)
-{
-	$.ajax({
-		type:"post",
-		url:funcitonId + ".action",
-		data : encodeURI($("#qryparm").serialize()),
-		success: function(data){
-			if(data == "success")
-			{
-				location.reload();
-			}else{
-				alert(data);
-			}
-		},
-		error: function(data){
-			alert(data);
-		}
-	});	
-}
 
 function enterForm()
 {

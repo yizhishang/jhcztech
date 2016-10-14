@@ -50,6 +50,7 @@ $(document).ready(function(){
 <form id="userForm" action="add.action" target="hiddenFrame"  method="post">
 <input type="hidden" name="form.pageUrl" value="${pageUrl}" ></input>
 <input type="hidden" name="form.isSystem" value="0"></input>
+<input type="hidden" name="function" value="add"/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
   <tr>
     <td>
@@ -168,8 +169,8 @@ $(document).ready(function(){
               <tr>
                 <td class="label">&nbsp;</td>
               <td>
-                	<input type="button" name="button" id="button" value="提交" class="bt04"/>&nbsp;
-                	<input type="button" name="button" onClick="window.close();" id="button" value="关闭" class="bt04"/>
+                	<input type="button" name="button" id="enterForm" value="提交" class="bt04"/>&nbsp;
+                	<input type="button" name="button" id="close" value="关闭" class="bt04"/>
                 </td>
               </tr>
             </table>

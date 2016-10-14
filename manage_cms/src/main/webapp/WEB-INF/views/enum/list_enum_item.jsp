@@ -1,46 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/header.jsp" %>
 <body>
-<script type="text/javascript">
-function deleteFunction(name,funcitonId){
-	if(isChecked(name))
-	{
-		if(window.confirm("确定删除选中数据？"))
-		{
-			$.ajax({
-				type:"post",
-				url:funcitonId + ".action",
-				data : encodeURI($("#qryparm").serialize()),
-				success: function(data){
-					if(data.errorNo == 0)
-					{
-						if(window.confirm(data.errorInfo)){
-							location.reload();
-						}
-					}else{
-						alert(data.errorInfo);
-					}
-				},
-				error: function(data){
-					alert(data);
-				}
-			});
-		}
-	}else{
-		alert("请选择需要删除的数据！");
-	}
-}
-
-function addFunction()
-{
-	openWindow("doAddItem.action?type=${param.type}", 500, 215);
-}
-
-function editFunction(id)
-{
-	openWindow("doEditItem.action?id="+id, 500, 215);
-}
-</script>
 <form id="qryparm" name="qryparm" action="list.action" >
 <input type="hidden" name="form.pageUrl" value="${pageUrl}"></input>
 <input type="hidden" name="manageCatalogId" value="${param.manageCatalogId }"></input>
@@ -59,13 +19,13 @@ function editFunction(id)
 				  <p><img src="${ctxPath }/admin/images/ico07.gif" />当前位置：系统管理<img src="${ctxPath }/admin/images/pic14.gif" />字典类型<img src="${ctxPath }/admin/images/pic14.gif" /><c:out value='${param.type}'/></p>  
 				</div>
                 <div class="label">
-                	<a href="#" onClick="addFunction();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a>
+                	<a href="#" onClick="addFunction('type=${param.type}','doAddItem.action');"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a>
                 	<a href="#" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a>
                 	<a href="#" onClick="location.reload();"><img src="${ctxPath }/admin/images/ico10.gif" border="0"/>刷新</a>
                 </div>  
                 <div class="search">
                   <div class="space"></div>
-                  <%--<div>
+                  <%-- <div>
                     <div style="float:left;"> <span>类型：
                       <select name="type">
                         <option selected value="">--全部--</option>
@@ -79,7 +39,7 @@ function editFunction(id)
 					  <script language="javascript">setSelectSelected("type", "<c:out value='${param.type}'/>")</script>
                       <input type="submit" name="button" id="button" value="查询"  class="bt01" />
                       </span> </div>
-                  </div>--%>
+                  </div> --%>
                 </div>
                 <div class="space"></div>
                 <div class="databox2" style="height: 350px">
@@ -110,7 +70,7 @@ function editFunction(id)
                           <c:out value="${item.item_value}" /></td>
                         <td>&nbsp;
                           <c:out value="${item.orderline}" /></td>
-                        <td >&nbsp;<a href="#" onClick="editFunction('<c:out value='${item.item_code}'/>')">编辑</a></td>
+                        <td>&nbsp;<a href="#" onClick="editFunction('id=<c:out value='${item.item_code}'/>','doEditItem.action')">编辑</a></td>
                       </tr>
                     </c:forEach>
                   </table>

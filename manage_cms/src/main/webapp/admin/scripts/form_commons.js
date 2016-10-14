@@ -613,7 +613,9 @@ function getKeyword(name, args){
 		success: function(data){
 			if(data.errorNo == 0)
 			{
-				if(window.confirm(data.errorInfo)){
+				layer.confirm(data.errorInfo, {
+					btn: ['确定', '取消'] //按钮
+				}, function() {
 					if(isSelf)
 					{
 						location.reload();
@@ -630,59 +632,82 @@ function getKeyword(name, args){
 						window.returnValue = data;
 						window.close();
 					}
-				}
+				});
 			}else{
-				alert(data.errorInfo);
+				layer.msg(data.errorInfo, {icon: 5});
 			}
 		},
 		error: function(data)
 		{
-			alert(data);
+			layer.msg(data, {icon: 5});
 		}
 	});
 }
 
-function addFunction(param)
-{
-	if(param == null){
-		saveDataFunction("doAdd.action");
-	}else{
-		saveDataFunction("doAdd.action?" + param);
+function addFunction(param, url){
+	if(url == null){
+		url = "doAdd.action";
 	}
+	if(param){
+		url += "?" + param;
+	}
+	saveDataFunction(url);
 }
 
-function editFunction(param)
-{
-	if(param == null){
-		saveDataFunction("doEdit.action");
-	}else{
-		saveDataFunction("doEdit.action?" + param);
+function editFunction(param, url){
+	if(url == null){
+		url = "doEdit.action";
 	}
+	if(param){
+		url += "?" + param;
+	}
+	saveDataFunction(url);
 }
 
-function saveDataFunction(url)
-{
-	var returnValue = openDialogWithScroll(url, 1300, 800);
-    if (returnValue != null && returnValue.length > 0)
-    {
-    	var is_submit = getKeyword("is_submit", returnValue);
-    	if(is_submit == "1")
-    	{
-    		location.reload();
-    	}else{
-    		url = getKeyword("function", returnValue) + ".action";
-    		$.post(url, returnValue,function(data){
-    			if(data.errorNo == 0)
-    			{
-    				if(window.confirm(data.errorInfo)){
-    					location.reload();
-    				}
-    			}else{
-    				alert(data.errorInfo);
-    			}
-    		},"json");
-    	}
-    }
+function saveDataFunction(url){
+	var openindex = layer.open({
+		type: 2,
+		title: false,
+		area: ['600px', '400px'],
+		skin: 'layui-layer-rim', //加上边框
+		content: [url, 'no'],
+		success: function(layero, index) {
+			var body = layer.getChildFrame('body', index);
+			var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+			body.find('#close').click(function(){
+				layer.close(index);
+			});
+			body.find('#enterForm').click(function(){
+				var is_submit = body.find("#is_submit").val();
+				if(is_submit == "1")
+				{
+					body.find("form").submit();
+					location.reload();
+					return;
+				}
+				var returnValue = encodeURI(body.find("form").serialize());
+				console.log(returnValue);
+				url = getKeyword("function", returnValue) + ".action";
+				$.post(url, returnValue,function(data){
+	    			if(data.errorNo == 0)
+	    			{
+	    				location.reload();
+	    			}else{
+	    				layer.msg(data.errorInfo, {icon: 5});
+	    			}
+	    		},"json");
+			});
+			
+		},
+		yes: function(index, layero)
+		{
+			layer.close(index); //如果设定了yes回调，需进行手工关闭
+		},
+		cancel :function(index)
+		{
+			console.log("cancel:" + index);
+		}
+	});
 }
 
 function saveData()
@@ -701,20 +726,26 @@ function closeFunction()
 }
 
 function deleteFunction(name,funcitonId){
-	if (isChecked(name) && window.confirm("确定删除选中数据？")){
-		submitForm("qryparm", funcitonId, true);
+	if (isChecked(name)){
+		//询问框
+		layer.confirm('确定删除选中数据？', {
+			btn: ['确定', '取消'] //按钮
+		}, function() {
+			submitForm("qryparm", funcitonId, true);
+		});
 	}else{
-		alert("请选择需要删除的数据！");
+		layer.msg('请选择需要删除的数据！', {icon: 6});
 	}
 }
 
 function deleteAllFunction(funcitonId){
 	$(":input[name='function']").val(funcitonId);
-	if (window.confirm("确定删除所有数据？")){
+	//询问框
+	layer.confirm('确定删除全部数据？', {
+		btn: ['确定', '取消'] //按钮
+	}, function() {
 		submitForm("qryparm", funcitonId, true);
-	}else{
-		alert("请选择需要删除的数据！");
-	}
+	});
 }
 /**
  * 描述: 更新数据状态

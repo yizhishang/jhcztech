@@ -271,9 +271,9 @@ public class UserAction extends BaseAction
     * 删除用户
     * @return
     */
+    @ResponseBody
     @RequestMapping("delete.action")
-    public @ResponseBody
-    Result doDelete()
+    public Result doDelete()
     {
         int[] idArray = getIntArrayParameter("id");
         User user = null;

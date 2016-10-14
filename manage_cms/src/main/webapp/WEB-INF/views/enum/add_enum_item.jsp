@@ -7,41 +7,11 @@
 		$("#item_name").formValidator().regexValidator({regexp:regexEnum.notempty,onerror:"名称不能为空,请确认"});
 		$("#enum_type").formValidator().inputValidator({min:1,onerror:"类型不能为空,请确认"});
 		$("#item_value").formValidator().regexValidator({regexp:regexEnum.notempty,onerror:"具体值不能为空,请确认"});
-		
-		$("#close").click(function(){
-			window.close();
-		});
-		
-		$("#enterForm").click(function(){
-			$.ajax({
-				type:"post",
-				url:$("#addForm").attr("action"),
-				dataType : "json",
-				data : encodeURI($("#addForm").serialize()),
-				success: function(data){
-					if(data.errorNo == 0)
-					{
-						if(window.confirm(data.errorInfo)){
-							if(!isIE())
-							{
-								window.opener.location=window.opener.location;
-							}
-							window.close();
-						}
-					}else{
-						alert(data.errorInfo);
-					}
-				},
-				error: function(data){
-					alert(data);
-				}
-			});
-		});
-		
 	});
 </script>
 <form action="addItem.action" method="post" target="hiddenFrame" id="addForm">
 <input type="hidden" name="enum_type" value="${enum_type}"/>
+<input type="hidden" name="function" value="addItem"/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
   <tr>
     <td>

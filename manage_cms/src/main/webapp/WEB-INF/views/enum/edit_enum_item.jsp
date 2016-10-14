@@ -7,15 +7,6 @@
 		$("#item_name").formValidator().regexValidator({regexp:regexEnum.notempty,onerror:"名称不能为空,请确认"});
 		$("#item_value").formValidator().regexValidator({regexp:regexEnum.notempty,onerror:"具体值不能为空,请确认"});
 		$("#orderline").formValidator().regexValidator({regexp:regexEnum.notempty,onerror:"排序值不能为空,请确认"}).regexValidator({regexp:regexEnum.num,onerror:"排序值只能为数字,请确认"});
-		
-		$("#close").click(function(){
-			window.close();
-		});
-		
-		$("#enterForm").click(function(){
-			submitForm('addForm');
-		});
-		
 	});
 </script>
 <form action="editItem.action" method="post" target="hiddenFrame" id="addForm">
@@ -23,6 +14,7 @@
 <input type="hidden" name="form.enum_type" value="<c:out value='${form.enum_type}'/>">
 <input type="hidden" name="form.siteno" value="<c:out value='${form.siteno}'/>">
 <input type="hidden" name="form.is_system" value="<c:out value='${form.is_system}'/>">
+<input type="hidden" name="function" value="editItem"/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
   <tr>
     <td>

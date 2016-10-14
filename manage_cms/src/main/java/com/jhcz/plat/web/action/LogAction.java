@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jhcz.base.config.SysConfig;
 import com.jhcz.base.jdbc.DBPage;
 import com.jhcz.base.util.StringHelper;
+import com.jhcz.plat.domain.Result;
 import com.jhcz.plat.service.LogService;
 
 /**
@@ -62,11 +63,12 @@ public class LogAction extends BaseAction
      * @return
      */
     @SuppressWarnings("finally")
+    @ResponseBody
     @RequestMapping("/delete.action")
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false, rollbackFor = Exception.class)
-    public @ResponseBody
-    String doDelete()
+    public Result doDelete()
     {
+    	Result result = new Result();
         try
         {
             int[] idArray = getIntArrayParameter("id");
@@ -75,18 +77,18 @@ public class LogAction extends BaseAction
                 logService.deleteLog(idArray[i]);
             }
             MESSAGE = "删除日志成功";
-            RETURNINFO = SUCCESS;
         }
         catch (Exception e)
         {
             MESSAGE = "删除日志失败";
-            RETURNINFO = ERROR;
+            result.setErrorNo(-1);
             throw new Exception();
         }
         finally
         {
             addLog("删除日志", MESSAGE);
-            return RETURNINFO;
+            result.setErrorInfo(MESSAGE);
+            return result;
         }
     }
     
@@ -96,11 +98,13 @@ public class LogAction extends BaseAction
      */
     @ResponseBody
     @RequestMapping("/deleteAll.action")
-    public String doDeleteAll()
+    public Result doDeleteAll()
     {
+    	Result result = new Result();
         logService.deleteAllLog();
         MESSAGE = "删除所有日志成功";
         addLog("删除所有日志", MESSAGE);
-        return SUCCESS;
+        result.setErrorInfo(MESSAGE);
+        return result;
     }
 }

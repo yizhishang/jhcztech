@@ -2,21 +2,6 @@
 <%@ include file="/admin/common/header.jsp" %>
 <body>
 <script type="text/javascript">
-	function addFunction(){
-		openWindow("doAdd.action",500, 420);
-	}
-	
-	function deleteFunction(name,funcitonId){
-		if(isChecked(name) && window.confirm("确定删除选中数据？")){
-			submitForm("qryparm", funcitonId, true);
-		}else{
-			alert("请选择需要删除的数据！");
-		}
-	}
-	 
-	function editFunction(functionId,id){
-		openWindow("doEdit.action?id="+id,500, 400);
-	}
 	
 	function modifyPassword(functionId,id){
 		openWindow("doEditPassword.action?id="+id,500, 180);
@@ -48,7 +33,7 @@
               <!-- 包含导航代码  -->
               <jsp:include flush="true" page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
               <div class="label">
-               	<a href="#" onClick="addFunction('add');"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a> 
+               	<a href="#" onClick="addFunction();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a> 
                 <a href="#" onClick="deleteFunction('id','delete');"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a>
                 <a href="#" onClick="operate('open');"><img src="${ctxPath }/admin/images/ico02.gif" border="0"/>开放</a> 
                 <a href="#" onClick="operate('close');"><img src="${ctxPath }/admin/images/ico10.gif" border="0"/>关闭</a> 
@@ -114,7 +99,7 @@
 	                    	<c:if test="${item.state == 0}"><font color="#ff0000">关闭</font></c:if>
 	                    	<c:if test="${item.state == 1}">开放</c:if>
 	                    </td>
-	                    <td>&nbsp;<a href="javascript:editFunction('edit','${item.user_id}');">编辑</a> ｜  <a href="javascript:modifyPassword('editPassword','${item.user_id}');">修改密码</a></td>
+	                    <td>&nbsp;<a href="javascript:editFunction('id=${item.user_id}');">编辑</a> ｜  <a href="javascript:modifyPassword('editPassword','${item.user_id}');">修改密码</a></td>
 		              </tr>
        			 </c:forEach>
                 </table>
