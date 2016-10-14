@@ -668,6 +668,7 @@ function saveDataFunction(url){
 	var openindex = layer.open({
 		type: 2,
 		title: false,
+		closeBtn: 0,
 		area: ['600px', '400px'],
 		skin: 'layui-layer-rim', //加上边框
 		content: [url, 'no'],

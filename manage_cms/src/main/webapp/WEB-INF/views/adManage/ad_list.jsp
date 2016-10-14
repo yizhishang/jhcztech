@@ -1,6 +1,32 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/header.jsp" %>
 <body>
+<script type="text/javascript">
+function saveDataFunction(url)
+{
+	var returnValue = openDialogWithScroll(url, 1300, 800);
+    if (returnValue != null && returnValue.length > 0)
+    {
+    	var is_submit = getKeyword("is_submit", returnValue);
+    	if(is_submit == "1")
+    	{
+    		location.reload();
+    	}else{
+    		url = getKeyword("function", returnValue) + ".action";
+    		$.post(url, returnValue,function(data){
+    			if(data.errorNo == 0)
+    			{
+    				if(window.confirm(data.errorInfo)){
+    					location.reload();
+    				}
+    			}else{
+    				alert(data.errorInfo);
+    			}
+    		},"json");
+    	}
+    }
+}
+</script>
 <form id="qryparm" name="qryparm" action="default.action" >
   	<input type="hidden" name="function" value="${param.function }" />
 	<input type="hidden" name="manageCatalogId" value="${param.manageCatalogId }"></input>
@@ -89,12 +115,5 @@
     </div>
   </div>
 </form>
-<!--添加角色开始-->
-<form id="addForm" action="role.action" method="post" target="">
-  <input type="hidden" name="function" value="add"/>
-  <input type="hidden" name="form.roleNo" id="roleNo"/>
-  <input type="hidden" name="form.name" id="name"/>
-</form>
-<!--添加角色结束-->
 </body>
 </html>

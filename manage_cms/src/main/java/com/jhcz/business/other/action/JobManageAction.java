@@ -96,7 +96,7 @@ public class JobManageAction extends BaseAction
 	@RequestMapping("/edit.action")
 	public Result edit(HttpServletRequest request, HttpServletResponse response)
 	{
-		normalize(form);
+		form = normalize(request);
 		DataRow data = new DataRow();
 		data.putAll(form);
 		String siteno = getLoginSiteNo();
@@ -113,7 +113,7 @@ public class JobManageAction extends BaseAction
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("/delete.actoin")
+	@RequestMapping("/delete.action")
 	public Result doDelete(HttpServletRequest request, HttpServletResponse response)
 	{
 		JobManageService jobManageService = new JobManageService();

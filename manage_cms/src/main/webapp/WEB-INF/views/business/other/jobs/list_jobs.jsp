@@ -2,22 +2,29 @@
 <%@ include file="/admin/common/header.jsp" %>
 <body>
 <script type="text/javascript">
-function publishFunction(name,funcitonId,state)
+function saveDataFunction(url)
 {
-    if(isChecked(name)){
-		if($(":input[@name='function']").length > 0){
-			$(":input[@name='function']").val(funcitonId);
-			$("#state").val(state);
-			$("#qryparm").submit();
-		}
-	}else{
-		alert("请选择操作的数据！");
-	}
-}
-
-function editFunction(id)
-{
-     openMaxWindowWithScroll("jobManage.action?function=edit&jobid="+id);
+	var returnValue = openDialogWithScroll(url, 1300, 800);
+    if (returnValue != null && returnValue.length > 0)
+    {
+    	var is_submit = getKeyword("is_submit", returnValue);
+    	if(is_submit == "1")
+    	{
+    		location.reload();
+    	}else{
+    		url = getKeyword("function", returnValue) + ".action";
+    		$.post(url, returnValue,function(data){
+    			if(data.errorNo == 0)
+    			{
+    				if(window.confirm(data.errorInfo)){
+    					location.reload();
+    				}
+    			}else{
+    				alert(data.errorInfo);
+    			}
+    		},"json");
+    	}
+    }
 }
 </script>
 <form id="qryparm" name="qryparm" action="jobManage.action" method="post">
@@ -56,6 +63,7 @@ function editFunction(id)
                     <td class="tdhead">职位名称</td>
                     <td class="tdhead">招聘部门</td>
                     <td class="tdhead">学历要求</td>
+                    <td class="tdhead">薪水</td>
 					<td class="tdhead">发布时间</td>
 					<td class="tdhead">操作</td>
                   </tr>
@@ -65,15 +73,16 @@ function editFunction(id)
                   </tr>
                   </c:if>
                 <c:forEach var="item" items="${data.page.data}">
-		              <tr id="row_<c:out value='${item.jobid}'/>" onDblClick="editFunction('<c:out value="${item.jobid}"/>')" title="双击查看详细内容">
+		              <tr id="row_<c:out value='${item.jobid}'/>" onDblClick="editFunction('jobid=<c:out value="${item.jobid}"/>')" title="双击查看详细内容">
 	                    <td class="td3">
 						<input type="checkbox" name="id" id="check_<c:out value='${item.jobid}'/>" value="<c:out value='${item.jobid}'/>" onClick="setCheck(this)">
 						</td>				
 	                    <td style="text-align: left">&nbsp;<c:out value="${item.position}" default="--"/>&nbsp;</td>
 	                    <td class="td3">&nbsp;<c:out value="${item.wantdept}" default="--"/></td>
 	                    <td class="td3">&nbsp;<c:out value="${item.degree}" default="--"/>&nbsp;</td>
+	                    <td class="td3">&nbsp;<c:out value="${item.salaryrange}" default="--"/>&nbsp;</td>
 	                    <td class="td3">&nbsp;<c:out value="${item.issuedate}" default="--"/>&nbsp;</td>
-						<td>&nbsp;<a href="#" onClick="editFunction('<c:out value="${item.jobid}"/>')">编辑</a>&nbsp;</td>
+						<td>&nbsp;<a href="#" onClick="editFunction('jobid=<c:out value="${item.jobid}"/>')">编辑</a>&nbsp;</td>
 		              </tr>
        			 </c:forEach>
                 </table>
@@ -92,4 +101,3 @@ function editFunction(id)
 </form>
 </body>
 </html>
-
