@@ -7,14 +7,14 @@
 <meta charset="UTF-8">
 <%@ include file="/admin/common/meta.jsp" %>
 <title>CMS后台管理系统</title>
-    <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/ajax.js"></script>
-    <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.form.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidator.js"></script>
-    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidatorRegex.js"></script>
-
-<link rel="stylesheet" href="/admin/styles/normalize.css">
-<link rel="stylesheet" href="/admin/styles/alogin.css">
+<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/ajax.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.form.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidator.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/formValidatorRegex.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/layer/layer.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/admin/styles/normalize.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/admin/styles/alogin.css">
 
 </head>
 
@@ -69,11 +69,11 @@
 					{
 						window.location.href = "/admin/index.action";
 					}else{
-						alert(result.errorInfo);
+						layer.msg(result.errorInfo, {icon: 5});
 					}
 				},
 				error: function(data){
-					alert(data);
+					layer.msg(data, {icon: 5});
 				}
 			});
 		});
