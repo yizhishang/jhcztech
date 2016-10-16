@@ -664,17 +664,17 @@ function editFunction(param, url){
 	saveDataFunction(url);
 }
 
-function saveDataFunction(url){
-	var openindex = layer.open({
+function saveDataFunction(url, width, height){
+	layer.open({
 		type: 2,
 		title: false,
 		closeBtn: 0,
-		area: ['600px', '400px'],
+		area: [width?width:'600px', height?height:'400px'],
 		skin: 'layui-layer-rim', //加上边框
 		content: [url, 'no'],
 		success: function(layero, index) {
 			var body = layer.getChildFrame('body', index);
-			var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+			// var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
 			body.find('#close').click(function(){
 				layer.close(index);
 			});
