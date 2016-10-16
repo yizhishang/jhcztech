@@ -12,9 +12,10 @@
     <!-- 本地环境 -->
 	<datasource id="web">
 		<property name="driver-name">oracle.jdbc.driver.OracleDriver</property>
-		<property name="url">jdbc:oracle:thin:@127.0.0.1:1521:ORCL</property>
-		<!-- 
 		<property name="url">jdbc:oracle:thin:@120.24.91.25:1521:ORCL</property>
+		<!-- 
+
+		<property name="url">jdbc:oracle:thin:@127.0.0.1:1521:ORCL</property>
 		 -->
 		<property name="user">jhcms</property>
 		<property name="password">888888</property>
