@@ -49,8 +49,7 @@
                 </tr>
                 <tr>
                   <td width="120" class="label"><span class="DetailTagText">变量值</span>：</td>
-                  <td><textarea name="form.item_value" id="item_value" class="input02" style="width:400px;height:150px;"><c:out value="${form.item_value}"/>
-</textarea>
+                  <td><textarea name="form.item_value" id="item_value" class="input02" style="width:250px;height:150px;"><c:out value="${form.item_value}"/></textarea>
                     <font color="#FF0000">*</font></td>
                 </tr>
                 <tr>

@@ -23,7 +23,6 @@ public class ScriptHelper
     
     /**
      * 通过javascript,提示信息
-     *
      * @param response response
      * @param message  需要显示的信息
      */

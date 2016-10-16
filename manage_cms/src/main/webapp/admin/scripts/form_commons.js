@@ -644,32 +644,31 @@ function getKeyword(name, args){
 	});
 }
 
-function addFunction(param, url){
+function addFunction(param, url, width, height){
 	if(url == null){
 		url = "doAdd.action";
 	}
-	if(param){
-		url += "?" + param;
-	}
-	saveDataFunction(url);
+	saveDataFunction(param, url, width, height);
 }
 
-function editFunction(param, url){
+function editFunction(param, url, width, height){
 	if(url == null){
 		url = "doEdit.action";
 	}
+	saveDataFunction(param, url, width, height);
+}
+
+function saveDataFunction(param, url, width, height){
 	if(param){
 		url += "?" + param;
 	}
-	saveDataFunction(url);
-}
-
-function saveDataFunction(url, width, height){
-	layer.open({
+	width = width?width:'600px';
+	height = height?height:'400px';
+	var openIndex = layer.open({
 		type: 2,
 		title: false,
 		closeBtn: 0,
-		area: [width?width:'600px', height?height:'400px'],
+		area: [width, height],
 		skin: 'layui-layer-rim', //加上边框
 		content: [url, 'no'],
 		success: function(layero, index) {

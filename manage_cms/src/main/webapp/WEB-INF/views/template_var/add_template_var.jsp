@@ -44,7 +44,7 @@
               </tr>
               <tr>
                 <td width="120" class="label"><span class="DetailTagText">变量值</span>：</td>
-                <td><textarea name="form.item_value" id="item_value" class="input02" style="width:400px;height:150px;"></textarea>
+                <td><textarea name="form.item_value" id="item_value" class="input02" style="width:350px;height:150px;"></textarea>
                   <font color="#FF0000">*</font></td>
               </tr>
               <tr>

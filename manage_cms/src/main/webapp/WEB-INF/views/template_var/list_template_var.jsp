@@ -19,7 +19,7 @@
                 <!-- 包含导航代码  -->
                 <jsp:include flush="true" page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
                 <div class="label">
-                	<a href="#" onClick="addFunction();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a>
+                	<a href="#" onClick="addFunction(null, null,'600px','350px');"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a>
                 	<a href="#" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a>
                 	<a href="#" onClick="editStateFunction('id','editState',1);"><img src="${ctxPath }/admin/images/ico02.gif" border="0"/>有效</a>
                 	<a href="#" onClick="editStateFunction('id','editState',0);"><img src="${ctxPath }/admin/images/import/ico003.png" border="0"/>无效</a> </div>
