@@ -47,7 +47,7 @@ $(document).ready(function(){
               <div class="content">
                 <!-- 包含导航代码  -->
                 <jsp:include flush="true" page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
-                <div class="label"> <a href="#" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a> <a href="#" class="FourFont" onClick="deleteAllFunction('deleteAll')"><img src="/admin/images/ico15.gif" border="0"/>删除全部</a> </div>
+                <div class="label"> <a href="#" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a> <a href="#" class="FourFont" onClick="deleteAllFunction('deleteAll')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除全部</a> </div>
                 <div class="search">
                   <div class="space"></div>
                   <div>

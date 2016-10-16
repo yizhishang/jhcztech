@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/header.jsp" %>
-<link href="/admin/styles/checktree.css" rel="stylesheet" type="text/css" />
-<script language="javascript" src="/admin/scripts/jquery.new.checktree.js"></script>
-<script language="javascript" src="/admin/scripts/syncReqJs.js"></script>
+<link href="${ctxPath }/admin/styles/checktree.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${ctxPath }/admin/scripts/jquery.new.checktree.js"></script>
+<script type="text/javascript" src="${ctxPath }/admin/scripts/syncReqJs.js"></script>
 <script type="text/javascript">	
 	function getCatalogTreeFunction()
 	{
@@ -83,7 +83,7 @@
           <div class="cl"></div>
           <div class="contentbox">
             <div class="content" id="content">
-              <jsp:include page="${ctxPath }/WEB-INF/views/catalog/include/menu.jsp" flush="true">
+              <jsp:include page="/WEB-INF/views/catalog/include/menu.jsp" flush="true">
               <jsp:param name="type" value="0"/>
               </jsp:include>
               <form action="edit.action" method="post" id="enterForm">
@@ -110,7 +110,7 @@
                         <tr>
                           <td class="label">栏目描述：</td>
                           <td><input type="hidden" id="description" name="form.description" value="<c:out value='${form.description}'/>">
-                            <iframe id="eWebEditor_description" src="/admin/editor/ewebeditor/ewebeditor.htm?id=description&style=mini" frameborder="0" scrolling="No" width="600" height="230"></iframe></td>
+                            <iframe id="eWebEditor_description" src="${ctxPath }/admin/editor/ewebeditor/ewebeditor.htm?id=description&style=mini" frameborder="0" scrolling="No" width="600" height="230"></iframe></td>
                         </tr>
                         <tr>
                           <td class="label"><span class="DetailTagText">栏目状态</span>：</td>

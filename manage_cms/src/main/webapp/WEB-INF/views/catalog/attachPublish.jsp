@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/taglibs.jsp" %>
-<jsp:include page="${ctxPath }/WEB-INF/views/catalog/include/menu.jsp" flush="true">
+<jsp:include page="/WEB-INF/views/catalog/include/menu.jsp" flush="true">
 <jsp:param name="type" value="1"/></jsp:include>
 <form action="attachPublish.action" method="post" id="attachForm">
   <input type="hidden" name="catalogId" value="${param.catalogId}"/>

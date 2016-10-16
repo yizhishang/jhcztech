@@ -2,11 +2,11 @@
 <%@ include file="/admin/common/header.jsp" %>
 <link href="${ctxPath }/admin/styles/checktree.css" rel="stylesheet" type="text/css" />
 <script language="javascript" src="${ctxPath }/admin/scripts/jquery.new.checktree.js"></script>
-<script language="javascript" src="/admin/scripts/syncReqJs.js"></script>
-<script language="javascript" src="/admin/scripts/articleAuthor.js"></script>
+<script language="javascript" src="${ctxPath }/admin/scripts/syncReqJs.js"></script>
+<script language="javascript" src="${ctxPath }/admin/scripts/articleAuthor.js"></script>
 
-<script type="text/javascript" src="/admin/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" src="/admin/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="${ctxPath }/admin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="${ctxPath }/admin/ueditor/ueditor.all.js"></script>
 
 <script type="text/javascript">
 
@@ -99,7 +99,7 @@ $(document).ready(function(){
   <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
     <tr>
       <td><div class="title">
-          <p><img src="/admin/images/ico04.gif" />添加文章</p>
+          <p><img src="${ctxPath }/admin/images/ico04.gif" />添加文章</p>
         </div></td>
     </tr>
     <tr>
@@ -148,7 +148,7 @@ $(document).ready(function(){
                   	<textarea name="form.content" id="content"></textarea>
                   	<!-- 
                   	<input name="form.content" type="hidden" id="content" value="" />
-                    <IFRAME ID="eWebEditor1" SRC="/admin/editor/ewebeditor/ewebeditor.htm?id=content&style=standard650" FRAMEBORDER="0" SCROLLING="no" WIDTH="99%" HEIGHT="500"></IFRAME>
+                    <IFRAME ID="eWebEditor1" src="${ctxPath }/admin/editor/ewebeditor/ewebeditor.htm?id=content&style=standard650" FRAMEBORDER="0" SCROLLING="no" WIDTH="99%" HEIGHT="500"></IFRAME>
                   	 -->
                   </td>
                 </tr>

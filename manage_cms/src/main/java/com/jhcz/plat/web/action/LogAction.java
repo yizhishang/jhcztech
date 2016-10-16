@@ -63,7 +63,7 @@ public class LogAction extends BaseAction
      * @return
      */
     @SuppressWarnings("finally")
-    @ResponseBody
+	@ResponseBody
     @RequestMapping("/delete.action")
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false, rollbackFor = Exception.class)
     public Result doDelete()

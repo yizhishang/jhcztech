@@ -19,7 +19,7 @@
 						if(window.confirm(data.errorInfo)){
 							//window.location.href = "/loginAdmin/loginOut.action";
 							parent.catalogLeftFrame.reloadChildrenCatalog();
-							window.location.href = "/admin/rightAdmin/default.action";
+							window.location.href = "${ctxPath}/admin/rightAdmin/default.action";
 						}
 					}
 				},

@@ -1,16 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
-<%@page import="com.jhcz.base.util.RequestHelper"%>
+<%@ page import="com.jhcz.base.util.RequestHelper"%>
 <%@ include file="/admin/common/header.jsp" %>
-<link href="/admin/styles/checktree.css" rel="stylesheet" type="text/css" />
-<script language="javascript" src="/admin/scripts/jquery.new.checktree.js"></script>
-<script language="javascript" src="/admin/scripts/syncReqJs.js"></script>
+<link href="${ctxPath }/admin/styles/checktree.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${ctxPath }/admin/scripts/jquery.new.checktree.js"></script>
+<script type="text/javascript" src="${ctxPath }/admin/scripts/syncReqJs.js"></script>
 <script type="text/javascript">
 /*
  * 添加角色用户
  */
 function addRoleUserFunction()
 {
-	var returnValue = openDialogWithScroll("/admin/userAdmin/userList.action?roleId=" + '${form.id}', 500, 800);
+	var returnValue = openDialogWithScroll("${ctxPath }/admin/userAdmin/userList.action?roleId=" + '${form.id}', 500, 800);
     if (returnValue != null && returnValue.length > 0)
     {
 		 $(":input[name='userIdStr']").val(returnValue);
@@ -90,7 +90,7 @@ function search()
             <div class="cl"></div>
             <div class="contentbox">
               <div class="content">
-                <jsp:include page="${ctxPath }/WEB-INF/views/role/include/menu.jsp" flush="true">
+                <jsp:include page="/WEB-INF/views/role/include/menu.jsp" flush="true">
 					<jsp:param name="index" value="0"/>
 					<jsp:param name="roleId" value="<%=RequestHelper.getString(request,"roleId") %>"/>
 					<jsp:param name="siteNo" value="<%=RequestHelper.getString(request,"siteNo") %>"/>
@@ -99,9 +99,9 @@ function search()
                 <div id="content">
                   <div class="eb0">
                     <div class="label">
-                    	<a href="#" onClick="addRoleFunction();"><img src="/admin/images/ico08.gif" border="0"/>新建</a>
-                    	<a href="#" onClick="editRoleFunction(<c:out value='${form.id}'/>);"><img src="/admin/images/ico09.gif" border="0"/>修改</a>
-                      <c:if test="${form.isSystem == 0}"><a href="#" onClick="delRoleFunction();"><img src="/admin/images/ico15.gif" border="0"/>删除</a></c:if>
+                    	<a href="#" onClick="addRoleFunction();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a>
+                    	<a href="#" onClick="editRoleFunction(<c:out value='${form.id}'/>);"><img src="${ctxPath }/admin/images/ico09.gif" border="0"/>修改</a>
+                      <c:if test="${form.isSystem == 0}"><a href="#" onClick="delRoleFunction();"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a></c:if>
                     </div>
                   </div>
                   <div class="space"></div>

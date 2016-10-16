@@ -110,13 +110,13 @@
                             <div class="label">
                                 <a href="#" onClick="addFunction('${param.catalogId}')"><img src="${ctxPath }/admin/images/ico08.gif" border="0" />新建</a>
                                 <a href="#" onClick="deleteFunction('id','doDelete');"><img src="${ctxPath }/admin/images/ico15.gif" border="0" />删除</a>
-                                <a href="#" onClick="editStateFunction('id','editState',1);"><img src="/admin/images/ico02.gif" border="0" />有效</a>
-                                <a href="#" onClick="editStateFunction('id','editState',0);"><img src="/admin/images/import/ico003.png" border="0" />无效</a>
+                                <a href="#" onClick="editStateFunction('id','editState',1);"><img src="${ctxPath }/admin/images/ico02.gif" border="0" />有效</a>
+                                <a href="#" onClick="editStateFunction('id','editState',0);"><img src="${ctxPath }/admin/images/import/ico003.png" border="0" />无效</a>
 								<!-- 
-								<a href="#" onClick="exportFunction('id','dataExport');"><img src="/admin/images/import/ico002.png" border="0" />导出</a>
-								<a href="doImportTemplate.action" target="_blank"><img src="/admin/images/import/ico001.png" border="0" />导入</a>
+								<a href="#" onClick="exportFunction('id','dataExport');"><img src="${ctxPath }/admin/images/import/ico002.png" border="0" />导出</a>
+								<a href="doImportTemplate.action" target="_blank"><img src="${ctxPath }/admin/images/import/ico001.png" border="0" />导入</a>
 								 -->
-								<a href="#" onClick="location.reload();"><img src="/admin/images/ico10.gif" border="0" />刷新</a>
+								<a href="#" onClick="location.reload();"><img src="${ctxPath }/admin/images/ico10.gif" border="0" />刷新</a>
                             </div>
                             <div class="search">
                                 <div class="space"></div>

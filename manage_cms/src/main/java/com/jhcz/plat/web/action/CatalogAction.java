@@ -149,22 +149,17 @@ public class CatalogAction extends BaseAction
             result.setErrorInfo("该字段代码已被扩展,请重新选择！");
             return result;
         }
-        
         if (customFieldService.addExtendField(data))
         {
-            //添加字段成功，移出扩展字段池中相应的信息
-            ExtendFieldManage.getInstance().removeField(new Integer(data.getInt("id")));
-            addLog(getUID(), getSiteNo(), "添加扩展字段字段成功", "添加扩展字段池中相应的信息");
-            result.setErrorNo(0);
-            result.setErrorInfo("添加字段成功");
-            return result;
+        	//添加字段成功，移出扩展字段池中相应的信息
+        	ExtendFieldManage.getInstance().removeField(new Integer(data.getInt("id")));
+        	addLog(getUID(), getSiteNo(), "添加扩展字段成功", "添加扩展字段池中相应的信息");
+        	result.setErrorNo(0);
+        	result.setErrorInfo("添加字段成功");
+        }else{
+        	result.setErrorInfo("添加扩展字段失败");
         }
-        else
-        {
-            result.setErrorNo(-2);
-            result.setErrorInfo("添加扩展字段失败");
-            return result;
-        }
+        return result;
     }
     
     @ResponseBody
@@ -436,8 +431,8 @@ public class CatalogAction extends BaseAction
     * 删除栏目
     * @return
     */
-    @RequestMapping(value = "/doDelete.action", produces = "text/javascript")
     @ResponseBody
+    @RequestMapping(value = "/doDelete.action", produces = "text/javascript")
     public void doDelete(HttpServletResponse response)
     {
         int catalogId = getIntParameter("catalogId");
@@ -477,7 +472,7 @@ public class CatalogAction extends BaseAction
     */
     @ResponseBody
     @RequestMapping("/deleteField.action")
-    public void doDeleteField(HttpServletRequest request, HttpServletResponse reponse)
+    public Result doDeleteField(HttpServletRequest request, HttpServletResponse reponse)
     {
         int[] idArray = getIntArrayParameter("id");
         for (int i = 0; i < idArray.length; i++)
@@ -489,8 +484,9 @@ public class CatalogAction extends BaseAction
             }
         }
         addLog(getUID(), getSiteNo(), "删除字段", "删除字段成功");
-        String successPage = RequestHelper.getString(request, "successPage");
-        ScriptHelper.redirect(reponse, successPage);
+        result.setErrorInfo("删除字段成功");
+        result.setErrorNo(0);
+        return result;
     }
     
     /**

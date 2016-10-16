@@ -14,7 +14,7 @@ $(document).ready(function(){
 	});
 });
 </script>
-<jsp:include page="${ctxPath }/WEB-INF/views/catalog/include/menu.jsp" flush="true">
+<jsp:include page="/WEB-INF/views/catalog/include/menu.jsp" flush="true">
 <jsp:param name="type" value="2"/>
 </jsp:include>
 <form action="seo.action" method="post" id="seoForm">

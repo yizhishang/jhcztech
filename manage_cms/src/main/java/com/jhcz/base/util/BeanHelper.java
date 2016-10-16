@@ -39,9 +39,9 @@ public class BeanHelper
         {
             Map<String, String> map = BeanUtils.describe(bean);
             map.remove("class");
-            for (Iterator iter = map.keySet().iterator(); iter.hasNext();)
+            for (Iterator<String> iter = map.keySet().iterator(); iter.hasNext();)
             {
-                String key = (String) iter.next();
+                String key = iter.next();
                 Object value = map.get(key);
                 properties.put(key, value);
             }

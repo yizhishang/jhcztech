@@ -1,13 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/header.jsp" %>
 <body>
-<script type="text/javascript">
-
-function enterForm()
-{
-	$(":input[name='function']").val("");
-}
-</script>
 <form id="qryparm" name="qryparm" action="doDefault.action" method="post">
 <input type="hidden" name="form.pageUrl" value="${pageUrl}"></input>
 <input type="hidden" name="manageCatalogId" value="${param.manageCatalogId }"></input>
@@ -27,18 +20,11 @@ function enterForm()
                 <a href="#" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a>
 				<a href="#" class="FourFont" onClick="deleteAllFunction('deleteAll')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除全部</a>
               </div>
-              <div class="search">
-                <div class="space"></div>
-                <div>
-              
-                  <div style="float:left;">
+              <div class="space"></div>
+              <div class="search" style="float:left;">
                   <span>用户标识：<input type="text" name="uid" value="${param.uid}" class="input01"/></span> 
 				  <span>&nbsp;操作名称：<input type="text" name="keyword" value="${param.keyword}" class="input01"/></span> 
-                  <span>
-                    <input type="submit" name="button" id="searchEnter" value="查询"  class="bt01" onClick="enterForm();"/>
-                    </span> </div>
-                </div>
-               
+                  <span><input type="submit" name="button" id="searchEnter" value="查询"  class="bt01" onClick="enterForm();"/></span>
               </div>
               <div class="space"></div>
               <div class="databox">
@@ -58,10 +44,10 @@ function enterForm()
                 <c:forEach var="item" items="${data.page.data}">
 		              <tr>
 	                    <td style="width:45px;">
-						<input type="checkbox" name="id" id="check_<c:out value='${item.id}'/>" value="<c:out value='${item.id}'/>" onClick="setCheck(this)">
+						<input type="checkbox" name="id" id="check_${item.id}" value="${item.id}" onClick="setCheck(this)">
 						</td>						
-	                    <td style="width:100px;text-align:center">&nbsp;<c:out value="${item.createBy}" /></td>
-	                    <td style="width:150px;text-align:center" class="td3">&nbsp;<c:out value="${item.operate}" /></td>
+	                    <td style="width:100px;text-align:center">${item.createBy}</td>
+	                    <td style="width:150px;text-align:center" class="td3">${item.operate}</td>
 	                    <td style="text-align:left">&nbsp;<c:out value="${item.description}" /></td>
 	                    <td style="width:130px;">&nbsp;<c:out value="${item.ip}" /></td>
 						<td style="width:180px;">&nbsp;<c:out value="${item.createDate}" /></td>
@@ -79,12 +65,5 @@ function enterForm()
   </div>
 </div>
 </form>
-<!--添加角色开始-->
-<form id="addForm" action="role.action" method="post" target="">
-	<input type="hidden" name="function" value="add"/>
-	<input type="hidden" name="form.roleNo" id="roleNo"/>
-	<input type="hidden" name="form.name" id="name"/>
-</form>
-<!--添加角色结束-->
 </body>
 </html>

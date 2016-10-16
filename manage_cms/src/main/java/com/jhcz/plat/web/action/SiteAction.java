@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jhcz.base.config.SysConfig;
@@ -20,6 +23,7 @@ import com.jhcz.base.util.DateHelper;
 import com.jhcz.base.util.ScriptHelper;
 import com.jhcz.base.util.StringHelper;
 import com.jhcz.plat.domain.Catalog;
+import com.jhcz.plat.domain.Result;
 import com.jhcz.plat.domain.Site;
 import com.jhcz.plat.service.CatalogService;
 import com.jhcz.plat.service.SiteService;
@@ -39,9 +43,9 @@ import com.jhcz.plat.web.form.DynaForm;
 public class SiteAction extends BaseAction
 {
 	
-	private final DynaForm form = new DynaForm();
+	private DynaForm form = new DynaForm();
 	
-    private final Logger logger = Logger.getLogger(SiteAction.class);
+    private Logger logger = Logger.getLogger(SiteAction.class);
 
     @Resource
     CatalogService catalogService;
@@ -49,10 +53,11 @@ public class SiteAction extends BaseAction
     @Resource
     SiteService siteService;
 
+    @ResponseBody
     @RequestMapping("/add.action")
-    public void add(HttpServletRequest request)
+    public Result add(HttpServletRequest request)
 	{
-
+    	Result result = new Result();
         DynaForm form = normalize(request);
         MESSAGE = "";
         if (StringHelper.isEmpty(form.getString("siteNo")))
@@ -75,8 +80,9 @@ public class SiteAction extends BaseAction
         if (StringHelper.isNotEmpty(MESSAGE))
         {
             logger.error(MESSAGE);
-            ScriptHelper.alert(response, MESSAGE);
-            return;
+            result.setErrorNo(-1);
+            result.setErrorInfo(MESSAGE);
+            return result;
         }
         
         /***************************** 添加站点信息开始 ******************************/
@@ -135,10 +141,8 @@ public class SiteAction extends BaseAction
         catalogService.updateCatalog(catalog);
         /***************************** 修改栏目信息结束 ******************************/
         addLog("添加站点", "添加站点[siteno=" + site.getSiteNo() + "]");
-        
-        //        ScriptHelper.eval(response, "parent.catalogLeftFrame.reloadChildrenCatalog();");
-        ScriptHelper.alert(response, "添加栏目[" + catalog.getName() + "]成功！", "/admin/rightAdmin/default.action");
-    
+        result.setErrorInfo("添加站点成功");
+        return result;
 	}
 	
     /**
@@ -192,36 +196,50 @@ public class SiteAction extends BaseAction
     * 描述：删除站点
     * @return
     */
-    @RequestMapping("/doDelete.aciton")
-	public String doDelete()
+    @ResponseBody
+    @RequestMapping("/delete.action")
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = false, rollbackFor = Exception.class)
+    public Result delete(HttpServletRequest request, HttpServletResponse response)
 	{
-		int[] idArray = getIntArrayParameter("id");
-		for (int i = 0; i < idArray.length; i++)
+    	try
 		{
-            siteService.deleteSite(idArray[i]);
-            addLog("删除站点", "删除站点[id=" + idArray[i] + "]");
+    		int[] idArray = getIntArrayParameter("id");
+    		for (int i = 0; i < idArray.length; i++)
+    		{
+                siteService.deleteSite(idArray[i]);
+                addLog("删除站点", "删除站点[id=" + idArray[i] + "]");
+    		}
+    		
+            List<Site> sites = siteService.getAllSite();
+    		String siteno = "";
+            for (Iterator<Site> iter = sites.iterator(); iter.hasNext();)
+    		{
+                Site site = iter.next();
+    			siteno += site.getSiteNo();
+    			if (iter.hasNext())
+    			{
+    				siteno += "|";
+    			}
+    		}
+            //查找栏目信息
+    		Catalog catalog = catalogService.findCatalogById(1);
+            //添加跟栏目编号0
+    		catalog.setId(1);
+            //添加栏目编号
+    		catalog.setSiteNo(siteno);
+            //跟新栏目信息
+    		catalogService.updateCatalog(catalog);
+    		MESSAGE = "删除站点成功";
+    		result.setErrorNo(0);
 		}
-		
-        List<Object> sites = siteService.getAllSite();
-		String siteno = "";
-        for (Iterator<Object> iter = sites.iterator(); iter.hasNext();)
+		catch (Exception e)
 		{
-            Site site = (Site) iter.next();
-			siteno += site.getSiteNo();
-			if (iter.hasNext())
-			{
-				siteno += "|";
-			}
+			MESSAGE = "删除站点失败";
+			result.setErrorNo(-1);
+			logger.error(e.getMessage());
 		}
-        //查找栏目信息
-		Catalog catalog = catalogService.findCatalogById(1);
-        //添加跟栏目编号0
-		catalog.setId(1);
-        //添加栏目编号
-		catalog.setSiteNo(siteno);
-        //跟新栏目信息
-		catalogService.updateCatalog(catalog);
-        return MAIN;
+    	result.setErrorInfo(MESSAGE);
+        return result;
 	}
 	
 	                                                                                                                                                                                                                                                                                                                                                                                        /**
@@ -245,6 +263,20 @@ public class SiteAction extends BaseAction
         ModelAndView mv = new ModelAndView("/WEB-INF/views/site/edit_site.jsp");
         mv.addObject("form", form);
         return mv;
+	}
+    
+    @ResponseBody
+    @RequestMapping("/edit.action")
+    public Result edit(HttpServletRequest request, HttpServletResponse reponse)
+	{
+    	form = normalize(request);
+        Site site = new Site();
+        BeanHelper.mapToBean(form, site);
+        
+        siteService.updateSite(site);
+        addLog("编辑站点信息", "编辑站点信息[name=" + site.getName() + "]成功");
+        
+        return super.edit(request, reponse);
 	}
     
     /**

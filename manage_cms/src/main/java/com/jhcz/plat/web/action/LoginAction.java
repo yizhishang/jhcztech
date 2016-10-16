@@ -105,17 +105,23 @@ public class LoginAction extends BaseAction
     @RequestMapping("/login.action")
     public String doLogin(Model model) throws InstantiationException, IllegalAccessException, ClassNotFoundException
     {
-        List<Object> list = siteService.getAllSite();
-        model.addAttribute("data.list", list);
+        List<Site> list = siteService.getAllSite();
+        model.addAttribute("list", list);
         return "/WEB-INF/views/login.jsp";
     }
     
     @RequestMapping("/loginOut.action")
     public String loginOut()
     {
-        //		addLog("退出系统", "退出系统成功");
+        addLog("退出系统", "退出系统成功");
         SessionHelper.removeAllAttribute(getSession());
         return "redirect:/";
+    }
+    
+    @RequestMapping("/reLogin.action")
+    public String reLogin()
+    {
+    	return "/WEB-INF/views/reLogin.jsp";
     }
     
     @ResponseBody
@@ -258,7 +264,7 @@ public class LoginAction extends BaseAction
         //如果是超级管理员
         if ("all".equals(user.getSiteNo()))
         {
-            List<Object> list = siteService.getAllSite();
+            List<Site> list = siteService.getAllSite();
             dataMap.put("list", list);
         }
         /**************************************** 判断用户权限模块结束 ***********************************************/
@@ -278,7 +284,7 @@ public class LoginAction extends BaseAction
         addLog("登录系统", "登录系统成功");
         
         /*************************************** 查询我可以使用的站点信息开始 ********************************************/
-        List<Object> sites = null;
+        List<Site> sites = null;
         if ("all".equals(user.getSiteNo()))
         {
             //系统超级管理员可以使用所有站点
@@ -289,7 +295,7 @@ public class LoginAction extends BaseAction
         {
             //允许登录的站点
             HashSet<String> siteRights = roleService.findUserSiteRights(user.getId());
-            sites = new ArrayList<Object>();
+            sites = new ArrayList<Site>();
             for (Iterator<String> iter = siteRights.iterator(); iter.hasNext();)
             {
                 String siteNo = iter.next();

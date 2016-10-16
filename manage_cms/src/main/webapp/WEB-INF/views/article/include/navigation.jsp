@@ -61,11 +61,11 @@ function previewFunction()
 <div class="space"></div>
 <div class="label">
 	<c:if test="${catalogRights.all eq '1' or catalogRights.add eq '1'}">
-		<a href="#" onClick="saveFunction();"><img src="/admin/images/ico08.gif" border="0"/>保存</a>
+		<a href="#" onClick="saveFunction();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>保存</a>
 	</c:if>
 	<c:if test="${catalogRights.all eq '1' or catalogRights.publish eq '1'}">
-		<a href="#" onclick="publishFunction();"><img src="/admin/images/ico10.gif" border="0"/>发布</a>
+		<a href="#" onclick="publishFunction();"><img src="${ctxPath }/admin/images/ico10.gif" border="0"/>发布</a>
 	</c:if>
-	<a href="#" onclick="previewFunction();"><img src="/admin/images/ico11.gif" border="0"/>预览</a>
-	<a href="javascript:void(0);" onClick="window.close();"><img src="/admin/images/ico15.gif" border="0"/>关闭</a>
+	<a href="#" onclick="previewFunction();"><img src="${ctxPath }/admin/images/ico11.gif" border="0"/>预览</a>
+	<a href="javascript:void(0);" onClick="window.close();"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>关闭</a>
 </div>

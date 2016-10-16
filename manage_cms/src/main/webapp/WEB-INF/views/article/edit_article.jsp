@@ -1,9 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/header.jsp" %>
-<script language="javascript" src="scripts/syncReqJs.js"></script>
-<script language="javascript" src="${ctxPath }/admin/scripts/articleAuthor.js"></script>
-<script type="text/javascript" src="/admin/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" src="/admin/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="scripts/syncReqJs.js"></script>
+<script type="text/javascript" src="${ctxPath }/admin/scripts/articleAuthor.js"></script>
+<script type="text/javascript" src="${ctxPath }/admin/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="${ctxPath }/admin/ueditor/ueditor.all.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -124,7 +124,7 @@ $(document).ready(function(){
   <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
     <tr>
       <td><div class="title">
-          <p><img src="/admin/images/ico04.gif" />编辑文章</p>
+          <p><img src="${ctxPath }/admin/images/ico04.gif" />编辑文章</p>
         </div></td>
     </tr>
     <tr>

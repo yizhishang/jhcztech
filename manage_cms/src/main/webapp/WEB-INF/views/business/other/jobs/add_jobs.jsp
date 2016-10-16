@@ -126,8 +126,8 @@
                <tr>
                 <td width="120" class="label"><span class="DetailTagText">职位要求</span>：</td>
                 <td>
-                   	<script type="text/javascript" src="/admin/ueditor/ueditor.config.js"></script>
-					<script type="text/javascript" src="/admin/ueditor/ueditor.all.js"></script>
+                   	<script type="text/javascript" src="${ctxPath }/admin/ueditor/ueditor.config.js"></script>
+					<script type="text/javascript" src="${ctxPath }/admin/ueditor/ueditor.all.js"></script>
 					<script type="text/javascript">
 						$(function(){
 							UE.getEditor('demand',{

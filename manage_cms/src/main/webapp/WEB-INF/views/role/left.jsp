@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/header.jsp" %>
-<link type="text/css" rel="stylesheet" href="/admin/xtree/css/xtree.css">
-<script type="text/javascript" src="/admin/xtree/js/xtree.js"></script>
-<script type="text/javascript" src="/admin/xtree/js/xloadtree.js"></script>
+<link type="text/css" rel="stylesheet" href="${ctxPath }/admin/xtree/css/xtree.css">
+<script type="text/javascript" src="${ctxPath }/admin/xtree/js/xtree.js"></script>
+<script type="text/javascript" src="${ctxPath }/admin/xtree/js/xloadtree.js"></script>
 <body>
 <script type="text/javascript">
 $(document).ready(function()

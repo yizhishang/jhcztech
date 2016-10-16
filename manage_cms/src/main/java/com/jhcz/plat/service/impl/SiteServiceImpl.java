@@ -137,7 +137,7 @@ public class SiteServiceImpl extends BaseService implements SiteService
     * @return 结果为一个List,其中每一个元素为一个Site对象
     */
     @Override
-    public List<Object> getAllSite()
+    public List<Site> getAllSite()
     {
         return siteDao.getAllSite();
     }

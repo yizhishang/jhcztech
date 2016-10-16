@@ -83,7 +83,7 @@ public interface SiteService
     *
     * @return 结果为一个List,其中每一个元素为一个Site对象
     */
-    public List<Object> getAllSite();
+    public List<Site> getAllSite();
     
     /**
     * 描述：根据站点所有信息进行分页处理

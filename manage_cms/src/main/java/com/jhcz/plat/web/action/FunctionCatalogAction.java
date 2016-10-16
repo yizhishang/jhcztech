@@ -260,9 +260,8 @@ public class FunctionCatalogAction extends BaseAction
     * @return
     */
     @ResponseBody
-    //    @RequestMapping(value = "/showChild.action")
     @RequestMapping(value = "/showChild.action", produces = "text/xml;charset=GBK")
-    public String doShowChild(HttpServletResponse response)
+    public String doShowChild(HttpServletRequest request, HttpServletResponse response)
     {
         int parentId = getIntParameter("parentNo", 1);
         StringBuffer buffer = new StringBuffer();
@@ -288,7 +287,7 @@ public class FunctionCatalogAction extends BaseAction
                 src = "showChild.action?parentNo=" + menuCatalog.getId();
             }
             
-            buffer.append("   <tree text=\"" + name + "\" target=\"catalogRightFrame\" action=\"doEdit.action?catalogId=" + menuCatalog.getId() + "\"  src=\""
+            buffer.append("   <tree text=\"" + name + "\" target=\"catalogRightFrame\" action=\"" + request.getContextPath() + "/admin/functionCatalogAdmin/doEdit.action?catalogId=" + menuCatalog.getId() + "\"  src=\""
                     + src + "\"  value=\"" + menuCatalog.getId() + "\" oncontextmenu=\"true\" />\n");
         }
         

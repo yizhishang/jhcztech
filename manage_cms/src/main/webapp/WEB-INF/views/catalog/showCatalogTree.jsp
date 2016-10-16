@@ -1,10 +1,7 @@
-<%@ page language="java" pageEncoding="UTF-8"
-	contentType="text/html;charset=UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <%@ include file="/admin/common/header.jsp"%>
-<link href="${ctxPath }/admin/styles/checktree.css" rel="stylesheet"
-	type="text/css" />
-<script language="javascript"
-	src="${ctxPath }/admin/scripts/jquery.new.checktree.js"></script>
+<link href="${ctxPath }/admin/styles/checktree.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="${ctxPath }/admin/scripts/jquery.new.checktree.js"></script>
 <script type="text/javascript">
 	if(window.frameElement!=null && document.all != null)
 	{
@@ -27,13 +24,10 @@
     {
 		winResize();
 		
-
         $("#close").click(function()
         {
             window.close();
         });
-		
-		
 
         $.ajax({
             url: "catalog.action?function=ajaxCatalogTree&id=${param.id}",
@@ -68,8 +62,7 @@
     });
 </script>
 <body>
-<table width="100%" border="0" cellspacing="0" cellpadding="0"
-		height="100%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
   <tr>
     <td><div class="title">
         <p> <img src="${ctxPath }/admin/images/ico04.gif" /> 选择栏目 </p>

@@ -14,7 +14,7 @@
 	border:2px solid #81c4fc;	
 	}
 .btn04{
-	background:url(/admin/images/bg07.gif) repeat-x;
+	background:url(../images/bg07.gif) repeat-x;
 	height:22px;
 	border:1px solid #bbb;
 	display:inline-block;
@@ -70,7 +70,14 @@ $(function(){
 			checkData = null;
 			
 			$("#userIdStr").val(roleStr);
-			$("#qryparm").submit();
+			$.post("editRoleRight.action", encodeURI($("#qryparm").serialize()),function(data){
+    			if(data.errorNo == 0)
+    			{
+    				location.reload();
+    			}else{
+    				layer.msg(data.errorInfo, {icon: 5});
+    			}
+    		},"json");
 		}
 	});
 
@@ -88,14 +95,19 @@ $(function(){
 		}
 		else
 		{
-			/**
-			 * submit
-			 */
 			checkData = leftFrame.window.getCheckedData(false);//获取未勾选的节点
 			var roleStr = formatRoleStr(checkData);
 			checkData = null;
 			$("#userIdStr").val(roleStr);
-			$("#qryparm").submit();
+			//$("#qryparm").submit();
+			$.post("editRoleRight.action", encodeURI($("#qryparm").serialize()),function(data){
+    			if(data.errorNo == 0)
+    			{
+    				location.reload();
+    			}else{
+    				layer.msg(data.errorInfo, {icon: 5});
+    			}
+    		},"json");
 		}
 	});
 	$("#siteNo").change(function(){
@@ -105,7 +117,7 @@ $(function(){
 });
 </script>
 <body>
-<form id="qryparm" name="qryparm" action="role.action" method="post">
+<form id="qryparm" name="qryparm" action="editRoleRight.action" method="post">
   <input type="hidden" name="function" value="${param.function }"/>
   <input type="hidden" name="manageCatalogId" value="${param.manageCatalogId }"/>
   <input type="hidden" name="subManageCatalogId" value="${param.subManageCatalogId }"/>
@@ -119,7 +131,7 @@ $(function(){
             <div class="cl"></div>
             <div class="contentbox">
               <div class="content">
-                <jsp:include page="${ctxPath }/WEB-INF/views/role/include/menu.jsp" flush="true">
+                <jsp:include page="/WEB-INF/views/role/include/menu.jsp" flush="true">
 					<jsp:param name="index" value="2"/>
 					<jsp:param name="roleId" value="<%=RequestHelper.getString(request,"roleId") %>"/>
 					<jsp:param name="siteNo" value="<%=RequestHelper.getString(request,"siteNo") %>"/>

@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
-<%@page import="com.jhcz.base.util.RequestHelper"%>
+<%@ page import="com.jhcz.base.util.RequestHelper"%>
+<%@ include file="/admin/common/taglibs.jsp" %>
 <div class="space"></div>
 <div class="eb0">
   <ul class="menu">

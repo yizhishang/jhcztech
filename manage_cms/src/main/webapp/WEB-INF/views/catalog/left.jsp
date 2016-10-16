@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/header.jsp" %>
-<link type="text/css" rel="stylesheet" href="/admin/xtree/css/xtree.css">
-<script type="text/javascript" src="/admin/xtree/js/xtree.js"></script>
-<script type="text/javascript" src="/admin/xtree/js/xloadtree.js"></script>
+<link type="text/css" rel="stylesheet" href="${ctxPath }/admin/xtree/css/xtree.css">
+<script type="text/javascript" src="${ctxPath }/admin/xtree/js/xtree.js"></script>
+<script type="text/javascript" src="${ctxPath }/admin/xtree/js/xloadtree.js"></script>
 <body>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -179,8 +179,8 @@
     tree.write();
 </script>
 </div>
-<link rel="stylesheet" href="/admin/scripts/bootstrapMenu/css/bootstrap.min.css">
-<script type="text/javascript" src="/admin/scripts/bootstrapMenu/js/BootstrapMenu.min.js"></script>
+<link rel="stylesheet" href="${ctxPath }/admin/scripts/bootstrapMenu/css/bootstrap.min.css">
+<script type="text/javascript" src="${ctxPath }/admin/scripts/bootstrapMenu/js/BootstrapMenu.min.js"></script>
 
 <!--根目录右键菜单-->
 <div id="rootMenu" class="RightClickMenu" style="position:absolute; left:0px; top:-1px; width:136px; z-index:1000; visibility: hidden">

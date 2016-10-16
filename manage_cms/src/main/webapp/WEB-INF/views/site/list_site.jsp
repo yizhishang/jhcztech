@@ -1,31 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/header.jsp" %>
 <body>
-<script type="text/javascript">
-function deleteFunction(name,funcitonId){
-	if(isChecked(name)){
-		if($(":input[name='function']").length>0){
-			$(":input[name='function']").val(funcitonId);
-			if(window.confirm("确定删除选中数据？")){
-				$("#qryparm").submit();
-			}
-		}
-	}else{
-		alert("请选择需要删除的数据！");
-	}
-}
-
-function addFunction()
-{
-	openWindow("doAdd.action", 700, 315);
-}
-
-function editFunction(id)
-{
-	openWindow("doEdit.action?id="+id, 700, 315);
-}
-</script>
-<form id="qryparm" name="qryparm" action="site.action" >
+<form id="qryparm" name="qryparm" action="doDefault.action" >
   	<input type="hidden" name="function" value="${param.function }"></input>
   	<input type="hidden" name="form.pageUrl" value="${pageUrl}"></input>
 	<input type="hidden" name="manageCatalogId" value="${param.manageCatalogId }"></input>
@@ -88,7 +64,7 @@ function editFunction(id)
                           --%>
                         <td style="text-align:left" >&nbsp;
                           <c:out value="${item.description}" /></td>
-                        <td >&nbsp;<a href="#" onClick="editFunction(<c:out value='${item.id}'/>)">编辑</a></td>
+                        <td >&nbsp;<a href="#" onClick="editFunction('id=${item.id}')">编辑</a></td>
                       </tr>
                     </c:forEach>
                   </table>

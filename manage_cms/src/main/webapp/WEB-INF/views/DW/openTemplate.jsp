@@ -2,7 +2,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
     <title></title>
-    <script language="javascript" src="/admin/scripts/jquery.min.js"></script>
+    <script language="javascript" src="${ctxPath }/admin/scripts/jquery.min.js"></script>
 	<script type="text/javascript" language="javascript">
 		function Check()
 		{

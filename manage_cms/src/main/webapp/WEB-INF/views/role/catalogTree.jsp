@@ -1,9 +1,9 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%><%@page import="com.jhcz.base.util.RequestHelper"%>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" media="screen" href="/admin/styles/zTreeStyle/zTreeStyle.css"></link>
-<script type="text/javascript" language="javascript" src="/admin/scripts/jquery.min.js"></script>
-<script type="text/javascript" language="javascript" src="/admin/scripts/jqueryUI/jquery.ztree.all-3.5.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="<%=request.getContextPath()%>/admin/styles/zTreeStyle/zTreeStyle.css"></link>
+<script type="text/javascript" language="javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.min.js"></script>
+<script type="text/javascript" language="javascript" src="<%=request.getContextPath()%>/admin/scripts/jqueryUI/jquery.ztree.all-3.5.js"></script>
 <SCRIPT type="text/javascript">
 		/**
 		 * query tree type，0:find yes data 1: find no daata

@@ -65,7 +65,7 @@ function editPlanFunction(queid)
               <div class="content">
                 <!-- 包含导航代码  -->
                 <jsp:include flush="true" page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
-                <div class="label"> <a href="#" onClick="commendFunction('id','commendQuestion','1')"><img src="/admin/images/ico10.gif" border="0"/>推荐</a> <a href="#" onClick="commendFunction('id','commendQuestion','0')" class="FourFont"><img src="/admin/images/ico10.gif" border="0"/>取消推荐</a> <a href="#" onClick="deleteFunction('id','deleteQuestion')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a></div>
+                <div class="label"> <a href="#" onClick="commendFunction('id','commendQuestion','1')"><img src="${ctxPath }/admin/images/ico10.gif" border="0"/>推荐</a> <a href="#" onClick="commendFunction('id','commendQuestion','0')" class="FourFont"><img src="${ctxPath }/admin/images/ico10.gif" border="0"/>取消推荐</a> <a href="#" onClick="deleteFunction('id','deleteQuestion')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a></div>
                 <div class="search">
                   <div class="space"></div>
                   <div>

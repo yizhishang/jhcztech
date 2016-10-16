@@ -17,7 +17,7 @@
             <div class="cl"></div>
             <div class="contentbox">
               <div class="content">
-                <jsp:include page="${ctxPath }/WEB-INF/views/role/include/menu.jsp" flush="true">
+                <jsp:include page="/WEB-INF/views/role/include/menu.jsp" flush="true">
 					<jsp:param name="index" value="1"/>
 					<jsp:param name="roleId" value="<%=RequestHelper.getString(request,"roleId") %>"/>
 					<jsp:param name="siteNo" value="<%=RequestHelper.getString(request,"siteNo") %>"/>
@@ -25,7 +25,7 @@
                 <div class="space"></div>
                 <div id="content">
                   <div class="eb0">
-                    <div class="label"> <a href="#" onClick="submitForm('qryparm');"><img src="/admin/images/ico10.gif" border="0"/>保存</a> </div>
+                    <div class="label"> <a href="#" onClick="submitForm('qryparm');"><img src="${ctxPath }/admin/images/ico10.gif" border="0"/>保存</a> </div>
                   </div>
                   <div class="space"></div>
                   <div class="databox">
@@ -37,7 +37,7 @@
                       </tr>
                       <c:forEach var="item" items="${data.dataList}" varStatus="status">
                         <tr>
-                          <td class="td3" style="text-align:left"><img src="/admin/images/T.png"/> <input type="checkbox" name="id_fun"  value="<c:out value='${item.siteNo}'/>" 
+                          <td class="td3" style="text-align:left"><img src="${ctxPath }/admin/images/T.png"/> <input type="checkbox" name="id_fun"  value="<c:out value='${item.siteNo}'/>" 
                             <c:if test="${item.show eq '1'}"> checked="checked"</c:if>
                             >
                             <c:out value="${item.name}" /></td>

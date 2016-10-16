@@ -10,8 +10,8 @@ td img,td input { vertical-align:middle;}
   <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1" id="roleTab">
     <c:forEach var="item" items="${data.dataList}" varStatus="status">
       <tr class="${(empty item.isLastTree)?'trlight':''}">
-        <td class="td3" style="text-align:left"><c:forEach begin="2" end="${item.rownum}"><img src="/admin/images/I.png"/></c:forEach>
-          <img src="/admin/images/T.png"/> <input type="checkbox" name="chooseCopyCatalog" id="chk_${item.route}" value="<c:out value='${item.catalog_id}'/>" 
+        <td class="td3" style="text-align:left"><c:forEach begin="2" end="${item.rownum}"><img src="${ctxPath }/admin/images/I.png"/></c:forEach>
+          <img src="${ctxPath }/admin/images/T.png"/> <input type="checkbox" name="chooseCopyCatalog" id="chk_${item.route}" value="<c:out value='${item.catalog_id}'/>" 
             
             
             

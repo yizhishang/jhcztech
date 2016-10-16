@@ -21,8 +21,8 @@
                 <div class="label">
                 	<a href="#" onClick="addFunction();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a>
                 	<a href="#" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a>
-                	<a href="#" onClick="editStateFunction('id','editState',1);"><img src="/admin/images/ico02.gif" border="0"/>有效</a>
-                	<a href="#" onClick="editStateFunction('id','editState',0);"><img src="/admin/images/import/ico003.png" border="0"/>无效</a> </div>
+                	<a href="#" onClick="editStateFunction('id','editState',1);"><img src="${ctxPath }/admin/images/ico02.gif" border="0"/>有效</a>
+                	<a href="#" onClick="editStateFunction('id','editState',0);"><img src="${ctxPath }/admin/images/import/ico003.png" border="0"/>无效</a> </div>
                 <div class="search">
                   <div class="space"></div>
                   <div>

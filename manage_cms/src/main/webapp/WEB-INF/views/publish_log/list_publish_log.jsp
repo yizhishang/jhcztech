@@ -43,7 +43,7 @@ $(document).ready(function(){
                 <jsp:include flush="true" page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
                 <div class="label">
                 	<a href="#" onClick="deleteFunction('id','doDelete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a>
-                	<a href="#" class="FourFont" onClick="deleteAllFunction('id','doDeleteAll')"><img src="/admin/images/ico15.gif" border="0"/>删除全部</a></div>
+                	<a href="#" class="FourFont" onClick="deleteAllFunction('id','doDeleteAll')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除全部</a></div>
                 <div class="search">
                   <div class="space"></div>
                   <div>

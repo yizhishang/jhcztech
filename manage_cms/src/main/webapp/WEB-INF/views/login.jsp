@@ -24,7 +24,7 @@
 	<h1>登录</h1>
 	<form method="post" id="loginForm">
 		<select name="siteno" id="siteno">
-        <c:forEach var="siteItem" items="${data.list }">
+        <c:forEach var="siteItem" items="${list }">
             <option value="${siteItem.siteNo }">${siteItem.name }</option>
         </c:forEach>
        	</select>
@@ -67,7 +67,7 @@
 				success: function(result){
 					if(result && result.errorNo == 0)
 					{
-						window.location.href = "/admin/index.action";
+						window.location.href = "${ctxPath }/admin/index.action";
 					}else{
 						layer.msg(result.errorInfo, {icon: 5});
 					}

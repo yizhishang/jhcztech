@@ -384,7 +384,7 @@ public class LeftAction extends BaseAction
     */
     @ResponseBody
     @RequestMapping(value = "/showChild.action", produces = "text/xml;charset=GBK")
-    public String doShowChild(HttpServletResponse response)
+    public String doShowChild(HttpServletRequest request, HttpServletResponse response)
     {
         int parentId = getIntParameter("parentNo", 1);
         StringBuffer buffer = new StringBuffer();
@@ -435,7 +435,7 @@ public class LeftAction extends BaseAction
                     src = "showChild.action?parentNo=" + menuCatalog.getId();
                 }
                 
-                String url = menuCatalog.getLinkUrl();
+                String url = request.getContextPath() + menuCatalog.getLinkUrl();
                 if (StringHelper.isEmpty(url) || url.startsWith("#"))
                 {
                     url = "javascript:void(0);";

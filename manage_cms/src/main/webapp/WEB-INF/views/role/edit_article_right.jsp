@@ -14,7 +14,7 @@
 	border:2px solid #81c4fc;	
 	}
 .btn04{
-	background:url(/admin/images/bg07.gif) repeat-x;
+	background:url(../images/bg07.gif) repeat-x;
 	height:22px;
 	border:1px solid #bbb;
 	display:inline-block;
@@ -134,7 +134,7 @@ $(function(){
             <div class="cl"></div>
             <div class="contentbox">
               <div class="content">
-                <jsp:include page="${ctxPath }/WEB-INF/views/role/include/menu.jsp" flush="true">
+                <jsp:include page="/WEB-INF/views/role/include/menu.jsp" flush="true">
 					<jsp:param name="index" value="3"/>
 					<jsp:param name="roleId" value="<%=RequestHelper.getString(request,"roleId") %>"/>
 					<jsp:param name="siteNo" value="<%=siteNo %>"/>

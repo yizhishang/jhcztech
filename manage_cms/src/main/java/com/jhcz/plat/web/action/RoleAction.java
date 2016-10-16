@@ -43,6 +43,7 @@ import com.jhcz.base.util.StringHelper;
 import com.jhcz.plat.domain.ManageCatalog;
 import com.jhcz.plat.domain.Result;
 import com.jhcz.plat.domain.Role;
+import com.jhcz.plat.domain.Site;
 import com.jhcz.plat.domain.User;
 import com.jhcz.plat.service.CatalogService;
 import com.jhcz.plat.service.EnumService;
@@ -351,7 +352,7 @@ public class RoleAction extends BaseAction
         //          List dataList = service.findDocRight(roleId, siteNo);
         //          dataMap.put("dataList", dataList);
         
-        List<Object> siteList = siteService.getAllSite();
+        List<Site> siteList = siteService.getAllSite();
         dataMap.put("siteList", siteList);
         mv.setViewName("/WEB-INF/views/role/edit_article_right.jsp");
         mv.addObject("data", dataMap);
@@ -381,7 +382,7 @@ public class RoleAction extends BaseAction
         //			List dataList = service.findCatalogRight(roleId, siteNo);
         //			dataMap.put("dataList", dataList);
         //			
-        List<Object> siteList = siteService.getAllSite();
+        List<Site> siteList = siteService.getAllSite();
         dataMap.put("siteList", siteList);
         
         mv.addObject("data", dataMap);
@@ -641,6 +642,7 @@ public class RoleAction extends BaseAction
         ModelAndView mv = new ModelAndView("/WEB-INF/views/role/list_role.jsp");
         mv.addObject("data", dataMap);
         mv.addObject("form", form);
+        mv.addObject("roleId", roleId);
         
         return mv;
     }
@@ -766,7 +768,8 @@ public class RoleAction extends BaseAction
         ScriptHelper.redirect(response, successPage);
     }
     
-    @RequestMapping("/editRoleRight.actoin")
+    @ResponseBody
+    @RequestMapping("/editRoleRight.action")
     public Result editRoleRight(HttpServletRequest request)
     {
         Result result = new Result();
@@ -774,9 +777,16 @@ public class RoleAction extends BaseAction
         int roleId = RequestHelper.getInt(request, "roleId");
         String siteNo = RequestHelper.getString(request, "siteNo");
         String userIdStr = RequestHelper.getString(request, "userIdStr");
-        
+        try
+		{
+			userIdStr = URLDecoder.decode(userIdStr, "UTF-8");
+		}
+		catch (UnsupportedEncodingException e)
+		{
+			userIdStr = "";
+		}
         roleService.editRoleRights(userIdStr, roleId, siteNo);
-        addLog("修改角色权限成功", "修改" + roleId + "的权限成功");
+        addLog("修改角色权限成功", "修改[roleId=" + roleId + "]的权限成功");
         
         result.setErrorInfo("修改角色权限成功");
         return result;

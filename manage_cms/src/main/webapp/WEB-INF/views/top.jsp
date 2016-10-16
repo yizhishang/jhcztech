@@ -3,27 +3,10 @@
 <%@ include file="/admin/common/header.jsp" %>
 <body>
 <script type="text/javascript">
-function modiPassword()
-{
-	
-   var returnValue = openDialogWithScroll('/admin/ModifyPwdAdmin/doDefault.action?isModelDialog', 500, 190);
-   if (returnValue != null && returnValue.length > 0)
-   {
-	   if(returnValue[0] == "success")
-	   {
-	   	   alert("修改密码成功！");
-	   }
-   }
-}
-
 $(document).ready(function(){
 	
 	$("#loginOut").click(function(){
-		if(window!= top){
-			top.location.href = "/loginAdmin/loginOut.action"
-		}else{
-			window.location.href = "/loginAdmin/loginOut.action";
-		}
+		top.location.href = "${ctxPath}/loginAdmin/loginOut.action";
 	});
 	/*$("#leftCatalogBtn").click(function(){
 		var bottomObj = $(window.parent.document).find("[name='bottomFrame']");
@@ -72,7 +55,7 @@ $(document).ready(function(){
             <c:set var="count" value="0"/>
             <c:forEach items="${data.rootMenus}" var="rootMenu">
               <c:if test="${rootMenu.parentId == 1}">
-                <li id="${rootMenu.id }" class="tn${count }" style="left:${count*90 }px;"><a href="${rootMenu.linkUrl }?form.manageCatalogId=${rootMenu.id }" target="leftFrame">${rootMenu.name }</a></li>
+                <li id="${rootMenu.id }" class="tn${count }" style="left:${count*90 }px;"><a href="${ctxPath}${rootMenu.linkUrl }?form.manageCatalogId=${rootMenu.id }" target="leftFrame">${rootMenu.name }</a></li>
                 <c:set var="count" value="${count+1 }"/>
               </c:if>
             </c:forEach>
@@ -121,7 +104,7 @@ $(document).ready(function(){
 	$(".topnav li").click(function(){
 		var cur_src=$(this).children("a").attr("href");
 		setTopClass(cur_src);
-		window.top.frames['mainFrame'].location.href="/admin/rightAdmin/default.action?form.manageCatalogId="+$(this).attr("id");
+		window.top.frames['mainFrame'].location.href="${ctxPath}/admin/rightAdmin/default.action?form.manageCatalogId="+$(this).attr("id");
 	});
 //-->
 </script>

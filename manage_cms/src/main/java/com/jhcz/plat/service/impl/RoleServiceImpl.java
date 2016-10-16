@@ -451,15 +451,15 @@ public class RoleServiceImpl extends BaseService implements RoleService
         }
         
         SiteDao siteDao = (SiteDao) getDao(SiteDao.class);
-        List<Object> siteList = siteDao.getAllSite();
+        List<Site> siteList = siteDao.getAllSite();
         
         if (siteList != null)
         {
             DataRow dataRow = null;
-            for (Iterator<Object> iter = siteList.iterator(); iter.hasNext();)
+            for (Iterator<Site> iter = siteList.iterator(); iter.hasNext();)
             {
                 dataRow = new DataRow();
-                Site site = (Site) iter.next();
+                Site site = iter.next();
                 String no = site.getSiteNo();
                 String name = site.getName();
                 dataRow.set("siteNo", no);

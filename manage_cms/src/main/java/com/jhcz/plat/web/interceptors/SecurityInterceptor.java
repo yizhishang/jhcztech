@@ -1,7 +1,6 @@
 package com.jhcz.plat.web.interceptors;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -69,7 +68,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter
         String rightUrl = uri.substring(pos + 1);
         if (rightUrl.indexOf("index.action") != -1 || rightUrl.indexOf("top.action") != -1 || rightUrl.indexOf("left.action") != -1
                 || rightUrl.indexOf("right.action") != -1 || rightUrl.indexOf("login.action") != -1 || rightUrl.indexOf("getTicket.action") != -1
-                || rightUrl.indexOf("loginValidate.action") != -1)
+                || rightUrl.indexOf("loginValidate.action") != -1 || rightUrl.indexOf("reLogin.action") != -1)
         {
             return true;
         }
@@ -140,10 +139,12 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter
      */
     private boolean isLogin(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
-        
         String uri = request.getRequestURI();
+        if(uri.indexOf("login.action") > -1 || uri.indexOf("reLogin.action") > -1 || uri.indexOf("getTicket.action") > -1 || uri.indexOf("loginValidate.action") > -1){
+        	return true;
+        }
         Object obj = request.getSession().getAttribute(Constants.ADMIN_USER_ID);
-        if (uri.matches("^(/admin).*(.action)$") && null == obj)
+        if (uri.indexOf("admin") > -1 && null == obj)
         {
             // 未登录  
             return false;
@@ -161,14 +162,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter
         if (!isLogin(request, response))
         {
             // 未登录  
-            PrintWriter out = response.getWriter();
-            StringBuilder builder = new StringBuilder();
-            builder.append("<script type=\"text/javascript\" charset=\"UTF-8\">");
-            builder.append("alert(\"页面过期，请重新登录\");");
-            builder.append("window.location.href=\"");
-            builder.append("/loginAdmin/login.action\";</script>");
-            out.print(builder.toString());
-            out.close();
+            ScriptHelper.redirect(response, request.getContextPath() + "/loginAdmin/reLogin.action");
             return false;
         }
         

@@ -7,7 +7,7 @@
 <frameset cols="200,*" name="articleFrameset" frameborder="NO"
 	border="0" framespacing="0">
 	<frame src="left.action" name="catalogLeftFrame" scrolling="No">
-	<frame src="/admin/rightAdmin/default.action" name="catalogRightFrame">
+	<frame src="<%=request.getContextPath()%>/admin/rightAdmin/default.action" name="catalogRightFrame">
 </frameset>
 <noframes>
 	<body>

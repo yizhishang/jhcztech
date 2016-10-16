@@ -39,9 +39,9 @@ function showTab(index)
 </script>
 <div class="space"></div>
 <ul class="menu">
-  <li class="cur"><a href="#" onClick="showTab(0);"><img src="/admin/images/ico16.gif" border="0"/>基本信息</a></li>
-  <li class="no"><a href="#" onClick="showTab(1);"><img src="/admin/images/ico17.gif" border="0"/>文章属性</a></li>
-  <li class="no"><a href="#" onClick="showTab(2);"><img src="/admin/images/ico17.gif" border="0"/>文章复制</a></li>
-  <li class="no"><a href="#" onClick="showTab(3);"><img src="/admin/images/ico18.gif" border="0"/>自定义字段</a></li>
+  <li class="cur"><a href="#" onClick="showTab(0);"><img src="${ctxPath }/admin/images/ico16.gif" border="0"/>基本信息</a></li>
+  <li class="no"><a href="#" onClick="showTab(1);"><img src="${ctxPath }/admin/images/ico17.gif" border="0"/>文章属性</a></li>
+  <li class="no"><a href="#" onClick="showTab(2);"><img src="${ctxPath }/admin/images/ico17.gif" border="0"/>文章复制</a></li>
+  <li class="no"><a href="#" onClick="showTab(3);"><img src="${ctxPath }/admin/images/ico18.gif" border="0"/>自定义字段</a></li>
   <!--<li class="no"><a href="#" onClick="showTab(3);"><img src="images/ico19.gif" border="0"/>文档权限</a></li>-->
 </ul>

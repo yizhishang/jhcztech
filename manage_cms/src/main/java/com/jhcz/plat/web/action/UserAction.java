@@ -35,6 +35,7 @@ import com.jhcz.base.util.DateHelper;
 import com.jhcz.base.util.StringHelper;
 import com.jhcz.base.util.security.SecurityHelper;
 import com.jhcz.plat.domain.Result;
+import com.jhcz.plat.domain.Site;
 import com.jhcz.plat.domain.User;
 import com.jhcz.plat.domain.UserPasswordLog;
 import com.jhcz.plat.service.BranchService;
@@ -176,7 +177,7 @@ public class UserAction extends BaseAction
         List<Object> dataList = branchService.getAll();
         dataMap.put("branchList", dataList);
         //查找所有站点信息
-        List<Object> siteList = siteService.getAllSite();
+        List<Site> siteList = siteService.getAllSite();
         dataMap.put("siteList", siteList);
         ModelAndView mv = new ModelAndView("/WEB-INF/views/user/add_user.jsp");
         mv.addObject("data", dataMap);

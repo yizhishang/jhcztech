@@ -124,10 +124,10 @@ public class SiteDaoImpl extends BaseDao implements SiteDao
     }
 
     @Override
-    public List<Object> getAllSite()
+    public List<Site> getAllSite()
     {
         List<Object> siteList = getJdbcTemplate().query(GET_ALL);
-        ArrayList<Object> newSiteList = new ArrayList<Object>();
+        ArrayList<Site> newSiteList = new ArrayList<Site>();
         for (Iterator<Object> iter = siteList.iterator(); iter.hasNext();)
         {
             Site site = new Site();

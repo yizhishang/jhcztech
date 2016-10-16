@@ -37,15 +37,10 @@ function enterForm()
               </div>
               <div class="search">
                 <div class="space"></div>
-                <div>
-              
-                  <div style="float:left;">
-                  <span>关键字：<input type="text" name="keyword" value="${param.keyword}" class="input01"/></span> 
-                  <span>
-                    <input type="submit" name="button" id="button" value="查询"  class="bt01" onClick="enterForm();"/>
-                    </span> </div>
-                </div>
-               
+                <div style="float:left;">
+	                  <span>关键字：<input type="text" name="keyword" value="${param.keyword}" class="input01"/></span> 
+	                  <span><input type="submit" name="button" id="button" value="查询"  class="bt01" onClick="enterForm();"/></span>
+                 </div>
               </div>
               <div class="space"></div>
               <div class="databox">
@@ -57,7 +52,7 @@ function enterForm()
                     <td class="tdhead" style="width:91px;">参数值</td>
                     <td class="tdhead" style="width:296px;">参数描述信息</td>
 					<td class="tdhead" style="width:118px;">是否系统参数</td>
-				 	<td class="tdhead" style="">&nbsp;&nbsp;操作&nbsp;&nbsp;</td>
+				 	<td class="tdhead" style="">操作</td>
                   </tr>
                 </table>
                 </div>

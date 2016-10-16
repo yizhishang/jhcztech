@@ -32,7 +32,7 @@ public interface SiteDao
 
     public boolean findSiteIsMain(String isMain);
 
-    public List<Object> getAllSite();
+    public List<Site> getAllSite();
 
     public DBPage getPageData(int curPage, int numPerPage, String keyword);
 
