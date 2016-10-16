@@ -60,7 +60,7 @@
               -->
 			  <tr>
                 <td width="120" class="label"><span class="DetailTagText">站点描述</span>：</td>
-                <td><textarea class="input02" name="form.description"  style="width:400px;height:100px;"><c:out value='${form.description}'/></textarea></td>
+                <td><textarea class="input02" name="form.description"  style="width:350px;height:100px;"><c:out value='${form.description}'/></textarea></td>
               </tr>
               <tr>
                 <td class="label">&nbsp;</td>

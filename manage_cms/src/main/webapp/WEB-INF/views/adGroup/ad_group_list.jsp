@@ -18,7 +18,7 @@
               <!-- 包含导航代码  -->
               <jsp:include flush="true" page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
               <div class="label">
-               	<a href="javascript:void(0);" onClick="addFunction();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a> 
+               	<a href="javascript:void(0);" onClick="addFunction(null, null,'400px','200px');"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a> 
                 <a href="javascript:void(0);" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a>
               </div>
               <div class="search">
