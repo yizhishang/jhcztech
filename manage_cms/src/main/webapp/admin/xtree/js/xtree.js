@@ -147,20 +147,20 @@ var arrayHelper = {
 //下面增加部分缺省参数值
 var webFXTreeConfig = {
 	rootIcon        : "xtree/images/folder.png",
-	openRootIcon    : "/admin/xtree/images/openfolder.png",
-	folderIcon      : "/admin/xtree/images/folder.png",
-	openFolderIcon  : "/admin/xtree/images/openfolder.png",
-	fileIcon        : "/admin/xtree/images/file.png",
-	iIcon           : "/admin/xtree/images/I.png",
-	lIcon           : "/admin/xtree/images/L.png",
-	lMinusIcon      : "/admin/xtree/images/Lminus.png",
-	lPlusIcon       : "/admin/xtree/images/Lplus.png",
-	tIcon           : "/admin/xtree/images/T.png",
-	tMinusIcon      : "/admin/xtree/images/Tminus.png",
-	tPlusIcon       : "/admin/xtree/images/Tplus.png",
-	plusIcon        : "/admin/xtree/images/plus.png",
-	minusIcon       : "/admin/xtree/images/minus.png",
-	blankIcon       : "/admin/xtree/images/blank.png",
+	openRootIcon    : ctxPath + "/admin/xtree/images/openfolder.png",
+	folderIcon      : ctxPath + "/admin/xtree/images/folder.png",
+	openFolderIcon  : ctxPath + "/admin/xtree/images/openfolder.png",
+	fileIcon        : ctxPath + "/admin/xtree/images/file.png",
+	iIcon           : ctxPath + "/admin/xtree/images/I.png",
+	lIcon           : ctxPath + "/admin/xtree/images/L.png",
+	lMinusIcon      : ctxPath + "/admin/xtree/images/Lminus.png",
+	lPlusIcon       : ctxPath + "/admin/xtree/images/Lplus.png",
+	tIcon           : ctxPath + "/admin/xtree/images/T.png",
+	tMinusIcon      : ctxPath + "/admin/xtree/images/Tminus.png",
+	tPlusIcon       : ctxPath + "/admin/xtree/images/Tplus.png",
+	plusIcon        : ctxPath + "/admin/xtree/images/plus.png",
+	minusIcon       : ctxPath + "/admin/xtree/images/minus.png",
+	blankIcon       : ctxPath + "/admin/xtree/images/blank.png",
 	defaultText     : "Tree Item",
 	defaultAction   : null,
 	defaultBehavior : "classic",
@@ -884,17 +884,17 @@ _p.getLabelHtml = function getLabelHtml() {
 		" onfocus=\"webFXTreeHandler.handleEvent(event)\"" +
 		" onblur=\"webFXTreeHandler.handleEvent(event)\"    "+this.getoncontextmenuHtml()+">" +
 		this.getHtml() + "</a>";
-		}
-		else{
-			return "<a href=\"" + webFXTreeHandler.textToHtml(this._getHref()) +
-		"\" class=\"webfx-tree-item-label\" tabindex=\"-1\"" +
-		(toolTip ? " title=\"" + webFXTreeHandler.textToHtml(toolTip) + "\"" : "") +
-		(target ? " target=\"" + target + "\"" : "") +
-		" onfocus=\"webFXTreeHandler.handleEvent(event)\"" +
-		" onblur=\"webFXTreeHandler.handleEvent(event)\" "+this.getoncontextmenuHtml()+">" +
-		this.getHtml() + "</a>";
+	}
+	else{
+		return "<a href=\"" + webFXTreeHandler.textToHtml(this._getHref()) +
+	"\" class=\"webfx-tree-item-label\" tabindex=\"-1\"" +
+	(toolTip ? " title=\"" + webFXTreeHandler.textToHtml(toolTip) + "\"" : "") +
+	(target ? " target=\"" + target + "\"" : "") +
+	" onfocus=\"webFXTreeHandler.handleEvent(event)\"" +
+	" onblur=\"webFXTreeHandler.handleEvent(event)\" "+this.getoncontextmenuHtml()+">" +
+	this.getHtml() + "</a>";
 
-		}
+	}
 };
 
 

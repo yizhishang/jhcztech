@@ -5,3 +5,4 @@
 <c:set var="ctxPath" value="${pageContext.request.contextPath}" scope="request" />
 <c:set var="uri" value="${pageContext.request.requestURI}" scope="request" />
 <jsp:useBean id="Constants" class="com.jhcz.plat.Constants"></jsp:useBean>
+<script type="text/javascript">var ctxPath = '${ctxPath}'; </script>

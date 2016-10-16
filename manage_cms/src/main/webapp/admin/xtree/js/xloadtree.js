@@ -35,7 +35,7 @@
 
 
 webFXTreeConfig.loadingText = "加载中...";
-webFXTreeConfig.loadingIcon = "/admin/xtree/images/loading.gif";
+webFXTreeConfig.loadingIcon = ctxPath + "/admin/xtree/images/loading.gif";
 
 
 function WebFXLoadTree(sText, sXmlSrc, oAction, sBehavior, sIcon, sOpenIcon) {
@@ -439,7 +439,7 @@ WebFXLoadTree.documentLoaded = function (jsNode) {
 	}
 
 	if (jsNode.errorText != "") {
-		jsNode._loadingItem.icon = "/admin/xtree/images/exclamation.16.gif";
+		jsNode._loadingItem.icon = ctxPath + "/admin/xtree/images/exclamation.16.gif";
 		jsNode._loadingItem.text = jsNode.errorText;
 		jsNode._loadingItem.action = WebFXLoadTree._reloadParent;
 		//jsNode._loadingItem.toolTip = "Click to reload";
