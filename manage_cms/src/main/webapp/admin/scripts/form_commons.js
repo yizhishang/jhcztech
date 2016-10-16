@@ -823,3 +823,15 @@ function autoOncontextmenu()
 		}]
    	});	
 }
+
+function modiPassword(){
+	var url = ctxPath + '/admin/ModifyPwdAdmin/doDefault.action?isModelDialog';
+	var returnValue = window.showModalDialog(url, window, 'dialogHeight: ' + 190 + 'px; dialogWidth: ' + 500 + 'px;edge: Raised; center: Yes; help: Yes;scroll:no; resizable: no; status: no;');
+	if (returnValue != null && returnValue.length > 0)
+	{
+	   if(returnValue[0] == "success")
+	   {
+	   	   alert("修改密码成功！");
+	   }
+	}
+}
