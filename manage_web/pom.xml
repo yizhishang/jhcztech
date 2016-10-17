@@ -340,11 +340,12 @@
 						WEB-INF/lib/**,
 						main/**,
 						logs/**,
-						fileUpload/**,
+						upload/**,
 						component/**,
 						js/**
 					</packagingExcludes>
 					<warSourceExcludes>
+						.gitignore,
 						logs/**
 					</warSourceExcludes>
 					<webappDirectory>${project.build.directory}/${project.artifactId}</webappDirectory>
