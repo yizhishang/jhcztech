@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc53582b-65cf-4b7f-b7f7-575934b31e44" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../manage_web/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../manage_web/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../manage_web/manage_web.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../manage_web/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../manage_web/.classpath" afterPath="$PROJECT_DIR$/../manage_web/.classpath" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../manage_web/.project" afterPath="$PROJECT_DIR$/../manage_web/.project" />
@@ -126,20 +122,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="manage_cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage_cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="manage_cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="target" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -474,7 +456,7 @@
       <workItem from="1476626949402" duration="1191000" />
       <workItem from="1476693292124" duration="161000" />
       <workItem from="1476693481504" duration="180000" />
-      <workItem from="1476693980741" duration="107000" />
+      <workItem from="1476693980741" duration="370000" />
     </task>
     <task id="LOCAL-00001" summary="增加idea配置">
       <created>1476693568168</created>
@@ -515,7 +497,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5072000" />
+    <option name="totallyTimeSpent" value="5335000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans    
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd    
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	<!-- 引入配置文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="${initialSize}"></property>
+		<!-- 连接池最大数量 -->
+		<property name="maxActive" value="${maxActive}"></property>
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="${maxIdle}"></property>
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="${minIdle}"></property>
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="${maxWait}"></property>
+	</bean>
+
+	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 自动扫描mapping.xml文件 -->
+		<property name="mapperLocations" value="classpath:mapping/**/*.xml"></property>
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>dialect=oracle</value>
+					</property>
+			        <!-- 该参数默认为false -->
+			        <!-- 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 -->
+			        <!-- 和startPage中的pageNum效果一样-->
+			        <property name="offsetAsPageNum" value="true"/>
+			        <!-- 该参数默认为false -->
+			        <!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+			        <property name="rowBoundsWithCount" value="true"/>
+			        <!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 -->
+			        <!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型）-->
+			        <property name="pageSizeZero" value="true"/>
+			        <!-- 3.3.0版本可用 - 分页参数合理化，默认false禁用 -->
+			        <!-- 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 -->
+			        <!-- 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据 -->
+			        <property name="reasonable" value="false"/>
+			        <!-- 3.5.0版本可用 - 为了支持startPage(Object params)方法 -->
+			        <!-- 增加了一个`params`参数来配置参数映射，用于从Map或ServletRequest中取值 -->
+			        <!-- 可以配置pageNum,pageSize,count,pageSizeZero,reasonable,orderBy,不配置映射的用默认值 -->
+			        <!-- 不理解该含义的前提下，不要随便复制该配置 -->
+			        <property name="params" value="pageNum=pageHelperStart;pageSize=pageHelperRows;"/>
+			        <!-- 支持通过Mapper接口参数来传递分页参数 -->
+			        <property name="supportMethodsArguments" value="false"/>
+			        <!-- always总是返回PageInfo类型,check检查返回类型是否为PageInfo,none返回Page -->
+			        <property name="returnPageInfo" value="none"/>					
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.jhcz" />
+		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+</beans>

@@ -237,7 +237,7 @@
          - configures an explicit root web-app matching the
          - webapp's ROOT
         -->
-      <web-app id="/" root-directory="G:\Workspace\manage_web\WebRoot">
+      <web-app id="/" root-directory="F:\Repositories\git\jhcztech\manage_web\target\manage_web">
 
       </web-app>
     </host>
