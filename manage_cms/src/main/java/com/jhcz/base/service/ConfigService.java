@@ -18,57 +18,57 @@ import com.jhcz.base.jdbc.DBPage;
 public interface ConfigService
 {
 	
-	            /**
-    * 添加新的配置信息
-    *
-    * @param config
-    * @return
-    */
+	/**
+	* 添加新的配置信息
+	*
+	* @param config
+	* @return
+	*/
 	public void addConfig(Config config);
 	
-	        /**
-    * 删除配置信息
-    *
-    * @param id
-    */
+	/**
+	* 删除配置信息
+	*
+	* @param id
+	*/
 	public void deleteConfig(int id);
 	
-	        /**
-    * 根据ID，得到某一个配置的详细信息
-    *
-    * @param id 配置的ID值
-    * @return
-    */
+	/**
+	* 根据ID，得到某一个配置的详细信息
+	*
+	* @param id 配置的ID值
+	* @return
+	*/
 	public Config findConfigById(int id);
 	
 	public Config findConfigByName(String name);
 	
-	        /**
-    * 获得所有的配置信息，返回列表中的每一项都是一个config对象
-    *
-    * @return
-    */
+	/**
+	* 获得所有的配置信息，返回列表中的每一项都是一个config对象
+	*
+	* @return
+	*/
 	public List<Config> getAllSysConfig();
 	
-	        /**
-    * 获得分页数据
-    *
-    * @return
-    */
+	/**
+	* 获得分页数据
+	*
+	* @return
+	*/
 	public DBPage getPageData(int curPage, int numPerPage, String keyword);
 	
-	        /**
-    *
-    * 读取权限URL
-    */
-    public List<Right_Url> loadRight();
+	/**
+	*
+	* 读取权限URL
+	*/
+	public List<Right_Url> loadRight();
 	
-	        /**
-    * 更新配置信息
-    *
-    * @param config
-    * @return
-    */
+	/**
+	* 更新配置信息
+	*
+	* @param config
+	* @return
+	*/
 	public void updateConfig(Config config);
 	
 }
