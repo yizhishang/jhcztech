@@ -165,9 +165,9 @@ public class GroupAction extends BaseAction
     * 删除组
     * @return
     */
+    @ResponseBody
     @RequestMapping("delete.action")
-    public @ResponseBody
-    Result doDelete()
+    public Result doDelete()
     {
         
         if (isPostBack())
@@ -191,9 +191,9 @@ public class GroupAction extends BaseAction
     * 删除该组用户
     * @return
     */
+    @ResponseBody
     @RequestMapping("deleteGroupUser.action")
-    public @ResponseBody
-    Result doDeleteGroupUser()
+    public Result doDeleteGroupUser()
     {
         Result result = new Result();
         int groupId = getIntParameter("group_id");
@@ -273,20 +273,23 @@ public class GroupAction extends BaseAction
     * 查看组信息
     * @return
     */
-    public String doView()
+    @RequestMapping("view.action")
+    public ModelAndView doView()
     {
+    	ModelAndView mv = new ModelAndView("/WEB-INF/views/group/view_group.jsp");
         int id = getIntParameter("id");
         if (id > 0)
         {
             Group group = groupService.findGroupById(id);
             BeanHelper.beanToMap(group, form);
+            mv.addObject("form", form);
         }
-        return "/WEB-INF/views/group/views_group.jsp";
+        return mv;
     }
     
+    @ResponseBody
     @RequestMapping("edit.action")
-    public @ResponseBody
-    Result edit(HttpServletRequest request)
+    public Result edit(HttpServletRequest request)
     {
         //对提交上来的form进行处理
         Result result = new Result();
