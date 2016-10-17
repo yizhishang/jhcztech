@@ -385,6 +385,17 @@ function openMaxNamedWindowWithScroll(url, windowName)
     return win;
 }
 
+function openMaxNamedWindow(url, windowName)
+{
+    if (url == '')
+        return;
+    var winOption = "toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=yes,fullscreen=0";
+    var win = window.open(url, windowName, winOption);
+    win.moveTo(0, 0);
+    win.resizeTo(screen.availWidth, screen.availHeight);
+    return win;
+}
+
 /**
   打开对话框
 **/
