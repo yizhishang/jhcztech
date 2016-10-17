@@ -2,29 +2,6 @@
 <%@ include file="/admin/common/header.jsp" %>
 <body>
 <script type="text/javascript">
-function deleteFunction(name,funcitonId){
-	if(isChecked(name) && window.confirm("确定删除选中数据？")){
-		submitForm("qryparm", funcitonId, true);
-	}else{
-		alert("请选择需要删除的数据！");
-	}
-}
-
-function addFunction()
-{
-	openWindow("doAdd.action", 500, 175);
-}
-
-function editFunction(id)
-{
-	openWindow("doEdit.action?id="+id, 500, 175);
-}
-
-
-function viewFunction(id)
-{
-     openWindow("group.action?function=view&id=" + id, 500, 175);
-}
 
 function listGroupUserFunction(id)
 {
@@ -48,21 +25,15 @@ function listGroupUserFunction(id)
               <!-- 包含导航代码  -->
               <jsp:include flush="true" page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
               <div class="label">
-               	<a href="#" onClick="addFunction();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a> 
+               	<a href="#" onClick="addFunction(null, null, '500px', '175px');"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>新建</a> 
                 <a href="#" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a>
               </div>
               <div class="search">
                 <div class="space"></div>
-                <div>
-              
                   <div style="float:left;">
-                  <span>关键字：<input type="text" alt="notempty" name="keyword" value="${param.keyword}" class="input01"/></span> 
-                  <span>
-                    <input type="submit" name="button" id="button" value="查询"  class="bt01" />
-                    </span> </div>
-                  
-                </div>
-               
+                  	<span>关键字：<input type="text" alt="notempty" name="keyword" value="${param.keyword}" class="input01"/></span> 
+                  	<span><input type="submit" name="button" id="button" value="查询"  class="bt01" /></span>
+                  </div>
               </div>
               <div class="space"></div>
               <div class="databox2" style="height: 350px">
@@ -75,14 +46,14 @@ function listGroupUserFunction(id)
                     <td class="tdhead" style="width:130px;">操作</td>
                   </tr>
                 <c:forEach var="item" items="${data.page.data}">
-		              <tr style="cursor:pointer" onDblClick="javascript:viewFunction('<c:out value='${item.group_Id}'/>')" title="双击查看详细内容">
+		              <tr style="cursor:pointer" onDblClick="javascript:saveDataFunction('id=${item.group_Id}','view.action', '500px', '175px')" title="双击查看详细内容">
 	                    <td>
 						<input type="checkbox" name="id" id="check_<c:out value='${item.group_Id}'/>" value="<c:out value='${item.group_Id}'/>" onClick="setCheck(this)">
 						</td>						
 	                    <td style="text-align:left" class="td3">&nbsp;<c:out value="${item.name}" /></td>
 	                    <td style="text-align:left">&nbsp;<c:out value="${item.description}" /></td>
 	                    <td>&nbsp;<c:out value="${item.create_date}" /></td>
-	                    <td> &nbsp;<a href="#" onClick="editFunction(<c:out value='${item.group_Id}'/>)">编辑</a> ｜  <a href="#" onClick="listGroupUserFunction(<c:out value='${item.group_Id}'/>)">组用户</a></td>
+	                    <td> &nbsp;<a href="#" onClick="editFunction('id=${item.group_Id}',null, '500px', '175px')">编辑</a> ｜  <a href="#" onClick="listGroupUserFunction(<c:out value='${item.group_Id}'/>)">组用户</a></td>
 		              </tr>
        			 </c:forEach>
                 </table>

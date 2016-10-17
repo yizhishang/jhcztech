@@ -5,8 +5,14 @@
 
 function reloadFunction()
 {
-	hiddenForm["function"].value = "reload";
-    hiddenForm.submit();
+    $.post("reload.action",null, function(result){
+    	if(result && result.errorNo == 0)
+		{
+    		layer.alert(result.errorInfo, {icon: 6});
+		}else{
+			layer.msg(result.errorInfo, {icon: 5});
+		}
+    },'json');
 }
 
 function enterForm()
@@ -74,7 +80,7 @@ function enterForm()
 	                    <td style="width:296px;text-align:left" > &nbsp;<c:out value="${item.description}" /></td>
 						<td style="width:118px;"> &nbsp;<c:if test="${item.isSystem eq '0'}">否</c:if>
                     		<c:if test="${item.isSystem eq '1'}">是</c:if></td>
-						<td > &nbsp;<a href="#" onClick="editFunction('id=${item.id}')">编辑</a></td>
+						<td > &nbsp;<a href="#" onClick="editFunction('id=${item.id}',null, '400px', '200px')">编辑</a></td>
 		              </tr>
        			 </c:forEach>
                 </table>
@@ -89,12 +95,6 @@ function enterForm()
   </div>
 </div>
 </form>
-<div styoe="display:none">
-    <iframe name="hiddenFrame" width="0" height="0"></iframe>
-    <form name="hiddenForm" action="config.action" target="hiddenFrame">
-        <input type="hidden" name="function" value="">
-    </form>
-</div>
 </body>
 </html>
 
