@@ -26,7 +26,7 @@ public class CaseControllerTest
     @Before
     public void setUp() throws Exception
     {
-        String[] paths = { "classpath:spring-context.xml","classpath:spring-web.xml" };
+        String[] paths = { "classpath:spring-context.xml","classpath:spring-servlet.xml" };
         ctx = new XmlWebApplicationContext();
         ctx.setConfigLocations(paths);
         ctx.setServletContext(new MockServletContext(""));

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	id="WebApp_ID" version="3.0">
+		 xmlns="http://java.sun.com/xml/ns/javaee"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+		 id="WebApp_ID" version="3.0">
 	<display-name>manage_web</display-name>
 	<welcome-file-list>
 		<welcome-file>/main/index.shtml</welcome-file>
@@ -57,7 +57,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath*:spring-web.xml</param-value>
+			<param-value>classpath*:spring-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -66,17 +66,15 @@
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
 
-<!-- 
-
 	<servlet>
 		<servlet-name>SSIServlet</servlet-name>
 		<servlet-class>org.apache.catalina.ssi.SSIServlet</servlet-class>
 	</servlet>
- -->
-	<servlet>
-		<servlet-name>SSIServlet</servlet-name>
-		<servlet-class>com.caucho.servlets.ssi.SSIServlet</servlet-class>
-	</servlet>
+
+	<!--<servlet>-->
+		<!--<servlet-name>SSIServlet</servlet-name>-->
+		<!--<servlet-class>com.caucho.servlets.ssi.SSIServlet</servlet-class>-->
+	<!--</servlet>-->
 	<servlet-mapping>
 		<servlet-name>SSIServlet</servlet-name>
 		<url-pattern>*.shtml</url-pattern>
