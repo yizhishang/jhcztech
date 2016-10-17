@@ -2,9 +2,9 @@
 <%@ include file="/admin/common/header.jsp" %>
 <body>
 <script type="text/javascript">
-function saveDataFunction(url)
+function saveDataFunction(param, url)
 {
-	var returnValue = openDialogWithScroll(url, 1300, 800);
+	var returnValue = openMaxWindowWithScroll(url, 1300, 800);
     if (returnValue != null && returnValue.length > 0)
     {
     	var is_submit = getKeyword("is_submit", returnValue);
@@ -43,7 +43,7 @@ function saveDataFunction(url)
                 <!-- 包含导航代码  -->
                 <jsp:include flush="true" page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
                 <div class="label">
-                	<a href="#" onClick="addFunction();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>添加</a>
+                	<a href="#" onClick="addFunction(null, 'doAdd.action');"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>添加</a>
                 	<a href="#" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a></div>
                 <div class="search">
                   <div class="space"></div>

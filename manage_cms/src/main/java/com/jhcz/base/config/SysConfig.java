@@ -24,8 +24,6 @@ import com.jhcz.base.util.StringHelper;
 public class SysConfig
 {
     
-    private static SysConfig instance = new SysConfig();
-    
     private static DataRow itemMap = new DataRow();
     
     public static ArrayList<Right_Url> rightUrl = new ArrayList<Right_Url>();
@@ -37,7 +35,11 @@ public class SysConfig
     
     public static SysConfig getInstance()
     {
-        return instance;
+        return LazyHolder.instance;
+    }
+    
+    private static class LazyHolder{
+    	private static final SysConfig instance = new SysConfig();
     }
     
     /**
