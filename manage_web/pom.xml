@@ -345,7 +345,6 @@
 						js/**
 					</packagingExcludes>
 					<warSourceExcludes>
-						main/**,
 						logs/**
 					</warSourceExcludes>
 					<webappDirectory>${project.build.directory}/${project.artifactId}</webappDirectory>
