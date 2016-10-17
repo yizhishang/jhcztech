@@ -13,7 +13,6 @@ import com.jhcz.base.config.SysConfig;
 import com.jhcz.base.domain.Config;
 import com.jhcz.base.jdbc.DBPage;
 import com.jhcz.base.util.BeanHelper;
-import com.jhcz.base.util.ScriptHelper;
 import com.jhcz.base.util.StringHelper;
 import com.jhcz.plat.domain.Result;
 import com.jhcz.plat.service.ConfigService;
@@ -120,13 +119,15 @@ public class ConfigAction extends BaseAction
     * 重新读入所有配置信息到内存
     * @return
     */
-    @SuppressWarnings("static-access")
-    public String doReload()
+    @ResponseBody
+    @RequestMapping("/reload.action")
+    public Result doReload(HttpServletResponse response)
     {
-        SysConfig.getInstance().loadConfig();
-        String successPage = getStrParameter("successPage");
-        ScriptHelper.alert(getResponse(), "重新读入配置文件到内存成功！", successPage);
-        return NONE;
+        SysConfig.getInstance();
+		SysConfig.loadConfig();
+        Result result = new Result();
+        result.setErrorInfo("重新读入配置文件到内存成功！");
+        return result;
     }
     
     @Override
