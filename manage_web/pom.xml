@@ -193,18 +193,19 @@
 			<version>1.1.2</version>
 		</dependency>
 
-		<dependency>
-		    <groupId>net.sourceforge.jexcelapi</groupId>
-		    <artifactId>jxl</artifactId>
-		    <version>2.6.12</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>3.9</version>
-		</dependency>
-		
+		<!-- 解析excle用到 -->
+        <!--<dependency>-->
+            <!--<groupId>net.sourceforge.jexcelapi</groupId>-->
+            <!--<artifactId>jxl</artifactId>-->
+            <!--<version>2.6.12</version>-->
+        <!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>org.apache.poi</groupId>-->
+			<!--<artifactId>poi</artifactId>-->
+			<!--<version>3.9</version>-->
+		<!--</dependency>-->
+
+        <!--对XML文档实现解析、生成、序列化以及多种操作-->
 		<dependency>
 			<groupId>org.jdom</groupId>
 			<artifactId>jdom</artifactId>
