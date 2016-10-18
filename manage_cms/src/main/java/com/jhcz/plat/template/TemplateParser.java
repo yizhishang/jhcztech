@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.jhcz.base.config.Configuration;
+import com.jhcz.plat.system.Application;
 import org.apache.log4j.Logger;
 
 import com.jhcz.base.jdbc.DataRow;
@@ -130,7 +131,7 @@ public final class TemplateParser
 
         //生成部件解析类的实例
         WebpartParser parser = null;
-        String clazz = "com.jhcz.plat.template.webpart." + webpartName;
+        String clazz = Configuration.getString("publish.viewPath").replace("/",".") + webpartName;
         parser = (WebpartParser) ReflectHelper.objectForName(clazz);
         if (parser == null)
         {
@@ -174,6 +175,7 @@ public final class TemplateParser
         //加入上下文变量，上下文变量以@开头
         templateVars.put("@catalogId", Integer.valueOf(context.getCatalogId()));
         templateVars.put("@articleId", Integer.valueOf(context.getArticleId()));
+        templateVars.put("@ctxPath", Application.getContextPath());
 
         //获取设置的系统变量
         Map<String, Object> varsMap = context.getAllVariable();

@@ -14,7 +14,7 @@
     <category name="publish" description="发布引擎相关配置">
         <item name="showArticleUrl" value="/common/showArticle.jsp" description="用于显示发布文章的URL" />
         <item name="checkInterval" value="5" description="发布引擎的检查间隔,缺省值为5秒" />
-        <item name="viewPath" value="/com/jhcz/plat/template/webpart/" descript="获得部件的缺省视图，该文件应该和类文件放在同样的目录"/>
+        <item name="viewPath" value="com/jhcz/plat/template/webpart/" descript="获得部件的缺省视图，该文件应该和类文件放在同样的目录"/>
     </category>
     <category name="publishPlan" description="发布计划相关配置">
         <item name="checkInterval" value="60" description="发布计划的检查间隔,缺省值为60秒" />

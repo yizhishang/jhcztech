@@ -13,6 +13,8 @@ public class Application
 {
     private static String rootPath = "";
 
+    private static String contextPath = "";
+
     /**
      * 获得当前应用程序的根目录的路径
      *
@@ -26,5 +28,13 @@ public class Application
     public static void setRootPath(String rootPath)
     {
         Application.rootPath = rootPath;
+    }
+
+    public static String getContextPath() {
+        return contextPath;
+    }
+
+    public static void setContextPath(String contextPath) {
+        Application.contextPath = contextPath;
     }
 }

@@ -70,8 +70,11 @@ public class ApplicationLifecycleListener implements ServletContextListener
     @SuppressWarnings("static-access")
     private void init()
 	{
-        //初始应用程序根目录路径
+		//初始应用程序根目录物理路径
 		Application.setRootPath(context.getRealPath("/"));
+
+		//初始应用程序根目录
+		Application.setContextPath(context.getContextPath());
 		
         //读入数据库配置文件
 		Configure.getInstance();
