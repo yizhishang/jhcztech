@@ -3,7 +3,6 @@ package com.jhcz.base.pojo;
 
 public class User
 {
-	
 	private long user_id;
 	private String siteno;
 	private String name;
