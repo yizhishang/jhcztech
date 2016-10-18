@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.jhcz.base.config.Configuration;
 import org.apache.log4j.Logger;
 
 import com.jhcz.base.jdbc.DataRow;
@@ -79,7 +80,7 @@ public final class TemplateParser
         InputStream inStream = null;
         try
         {
-            String path = "/com/jhcz/plat/template/webpart/" + webpartName + ".view";
+            String path = Configuration.getString("publish.viewPath") + webpartName + ".view";
             inStream = TemplateParser.class.getResourceAsStream(path);
             if (inStream != null)
             {
