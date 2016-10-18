@@ -130,7 +130,7 @@ public final class TemplateParser
 
         //生成部件解析类的实例
         WebpartParser parser = null;
-        String clazz = "com.jhcz.plat.template.webpart." + webpartName;
+        String clazz = Configuration.getString("publish.viewPath").replace("/",".") + webpartName;
         parser = (WebpartParser) ReflectHelper.objectForName(clazz);
         if (parser == null)
         {
