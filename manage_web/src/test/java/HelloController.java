@@ -1,26 +1,27 @@
-import javax.annotation.Resource;
+import org.junit.Test;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.jhcz.base.pojo.User;
-import com.jhcz.web.aspect.MethodLog;
-import com.jhcz.web.service.UserService;
-
-@Controller
-public class HelloController
+public class HelloController extends MockControllerTest
 {
-	@Resource
-	UserService userService;
-	
-	@RequestMapping("/greeting.action")
-	@MethodLog(remark="欢迎")
-	public ModelAndView greeting()
+	@Test
+	public void testQueryArticlePageByCatalogId()
 	{
-		User user = userService.getUserById(1);
-		ModelAndView mv = new ModelAndView("/test/hello1");
-		mv.addObject("user", user);
-		return mv;
+		try {
+			mockMvc.perform(
+					get("/queryArticlePageByCatalogId.action").param(
+							"catalogId", "2914"
+					).param("curPage", "1")
+					.param("numPerPage", "1")
+			).andExpect(
+					status().isOk()
+			).andDo(
+					print()
+			);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
