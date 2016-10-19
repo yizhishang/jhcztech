@@ -22,7 +22,7 @@ public class ArticleDaoImpl extends BaseDaoImpl implements ArticleDao
     	sql.append(" ORDER BY CATALOG_ID, PUBLISH_DATE DESC");
     	return getJdbcTemplate().queryPage(sql.toString(), args.toArray(), curPage, numPerPage);
 	}
-	
+
 	public static void main(String[] args)
 	{
 		ArticleDaoImpl daoImpl = new ArticleDaoImpl();
