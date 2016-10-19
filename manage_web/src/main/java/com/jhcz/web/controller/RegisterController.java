@@ -26,7 +26,7 @@ public class RegisterController extends BaseController
 	
 	@ResponseBody
 	@MethodLog(remark = "联系我们留言")
-	@RequestMapping(value="/insertMessage.action",method=RequestMethod.POST)
+	@RequestMapping(value="/insertMessage.action",method=RequestMethod.GET)
 	public Result insertMessage(HttpServletRequest request)
 	{
 		Result result = new Result();
@@ -36,19 +36,19 @@ public class RegisterController extends BaseController
 			String name = request.getParameter("name");
 			if (StringHelper.isEmpty(name))
 			{
-				throw new BusinessException("用户名不能为空！");
+				throw new BusinessException("用户名[name]不能为空！");
 			}
 			
 			String mobileNo = request.getParameter("mobileNo");
 			if (StringHelper.isEmpty(mobileNo))
 			{
-				throw new BusinessException("手机号不能为空！");
+				throw new BusinessException("手机号[mobileNo]不能为空！");
 			}
 			
 			String message = request.getParameter("message");
 			if (StringHelper.isEmpty(message))
 			{
-				throw new BusinessException("留言信息不能为空！");
+				throw new BusinessException("留言信息[message]不能为空！");
 			}
 			
 			try
