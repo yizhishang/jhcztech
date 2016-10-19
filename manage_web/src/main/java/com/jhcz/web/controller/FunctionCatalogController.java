@@ -13,22 +13,19 @@ import com.jhcz.base.pojo.system.Result;
 import com.jhcz.web.aspect.MethodLog;
 import com.jhcz.web.service.ManageCatalogService;
 
-
 @Controller
 @RequestMapping("/functionCatalog")
-public class FunctionCatalogController
-{
-	@Resource
+public class FunctionCatalogController {
+    @Resource
     ManageCatalogService manageCatalogService;
-	
-	@ResponseBody
-	@RequestMapping("queryFunctionCatalog.action")
-	@MethodLog(remark="根据父栏目id查询子栏目")
-	public Result queryFunctionCatalogByParentId(String parentId)
-	{
-		Result result = new Result();
-		List<ManageCatalog> catalogs = manageCatalogService.queryFunctionCatalogByParentId("1");
-		result.setObj(catalogs);
-		return result;
-	}
+
+    @ResponseBody
+    @RequestMapping("queryFunctionCatalog.action")
+    @MethodLog(remark = "根据父栏目id查询子栏目")
+    public Result queryFunctionCatalogByParentId(String parentId) {
+        Result result = new Result();
+        List<ManageCatalog> catalogs = manageCatalogService.queryFunctionCatalogByParentId("1");
+        result.setObj(catalogs);
+        return result;
+    }
 }
