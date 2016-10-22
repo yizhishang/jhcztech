@@ -1,7 +1,10 @@
 package com.jhcz.web.service;
 
+import com.jhcz.base.jdbc.DataRow;
 import com.jhcz.base.jdbc.Page;
+import com.jhcz.base.mybatis.util.PagedResult;
 
+import java.util.List;
 
 public interface ArticleService
 {
@@ -16,4 +19,6 @@ public interface ArticleService
 	 * @return
 	 */
 	public Page findArticlePageByCatalogId(int catalogId,int curPage, int numPerPage);
+
+	public PagedResult<DataRow> findArticleListByCatalogId(int catalogId,int curPage, int numPerPage);
 }

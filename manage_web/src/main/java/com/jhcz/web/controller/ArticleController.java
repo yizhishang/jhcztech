@@ -2,14 +2,21 @@ package com.jhcz.web.controller;
 
 import javax.annotation.Resource;
 
+import com.github.pagehelper.PageHelper;
+import com.jhcz.base.domain.system.Result;
+import com.jhcz.base.jdbc.DataRow;
+import com.jhcz.base.mybatis.util.BeanUtil;
+import com.jhcz.base.mybatis.util.PagedResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jhcz.base.jdbc.Page;
 import com.jhcz.web.aspect.MethodLog;
 import com.jhcz.web.service.ArticleService;
 
+import java.util.List;
 
 /**
  * 描述: 文章
@@ -27,15 +34,20 @@ public class ArticleController
 {
 	@Resource
 	ArticleService articleService;
-	
+
+	@ResponseBody
 	@MethodLog(remark="获取文章分页数据")
 	@RequestMapping("/findArticlePageByCatalogId.action")
-	public ModelAndView findArticlePageByCatalogId(int catalogId,int curPage, int numPerPage)
+	public Result findArticlePageByCatalogId(int catalogId,int curPage, int numPerPage)
     {
-    	Page page = articleService.findArticlePageByCatalogId(catalogId, curPage, numPerPage);
     	ModelAndView  mv = new ModelAndView("/article/ajaxArticleList");
-    	mv.addObject("page", page);
-    	mv.addObject("catalogId", catalogId);
-    	return mv;
+		PagedResult<DataRow> page = articleService.findArticleListByCatalogId(catalogId, curPage, numPerPage);
+//    	mv.addObject("page", page);
+//    	mv.addObject("catalogId", catalogId);
+//    	return mv;
+
+		Result result = new Result();
+		result.setObj(page);
+		return result;
     }
 }
