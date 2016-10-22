@@ -67,13 +67,13 @@ public class CaseControllerTest
     public void queryArticlePageByCatalogId() throws BusinessException
     {
     	helloController = (HelloController) ctx.getBean("helloController");
-        logger.info("*****insertMessage start**********");
+        logger.info("*****queryArticlePageByCatalogId start**********");
         MockHttpServletRequest request = new MockHttpServletRequest("POST", "/loginValidate.action");
         request.addParameter("name", "Jack");
         request.addParameter("mobileNo", "13088840046");
         request.addParameter("message", "hello world");
         helloController.queryArticlePageByCatalogId(2915, 1, 3);
-        logger.info("*****insertMessage end**********");
+        logger.info("*****queryArticlePageByCatalogId end**********");
     }
     
     @Test
