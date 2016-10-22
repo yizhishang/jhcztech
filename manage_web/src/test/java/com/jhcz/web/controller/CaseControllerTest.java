@@ -1,6 +1,13 @@
 package com.jhcz.web.controller;
 import java.util.Arrays;
+import java.util.List;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.jhcz.base.mybatis.util.BeanUtil;
+import com.jhcz.base.mybatis.util.PagedResult;
+import com.jhcz.base.pojo.Site;
+import com.jhcz.web.dao.SiteDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
@@ -10,6 +17,8 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
+import com.jhcz.base.mybatis.dao.SequenceDao;
+import com.jhcz.base.pojo.Sequence;
 import com.jhcz.web.exception.BusinessException;
 
 public class CaseControllerTest
@@ -66,4 +75,23 @@ public class CaseControllerTest
         helloController.queryArticlePageByCatalogId(2915, 1, 3);
         logger.info("*****insertMessage end**********");
     }
+    
+    @Test
+    public void getNextSequence()
+    {
+        SequenceDao sequenceDao = (SequenceDao) ctx.getBean("sequenceDao");
+        Sequence sequence = sequenceDao.getNextSequence("T_WS_BUSINESS_REGISTER");
+        System.out.println(sequence);
+    }
+
+    @Test
+    public void getSite()
+    {
+        SiteDao siteDao = (SiteDao) ctx.getBean("siteDao");
+        List<Site> list = siteDao.getAllSite();
+        System.out.println(list.size());
+		PageHelper.startPage(1,1);
+		PagedResult<Site> page = BeanUtil.toPagedResult(list);
+		System.out.println(page.getPageSize());
+	}
 }
