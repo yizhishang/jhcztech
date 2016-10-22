@@ -6,7 +6,9 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.jhcz.base.mybatis.util.BeanUtil;
 import com.jhcz.base.mybatis.util.PagedResult;
+import com.jhcz.base.pojo.ManageCatalog;
 import com.jhcz.base.pojo.Site;
+import com.jhcz.web.dao.ManageCatalogDao;
 import com.jhcz.web.dao.SiteDao;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -92,6 +94,16 @@ public class CaseControllerTest
         System.out.println(list.size());
 		PageHelper.startPage(1,1);
 		PagedResult<Site> page = BeanUtil.toPagedResult(list);
+		System.out.println(page.getPageSize());
+	}
+
+	@Test
+	public void queryFunctionCatalogByParentId(){
+		ManageCatalogDao manageCatalogDao = (ManageCatalogDao) ctx.getBean("manageCatalogDao");
+		List<ManageCatalog> list = manageCatalogDao.queryFunctionCatalogByParentId("1");
+		System.out.println(list.size());
+		PageHelper.startPage(1,1);
+		PagedResult<ManageCatalog> page = BeanUtil.toPagedResult(list);
 		System.out.println(page.getPageSize());
 	}
 }
