@@ -4,10 +4,10 @@
     <bookmark url="jar://$MAVEN_REPOSITORY$/com/github/pagehelper/pagehelper/4.1.3/pagehelper-4.1.3-sources.jar!/com/github/pagehelper/SqlUtil.java" line="56" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="694411e1-aca7-47bd-8c92-23430dc1978f" name="Default" comment="增加">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../manage_cms/.idea/misc.xml" afterPath="$PROJECT_DIR$/../manage_cms/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../manage_cms/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../manage_cms/.idea/workspace.xml" />
+    <list default="true" id="694411e1-aca7-47bd-8c92-23430dc1978f" name="Default" comment="修改domain">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manage_web.iml" afterPath="$PROJECT_DIR$/manage_web.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/Logback.xml" afterPath="$PROJECT_DIR$/src/main/resources/Logback.xml" />
     </list>
     <ignored path="manage_web.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,21 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="encodings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../manage_cms/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="128">
+              <caret line="268" column="19" selection-start-line="268" selection-start-column="19" selection-end-line="268" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -85,20 +75,16 @@
         <option value="$PROJECT_DIR$/target/manage_web/main/include/header.html" />
         <option value="$PROJECT_DIR$/target/manage_web/WEB-INF/classes/jdbc.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/jhcz/web/controller/RegisterController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/spring-servlet.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/spring-context.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/jhcz/web/controller/FunctionCatalogController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/ManageCatalogDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/jhcz/base/dao/impl/BaseDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis-config.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/ArticleDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/impl/ArticleDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/main/resources/spring-mybatis.xml" />
         <option value="$PROJECT_DIR$/src/test/java/HelloController.java" />
         <option value="$PROJECT_DIR$/src/test/java/MockControllerTest.java" />
-        <option value="$PROJECT_DIR$/target/manage_web/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="git.oschina.net/free/Mybatis_PageHelper.git" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/UserDao.java" />
@@ -110,7 +96,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/jhcz/base/mybatis/mapping/SequenceMapping.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/jhcz/base/mybatis/util/PagedResult.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/jhcz/base/mybatis/util/BeanUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/ArticleDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapping/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/Logback.xml" />
         <option value="$PROJECT_DIR$/src/test/java/com/jhcz/web/controller/CaseControllerTest.java" />
+        <option value="$PROJECT_DIR$/target/manage_web/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/mvn.bat" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
       </list>
     </option>
   </component>
@@ -141,7 +134,32 @@
     </option>
   </component>
   <component name="MavenProjectNavigator">
-    <treeState />
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="manage_web" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="manage_web" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
   </component>
   <component name="MavenRunner">
     <option name="jreName" value="#JAVA_HOME" />
@@ -284,7 +302,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="SearchEverywhereHistoryKey" value="web&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/target/manage_web/WEB-INF/web.xml&#10;pom&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/pom.xml&#10;pom.xml&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/pom.xml&#10;web.xml&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/target/manage_web/WEB-INF/web.xml&#10;pagehe&#9;FILE&#9;jar://D:/MavenRepository/com/github/pagehelper/pagehelper/4.1.3/pagehelper-4.1.3-sources.jar!/com/github/pagehelper/PageHelper.java&#10;my&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/src/main/resources/spring-mybatis.xml&#10;webx&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/target/manage_web/WEB-INF/web.xml&#10;w&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/target/manage_web/WEB-INF/web.xml&#10;we&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/src/main/webapp/WEB-INF/web.xml&#10;articleController&#9;PSI&#9;JAVA://com.jhcz.web.controller.ArticleController&#10;jdbc.&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/src/main/resources/jdbc.properties&#10;data&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/src/main/resources/datasource.xml" />
+    <property name="SearchEverywhereHistoryKey" value="web.xml&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/src/main/webapp/WEB-INF/web.xml&#10;web&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/target/manage_web/WEB-INF/web.xml&#10;pom&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/pom.xml&#10;pom.xml&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/pom.xml&#10;pagehe&#9;FILE&#9;jar://D:/MavenRepository/com/github/pagehelper/pagehelper/4.1.3/pagehelper-4.1.3-sources.jar!/com/github/pagehelper/PageHelper.java&#10;my&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/src/main/resources/spring-mybatis.xml&#10;webx&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/target/manage_web/WEB-INF/web.xml&#10;w&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/target/manage_web/WEB-INF/web.xml&#10;we&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/src/main/webapp/WEB-INF/web.xml&#10;articleController&#9;PSI&#9;JAVA://com.jhcz.web.controller.ArticleController&#10;jdbc.&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/src/main/resources/jdbc.properties&#10;data&#9;FILE&#9;file://F:/Repositories/git/jhcztech/manage_web/src/main/resources/datasource.xml" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="48" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="51" />
@@ -307,144 +325,14 @@
       <recent name="https://git.oschina.net/free/Mybatis_PageHelper.git" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Repositories\git\jhcztech\manage_web\target\manage_web\WEB-INF\classes" />
       <recent name="F:\Repositories\git\jhcztech\manage_web\src\main\java\com\jhcz\base\mybatis" />
       <recent name="F:\Repositories\git\jhcztech\manage_web\src\test\java" />
       <recent name="F:\Repositories\git\jhcztech\manage_web\src\main\resources" />
       <recent name="F:\Repositories\git\jhcztech\manage_web\src\test\java\com\jhcz\web\controller" />
-      <recent name="F:\Repositories\git\jhcztech\manage_web\src\main\webapp" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.CaseControllerTest.getSite">
-    <configuration default="false" name="CaseControllerTest.insertMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.jhcz.web.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="manage_web" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.jhcz.web.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.jhcz.web.controller.CaseControllerTest" />
-      <option name="METHOD_NAME" value="insertMessage" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="CaseControllerTest.queryArticlePageByCatalogId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.jhcz.web.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="manage_web" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.jhcz.web.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.jhcz.web.controller.CaseControllerTest" />
-      <option name="METHOD_NAME" value="queryArticlePageByCatalogId" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="CaseControllerTest.querySite" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.jhcz.web.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="manage_web" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.jhcz.web.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.jhcz.web.controller.CaseControllerTest" />
-      <option name="METHOD_NAME" value="querySite" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="CaseControllerTest.getNextSequence" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.jhcz.web.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="manage_web" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.jhcz.web.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.jhcz.web.controller.CaseControllerTest" />
-      <option name="METHOD_NAME" value="getNextSequence" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="CaseControllerTest.getSite" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.jhcz.web.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="manage_web" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.jhcz.web.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.jhcz.web.controller.CaseControllerTest" />
-      <option name="METHOD_NAME" value="getSite" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Tomcat Server.Tomcat">
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7.0.691" ALTERNATIVE_JRE_ENABLED="false">
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment />
@@ -805,23 +693,9 @@
         </option>
       </method>
     </configuration>
-    <list size="6">
+    <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Tomcat Server.Tomcat" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.CaseControllerTest.insertMessage" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.CaseControllerTest.queryArticlePageByCatalogId" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.CaseControllerTest.querySite" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.CaseControllerTest.getNextSequence" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.CaseControllerTest.getSite" />
     </list>
-    <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.CaseControllerTest.getSite" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.CaseControllerTest.queryArticlePageByCatalogId" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.CaseControllerTest.getNextSequence" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.CaseControllerTest.insertMessage" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.CaseControllerTest.querySite" />
-      </list>
-    </recent_temporary>
     <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -854,7 +728,7 @@
       <workItem from="1476850609785" duration="12534000" />
       <workItem from="1476982575687" duration="21000" />
       <workItem from="1477111599862" duration="12000" />
-      <workItem from="1477111621079" duration="6388000" />
+      <workItem from="1477111621079" duration="16697000" />
     </task>
     <task id="LOCAL-00001" summary="转化为maven工程">
       <created>1476694566814</created>
@@ -1122,67 +996,102 @@
       <option name="project" value="LOCAL" />
       <updated>1477117903860</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="格式化代码">
+      <created>1477118040709</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1477118040709</updated>
+    </task>
+    <task id="LOCAL-00040" summary="格式化代码">
+      <created>1477118216317</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1477118216317</updated>
+    </task>
+    <task id="LOCAL-00041" summary="测试分页代码">
+      <created>1477122017591</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1477122017591</updated>
+    </task>
+    <task id="LOCAL-00042" summary="修改domain">
+      <created>1477123028549</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1477123028549</updated>
+    </task>
+    <task id="LOCAL-00043" summary="增加logback.xml配置">
+      <created>1477140489368</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1477140489368</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CaseControllerTest_getNextSequence - 2016.10.22 at 13h 01m 00s.xml">
-      <configuration name="CaseControllerTest.getNextSequence" configurationId="JUnit" />
+    <history-entry file="CaseControllerTest_queryFunctionCatalogByParentId - 2016.10.22 at 15h 50m 14s.xml">
+      <configuration name="CaseControllerTest.queryFunctionCatalogByParentId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CaseControllerTest_getNextSequence - 2016.10.22 at 13h 02m 22s.xml">
-      <configuration name="CaseControllerTest.getNextSequence" configurationId="JUnit" />
+    <history-entry file="CaseControllerTest_queryFunctionCatalogByParentId - 2016.10.22 at 15h 51m 27s.xml">
+      <configuration name="CaseControllerTest.queryFunctionCatalogByParentId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CaseControllerTest_getNextSequence - 2016.10.22 at 13h 49m 21s.xml">
-      <configuration name="CaseControllerTest.getNextSequence" configurationId="JUnit" />
+    <history-entry file="CaseControllerTest_queryFunctionCatalogByParentId - 2016.10.22 at 15h 58m 52s.xml">
+      <configuration name="CaseControllerTest.queryFunctionCatalogByParentId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CaseControllerTest_getNextSequence - 2016.10.22 at 13h 50m 30s.xml">
-      <configuration name="CaseControllerTest.getNextSequence" configurationId="JUnit" />
+    <history-entry file="CaseControllerTest_queryFunctionCatalogByParentId - 2016.10.22 at 15h 59m 59s.xml">
+      <configuration name="CaseControllerTest.queryFunctionCatalogByParentId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CaseControllerTest_getSite - 2016.10.22 at 13h 59m 46s.xml">
-      <configuration name="CaseControllerTest.getSite" configurationId="JUnit" />
+    <history-entry file="CaseControllerTest_queryFunctionCatalogByParentId - 2016.10.22 at 16h 01m 41s.xml">
+      <configuration name="CaseControllerTest.queryFunctionCatalogByParentId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CaseControllerTest_getSite - 2016.10.22 at 14h 19m 17s.xml">
-      <configuration name="CaseControllerTest.getSite" configurationId="JUnit" />
+    <history-entry file="CaseControllerTest_queryFunctionCatalogByParentId - 2016.10.22 at 16h 04m 36s.xml">
+      <configuration name="CaseControllerTest.queryFunctionCatalogByParentId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CaseControllerTest_getSite - 2016.10.22 at 14h 21m 26s.xml">
-      <configuration name="CaseControllerTest.getSite" configurationId="JUnit" />
+    <history-entry file="CaseControllerTest_queryFunctionCatalogByParentId - 2016.10.22 at 16h 07m 03s.xml">
+      <configuration name="CaseControllerTest.queryFunctionCatalogByParentId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CaseControllerTest_insertMessage - 2016.10.22 at 12h 58m 20s.xml">
-      <configuration name="CaseControllerTest.insertMessage" configurationId="JUnit" />
+    <history-entry file="CaseControllerTest_queryFunctionCatalogByParentId - 2016.10.22 at 16h 15m 18s.xml">
+      <configuration name="CaseControllerTest.queryFunctionCatalogByParentId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CaseControllerTest_queryArticlePageByCatalogId - 2016.10.22 at 13h 49m 56s.xml">
-      <configuration name="CaseControllerTest.queryArticlePageByCatalogId" configurationId="JUnit" />
+    <history-entry file="CaseControllerTest_queryFunctionCatalogByParentId - 2016.10.22 at 16h 16m 27s.xml">
+      <configuration name="CaseControllerTest.queryFunctionCatalogByParentId" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CaseControllerTest_queryArticlePageByCatalogId - 2016.10.22 at 13h 51m 44s.xml">
-      <configuration name="CaseControllerTest.queryArticlePageByCatalogId" configurationId="JUnit" />
+    <history-entry file="CaseControllerTest_queryFunctionCatalogByParentId - 2016.10.22 at 16h 17m 32s.xml">
+      <configuration name="CaseControllerTest.queryFunctionCatalogByParentId" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51760000" />
+    <option name="totallyTimeSpent" value="62069000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32626426" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4274062" sideWeight="0.4969743" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25718608" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32952693" sideWeight="0.46520424" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39314845" sideWeight="0.5295008" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14069591" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39314845" sideWeight="0.47579426" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3670473" sideWeight="0.5234493" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.50907713" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3964111" sideWeight="0.4871407" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19894099" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2912254" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4730832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36378467" sideWeight="0.53479576" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42251223" sideWeight="0.52420574" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1243,68 +1152,19 @@
     <MESSAGE value="单元测试" />
     <MESSAGE value="增加分页代码" />
     <MESSAGE value="增加getNextSequence和getSite方法" />
-    <MESSAGE value="格式化代码" />
     <MESSAGE value="单元测试类&#10;修改springframe版本从3.1.3改成4.2.6" />
-    <option name="LAST_COMMIT_MESSAGE" value="单元测试类&#10;修改springframe版本从3.1.3改成4.2.6" />
+    <MESSAGE value="格式化代码" />
+    <MESSAGE value="测试分页代码" />
+    <MESSAGE value="修改domain" />
+    <MESSAGE value="增加logback.xml配置" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加logback.xml配置" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/jhcz/web/aspect/BaseInterceptor.java</url>
-          <line>73</line>
-          <properties />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/jhcz/web/controller/RegisterController.java</url>
-          <line>65</line>
-          <properties />
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/impl/RegisterServiceImpl.java</url>
-          <line>35</line>
-          <properties />
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/impl/RegisterServiceImpl.java</url>
-          <line>38</line>
-          <properties />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/impl/RegisterServiceImpl.java</url>
-          <line>45</line>
-          <properties />
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/jhcz/base/mybatis/service/impl/SequenceServiceImpl.java</url>
-          <line>20</line>
-          <properties />
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/jhcz/base/mybatis/service/impl/SequenceServiceImpl.java</url>
-          <line>28</line>
-          <properties />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/jhcz/web/controller/CaseControllerTest.java</url>
-          <line>94</line>
-          <properties />
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/jhcz/base/mybatis/dao/SequenceDao.java</url>
-          <line>40</line>
-          <properties class="com.jhcz.base.mybatis.dao.SequenceDao" method="getNextSequence" />
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="15" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1313,201 +1173,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mybatis/mybatis-spring/1.2.3/mybatis-spring-1.2.3-sources.jar!/org/mybatis/spring/SqlSessionFactoryBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/impl/ManageCatalogServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="27" column="56" selection-start-line="27" selection-start-column="56" selection-end-line="27" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/base/jdbc/Page.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-558">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/base/exception/ServiceException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="14" column="22" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/ManageCatalogDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/TestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/TestService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/TestServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/manage_web/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="100" column="22" selection-start-line="100" selection-start-column="22" selection-end-line="100" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="https://git.oschina.net/free/Mybatis_PageHelper.git">
-      <provider selected="true" editor-type-id="httpFileEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="245" column="20" selection-start-line="245" selection-start-column="20" selection-end-line="245" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/RegisterDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/impl/SiteServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="40" selection-end-column="5" />
-          <folding>
-            <element signature="e#2977#2978#0" expanded="false" />
-            <element signature="e#3017#3018#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/SiteService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/MockControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/4.2.6.RELEASE/spring-core-4.2.6.RELEASE.jar!/org/springframework/cglib/proxy/MethodProxy.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="97" column="47" selection-start-line="97" selection-start-column="47" selection-end-line="97" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/RegisterService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="25" selection-start-line="28" selection-start-column="25" selection-end-line="28" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/base/mybatis/service/SequenceService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/controller/HelloController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="41" column="47" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/impl/ArticleServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="20" column="38" selection-start-line="20" selection-start-column="38" selection-end-line="20" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/impl/ArticleDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/classes/datasource.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/datasource.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/jdbc.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/HelloController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="55">
@@ -1528,9 +1193,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="20" column="76" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="76" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1636,9 +1299,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-99">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1655,8 +1316,8 @@
         <state relative-caret-position="255">
           <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
           <folding>
-            <element signature="e#2926#2927#0" expanded="true" />
-            <element signature="e#2983#2984#0" expanded="true" />
+            <element signature="e#2926#2927#0" expanded="false" />
+            <element signature="e#2983#2984#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1682,8 +1343,8 @@
         <state relative-caret-position="246">
           <caret line="350" column="20" selection-start-line="350" selection-start-column="20" selection-end-line="350" selection-end-column="20" />
           <folding>
-            <element signature="e#2349#2350#0" expanded="true" />
-            <element signature="e#2400#2401#0" expanded="true" />
+            <element signature="e#2349#2350#0" expanded="false" />
+            <element signature="e#2400#2401#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1696,26 +1357,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/jhcz/web/controller/CaseControllerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mybatis.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1819">
-          <caret line="107" column="27" selection-start-line="107" selection-start-column="27" selection-end-line="107" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis-config.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="697">
           <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../manage_cms/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1728,10 +1381,235 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../manage_cms/.idea/workspace.xml">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/base/pojo/ManageCatalog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1139">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/ArticleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="31" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/impl/ArticleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="20" column="46" selection-start-line="20" selection-start-column="46" selection-end-line="20" selection-end-column="46" />
+          <folding>
+            <element signature="e#434#435#0" expanded="false" />
+            <element signature="e#517#518#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/controller/HelloController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/ManageCatalogService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/controller/FunctionCatalogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/service/impl/ManageCatalogServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="27" column="65" selection-start-line="27" selection-start-column="65" selection-end-line="27" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/ArticleDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/impl/ArticleDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-17">
+          <caret line="12" column="64" selection-start-line="12" selection-start-column="64" selection-end-line="12" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/web/dao/ManageCatalogDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapping/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding>
+            <marker date="1477122650043" expanded="true" signature="283:327" placeholder="select * fro... t_user" />
+            <marker date="1477122650043" expanded="true" signature="433:473" placeholder="select * fro... T_USER" />
+            <marker date="1477122650043" expanded="true" signature="557:656" placeholder="update t_use... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mybatis.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="104" column="16" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/jdbc.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="3" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/jhcz/base/util/security/SecurityHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Logback.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="42" column="22" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/jhcz/web/controller/CaseControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="47">
+          <caret line="95" column="0" selection-start-line="95" selection-start-column="0" selection-end-line="95" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/manage_web/WEB-INF/classes/log4j.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="22" column="10" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.pom">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.7.7/slf4j-log4j12-1.7.7.pom">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-306">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MAVEN_REPOSITORY$/org/slf4j/jcl-over-slf4j/1.7.7/jcl-over-slf4j-1.7.7.pom">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$MAVEN_REPOSITORY$/org/slf4j/jul-to-slf4j/1.7.7/jul-to-slf4j-1.7.7.pom">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvn.bat">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="0" column="29" selection-start-line="0" selection-start-column="29" selection-end-line="0" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.2.6.RELEASE/spring-web-4.2.6.RELEASE-sources.jar!/org/springframework/web/util/Log4jConfigListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/manage_web/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-34">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="268" column="19" selection-start-line="268" selection-start-column="19" selection-end-line="268" selection-end-column="19" />
           <folding />
         </state>
       </provider>
