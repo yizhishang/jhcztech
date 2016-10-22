@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jhcz.base.pojo.system.Result;
+import com.jhcz.base.domain.system.Result;
 import com.jhcz.base.util.StringHelper;
 import com.jhcz.web.aspect.MethodLog;
 import com.jhcz.web.exception.BusinessException;

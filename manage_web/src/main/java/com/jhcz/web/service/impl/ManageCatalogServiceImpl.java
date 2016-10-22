@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.jhcz.base.pojo.ManageCatalog;
+import com.jhcz.base.domain.ManageCatalog;
 import com.jhcz.base.util.StringHelper;
 import com.jhcz.web.dao.ManageCatalogDao;
 import com.jhcz.web.service.ManageCatalogService;

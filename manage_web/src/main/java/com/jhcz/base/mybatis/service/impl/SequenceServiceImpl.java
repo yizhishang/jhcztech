@@ -4,10 +4,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.jhcz.base.domain.Sequence;
 import com.jhcz.base.exception.ServiceException;
 import com.jhcz.base.mybatis.dao.SequenceDao;
 import com.jhcz.base.mybatis.service.SequenceService;
-import com.jhcz.base.pojo.Sequence;
 
 @Service
 public class SequenceServiceImpl implements SequenceService

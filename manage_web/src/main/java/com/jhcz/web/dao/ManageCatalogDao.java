@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import com.jhcz.base.pojo.ManageCatalog;
+import com.jhcz.base.domain.ManageCatalog;
 
 @Repository
 public interface ManageCatalogDao

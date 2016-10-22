@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jhcz.base.domain.User;
+import com.jhcz.base.domain.system.Result;
 import com.jhcz.base.jdbc.Page;
-import com.jhcz.base.pojo.User;
-import com.jhcz.base.pojo.system.Result;
 import com.jhcz.web.aspect.MethodLog;
 import com.jhcz.web.service.ArticleService;
 import com.jhcz.web.service.UserService;

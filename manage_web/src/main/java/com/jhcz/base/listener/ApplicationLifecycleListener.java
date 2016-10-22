@@ -6,7 +6,7 @@ import javax.servlet.ServletContextListener;
 
 import org.apache.log4j.Logger;
 
-import com.jhcz.base.pojo.system.Application;
+import com.jhcz.base.domain.system.Application;
 
 /**
  * 描述: ApplicationLifecycleListener.java

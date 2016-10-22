@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
-import com.jhcz.base.pojo.Sequence;
+import com.jhcz.base.domain.Sequence;
 
 /**
  * 描述: 序列管理

@@ -2,7 +2,7 @@ package com.jhcz.web.dao;
 
 import org.springframework.stereotype.Repository;
 
-import com.jhcz.base.pojo.User;
+import com.jhcz.base.domain.User;
 
 @Repository
 public interface UserDao

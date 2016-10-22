@@ -1,6 +1,6 @@
 package com.jhcz.web.service;
 
-import com.jhcz.base.pojo.User;
+import com.jhcz.base.domain.User;
 import com.jhcz.web.exception.BusinessException;
 
 

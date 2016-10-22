@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.jhcz.base.pojo.User;
+import com.jhcz.base.domain.User;
 import com.jhcz.base.util.DateHelper;
 import com.jhcz.base.util.security.MD5;
 import com.jhcz.web.dao.UserDao;

@@ -2,7 +2,7 @@ package com.jhcz.web.service;
 
 import java.util.List;
 
-import com.jhcz.base.pojo.Site;
+import com.jhcz.base.domain.Site;
 
 public interface SiteService
 {
