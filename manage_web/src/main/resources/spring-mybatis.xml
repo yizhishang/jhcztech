@@ -103,9 +103,6 @@
 		<property name="plugins">
 			<array>
 				<bean class="com.github.pagehelper.PageHelper">
-					<property name="properties">
-						<value>dialect=oracle</value>
-					</property>
 			        <property name="sqlUtilConfig" ref="sqlUtilConfig"/>
 				</bean>
 			</array>
