@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.jhcz.base.domain.Site;
-import com.jhcz.base.mybatis.service.SequenceService;
+import com.jhcz.base.service.SequenceService;
 import com.jhcz.web.dao.SiteDao;
 import com.jhcz.web.service.SiteService;
 

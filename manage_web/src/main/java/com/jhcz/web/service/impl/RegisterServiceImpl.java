@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jhcz.base.mybatis.service.SequenceService;
+import com.jhcz.base.service.SequenceService;
 import com.jhcz.web.dao.RegisterDao;
 import com.jhcz.web.exception.BusinessException;
 import com.jhcz.web.service.RegisterService;

@@ -9,10 +9,8 @@ import com.jhcz.base.dao.impl.BaseDaoImpl;
 import com.jhcz.base.jdbc.Page;
 import com.jhcz.web.dao.ArticleDao;
 
-@Repository
-public class ArticleDaoImpl extends BaseDaoImpl implements ArticleDao
+public class ArticleDaoImpl extends BaseDaoImpl
 {
-	@Override
 	public Page findArticlePageByCatalogId(int catalogId,int curPage, int numPerPage)
 	{
 		StringBuffer sql = new StringBuffer("SELECT TITLE, BRIEF, PUBLISH_DATE,URL,CATALOG_ID FROM T_ARTICLE WHERE STATE = 3");

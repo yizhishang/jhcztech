@@ -1,8 +1,13 @@
 package com.jhcz.web.dao;
 
+import com.jhcz.base.jdbc.DataRow;
 import com.jhcz.base.jdbc.Page;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
 
+@Repository
 public interface ArticleDao
 {
 	/**
@@ -16,4 +21,7 @@ public interface ArticleDao
 	 * @return
 	 */
 	public Page findArticlePageByCatalogId(int catalogId,int curPage, int numPerPage);
+
+	@Select("SELECT TITLE, BRIEF, PUBLISH_DATE,URL,CATALOG_ID FROM T_ARTICLE WHERE STATE = 3 AND CATALOG_ID = #{CATALOGID} ORDER BY CATALOG_ID, PUBLISH_DATE DESC")
+	public List<DataRow> findArticleListByCatalogId(int catalogId);
 }
