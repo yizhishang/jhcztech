@@ -5,7 +5,8 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("rawtypes")
 public class Constants extends HashMap
@@ -13,7 +14,7 @@ public class Constants extends HashMap
     
     private static final long serialVersionUID = 1L;
 
-    private static Logger logger = Logger.getLogger(Constants.class);
+    private static Logger logger = LoggerFactory.getLogger(Constants.class);
     
     /**
     * 登录验证码图片

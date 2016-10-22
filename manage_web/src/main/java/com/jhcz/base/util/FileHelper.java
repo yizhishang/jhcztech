@@ -15,10 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 描述:
@@ -40,7 +41,7 @@ public class FileHelper
     /**
     * FileHelper 日志
     */
-    private static Logger logger = Logger.getLogger(FileHelper.class);
+    private static Logger logger = LoggerFactory.getLogger(FileHelper.class);
     
     /**
      * 清除一个目录的内容，但不删除此目录

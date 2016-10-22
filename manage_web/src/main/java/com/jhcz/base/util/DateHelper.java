@@ -5,7 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 描述: 日期工具类
@@ -30,7 +31,7 @@ public class DateHelper
 	/**
 	* 日志
 	*/
-	private static Logger logger = Logger.getLogger(DateHelper.class);
+	private static Logger logger = LoggerFactory.getLogger(DateHelper.class);
 	
 	/**
 	* 描述：日期格式化
