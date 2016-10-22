@@ -1,6 +1,7 @@
 package com.jhcz.base.util.security;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.util.StringHelper;
 
@@ -29,7 +30,7 @@ public class SecurityHelper
 	/**
 	 * SecurityHelper 日志
 	 */
-	private static Logger logger = Logger.getLogger(SecurityHelper.class);
+	private static Logger logger = LoggerFactory.getLogger(SecurityHelper.class);
 	
 	/**
 	 * 密钥

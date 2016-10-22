@@ -4,7 +4,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.domain.system.Application;
 
@@ -22,7 +23,7 @@ public class ApplicationLifecycleListener implements ServletContextListener
 	
 	private ServletContext context = null;
 	
-	private static Logger logger = Logger.getLogger(ApplicationLifecycleListener.class);
+	private static Logger logger = LoggerFactory.getLogger(ApplicationLifecycleListener.class);
 	
     /**
     * 在系统停止时调用

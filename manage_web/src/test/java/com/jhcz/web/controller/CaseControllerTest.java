@@ -2,31 +2,30 @@ package com.jhcz.web.controller;
 import java.util.Arrays;
 import java.util.List;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.jhcz.base.mybatis.util.BeanUtil;
-import com.jhcz.base.mybatis.util.PagedResult;
-import com.jhcz.base.pojo.ManageCatalog;
-import com.jhcz.base.pojo.Site;
-import com.jhcz.web.dao.ManageCatalogDao;
-import com.jhcz.web.dao.SiteDao;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
+import com.github.pagehelper.PageHelper;
+import com.jhcz.base.domain.ManageCatalog;
+import com.jhcz.base.domain.Sequence;
+import com.jhcz.base.domain.Site;
 import com.jhcz.base.mybatis.dao.SequenceDao;
-import com.jhcz.base.pojo.Sequence;
+import com.jhcz.base.mybatis.util.BeanUtil;
+import com.jhcz.base.mybatis.util.PagedResult;
+import com.jhcz.web.dao.ManageCatalogDao;
+import com.jhcz.web.dao.SiteDao;
 import com.jhcz.web.exception.BusinessException;
 
 public class CaseControllerTest
 {
     
-    private static final Log logger = LogFactory.getLog(CaseControllerTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(CaseControllerTest.class);
     
     private RegisterController registerController = null;
     
@@ -43,7 +42,7 @@ public class CaseControllerTest
         ctx.setServletContext(new MockServletContext(""));
         ctx.refresh();
         String[] names = ctx.getBeanDefinitionNames();
-        System.out.println(Arrays.toString(names));
+        logger.info(Arrays.toString(names));
     }
     
     @After
@@ -101,9 +100,9 @@ public class CaseControllerTest
 	public void queryFunctionCatalogByParentId(){
 		ManageCatalogDao manageCatalogDao = (ManageCatalogDao) ctx.getBean("manageCatalogDao");
 		List<ManageCatalog> list = manageCatalogDao.queryFunctionCatalogByParentId("1");
-		System.out.println(list.size());
+		logger.info("{}", list.size());
 		PageHelper.startPage(1,1);
 		PagedResult<ManageCatalog> page = BeanUtil.toPagedResult(list);
-		System.out.println(page.getPageSize());
+		logger.info("{}", page.getPageSize());
 	}
 }

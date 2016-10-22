@@ -3,12 +3,13 @@ package com.jhcz.web.aspect;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -37,7 +38,7 @@ public class BaseInterceptor
 	@Around(value = "pointCut()")
 	public Object AroundExcute(ProceedingJoinPoint pjp) throws Throwable
 	{
-		logger = Logger.getLogger(pjp.getTarget().getClass());
+		logger = LoggerFactory.getLogger(pjp.getTarget().getClass());
 		try
 		{
 			String className = pjp.getTarget().getClass().getName();

@@ -11,18 +11,19 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.mchange.v2.c3p0.DataSources;
 import com.jhcz.base.config.Configuration;
 import com.jhcz.base.util.FileHelper;
 import com.jhcz.base.util.PropHelper;
 import com.jhcz.base.util.StringHelper;
 import com.jhcz.base.util.security.AES;
 import com.jhcz.base.util.security.SecurityHelper;
+import com.mchange.v2.c3p0.DataSources;
 
 /**
  * 描述:	 获取datasource.xml数据库配置信息
@@ -42,7 +43,7 @@ public final class Configure
     
     private static String _default = "";
     
-    private static Logger logger = Logger.getLogger(Configure.class);
+    private static Logger logger = LoggerFactory.getLogger(Configure.class);
     
     private static Configure instance = new Configure();
     

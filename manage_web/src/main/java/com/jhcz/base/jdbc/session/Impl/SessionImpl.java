@@ -13,12 +13,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.config.Configuration;
-import com.jhcz.base.jdbc.Page;
 import com.jhcz.base.jdbc.DataRow;
 import com.jhcz.base.jdbc.DatabaseType;
+import com.jhcz.base.jdbc.Page;
 import com.jhcz.base.jdbc.exception.JdbcException;
 import com.jhcz.base.jdbc.session.Session;
 
@@ -34,7 +35,7 @@ import com.jhcz.base.jdbc.session.Session;
 public class SessionImpl implements Session
 {
 	
-	private static Logger logger = Logger.getLogger(SessionImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(SessionImpl.class);
 	
 	private Connection conn = null;
 	
