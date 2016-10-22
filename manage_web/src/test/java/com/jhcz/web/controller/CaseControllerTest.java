@@ -2,6 +2,8 @@ package com.jhcz.web.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import com.jhcz.base.jdbc.DataRow;
+import com.jhcz.web.dao.ArticleDao;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -103,6 +105,16 @@ public class CaseControllerTest
 		logger.info("{}", list.size());
 		PageHelper.startPage(1,1);
 		PagedResult<ManageCatalog> page = BeanUtil.toPagedResult(list);
+		logger.info("{}", page.getPageSize());
+	}
+
+	@Test
+	public void findArticleListByCatalogId(){
+		ArticleDao articleDao = (ArticleDao) ctx.getBean("articleDao");
+		List<DataRow> list = articleDao.findArticleListByCatalogId(2914);
+		logger.info("{}", list.size());
+		PageHelper.startPage(1,1);
+		PagedResult<DataRow> page = BeanUtil.toPagedResult(list);
 		logger.info("{}", page.getPageSize());
 	}
 }
