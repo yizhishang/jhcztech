@@ -91,7 +91,7 @@ public class DateHelper
 	
 	/**
 	 * 描述：去除日期字串中原“-”和“:”
-	 * @param dateTime日期字串
+	 * @param dateTime	日期字串
 	 * @return
 	 */
 	public static String formatString(String dateTime)
