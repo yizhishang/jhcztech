@@ -14,7 +14,8 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -67,7 +68,7 @@ import com.jhcz.plat.web.form.DynaForm;
 public class ArticleAction extends BaseAction
 {
     
-    private static Logger logger = Logger.getLogger(ArticleAction.class);
+    private static Logger logger = LoggerFactory.getLogger(ArticleAction.class);
     
     private static final int SPLIT_NUM = 500;//自动截取的字符串长度
     
@@ -372,7 +373,7 @@ public class ArticleAction extends BaseAction
         //        }
         //        catch (IOException e)
         //        {
-        //            logger.error(e);
+        //            logger.error(e.getMessage());
         //        }
         Result result = new Result();
         result.setObj(jsonArr);
@@ -562,7 +563,7 @@ public class ArticleAction extends BaseAction
         }
         catch (Exception e)
         {
-            logger.error(e);
+            logger.error(e.getMessage());
         }
         return NONE;
     }

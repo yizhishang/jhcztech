@@ -6,7 +6,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.config.Configuration;
 import com.jhcz.base.jdbc.DataRow;
@@ -28,7 +29,7 @@ import com.jhcz.plat.service.PublishQueueService;
 public class PublishPlan extends Thread
 {
     
-    private static Logger logger = Logger.getLogger(PublishPlan.class);
+    private static Logger logger = LoggerFactory.getLogger(PublishPlan.class);
 
     private static List<Object> dataList = null;
     

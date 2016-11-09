@@ -3,14 +3,14 @@ package com.jhcz.timerengine;
 import java.util.Date;
 import java.util.TimerTask;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 import com.jhcz.timerengine.util.Util;
 
 
 public abstract class AbstractTimerTask extends TimerTask
 {
-    private static Logger logger = Logger.getLogger(AbstractTimerTask.class);
+    private static Logger logger = LoggerFactory.getLogger(AbstractTimerTask.class);
     //任务记录
     public TaskEntry taskEntry;
 

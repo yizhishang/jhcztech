@@ -1,8 +1,10 @@
+
 package com.jhcz.plat.template.publish;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.config.Configuration;
 import com.jhcz.base.service.ServiceLocator;
@@ -27,7 +29,7 @@ import com.jhcz.plat.util.QueueThreadProperty;
 public class PublishCallBack implements WorkCallBack
 {
 	
-	private static Logger logger = Logger.getLogger(PublishCallBack.class);
+	private static Logger logger = LoggerFactory.getLogger(PublishCallBack.class);
 	
 	private static PublishLogService logService = (PublishLogService) ServiceLocator.getService(PublishLogService.class);
 	

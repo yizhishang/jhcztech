@@ -9,10 +9,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.util.PropHelper;
 import com.jhcz.base.util.StringHelper;
@@ -29,7 +30,7 @@ import com.jhcz.base.util.StringHelper;
 public class Configuration
 {
     
-    private static Logger logger = Logger.getLogger(Configuration.class);
+    private static Logger logger = LoggerFactory.getLogger(Configuration.class);
     
     private static Map<String, String> items = new HashMap<String, String>();
     

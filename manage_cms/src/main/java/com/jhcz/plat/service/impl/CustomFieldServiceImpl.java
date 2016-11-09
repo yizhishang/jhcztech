@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.jhcz.base.jdbc.DataRow;
@@ -28,7 +29,7 @@ import com.jhcz.plat.service.CustomFieldService;
 public class CustomFieldServiceImpl extends BaseService implements CustomFieldService
 {
 	
-	private static Logger logger = Logger.getLogger(CustomFieldServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(CustomFieldServiceImpl.class);
 	
     /**
     * @描述：插入扩展字段信息
@@ -121,7 +122,7 @@ public class CustomFieldServiceImpl extends BaseService implements CustomFieldSe
 		}
 		catch (Exception ex)
 		{
-			logger.error(ex);
+			logger.error(ex.getMessage());
 			return false;
 		}
 	}
@@ -220,7 +221,7 @@ public class CustomFieldServiceImpl extends BaseService implements CustomFieldSe
 		}
 		catch (Exception ex)
 		{
-			logger.error(ex);
+			logger.error(ex.getMessage());
 			return null;
 		}
 	}
@@ -246,7 +247,7 @@ public class CustomFieldServiceImpl extends BaseService implements CustomFieldSe
 		}
 		catch (Exception ex)
 		{
-			logger.error(ex);
+			logger.error(ex.getMessage());
 			return null;
 		}
 	}
@@ -330,7 +331,7 @@ public class CustomFieldServiceImpl extends BaseService implements CustomFieldSe
 		}
 		catch (Exception ex)
 		{
-			logger.error(ex);
+			logger.error(ex.getMessage());
 			return false;
 		}
 	}

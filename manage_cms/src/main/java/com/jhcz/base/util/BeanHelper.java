@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 描述:	 javabean工具类，bean与map间的互转
@@ -21,7 +22,7 @@ public class BeanHelper
     /**
      * BeanHelper 日志
      */
-    private static Logger logger = Logger.getLogger(BeanHelper.class);
+    private static Logger logger = LoggerFactory.getLogger(BeanHelper.class);
 
     /**
      * 把一个bean中的属性转化到map中

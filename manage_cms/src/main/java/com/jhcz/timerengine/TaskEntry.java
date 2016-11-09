@@ -3,14 +3,14 @@ package com.jhcz.timerengine;
 import java.util.Date;
 import java.util.Timer;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 import com.jhcz.timerengine.util.Util;
 
 public class TaskEntry
 {
 
-   private static Logger logger = Logger.getLogger(TaskEntry.class);
+   private static Logger logger = LoggerFactory.getLogger(TaskEntry.class);
 
     //定义两个表示任务记录状态常量
     public static final int TASK_START = 0;

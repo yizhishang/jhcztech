@@ -7,10 +7,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.util.FileHelper;
 import com.jhcz.base.util.XMLHelper;
@@ -30,7 +31,7 @@ import com.jhcz.plat.service.impl.TemplateServiceImpl;
 public class TemplateXmlManage
 {
     
-    private static Logger logger = Logger.getLogger(TemplateXmlManage.class);
+    private static Logger logger = LoggerFactory.getLogger(TemplateXmlManage.class);
     
     private String directory = "";
     

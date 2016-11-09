@@ -5,12 +5,13 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -66,15 +67,15 @@ public class BaseActionInterceptor
 	@Around(value = "pointCut()")
 	public Object AroundExcute(ProceedingJoinPoint pjp) throws Throwable
 	{
-		logger = Logger.getLogger(pjp.getTarget().getClass());
+		logger = LoggerFactory.getLogger(pjp.getTarget().getClass());
 		try
 		{
-			String className = pjp.getTarget().getClass().getName();
+//			String className = pjp.getTarget().getClass().getName();
 			String method = pjp.getSignature().getName();
 			
 			if (logger.isInfoEnabled())
 			{
-                logger.info("开始执行 [" + className + "." + method + "]");
+                logger.info("开始执行 [" + method + "]");
 			}
 			long startTime = System.currentTimeMillis();
 			
@@ -82,7 +83,7 @@ public class BaseActionInterceptor
 			Object result = pjp.proceed();;
 			if (logger.isInfoEnabled())
 			{
-                logger.info("执行完成 [" + className + "." + method + "] times=" + String.valueOf(System.currentTimeMillis() - startTime) + " millisecond");
+                logger.info("执行完成 [" + method + "] times=" + String.valueOf(System.currentTimeMillis() - startTime) + " millisecond");
 			}
 			return (result == null) ? "none" : result;
 		}

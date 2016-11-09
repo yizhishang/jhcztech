@@ -6,14 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 import com.jhcz.timerengine.util.TimerGenerate;
 
 public class TaskSelectHourMinuteBuilder extends AbstractTaskBuilder
 {
 
-    private static Logger logger = Logger.getLogger(TaskSelectHourMinuteBuilder.class);
+    private static Logger logger = LoggerFactory.getLogger(TaskSelectHourMinuteBuilder.class);
 
     public TaskSelectHourMinuteBuilder()
     {

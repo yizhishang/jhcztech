@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.jhcz.base.config.Configuration;
@@ -28,7 +29,7 @@ import com.jhcz.plat.domain.Catalog;
 public class CatalogDaoImpl extends BaseDao implements CatalogDao
 {
 	
-	private static Logger logger = Logger.getLogger(CatalogDaoImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(CatalogDaoImpl.class);
 	
 	                                                                                                                                                                            /**
     * 
@@ -58,7 +59,7 @@ public class CatalogDaoImpl extends BaseDao implements CatalogDao
 			}
 			catch (Exception ex)
 			{
-				logger.error(ex);
+				logger.error(ex.getMessage());
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 package com.jhcz.base.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 描述:	 反射工具类
@@ -17,7 +18,7 @@ public class ReflectHelper
     /**
      * ReflectHelper 日志
      */
-    private static Logger logger = Logger.getLogger(ReflectHelper.class);
+    private static Logger logger = LoggerFactory.getLogger(ReflectHelper.class);
 
     /**
      * 提指定的类载入以系统中

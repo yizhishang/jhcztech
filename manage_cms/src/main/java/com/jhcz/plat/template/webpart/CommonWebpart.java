@@ -5,7 +5,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.util.MapHelper;
 import com.jhcz.base.util.ReflectHelper;
@@ -25,7 +26,7 @@ import com.jhcz.plat.template.WebpartParser;
 public class CommonWebpart implements WebpartParser
 {
 	
-	private final Logger logger = Logger.getLogger(CommonWebpart.class);
+	private final Logger logger = LoggerFactory.getLogger(CommonWebpart.class);
 	
 	private String getDefaultView(String provider)
 	{

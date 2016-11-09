@@ -10,7 +10,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,7 @@ import com.jhcz.plat.web.form.DynaForm;
 public class FunctionCatalogAction extends BaseAction
 {
     
-    private final Logger logger = Logger.getLogger(FunctionCatalogAction.class);
+    private final Logger logger = LoggerFactory.getLogger(FunctionCatalogAction.class);
     
     @Resource
     EnumService enumService;

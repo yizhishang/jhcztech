@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.config.Configuration;
 import com.jhcz.base.jdbc.DataRow;
@@ -24,7 +25,7 @@ import com.jhcz.plat.util.QueueThreadProperty;
 public class PublishEngine extends TimerTask
 {
     
-    private final Logger logger = Logger.getLogger(PublishEngine.class);
+    private final Logger logger = LoggerFactory.getLogger(PublishEngine.class);
     
     private static PublishThead publishThread = null;
     
@@ -55,7 +56,7 @@ public class PublishEngine extends TimerTask
 class PublishThead extends Thread
 {
     
-    private static Logger logger = Logger.getLogger(PublishThead.class);
+    private static Logger logger = LoggerFactory.getLogger(PublishThead.class);
     
     int workThreadNum = Configuration.getInt("system.workThreadNum", 10);//模板发布队列工作线程数量，默认为10个线程
     

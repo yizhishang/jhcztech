@@ -5,12 +5,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 
 public abstract class AbstractTaskBuilder implements TaskBuilder
 {
-    private static Logger logger = Logger.getLogger(AbstractTaskBuilder.class);
+    private static Logger logger = LoggerFactory.getLogger(AbstractTaskBuilder.class);
 
     //保存每一个任务属性的Map，此处用Map保存，主要是为了以后扩充的需要
     //可以针对不同的任务增加相应的属性设置

@@ -10,7 +10,8 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.jhcz.base.config.Configuration;
@@ -46,7 +47,7 @@ import com.jhcz.plat.template.TemplatePreview;
 public class TemplateServiceImpl extends BaseService implements TemplateService
 {
     
-    private static Logger logger = Logger.getLogger(TemplateServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(TemplateServiceImpl.class);
     
     @Resource
     private ArticleService articleService;

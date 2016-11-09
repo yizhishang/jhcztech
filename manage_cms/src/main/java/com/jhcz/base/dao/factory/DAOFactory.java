@@ -1,6 +1,6 @@
 package com.jhcz.base.dao.factory;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.service.exception.ServiceException;
 
@@ -15,7 +15,7 @@ import com.jhcz.base.service.exception.ServiceException;
  */
 public class DAOFactory
 {
-    private static Logger logger = Logger.getLogger(DAOFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(DAOFactory.class);
 
     /**
      * 返回数据访问对象
