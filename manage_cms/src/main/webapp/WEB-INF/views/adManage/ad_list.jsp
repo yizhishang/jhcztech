@@ -2,9 +2,9 @@
 <%@ include file="/admin/common/header.jsp" %>
 <body>
 <script type="text/javascript">
-function saveDataFunction(param, url)
+function saveDataFunction(url)
 {
-	var returnValue = openMaxWindowWithScroll(url, 1300, 800);
+	var returnValue = openDialogWithScroll(url, 1300, 800);
     if (returnValue != null && returnValue.length > 0)
     {
     	var is_submit = getKeyword("is_submit", returnValue);
@@ -26,6 +26,12 @@ function saveDataFunction(param, url)
     	}
     }
 }
+function addFunction(){
+	saveDataFunction("doAdd.action");
+}
+function editFunction(param, width, height){
+	saveDataFunction("doEdit.action?"+param);
+}
 </script>
 <form id="qryparm" name="qryparm" action="default.action" >
   	<input type="hidden" name="function" value="${param.function }" />
@@ -43,7 +49,7 @@ function saveDataFunction(param, url)
                 <!-- 包含导航代码  -->
                 <jsp:include flush="true" page="/WEB-INF/views/include/menubar.jsp"></jsp:include>
                 <div class="label">
-                	<a href="#" onClick="addFunction(null, 'doAdd.action');"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>添加</a>
+                	<a href="#" onClick="addFunction('doAdd.action');"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>添加</a>
                 	<a href="#" onClick="deleteFunction('id','delete')"><img src="${ctxPath }/admin/images/ico15.gif" border="0"/>删除</a></div>
                 <div class="search">
                   <div class="space"></div>
@@ -100,7 +106,7 @@ function saveDataFunction(param, url)
                         <td>&nbsp;
                           <c:if test="${item.file_state == 0}"> <font color="#FF0000">无效</font> </c:if>
                           <c:if test="${item.file_state == 1}"> 有效 </c:if></td>
-                        <td>&nbsp;<a href="#" onClick="editFunction('id=<c:out value='${item.ad_id}'/>')">编辑</a>&nbsp;</td>
+                        <td>&nbsp;<a href="#" onClick="editFunction('id=${item.ad_id}')">编辑</a>&nbsp;</td>
                       </tr>
                     </c:forEach>
                   </table>

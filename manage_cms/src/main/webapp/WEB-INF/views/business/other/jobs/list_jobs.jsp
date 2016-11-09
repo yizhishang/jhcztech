@@ -27,7 +27,10 @@ function saveDataFunction(url)
     }
 }
 function addFunction(){
-	openMaxWindow("doAdd.action");
+	saveDataFunction("doAdd.action");
+}
+function editFunction(param, width, height){
+	saveDataFunction("doEdit.action?"+param);
 }
 </script>
 <form id="qryparm" name="qryparm" action="jobManage.action" method="post">
@@ -86,7 +89,7 @@ function addFunction(){
 	                    <td class="td3">&nbsp;<c:out value="${item.degree}" default="--"/>&nbsp;</td>
 	                    <td class="td3">&nbsp;<c:out value="${item.salaryrange}" default="--"/>&nbsp;</td>
 	                    <td class="td3">&nbsp;<c:out value="${item.issuedate}" default="--"/>&nbsp;</td>
-						<td>&nbsp;<a href="#" onClick="editFunction('jobid=<c:out value="${item.jobid}"/>')">编辑</a>&nbsp;</td>
+						<td>&nbsp;<a href="#" onClick="editFunction('jobid=${item.jobid}')">编辑</a>&nbsp;</td>
 		              </tr>
        			 </c:forEach>
                 </table>

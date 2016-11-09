@@ -143,7 +143,7 @@
                   </tr>
                   <tr>
                     <td class="label"><span class="DetailTagText">弹出广告编辑</span>：</td>
-                    <td><input type="hidden" id="description" name="form.description" value="<c:out value='${form.description}'/>">
+                    <td><input type="hidden" id="description" name="form.description" />
                         <iframe id="eWebEditor_description" src="${ctxPath }/admin/editor/ewebeditor/ewebeditor.htm?id=description&style=mini" frameborder="0" scrolling="No" width="600" height="230"></iframe>
                     </td>
                   </tr>
