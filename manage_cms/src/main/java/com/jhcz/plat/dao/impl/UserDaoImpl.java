@@ -28,7 +28,7 @@ public class UserDaoImpl extends BaseDao implements UserDao
 	
 	private static String FIND_USER_BY_UID = "select * from T_USER where uid2 = ?";
 	
-	private static String FIND_USER_BY_ID = "select * from T_USER where user_id = ?";
+	private static String FIND_USER_BY_ID = "select * from T_USER where id = ?";
 	
 	@Override
     public void addUser(User user)
@@ -41,7 +41,7 @@ public class UserDaoImpl extends BaseDao implements UserDao
 	@Override
     public void deleteUser(int id)
 	{
-		getJdbcTemplate().delete("T_USER", "user_id", new Integer(id));
+		getJdbcTemplate().delete("T_USER", "id", new Integer(id));
 	}
 	
 	@Override
@@ -88,7 +88,7 @@ public class UserDaoImpl extends BaseDao implements UserDao
     @Override
     public List<Object> getAll()
 	{
-        List<Object> dataList = getJdbcTemplate().query("select * from T_USER order by user_id desc ");
+        List<Object> dataList = getJdbcTemplate().query("select * from T_USER order by id desc ");
 		ArrayList<Object> newDataList = new ArrayList<Object>();
         for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
 		{
@@ -107,7 +107,7 @@ public class UserDaoImpl extends BaseDao implements UserDao
 		
 		StringBuffer sqlBuffer = new StringBuffer();
 		ArrayList<Object> argList = new ArrayList<Object>();
-		sqlBuffer.append("select * from T_USER where user_id not in (select user_id from t_group_user where group_id = ?) ");
+		sqlBuffer.append("select * from T_USER where id not in (select user_id from t_group_user where group_id = ?) ");
 		argList.add(group_id);
 		if (!StringHelper.isEmpty(siteNo))
 		{
@@ -130,7 +130,7 @@ public class UserDaoImpl extends BaseDao implements UserDao
 		}
 		else
 		{
-			sqlBuffer.append(" order by user_id desc ");
+			sqlBuffer.append(" order by id desc ");
 		}
 		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
@@ -180,7 +180,7 @@ public class UserDaoImpl extends BaseDao implements UserDao
 		}
 		else
 		{
-			sqlBuffer.append(" order by user_id desc ");
+			sqlBuffer.append(" order by id desc ");
 		}
 		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
@@ -207,7 +207,7 @@ public class UserDaoImpl extends BaseDao implements UserDao
 		DBPage page = null;
 		StringBuffer sqlBuffer = new StringBuffer();
 		ArrayList<Object> argList = new ArrayList<Object>();
-		sqlBuffer.append("SELECT U.USER_ID,U.SITENO,U.NAME,U.PASSWORD,U.STATE,U.LOGIN_TIMES,U.LAST_TIME,U.EMAIL,U.PHONE,U.MOBILE,U.UID2,U.BRANCHNO,B.BRANCHNAME");
+		sqlBuffer.append("SELECT U.ID,U.SITENO,U.NAME,U.PASSWORD,U.STATE,U.LOGIN_TIMES,U.LAST_TIME,U.EMAIL,U.PHONE,U.MOBILE,U.UID2,U.BRANCHNO,B.BRANCHNAME");
 		sqlBuffer.append(" FROM T_USER U LEFT JOIN T_B_BRANCH B ON U.BRANCHNO = B.BRANCHNO WHERE 1 = 1 ");
 		if (!StringHelper.isEmpty(siteNo))
 		{
@@ -230,11 +230,11 @@ public class UserDaoImpl extends BaseDao implements UserDao
 		}
 		if (StringHelper.isNotEmpty(roleid))
 		{
-			sqlBuffer.append(" AND U.USER_ID IN (SELECT USER_ID FROM T_ROLE_USER WHERE ROLE_ID = ?)");
+			sqlBuffer.append(" AND U.ID IN (SELECT USER_ID FROM T_ROLE_USER WHERE ROLE_ID = ?)");
 			argList.add(roleid);			
 		}
 		sqlBuffer.append(" AND U.IS_SYSTEM = 0");
-		sqlBuffer.append(" ORDER BY USER_ID DESC");
+		sqlBuffer.append(" ORDER BY ID DESC");
 		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
 		//		if (page != null)
@@ -274,9 +274,9 @@ public class UserDaoImpl extends BaseDao implements UserDao
 			argList.add("%" + keyword + "%");
 		}
 		
-		sqlBuffer.append(" and user_id not in (select user_id from T_ROLE_USER where role_id=?)");
+		sqlBuffer.append(" and id not in (select user_id from T_ROLE_USER where role_id=?)");
 		argList.add(new Integer(roleId));
-		sqlBuffer.append(" order by user_id desc ");
+		sqlBuffer.append(" order by id desc ");
 		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
 		if (page != null)
@@ -303,7 +303,7 @@ public class UserDaoImpl extends BaseDao implements UserDao
 		dataRow.putAll(user.toMap());
 		if (user.getId() > 0)
 		{
-			getJdbcTemplate().update("T_USER", dataRow, "user_id", new Integer(user.getId()));
+			getJdbcTemplate().update("T_USER", dataRow, "id", new Integer(user.getId()));
 		}
 		else
 		{

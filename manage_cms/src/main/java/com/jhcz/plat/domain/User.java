@@ -18,12 +18,12 @@ public class User extends DynaModel
 
     public int getId()
     {
-        return getInt("user_id");
+        return getInt("id");
     }
 
     public void setId(int id)
     {
-        set("user_id", id);
+        set("id", id);
     }
 
     public String getUid()

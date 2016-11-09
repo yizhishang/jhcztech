@@ -16,12 +16,12 @@ public class Log extends DynaModel
 	
 	public int getId()
 	{
-		return getInt("log_id");
+		return getInt("id");
 	}
 	
 	public void setId(int id)
 	{
-		set("log_id", id);
+		set("id", id);
 	}
 	
 	public String getSiteNo()

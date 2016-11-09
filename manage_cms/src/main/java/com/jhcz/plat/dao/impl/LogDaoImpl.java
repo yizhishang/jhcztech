@@ -46,7 +46,7 @@ public class LogDaoImpl extends BaseDao implements LogDao
 	@Override
     public void clearErrorPwdNum(int userId)
 	{
-		String sql = "DELETE FROM T_LOG WHERE CREATE_BY = (SELECT UID2 FROM T_USER WHERE USER_ID = ?) AND CREATE_DATE > ? AND DESCRIPTION LIKE '%密码错误%'";
+		String sql = "DELETE FROM T_LOG WHERE CREATE_BY = (SELECT UID2 FROM T_USER WHERE ID = ?) AND CREATE_DATE > ? AND DESCRIPTION LIKE '%密码错误%'";
 		getJdbcTemplate().update(sql, new Object[] { new Integer(userId), DateHelper.formatDate(new Date(), DateHelper.pattern_date) });
 	}
 	
@@ -59,7 +59,7 @@ public class LogDaoImpl extends BaseDao implements LogDao
 	@Override
     public void deleteLog(int id)
 	{
-		getJdbcTemplate().delete("T_LOG", "LOG_ID", new Integer(id));
+		getJdbcTemplate().delete("T_LOG", "ID", new Integer(id));
 	}
 	
 	    /**
@@ -73,7 +73,7 @@ public class LogDaoImpl extends BaseDao implements LogDao
 	@Override
     public int getNowErrorPwdNum(String loginId)
 	{
-        String sql = "SELECT COUNT(LOG_ID) FROM T_LOG WHERE CREATE_BY = ? AND CREATE_DATE > ? AND DESCRIPTION LIKE '%密码错误%'";
+        String sql = "SELECT COUNT(ID) FROM T_LOG WHERE CREATE_BY = ? AND CREATE_DATE > ? AND DESCRIPTION LIKE '%密码错误%'";
 		return getJdbcTemplate().queryInt(sql, new Object[] { loginId, DateHelper.formatDate(new Date(), DateHelper.pattern_date) });
 		
 	}
@@ -101,7 +101,7 @@ public class LogDaoImpl extends BaseDao implements LogDao
 			sqlBuffer.append(" and create_by like ? ");
 			argList.add("%" + uid + "%");
 		}
-		sqlBuffer.append(" order by log_id desc ");
+		sqlBuffer.append(" order by id desc ");
 		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
 		if (page != null)

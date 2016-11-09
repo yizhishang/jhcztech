@@ -34,7 +34,7 @@ public class GroupDaoImpl extends BaseDao implements GroupDao
     
     private static String INSERT_GROUP_USER = "insert into T_GROUP_USER values(?,?,?,?)";
     
-    private static String FIND_GROUP_USER_ALL = "select * from T_USER where user_id in (select user_id from T_GROUP_USER where group_id=? ) order by user_id desc";
+    private static String FIND_GROUP_USER_ALL = "select * from T_USER where id in (select user_id from T_GROUP_USER where group_id=? ) order by id desc";
     
     private static String DELETE_GROUP_USER = "delete from T_GROUP_USER where GROUP_ID=? and USER_ID=?";
     
@@ -160,7 +160,7 @@ public class GroupDaoImpl extends BaseDao implements GroupDao
         DBPage page = null;
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
-        sqlBuffer.append("select * from T_USER where user_id in (select user_id from T_GROUP_USER where group_id=? )");
+        sqlBuffer.append("select * from T_USER where id in (select user_id from T_GROUP_USER where group_id=? )");
         argList.add(new Integer(groupId));
         if (!StringHelper.isEmpty(keyword))
         {
@@ -169,7 +169,7 @@ public class GroupDaoImpl extends BaseDao implements GroupDao
             argList.add("%" + keyword + "%");
         }
         
-        sqlBuffer.append(" order by user_id desc ");
+        sqlBuffer.append(" order by id desc ");
         
         page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
         if (page != null)

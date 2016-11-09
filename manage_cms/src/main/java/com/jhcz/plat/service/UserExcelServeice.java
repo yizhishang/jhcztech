@@ -8,9 +8,8 @@ import com.jhcz.base.util.StringHelper;
 
 public class UserExcelServeice extends BaseService
 {
-	
-	
-    public List<Object> getUser(String keyword, String loanNo)
+
+	public List<Object> getUser(String keyword, String loanNo)
 	{
 		StringBuffer sqlBuffer = new StringBuffer();
 		ArrayList<Object> argList = new ArrayList<Object>();
@@ -27,7 +26,7 @@ public class UserExcelServeice extends BaseService
 		}
 		else
 		{
-			sqlBuffer.append(" order by user_id desc ");
+			sqlBuffer.append(" order by id desc ");
 		}
 		return getJdbcTemplate().query(sqlBuffer.toString(), argList.toArray());
 	}

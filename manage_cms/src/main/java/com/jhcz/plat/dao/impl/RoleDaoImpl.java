@@ -293,7 +293,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao
     public Role findRoleById(int id, String siteNo)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
-        String sql = "select * from T_ROLE where role_id = ?";
+        String sql = "select * from T_ROLE where id = ?";
         argList.add(new Integer(id));
         if (StringHelper.isNotEmpty(siteNo))
         {
@@ -330,7 +330,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao
     @Override
     public List<Object> findRoleBySiteno(String siteno)
     {
-        String sql = "SELECT ROLE_ID,ROLENO,NAME,IS_SYSTEM FROM T_ROLE WHERE SITENO = ? ORDER BY ROLE_ID DESC";
+        String sql = "SELECT ID,ROLENO,NAME,IS_SYSTEM FROM T_ROLE WHERE SITENO = ? ORDER BY ID DESC";
         return getJdbcTemplate().query(sql, new Object[] { siteno });
     }
     
@@ -345,7 +345,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao
             argList.add(siteNo);
             
         }
-        sql += " order by role_id";
+        sql += " order by id";
         
         List<Object> dataList = getJdbcTemplate().query(sql, argList.toArray());
         ArrayList<Object> newDataList = new ArrayList<Object>();
@@ -479,7 +479,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao
         
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
-        sqlBuffer.append("select * from T_USER where user_id in (select user_id from T_ROLE_USER where role_id=? )");
+        sqlBuffer.append("select * from T_USER where id in (select user_id from T_ROLE_USER where role_id=? )");
         argList.add(new Integer(roleId));
         
         if (!StringHelper.isEmpty(keyword))
@@ -489,7 +489,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao
             argList.add("%" + keyword + "%");
         }
         
-        sqlBuffer.append(" order by user_id desc ");
+        sqlBuffer.append(" order by id desc ");
         
         page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
         
@@ -707,7 +707,7 @@ public class RoleDaoImpl extends BaseDao implements RoleDao
     public List<Object> getRoleUser(int roleId, String siteNo)
     {
         List<Object> dataList = getJdbcTemplate().query(
-                "select * from T_USER where user_id in (select user_id from T_ROLE_USER where role_id = ? and siteno = ?)",
+                "select * from T_USER where id in (select user_id from T_ROLE_USER where role_id = ? and siteno = ?)",
                 new Object[] { new Integer(roleId), siteNo });
         ArrayList<Object> newDataList = new ArrayList<Object>();
         
