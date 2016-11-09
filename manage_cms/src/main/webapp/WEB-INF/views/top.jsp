@@ -8,19 +8,6 @@ $(document).ready(function(){
 	$("#loginOut").click(function(){
 		top.location.href = "${ctxPath}/loginAdmin/loginOut.action";
 	});
-	/*$("#leftCatalogBtn").click(function(){
-		var bottomObj = $(window.parent.document).find("[name='bottomFrame']");
-		if(bottomObj.attr("cols") == '0,*')
-		{
-			bottomObj.attr("cols","150,*");
-			$(this).attr("src","${ctxPath }/admin/images/pic05.gif");
-		}
-		else
-		{
-			bottomObj.attr("cols","0,*");
-			$(this).attr("src","${ctxPath }/admin/images/pic06.gif");
-		}
-	});*/
 	
 	$("#sites").change(function(){
 		parent.location.href="login.action?function=changeAccount&siteNo=" + $(this).val();
@@ -33,24 +20,18 @@ $(document).ready(function(){
 });
 </script>
 <!--头部start-->
-<div class="ie6_out">
-  <div class="ie6_in">
-    <div class="header">
+<div class="ie6_out ie6_in header">
       <div class="top1">
-        <div class="website"> <span>当前站点：</span> <span>
+        <span>当前站点：</span> <span>
           <select name="sites" id="sites">
             <c:forEach var="item" items="${data.sites}">
               <option value="${item.siteNo}" ${(item.siteNo eq data.siteNo)?'selected="selected"':''}>${item.name}</option>
             </c:forEach>
           </select>
-          </span> </div>
+          </span>
       </div>
       <div class="top2">
-        <div class="top2box">
-          <div class="oc">
-            <!--<img src="${ctxPath }/admin/images/pic05.gif" id="leftCatalogBtn"/>-->
-            <!--打开的图片<img src="${ctxPath }/admin/images/pic06.gif" />-->
-          </div>
+          <div class="oc"></div>
           <ul class="topnav">
             <c:set var="count" value="0"/>
             <c:forEach items="${data.rootMenus}" var="rootMenu">
@@ -60,22 +41,11 @@ $(document).ready(function(){
               </c:if>
             </c:forEach>
           </ul>
-          <div class="logininfo"> <span>当前登录用户：${data.userName}</span> <span>&nbsp;|&nbsp;
-            <!--<a href="#">帮助</a>&nbsp;|&nbsp;-->
-            <a href="javascript:void(0);" onClick="modiPassword();">修改密码</a>&nbsp;|&nbsp;<a href="javascript:" id="loginOut">退出</a>&nbsp;&nbsp;</span> </div>
-        </div>
+          <div class="logininfo">
+          	<span>当前登录用户：${data.userName}</span>
+          	<span>&nbsp;|&nbsp; <a href="javascript:void(0);" onClick="modiPassword();">修改密码</a>&nbsp;|&nbsp;<a href="javascript:" id="loginOut">退出</a>&nbsp;&nbsp;</span>
+          </div>
       </div>
-      <div class="top3">
-        <div class="tl"></div>
-        <div class="tr">
-          <!--<div class="logininfo">
-        	<span>当前登录用户：admin</span>
-            <span>&nbsp;|&nbsp;<a href="#">修改密码</a>&nbsp;|&nbsp;<a href="#">退出</a>&nbsp;&nbsp;</span>
-            </div>-->
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 <script type="text/javascript">
 <!--

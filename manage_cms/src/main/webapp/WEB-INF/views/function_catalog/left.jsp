@@ -127,7 +127,7 @@
 		menuObj.style.top = y;
 		menuObj.style.left = x;
 		
-		        //设置菜单可见
+		//设置菜单可见
         menuObj.style.visibility = "visible";
         event.returnValue = false;
         event.cancelBubble = true;
