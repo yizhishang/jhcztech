@@ -4,7 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.config.Configuration;
 import com.jhcz.base.util.FileHelper;
@@ -23,7 +24,7 @@ import com.jhcz.plat.system.Application;
 public class QueueThreadProperty
 {
 	
-	private static Logger logger = Logger.getLogger(QueueThreadProperty.class);
+	private static Logger logger = LoggerFactory.getLogger(QueueThreadProperty.class);
 	
 	private static Properties props = null;
 	
@@ -58,7 +59,7 @@ public class QueueThreadProperty
 		}
 		catch (Exception e)
 		{
-			logger.info(e);
+			logger.error(e.getMessage());
 		}
 		finally
 		{
@@ -71,7 +72,7 @@ public class QueueThreadProperty
 				}
 				catch (Exception e)
 				{
-					logger.info(e);
+					logger.error(e.getMessage());
 				}
 			}
 			
@@ -96,7 +97,7 @@ public class QueueThreadProperty
 		}
 		catch (Exception e)
 		{
-			logger.info(e);
+			logger.error(e.getMessage());
 		}
 	}
 }

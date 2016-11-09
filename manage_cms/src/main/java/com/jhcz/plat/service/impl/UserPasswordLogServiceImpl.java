@@ -5,7 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.jhcz.base.jdbc.DataRow;
@@ -21,7 +22,7 @@ import com.jhcz.plat.service.exception.LoginFailedException;
 public class UserPasswordLogServiceImpl extends BaseService implements UserPasswordLogService
 {
     
-    private static Logger logger = Logger.getLogger(UserPasswordLogServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(UserPasswordLogServiceImpl.class);
     
     @Resource
     private UserPasswordLogDao passwordLogDao;

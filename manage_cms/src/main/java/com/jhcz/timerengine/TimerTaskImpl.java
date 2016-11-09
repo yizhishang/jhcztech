@@ -1,11 +1,11 @@
 package com.jhcz.timerengine;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 
 public class TimerTaskImpl extends AbstractTimerTask
 {
-    private static Logger logger = Logger.getLogger(TimerTaskImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(TimerTaskImpl.class);
     //需要执行的任务
     private Task task = null;
 

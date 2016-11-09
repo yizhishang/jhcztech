@@ -21,7 +21,8 @@ import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,7 +61,7 @@ import com.jhcz.plat.web.form.DynaForm;
 public class UserAction extends BaseAction
 {
     
-    private final Logger logger = Logger.getLogger(UserAction.class);
+    private final Logger logger = LoggerFactory.getLogger(UserAction.class);
     
     @Resource
     BranchService branchService;

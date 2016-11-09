@@ -11,7 +11,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -42,7 +42,7 @@ public final class Configure
     
     private static String _default = "";
     
-    private static Logger logger = Logger.getLogger(Configure.class);
+    private static Logger logger = LoggerFactory.getLogger(Configure.class);
     
     private static Configure instance = new Configure();
     

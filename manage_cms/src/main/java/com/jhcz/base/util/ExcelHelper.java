@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -25,6 +24,8 @@ import org.apache.poi.hssf.usermodel.HSSFPictureData;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.jdbc.DataRow;
 
@@ -45,7 +46,7 @@ public class ExcelHelper
     /**
      * log
      */
-    private static Logger logger = Logger.getLogger(ExcelHelper.class);
+    private static Logger logger = LoggerFactory.getLogger(ExcelHelper.class);
     
     /**
      * 描述: 读取Excel

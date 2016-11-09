@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.jhcz.base.config.Configuration;
@@ -29,7 +30,7 @@ import com.jhcz.plat.domain.Article;
 public class ArticleDaoImpl extends BaseDao implements ArticleDao
 {
     
-    private static Logger logger = Logger.getLogger(ArticleDaoImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(ArticleDaoImpl.class);
     
     @Override
     public int addArticle(Article article)
@@ -69,7 +70,7 @@ public class ArticleDaoImpl extends BaseDao implements ArticleDao
             {
                 session.rollbackTrans();
             }
-            logger.error(ex);
+            logger.error(ex.getMessage());
             throw new RuntimeException(ex);
         }
         finally
@@ -100,7 +101,7 @@ public class ArticleDaoImpl extends BaseDao implements ArticleDao
         }
         catch (Exception ex)
         {
-            logger.error(ex);
+            logger.error(ex.getMessage());
         }
     }
     
@@ -122,7 +123,7 @@ public class ArticleDaoImpl extends BaseDao implements ArticleDao
         }
         catch (Exception ex)
         {
-            logger.error(ex);
+            logger.error(ex.getMessage());
         }
     }
     
@@ -204,7 +205,7 @@ public class ArticleDaoImpl extends BaseDao implements ArticleDao
         }
         catch (Exception ex)
         {
-            logger.error(ex);
+            logger.error(ex.getMessage());
             return null;
         }
     }
@@ -404,7 +405,7 @@ public class ArticleDaoImpl extends BaseDao implements ArticleDao
         }
         catch (Exception ex)
         {
-            logger.error(ex);
+            logger.error(ex.getMessage());
             return false;
         }
     }
@@ -432,7 +433,7 @@ public class ArticleDaoImpl extends BaseDao implements ArticleDao
         }
         catch (Exception ex)
         {
-            logger.error(ex);
+            logger.error(ex.getMessage());
             return false;
         }
     }

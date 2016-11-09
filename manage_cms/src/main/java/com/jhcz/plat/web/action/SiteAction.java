@@ -8,7 +8,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +46,7 @@ public class SiteAction extends BaseAction
 	
 	private DynaForm form = new DynaForm();
 	
-    private Logger logger = Logger.getLogger(SiteAction.class);
+    private Logger logger = LoggerFactory.getLogger(SiteAction.class);
 
     @Resource
     CatalogService catalogService;

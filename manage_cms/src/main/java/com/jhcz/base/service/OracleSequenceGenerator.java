@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.jdbc.connection.ConnManager;
 import com.jhcz.base.service.exception.ServiceException;
@@ -15,7 +15,7 @@ import com.jhcz.base.util.StringHelper;
 public class OracleSequenceGenerator
 {
 	
-	static Logger logger = Logger.getLogger(OracleSequenceGenerator.class);
+	static Logger logger = LoggerFactory.getLogger(OracleSequenceGenerator.class);
 	
 	private static final String SEQUENCE_PREFIX = "seq";
 	

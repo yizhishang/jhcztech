@@ -10,16 +10,17 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.jhcz.base.config.Configuration;
-import com.jhcz.plat.system.Application;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.jhcz.base.config.Configuration;
 import com.jhcz.base.jdbc.DataRow;
 import com.jhcz.base.service.ServiceLocator;
 import com.jhcz.base.util.MapHelper;
 import com.jhcz.base.util.ReflectHelper;
 import com.jhcz.base.util.StringHelper;
 import com.jhcz.plat.service.TemplateVarService;
+import com.jhcz.plat.system.Application;
 
 /**
  * 描述:
@@ -33,7 +34,7 @@ import com.jhcz.plat.service.TemplateVarService;
 public final class TemplateParser
 {
 
-    private final Logger logger = Logger.getLogger(TemplateParser.class);
+    private final Logger logger = LoggerFactory.getLogger(TemplateParser.class);
 
 
     /**

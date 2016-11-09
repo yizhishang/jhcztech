@@ -1,6 +1,7 @@
 package com.jhcz.plat.template.publish;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.config.Configuration;
 import com.jhcz.base.service.ServiceLocator;
@@ -24,7 +25,7 @@ import com.jhcz.plat.template.TemplateParser;
 public class TemplatePromulgate extends BasePromulgate
 {
     
-    private static Logger logger = Logger.getLogger(TemplatePromulgate.class);
+    private static Logger logger = LoggerFactory.getLogger(TemplatePromulgate.class);
     
     private static TemplateService templateService = (TemplateService) ServiceLocator.getService(TemplateService.class);
     

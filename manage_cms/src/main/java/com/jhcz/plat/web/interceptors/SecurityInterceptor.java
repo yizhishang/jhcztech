@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -35,7 +36,7 @@ import com.jhcz.plat.system.SysLibrary;
 public class SecurityInterceptor extends HandlerInterceptorAdapter
 {
     
-    private static Logger logger = Logger.getLogger(SecurityInterceptor.class);
+    private static Logger logger = LoggerFactory.getLogger(SecurityInterceptor.class);
     
     /**
     * 判断用户对当前操作的功能是否有权限

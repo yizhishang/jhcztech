@@ -8,9 +8,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.config.Configuration;
 import com.jhcz.base.jdbc.DataRow;
@@ -35,7 +36,7 @@ import com.jhcz.plat.system.Application;
 public class TemplateImpManage
 {
     
-    private static Logger logger = Logger.getLogger(TemplateImpManage.class);
+    private static Logger logger = LoggerFactory.getLogger(TemplateImpManage.class);
 
     String directory = "";
     

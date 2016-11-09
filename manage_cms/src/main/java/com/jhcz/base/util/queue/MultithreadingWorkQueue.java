@@ -2,7 +2,7 @@ package com.jhcz.base.util.queue;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 /**
  * 描述: 多线程工作队列
@@ -45,7 +45,7 @@ public class MultithreadingWorkQueue
 		}
 	}
 	
-    private static Logger logger = Logger.getLogger(MultithreadingWorkQueue.class);
+    private static Logger logger = LoggerFactory.getLogger(MultithreadingWorkQueue.class);
 	
     // 内部工作对象存放队列
     private final LinkedBlockingQueue<Object> queue = new LinkedBlockingQueue<Object>();

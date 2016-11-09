@@ -4,7 +4,8 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.jhcz.base.jdbc.DBPage;
@@ -29,7 +30,7 @@ import com.jhcz.plat.service.exception.LoginFailedException;
 public class LogServiceImpl extends BaseService implements LogService
 {
 	
-	private static Logger logger = Logger.getLogger(LogServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(LogServiceImpl.class);
 	
 	@Resource
 	private LogDao logDao;

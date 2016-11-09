@@ -2,7 +2,8 @@ package com.jhcz.base.util;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 描述:	 Script工具类
@@ -19,7 +20,7 @@ public class ScriptHelper
     /**
      * ScriptHelper 日志
      */
-    private static Logger logger = Logger.getLogger(ScriptHelper.class);
+    private static Logger logger = LoggerFactory.getLogger(ScriptHelper.class);
     
     /**
      * 通过javascript,提示信息

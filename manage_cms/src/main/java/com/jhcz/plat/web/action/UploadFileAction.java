@@ -8,7 +8,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,7 @@ import com.jhcz.plat.domain.Result;
 public class UploadFileAction extends BaseAction
 {
     
-    private final Logger logger = Logger.getLogger(UploadFileAction.class);
+    private final Logger logger = LoggerFactory.getLogger(UploadFileAction.class);
     
     /**
      * 描述: fileUpload  上传文件
@@ -92,7 +93,7 @@ public class UploadFileAction extends BaseAction
                     }
                     catch (IOException e)
                     {
-                        logger.error(e);
+                        logger.error(e.getMessage());
                         addLog("上传图片失败", e.getMessage());
                         result.setErrorNo(-1);
                         result.setErrorInfo(e.getMessage());

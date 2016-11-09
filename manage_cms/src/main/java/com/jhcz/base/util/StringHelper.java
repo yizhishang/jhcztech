@@ -7,7 +7,8 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 描述:	 字串工具类
@@ -24,7 +25,7 @@ public final class StringHelper
     /**
     * StringHelper 日志
     */
-    private static Logger logger = Logger.getLogger(StringHelper.class);
+    private static Logger logger = LoggerFactory.getLogger(StringHelper.class);
     
     /**
     * 空字符串
@@ -206,7 +207,7 @@ public final class StringHelper
         }
         catch (Exception ex)
         {
-            logger.debug(ex);
+            logger.debug(ex.getMessage());
         }
         finally
         {
@@ -313,7 +314,7 @@ public final class StringHelper
             }
             catch (NumberFormatException e)
             {
-                logger.error(e);
+                logger.error(e.getMessage());
                 e.printStackTrace();
             }
             

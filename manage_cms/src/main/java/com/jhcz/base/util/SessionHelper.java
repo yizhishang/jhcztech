@@ -1,10 +1,10 @@
 package com.jhcz.base.util;
 
-import javax.servlet.http.HttpSession;
-
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 描述:	 Session工具类

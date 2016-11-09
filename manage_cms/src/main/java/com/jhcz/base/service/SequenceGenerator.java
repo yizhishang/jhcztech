@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.config.Configuration;
 import com.jhcz.base.jdbc.DatabaseType;
@@ -33,7 +33,7 @@ public class SequenceGenerator
 	
     //	private static final String CONFIG_AUTO_INCREMENT = "system.isAutoIncrement";
 	
-	private static Logger logger = Logger.getLogger(SequenceGenerator.class);
+	private static Logger logger = LoggerFactory.getLogger(SequenceGenerator.class);
 	
 	public static SequenceGenerator getInstance()
 	{

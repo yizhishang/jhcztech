@@ -3,7 +3,8 @@ package com.jhcz.plat.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.jhcz.base.jdbc.DBPage;
@@ -25,7 +26,7 @@ import com.jhcz.plat.service.BranchService;
 public class BranchServiceImpl extends BaseService implements BranchService
 {
     
-    private static Logger logger = Logger.getLogger(BranchServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(BranchServiceImpl.class);
 
     /**
     * 添加营业网点信息
@@ -148,7 +149,7 @@ public class BranchServiceImpl extends BaseService implements BranchService
         }
         catch (Exception ex)
         {
-            logger.error(ex);
+            logger.error(ex.getMessage());
         }
         return rstList;
     }

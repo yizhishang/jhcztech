@@ -1,6 +1,6 @@
 package com.jhcz.plat.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -24,7 +24,7 @@ public class LoggerUtil
 	 */
 	public static <T> void info(Class<T> t, String msg)
 	{
-		Logger.getLogger(t).info(msg);
+		LoggerFactory.getLogger(t).info(msg);
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public class LoggerUtil
 	 */
 	public static <T> void error(Class<T> t, Exception ex)
 	{
-		Logger.getLogger(t).error(null, ex);
+		LoggerFactory.getLogger(t).error(null, ex);
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class LoggerUtil
 	 */
 	public static <T> void error(Class<T> t, String msg)
 	{
-		Logger.getLogger(t).error(msg);
+		LoggerFactory.getLogger(t).error(msg);
 	}
 	
 }

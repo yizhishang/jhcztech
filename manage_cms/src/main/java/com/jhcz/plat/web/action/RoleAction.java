@@ -26,7 +26,8 @@ import jxl.write.WritableWorkbook;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -67,7 +68,7 @@ import com.jhcz.plat.web.form.DynaForm;
 public class RoleAction extends BaseAction
 {
     
-    private static Logger logger = Logger.getLogger(RoleAction.class);
+    private static Logger logger = LoggerFactory.getLogger(RoleAction.class);
     
     @Resource
     CatalogService catalogService;

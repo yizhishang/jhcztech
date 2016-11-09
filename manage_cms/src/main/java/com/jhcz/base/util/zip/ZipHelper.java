@@ -15,7 +15,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 
 import com.jhcz.base.util.DateHelper;
 import com.jhcz.base.util.StringHelper;
@@ -32,7 +32,7 @@ import com.jhcz.base.util.StringHelper;
 public class ZipHelper
 {
     
-    private static Logger logger = Logger.getLogger(ZipHelper.class);
+    private static Logger logger = LoggerFactory.getLogger(ZipHelper.class);
     
     /**
      * 递归压缩目录和文件
