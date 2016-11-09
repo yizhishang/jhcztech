@@ -39,7 +39,7 @@
                   </tr>
                 </table>
                 </div>
-                <div class="databox2" style="height: 400px">
+                <div class="databox2" style="height: 410px;">
                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
                 <c:forEach var="item" items="${data.page.data}">
 		              <tr>
