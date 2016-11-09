@@ -434,9 +434,9 @@ public class LeftAction extends BaseAction
                 {
                     src = "showChild.action?parentNo=" + menuCatalog.getId();
                 }
-                
-                String url = request.getContextPath() + menuCatalog.getLinkUrl();
-                if (StringHelper.isEmpty(url) || url.startsWith("#"))
+                String linkUrl = menuCatalog.getLinkUrl();
+                String url = request.getContextPath() + linkUrl;
+                if (StringHelper.isEmpty(linkUrl) || linkUrl.startsWith("#"))
                 {
                     url = "javascript:void(0);";
                 }
