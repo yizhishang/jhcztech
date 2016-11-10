@@ -744,6 +744,6 @@ public class RoleDaoImpl extends BaseDao implements RoleDao
     {
         DataRow dataRow = new DataRow();
         dataRow.putAll(role.toMap());
-        getJdbcTemplate().update("T_ROLE", dataRow, "role_id", new Integer(role.getId()));
+        getJdbcTemplate().update("T_ROLE", dataRow, "id", new Integer(role.getId()));
     }
 }

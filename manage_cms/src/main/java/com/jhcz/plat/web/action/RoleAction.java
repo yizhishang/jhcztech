@@ -336,11 +336,7 @@ public class RoleAction extends BaseAction
     @RequestMapping("/doEditArticleRoleRight.action")
     public ModelAndView doEditArticleRoleRight(HttpServletRequest request)
     {
-        int roleId = RequestHelper.getInt(request, "roleId");
-        if (roleId == 0)
-        {
-            return null;
-        }
+//        int roleId = RequestHelper.getInt(request, "roleId");
         
         //          RoleService service = (RoleService) getService(RoleService.class);
         //          //查找角色信息
@@ -367,11 +363,11 @@ public class RoleAction extends BaseAction
     @RequestMapping("/doEditRoleRight.action")
     public ModelAndView doEditRoleRight(HttpServletRequest request)
     {
-        int roleId = RequestHelper.getInt(request, "roleId");
-        if (roleId == 0)
-        {
-            return null;
-        }
+//        int roleId = RequestHelper.getInt(request, "roleId");
+//        if (roleId == 0)
+//        {
+//            return null;
+//        }
         //			
         //			//查找角色信息
         //			Role role = service.findRoleById(roleId, "");
@@ -395,10 +391,10 @@ public class RoleAction extends BaseAction
     public ModelAndView doEditSiteRoleRight(HttpServletRequest request)
     {
         int roleId = RequestHelper.getInt(request, "roleId");
-        if (roleId == 0)
-        {
-            return mv;
-        }
+//        if (roleId == 0)
+//        {
+//            return mv;
+//        }
         
         //查找角色信息
         Role role = roleService.findRoleById(roleId, "");
@@ -692,8 +688,8 @@ public class RoleAction extends BaseAction
         buffer.append("<?xml version=\"1.0\" encoding=\"GBK\"?>\n");
         buffer.append("<tree>\n");
         
-        //		String siteno = getLoginSiteNo();
-        List<Object> roles = roleService.findRoleBySiteNo("");
+        String siteno = getLoginSiteNo();
+        List<Object> roles = roleService.findRoleBySiteNo(siteno);
         for (Iterator<Object> iter = roles.iterator(); iter.hasNext();)
         {
             Role role = (Role) iter.next();

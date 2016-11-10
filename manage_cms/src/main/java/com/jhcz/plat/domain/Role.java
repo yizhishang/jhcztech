@@ -16,12 +16,12 @@ public class Role extends DynaModel
 	
 	public int getId()
 	{
-		return getInt("role_id");
+		return getInt("id");
 	}
 	
 	public void setId(int id)
 	{
-		set("role_id", id);
+		set("id", id);
 	}
 	
 	public String getRoleNo()
