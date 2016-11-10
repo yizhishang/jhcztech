@@ -90,7 +90,7 @@ function exportFunction(functionId){
                 <div>
                   <div style="width:980px;">
                   	<c:forEach var="colitem" items="${data.searchcols}">
-                    <span style="float:left;width:186px;display:block;text-align:right;"><jhcz:dynsearchinput colname="${colitem.name_en }" param="${param }" colitem="${colitem }"/></span>
+                    <span style="float:left;width:186px;display:block;text-align:right;"><yizhishang:dynsearchinput colname="${colitem.name_en }" param="${param }" colitem="${colitem }"/></span>
                     </c:forEach>
 	                  
                   </div>
@@ -112,13 +112,13 @@ function exportFunction(functionId){
                   </tr>
                 <c:forEach var="item" items="${data.page.data}">
 		              <tr>
-	                    <td><input type="checkbox" name="pkcol" id="check_<jhcz:printvalue colname='${data.tableinfo.pk_column }' item='${item }' colitem='${colitem }' is_pk='Y'/>" value="<jhcz:printvalue colname='${data.tableinfo.pk_column }' item='${item }' colitem='${colitem }' is_pk='Y'/>" onClick="setCheck(this)"/></td>
+	                    <td><input type="checkbox" name="pkcol" id="check_<yizhishang:printvalue colname='${data.tableinfo.pk_column }' item='${item }' colitem='${colitem }' is_pk='Y'/>" value="<yizhishang:printvalue colname='${data.tableinfo.pk_column }' item='${item }' colitem='${colitem }' is_pk='Y'/>" onClick="setCheck(this)"/></td>
 	                    <c:forEach var="colitem" items="${data.cols}">
-	                    <td style="text-align:${colitem.align_in_list }">&nbsp;<jhcz:printvalue colname="${colitem.name_en }" item="${item }" colitem="${colitem }"/></td>
+	                    <td style="text-align:${colitem.align_in_list }">&nbsp;<yizhishang:printvalue colname="${colitem.name_en }" item="${item }" colitem="${colitem }"/></td>
 	                    </c:forEach>
 	                    <td>&nbsp;
 	                    	<c:if test="${data.tableinfo.can_update eq 'Y'}">
-			                <a href="javascript:editFunction('edit','<jhcz:printvalue colname='${data.tableinfo.pk_column }' item='${item }' is_pk='Y' />');">编辑</a>
+			                <a href="javascript:editFunction('edit','<yizhishang:printvalue colname='${data.tableinfo.pk_column }' item='${item }' is_pk='Y' />');">编辑</a>
 			                </c:if>
 		              </tr>
        			 </c:forEach>

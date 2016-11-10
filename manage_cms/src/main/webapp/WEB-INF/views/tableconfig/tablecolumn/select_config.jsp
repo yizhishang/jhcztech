@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>jhczCMS后台管理系统</title>
+    <title>yizhishangCMS后台管理系统</title>
     <%@ include file="/admin/common/meta.jsp" %>
     <link href="<%=request.getContextPath()%>/admin/styles/cms.css" rel="stylesheet" type="text/css" />
     <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/ajax.js"></script>

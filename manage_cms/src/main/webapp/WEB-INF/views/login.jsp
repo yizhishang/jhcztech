@@ -1,6 +1,5 @@
-﻿<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/admin/common/taglibs.jsp" %>
-
 <!DOCTYPE html>
 <html >
 <head>

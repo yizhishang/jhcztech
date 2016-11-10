@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
-<%@ page import="com.jhcz.plat.*"%>
-<%@ page import="com.jhcz.plat.Constants" %> 
+<%@ page import="com.yizhishang.plat.*"%>
+<%@ page import="com.yizhishang.plat.Constants" %> 
 <%@ include file="/admin/common/header.jsp" %>
 <body>
 <div class="c_ie6_out">

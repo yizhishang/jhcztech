@@ -3,14 +3,14 @@ package webpart;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.jhcz.base.jdbc.DataRow;
-import com.jhcz.base.service.ServiceLocator;
-import com.jhcz.base.util.MapHelper;
-import com.jhcz.base.util.StringHelper;
-import com.jhcz.plat.domain.Article;
-import com.jhcz.plat.service.ArticleService;
-import com.jhcz.plat.template.Context;
-import com.jhcz.plat.template.FMWebpartParser;
+import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.service.ServiceLocator;
+import com.yizhishang.base.util.MapHelper;
+import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.plat.domain.Article;
+import com.yizhishang.plat.service.ArticleService;
+import com.yizhishang.plat.template.Context;
+import com.yizhishang.plat.template.FMWebpartParser;
 
 /**
  * 描述: ArticleContentWebpart.java

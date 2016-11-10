@@ -4,16 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.jhcz.base.jdbc.DataRow;
-import com.jhcz.base.service.ServiceLocator;
-import com.jhcz.base.util.MapHelper;
-import com.jhcz.base.util.StringHelper;
-import com.jhcz.plat.domain.Catalog;
-import com.jhcz.plat.service.ArticleService;
-import com.jhcz.plat.service.CatalogService;
-import com.jhcz.plat.system.SysLibrary;
-import com.jhcz.plat.template.Context;
-import com.jhcz.plat.template.FMWebpartParser;
+import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.service.ServiceLocator;
+import com.yizhishang.base.util.MapHelper;
+import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.plat.domain.Catalog;
+import com.yizhishang.plat.service.ArticleService;
+import com.yizhishang.plat.service.CatalogService;
+import com.yizhishang.plat.system.SysLibrary;
+import com.yizhishang.plat.template.Context;
+import com.yizhishang.plat.template.FMWebpartParser;
 
 /**
  * 描述: 获取一级子栏目列表信息

@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.jhcz.base.util.MapHelper;
-import com.jhcz.business.other.service.AdManageService;
-import com.jhcz.plat.template.Context;
-import com.jhcz.plat.template.FMWebpartParser;
+import com.yizhishang.base.util.MapHelper;
+import com.yizhishang.business.other.service.AdManageService;
+import com.yizhishang.plat.template.Context;
+import com.yizhishang.plat.template.FMWebpartParser;
 
 /**
  * 描述: 广告管理

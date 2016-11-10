@@ -1,14 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%>
 <%@ include file="/admin/common/taglibs.jsp" %>
 <%@ include file="/admin/common/meta.jsp" %>
-<jsp:directive.page import="com.jhcz.base.util.RequestHelper" />
-<jsp:directive.page import="com.jhcz.base.util.ScriptHelper"/>
-<jsp:directive.page import="com.jhcz.base.util.StringHelper"/>
-<jsp:directive.page import="com.jhcz.plat.service.CatalogService" />
-<jsp:directive.page import="com.jhcz.plat.service.impl.CatalogServiceImpl" />
-<jsp:directive.page import="com.jhcz.plat.domain.Catalog" />
+<jsp:directive.page import="com.yizhishang.base.util.RequestHelper" />
+<jsp:directive.page import="com.yizhishang.base.util.ScriptHelper"/>
+<jsp:directive.page import="com.yizhishang.base.util.StringHelper"/>
+<jsp:directive.page import="com.yizhishang.plat.service.CatalogService" />
+<jsp:directive.page import="com.yizhishang.plat.service.impl.CatalogServiceImpl" />
+<jsp:directive.page import="com.yizhishang.plat.domain.Catalog" />
 <jsp:directive.page import="java.util.LinkedList"/>
-<jsp:directive.page import="com.jhcz.base.jdbc.DataRow"/>
+<jsp:directive.page import="com.yizhishang.base.jdbc.DataRow"/>
 <%
 	int catalogId = RequestHelper.getInt(request, "catalogId");
 	if (catalogId > 0)

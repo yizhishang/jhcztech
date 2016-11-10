@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
-<%@ page import="com.jhcz.base.util.RequestHelper"%>
+<%@ page import="com.yizhishang.base.util.RequestHelper"%>
 <%@ include file="/admin/common/header.jsp" %>
 <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/validator.js"></script>
 <style>
@@ -70,7 +70,7 @@ function changeRadioTxt(txt,txtid){
 					</c:if>
 					   <td class="label">${colitem.name_ch }： </td>
 	                   <td>
-	                   	<jhcz:dyninput curuser="${data.uid}" id="${colitem.name_en }" name="form.${colitem.name_en }" item="${data.bean}" colitem="${colitem}" colname="${colitem.name_en }"/>
+	                   	<yizhishang:dyninput curuser="${data.uid}" id="${colitem.name_en }" name="form.${colitem.name_en }" item="${data.bean}" colitem="${colitem}" colname="${colitem.name_en }"/>
 						<c:if test="${colitem.be_null=='N'}"><font color="#ff0000">*</font></c:if>
 	                   </td>
 	                <c:choose>
@@ -96,7 +96,7 @@ function changeRadioTxt(txt,txtid){
 					<tr>
 						<td class="label">${colitem.name_ch }： </td>
 						<td colspan="3">
-							<jhcz:dyninput curuser="${data.uid}" id="${colitem.name_en }" name="form.${colitem.name_en }" item="${data.bean}" colitem="${colitem}" colname="${colitem.name_en }"/>
+							<yizhishang:dyninput curuser="${data.uid}" id="${colitem.name_en }" name="form.${colitem.name_en }" item="${data.bean}" colitem="${colitem}" colname="${colitem.name_en }"/>
 							<c:if test="${colitem.be_null=='N'}"><font color="#ff0000">*</font></c:if>
 						</td>
 					</tr>

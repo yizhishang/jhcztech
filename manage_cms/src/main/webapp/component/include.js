@@ -1,6 +1,6 @@
 /**
  * 描述:  引入所需要的js包
- * 作者: JHCZ-蒋斌
+ * 作者: yizhishang-蒋斌
  * 时间：2016/3/14
  */
 if(!window['ui_relative_path']){

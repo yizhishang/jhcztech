@@ -1,6 +1,6 @@
 /**
  * 描述:  把每个页面的底部 写入
- * 作者: JHCZ-蒋斌
+ * 作者: yizhishang-蒋斌
  * 时间：2016/3/16
  */
 var footer_content='';
@@ -93,7 +93,7 @@ footer_content+='<div class="footer main">'+
 '  </div>'+
 '  <div class="clearfix"></div>'+
 '  <div class="copyright">'+
-'    <span>版权所有@金恒创智&nbsp;&nbsp;|&nbsp;&nbsp;Copyright 2016 www.jhcztech.com,All Rights Reserved</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   '+
+'    <span>版权所有@金恒创智&nbsp;&nbsp;|&nbsp;&nbsp;Copyright 2016 www.yizhishangtech.com,All Rights Reserved</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   '+
 '  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+
 '    <img src="/component/app/images/u130.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       '+
 '    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+

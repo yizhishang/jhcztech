@@ -3,19 +3,19 @@
 	2.	系统功能管理
 			-编辑功能
 	3.	添加日志方面组件
-			com.jhcz.plat.web.aspect.BaseActionInterceptor
+			com.yizhishang.plat.web.aspect.BaseActionInterceptor
 	4.	系统配置
 2015-10-21
 	5. 	添加数据字典配置
 2015-10-21
 	6.	添加角色
-		a. 类com.jhcz.plat.web.action.RoleAction.java
+		a. 类com.yizhishang.plat.web.action.RoleAction.java
 		b. jxl1.0.jar,json-lib-2.2.3-jdk15.jar
 2015-10-30
 	7.	添加用户组
-		a. 类com.jhcz.plat.web.action.GroupAction.java
+		a. 类com.yizhishang.plat.web.action.GroupAction.java
 	8.	添加用户
-		a. 类com.jhcz.plat.web.action.UserAction.java
+		a. 类com.yizhishang.plat.web.action.UserAction.java
 2016-01-09
 	9.	广告业务管理
 		question1：上传文件FireFox正常，IE浏览器返回json自动下载

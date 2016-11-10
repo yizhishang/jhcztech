@@ -3,7 +3,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.jhcz.base.jdbc.JdbcTemplate;
+import com.yizhishang.base.jdbc.JdbcTemplate;
 
 
 /**

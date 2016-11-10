@@ -65,7 +65,7 @@
     <logger name="dao" level="DEBUG"/>
 
     <!-- additivity true 信息向上级传递，logger本身打印一次 -->
-    <logger name="com.jhcz" level="INFO" additivity="true">
+    <logger name="com.yizhishang" level="INFO" additivity="true">
         <appender-ref ref="INFO_FILE"/>
     </logger>
 

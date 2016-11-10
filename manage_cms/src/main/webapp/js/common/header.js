@@ -1,6 +1,6 @@
 /**
  * 描述:
- * 作者: JHCZ-宋秋明
+ * 作者: yizhishang-宋秋明
  * 时间：2016/03/16
  */
 var paramValue=new Array(5);

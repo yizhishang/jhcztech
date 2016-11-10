@@ -6,37 +6,37 @@
     version="2.0">  
        
     <description>StringHelper</description> 
-    <display-name>jhczTag</display-name> 
+    <display-name>yizhishangTag</display-name> 
     <tlib-version>1.0</tlib-version>  
     <short-name>tktl</short-name>  
-    <uri>http://www.jhcztech.com/</uri>
+    <uri>http://www.yizhishangtech.com/</uri>
 
   
     <function>  
         <description>StringHelper</description>  
         <name>truncate</name>  
-        <function-class>com.jhcz.base.util.StringHelper</function-class>  
+        <function-class>com.yizhishang.base.util.StringHelper</function-class>  
         <function-signature>java.lang.String truncate(java.lang.String, int, boolean)</function-signature>       
     </function>
     
     <function>  
         <description>StringHelper</description>  
         <name>currencyShortFor</name>  
-        <function-class>com.jhcz.base.util.StringHelper</function-class>  
+        <function-class>com.yizhishang.base.util.StringHelper</function-class>  
         <function-signature>java.lang.String currencyShortFor(java.lang.String)</function-signature>       
     </function>
     
      <function>  
         <description>StringHelper</description>  
         <name>formatDate</name>  
-        <function-class>com.jhcz.base.util.StringHelper</function-class>  
+        <function-class>com.yizhishang.base.util.StringHelper</function-class>  
         <function-signature>java.lang.String formatDate(java.lang.String)</function-signature>       
     </function>
     
      <function>  
         <description>StringHelper</description>  
         <name>substring</name>  
-        <function-class>com.jhcz.base.util.StringHelper</function-class>  
+        <function-class>com.yizhishang.base.util.StringHelper</function-class>  
         <function-signature>java.lang.String substring(java.lang.String,int)</function-signature>       
     </function>
       

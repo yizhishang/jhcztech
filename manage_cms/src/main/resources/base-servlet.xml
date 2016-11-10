@@ -15,7 +15,7 @@
 
 	<!-- 启动spring自动扫描 -->
 	<aop:aspectj-autoproxy />
-	<context:component-scan base-package="com.jhcz"/>
+	<context:component-scan base-package="com.yizhishang"/>
 
 	<!-- 支持spring3.0新的mvc注解 -->
 	<!-- 
@@ -53,7 +53,7 @@
 	 -->
 	
 	<!--定义定时任务类--> 
-	<bean id="taskManager" class="com.jhcz.timerengine.TaskManager"/>
+	<bean id="taskManager" class="com.yizhishang.timerengine.TaskManager"/>
 	<bean id="scheduledTimerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask"> 
 	    <!--这里定义定时任务的对象的位置--> 
 	    <property name="timerTask">
@@ -69,7 +69,7 @@
 	    </property> 
 	</bean>
 	
-	<bean id="publishEngine" class="com.jhcz.plat.template.publish.PublishEngine"/>
+	<bean id="publishEngine" class="com.yizhishang.plat.template.publish.PublishEngine"/>
 	<bean id="publishTimerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask"> 
 	    <!--这里定义定时任务的对象的位置--> 
 	    <property name="timerTask">
@@ -101,8 +101,8 @@
         p:uploadTempDir="fileUpload/temp" />
     
     <mvc:interceptors>
-    	<!-- <bean class="com.jhcz.plat.web.interceptors.SessionInterceptor" /> -->
-    	<bean class="com.jhcz.plat.web.interceptors.SecurityInterceptor" />
+    	<!-- <bean class="com.yizhishang.plat.web.interceptors.SessionInterceptor" /> -->
+    	<bean class="com.yizhishang.plat.web.interceptors.SecurityInterceptor" />
     </mvc:interceptors>
         
 </beans>

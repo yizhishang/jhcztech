@@ -14,7 +14,7 @@
     <category name="publish" description="发布引擎相关配置">
         <item name="showArticleUrl" value="/common/showArticle.jsp" description="用于显示发布文章的URL" />
         <item name="checkInterval" value="5" description="发布引擎的检查间隔,缺省值为5秒" />
-        <item name="viewPath" value="com/jhcz/plat/template/webpart/" descript="获得部件的缺省视图，该文件应该和类文件放在同样的目录"/>
+        <item name="viewPath" value="com/yizhishang/plat/template/webpart/" descript="获得部件的缺省视图，该文件应该和类文件放在同样的目录"/>
     </category>
     <category name="publishPlan" description="发布计划相关配置">
         <item name="checkInterval" value="60" description="发布计划的检查间隔,缺省值为60秒" />
@@ -24,7 +24,7 @@
 	</category>
 	<category name="search" comment="查询引擎配置">
        <item name="isuse" value="false" comment="是否启用"/>
-       <item name="indexpath" value="E:/jhcz/index" comment="索引文件存在的路径，该值和索引程序的相应值相同"/>
+       <item name="indexpath" value="E:/yizhishang/index" comment="索引文件存在的路径，该值和索引程序的相应值相同"/>
        <item name="searchpath" value="/admin/search/file" ispath="true" comment="需要索引的文件的列表的目录，该值和索引程序的相应值相同"/>
        <item name="maxrows" value="10" comment="一页中包含的最大记录数"/>
        <item name="fontcolor" value="CC0033" comment="加亮的字体的颜色" />

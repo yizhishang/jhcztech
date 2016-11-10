@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
-<%@page import="com.jhcz.base.util.RequestHelper"%>
-<%@page import="com.jhcz.base.util.StringHelper"%>
+<%@page import="com.yizhishang.base.util.RequestHelper"%>
+<%@page import="com.yizhishang.base.util.StringHelper"%>
 <%@ include file="/admin/common/header.jsp" %>
 <%
 	String siteNo = RequestHelper.getString(request,"siteNo");

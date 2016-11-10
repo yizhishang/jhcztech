@@ -1,16 +1,16 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
-<%@ page import="com.jhcz.plat.system.*" %>
-<%@ page import="com.jhcz.plat.system.SysLibrary" %>
+<%@ page import="com.yizhishang.plat.system.*" %>
+<%@ page import="com.yizhishang.plat.system.SysLibrary" %>
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="java.io.File" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="com.jhcz.base.util.*" %>
-<%@ page import="com.jhcz.base.jdbc.connection.ConnManager" %>
+<%@ page import="com.yizhishang.base.util.*" %>
+<%@ page import="com.yizhishang.base.jdbc.connection.ConnManager" %>
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.io.FileInputStream" %>
-<%@ page import="com.jhcz.base.config.*" %>
+<%@ page import="com.yizhishang.base.config.*" %>
 <%
 	System.out.println("8888888888");
     if (RequestHelper.isPostBack(request))

@@ -1,8 +1,8 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.jhcz.base.jdbc.DataRow"%>
+<%@page import="com.yizhishang.base.jdbc.DataRow"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-<%@page import="com.jhcz.base.jdbc.JdbcTemplate"%>
+<%@page import="com.yizhishang.base.jdbc.JdbcTemplate"%>
 <%@ page language="java" pageEncoding="UTF-8"
 	contentType="text/html;charset=UTF-8"%>
 <%

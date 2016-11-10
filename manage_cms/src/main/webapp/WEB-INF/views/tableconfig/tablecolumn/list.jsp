@@ -1,10 +1,10 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/taglibs.jsp" %>
-<%@ taglib uri="/WEB-INF/tlds/jhcz.tld" prefix="jhcz" %>
+<%@ taglib uri="/WEB-INF/tlds/yizhishang.tld" prefix="yizhishang" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>jhczCMS后台管理系统</title>
+    <title>yizhishangCMS后台管理系统</title>
     <%@ include file="/admin/common/meta.jsp" %>
     <link href="<%=request.getContextPath()%>/admin/styles/cms.css" rel="stylesheet" type="text/css" />
     <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/ajax.js"></script>
@@ -242,7 +242,7 @@ input .list_input{border-left:0px;border-right:0px;border-top:0px;};
             	<div class="content">
               		<div>输入框类型:</div>
               		<div>
-              			<jhcz:constselect id="temp_input_type" style="width:100px;" prefix="input_type_" value=""/>
+              			<yizhishang:constselect id="temp_input_type" style="width:100px;" prefix="input_type_" value=""/>
               		</div>
               	</div>
               	<div class="content">
@@ -260,7 +260,7 @@ input .list_input{border-left:0px;border-right:0px;border-top:0px;};
               	</div>
               	<div class="content">
               		<div>特殊格式类型</div>
-              		<div><jhcz:constselect id="temp_special_format" style="width:100px;" prefix="special_format_" value=""/></div>
+              		<div><yizhishang:constselect id="temp_special_format" style="width:100px;" prefix="special_format_" value=""/></div>
               	</div>
               	<div class="clearfix"></div>
               	<div class="content">
@@ -321,7 +321,7 @@ input .list_input{border-left:0px;border-right:0px;border-top:0px;};
               	<div class="content">
               		<div>系统取值类型:</div>
               		<div>
-              			<jhcz:constselect id="temp_sys_type" style="width:100px;" prefix="sys_col_" value=""/>
+              			<yizhishang:constselect id="temp_sys_type" style="width:100px;" prefix="sys_col_" value=""/>
               		</div>
               	</div>
               	<div class="content">

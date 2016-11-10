@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>jhczCMS后台管理系统</title>
+    <title>忆之殇CMS后台管理系统</title>
     <meta http-equiv="Cache-Control" content="no-store" />
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Expires" content="0" />

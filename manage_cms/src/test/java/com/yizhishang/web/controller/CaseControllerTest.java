@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
-import com.jhcz.base.domain.Config;
-import com.jhcz.base.service.ConfigService;
+import com.yizhishang.base.domain.Config;
+import com.yizhishang.base.service.ConfigService;
 
 public class CaseControllerTest
 {

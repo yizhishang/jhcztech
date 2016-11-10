@@ -1,17 +1,17 @@
 <%@ page import="com.oreilly.servlet.MultipartRequest" %>
-<%@ page import="com.jhcz.base.util.ScriptHelper" %>
-<%@ page import="com.jhcz.plat.system.SysLibrary" %>
-<%@ page import="com.jhcz.base.util.FileHelper" %>
-<%@ page import="com.jhcz.base.config.SysConfig" %>
-<%@ page import="com.jhcz.base.util.StringHelper" %>
+<%@ page import="com.yizhishang.base.util.ScriptHelper" %>
+<%@ page import="com.yizhishang.plat.system.SysLibrary" %>
+<%@ page import="com.yizhishang.base.util.FileHelper" %>
+<%@ page import="com.yizhishang.base.config.SysConfig" %>
+<%@ page import="com.yizhishang.base.util.StringHelper" %>
 <%@ page import="java.io.File" %>
-<%@ page import="com.jhcz.base.util.DateHelper" %>
+<%@ page import="com.yizhishang.base.util.DateHelper" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="com.jhcz.base.jdbc.session.SessionFactory" %>
-<%@ page import="com.jhcz.base.jdbc.session.Session" %>
+<%@ page import="com.yizhishang.base.jdbc.session.SessionFactory" %>
+<%@ page import="com.yizhishang.base.jdbc.session.Session" %>
 <%@ page import="java.io.FileInputStream" %>
 <%@ page import="java.sql.Connection" %>
-<%@ page import="com.jhcz.base.jdbc.connection.ConnManager" %>
+<%@ page import="com.yizhishang.base.jdbc.connection.ConnManager" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%

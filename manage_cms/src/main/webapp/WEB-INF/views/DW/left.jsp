@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/header.jsp" %>
-<%@ page import="com.jhcz.base.util.RequestHelper"%>
+<%@ page import="com.yizhishang.base.util.RequestHelper"%>
 <link type="text/css" rel="stylesheet" href="xtree/css/xtree.css">
 <script type="text/javascript" src="xtree/js/xtree.js"></script>
 <script type="text/javascript" src="xtree/js/xloadtree.js"></script>

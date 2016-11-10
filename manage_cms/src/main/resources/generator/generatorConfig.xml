@@ -24,7 +24,7 @@
 		</javaTypeResolver>
 
 		<!-- 生成实体类地址 -->
-		<javaModelGenerator targetPackage="com.jhcz.base.domain" targetProject=".">
+		<javaModelGenerator targetPackage="com.yizhishang.base.domain" targetProject=".">
 			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
 			<property name="enableSubPackages" value="false" />
 			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->
@@ -38,7 +38,7 @@
 		</sqlMapGenerator>
 
 		<!-- 生成mapxml对应client，也就是接口dao -->
-		<javaClientGenerator targetPackage="src.main.java.com.jhcz.cms.dao" targetProject="." type="XMLMAPPER">
+		<javaClientGenerator targetPackage="src.main.java.com.yizhishang.cms.dao" targetProject="." type="XMLMAPPER">
 			<!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>

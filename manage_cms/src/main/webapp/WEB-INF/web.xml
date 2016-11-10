@@ -20,7 +20,7 @@
 	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
 	</listener>
 	<listener>
-        <listener-class>com.jhcz.plat.web.listener.ApplicationLifecycleListener</listener-class>
+        <listener-class>com.yizhishang.plat.web.listener.ApplicationLifecycleListener</listener-class>
     </listener>
     <!-- listener definition end -->
 

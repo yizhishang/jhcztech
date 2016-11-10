@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
-<%@page import="com.jhcz.base.util.RequestHelper"%>
+<%@page import="com.yizhishang.base.util.RequestHelper"%>
 <%@ include file="/admin/common/header.jsp" %>
 <body>
 <form id="qryparm" name="qryparm" action="editSiteRoleRight.action" method="post">

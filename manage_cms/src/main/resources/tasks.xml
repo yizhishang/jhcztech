@@ -27,21 +27,21 @@
         <task-type>2</task-type>
         <task-name>mailSend</task-name>
         <description>邮件发送任务</description>
-        <task-class>com.jhcz.task.email.MailSendTask</task-class>
+        <task-class>com.yizhishang.task.email.MailSendTask</task-class>
         <task-interval>30000</task-interval>        
     </task>
     <task id="smsSend">
         <task-type>2</task-type>
         <task-name>smsSend</task-name>
         <description>短信发送任务</description>
-        <task-class>com.jhcz.task.sms.SMSSendTask</task-class>
+        <task-class>com.yizhishang.task.sms.SMSSendTask</task-class>
         <task-interval>30000</task-interval>        
     </task>    
     <task id="billSend">
         <task-type>1</task-type>
         <task-name>billSend</task-name>
         <description>对帐单邮件发送任务</description>
-        <task-class>com.jhcz.task.bill.BillTask</task-class>
+        <task-class>com.yizhishang.task.bill.BillTask</task-class>
         <task-interval>00:00</task-interval>        
     </task>
    
@@ -50,7 +50,7 @@
         <task-type>4</task-type>
         <task-name>testTask</task-name>
         <description>定时测试任务</description>
-        <task-class>com.jhcz.test.TestTask</task-class>
+        <task-class>com.yizhishang.test.TestTask</task-class>
         <task-interval>00:00</task-interval>        
     </task>
     --> 

@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%><%@page import="com.jhcz.base.util.RequestHelper"%>
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8"%><%@page import="com.yizhishang.base.util.RequestHelper"%>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" media="screen" href="<%=request.getContextPath()%>/admin/styles/zTreeStyle/zTreeStyle.css"></link>

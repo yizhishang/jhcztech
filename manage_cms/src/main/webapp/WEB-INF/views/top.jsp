@@ -1,4 +1,4 @@
-<%@ page import="com.jhcz.plat.system.SysLibrary" %>
+<%@ page import="com.yizhishang.plat.system.SysLibrary" %>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
 <%@ include file="/admin/common/header.jsp" %>
 <body>

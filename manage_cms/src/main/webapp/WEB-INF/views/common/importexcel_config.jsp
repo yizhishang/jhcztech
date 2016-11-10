@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="GBK" contentType="text/html;charset=GBK" %>
-<%@ page import="com.jhcz.base.util.RequestHelper"%>
+<%@ page import="com.yizhishang.base.util.RequestHelper"%>
 <%@ include file="/admin/common/header.jsp" %>
 <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/validator.js"></script>
 <style>
