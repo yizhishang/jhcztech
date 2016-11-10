@@ -20,6 +20,7 @@ import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.RequestHelper;
 import com.yizhishang.base.util.ScriptHelper;
 import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.base.util.UserHelper;
 import com.yizhishang.plat.domain.ManageCatalog;
 import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.domain.Right_Function;
@@ -469,7 +470,7 @@ public class LeftAction extends BaseAction
     {
         List<Object> list = null;
         //获得登陆用的ID
-        int user_id = getUserId();
+        int user_id = UserHelper.getUserId();
         //查找其相应的信息
         User user = userService.findUserById(user_id);
         //获得其拥有的站点信息

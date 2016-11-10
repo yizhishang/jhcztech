@@ -8,8 +8,8 @@ import com.yizhishang.base.domain.Config;
 import com.yizhishang.base.domain.Right_Url;
 import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.ConfigService;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.ReflectHelper;
+import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
 
 /**
@@ -104,7 +104,7 @@ public class SysConfig
         }
         else
         {
-            ConfigService service = (ConfigService) ServiceLocator.getService(ConfigService.class);
+            ConfigService service = SpringContextHolder.getBean("configService");
             configList = service.getAllSysConfig();
         }
         if (configList != null)
@@ -127,7 +127,7 @@ public class SysConfig
     */
     public static void loadRight()
     {
-        ConfigService service = (ConfigService) ServiceLocator.getService(ConfigService.class);
+    	ConfigService service = SpringContextHolder.getBean("configService");
         rightUrl = (ArrayList<Right_Url>) service.loadRight();
     }
     

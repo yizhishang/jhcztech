@@ -22,10 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.ConvertHelper;
 import com.yizhishang.base.util.DateHelper;
+import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.base.util.UserHelper;
 import com.yizhishang.plat.Constants;
 import com.yizhishang.plat.domain.Log;
 import com.yizhishang.plat.domain.Result;
@@ -126,7 +127,7 @@ public class BaseAction
         String uid = getUID();
         //获得用户所登陆的站点
         String siteNo = getLoginSiteNo();
-        String branchNo = getUserBranch();
+        String branchNo = UserHelper.getUserBranch();
         
         addLog(uid, siteNo, operate, description, branchNo, 0);
     }
@@ -141,14 +142,14 @@ public class BaseAction
         String uid = getUID();
         //获得用户所登陆的站点
         String siteNo = getLoginSiteNo();
-        String branchNo = getUserBranch();
+        String branchNo = UserHelper.getUserBranch();
         
         addLog(uid, siteNo, operate, description, branchNo, catalogId);
     }
     
     public void addLog(String uid, String siteNo, String operate, String description)
     {
-        String branchNo = getUserBranch();
+        String branchNo = UserHelper.getUserBranch();
         addLog(uid, siteNo, operate, description, branchNo, 0);
     }
     
@@ -493,17 +494,6 @@ public class BaseAction
     }
     
     /**
-     * 获得相应的Service实现类
-     * @param interfaceClass
-     * @return
-     */
-    @SuppressWarnings("rawtypes")
-    public Object getService(Class interfaceClass)
-    {
-        return ServiceLocator.getService(interfaceClass);
-    }
-    
-    /**
      * 返回HttpSession对象
      * @return
      */
@@ -521,7 +511,7 @@ public class BaseAction
     public String getSiteName()
     {
         String siteNo = getSiteNo();
-        SiteService service = (SiteService) getService(SiteService.class);
+        SiteService service = (SiteService) SpringContextHolder.getBean("siteService");
         Site site = service.findSiteBySiteNO(siteNo);
         String siteName = site.getName();
         String uId = getUID();
@@ -675,33 +665,6 @@ public class BaseAction
     {
         HttpSession session = getRequest().getSession();
         return (String) session.getAttribute(Constants.ADMIN_UID);
-    }
-    
-    /**
-     * 获得当前后台登录用户的营业部编号
-     * @return
-     */
-    public String getUserBranch()
-    {
-        HttpSession session = getRequest().getSession();
-        return (String) session.getAttribute(Constants.USER_BRANCHNO);
-    }
-    
-    /**
-     * 获得当前后登录用户的userId
-     *
-     * @return
-     */
-    public int getUserId()
-    {
-        HttpSession session = getRequest().getSession();
-        return ((Integer) session.getAttribute(Constants.ADMIN_USER_ID)).intValue();
-    }
-    
-    public String getUserName()
-    {
-        HttpSession session = getRequest().getSession();
-        return ((String) session.getAttribute(Constants.ADMIN_USER_NAME));
     }
     
     /**

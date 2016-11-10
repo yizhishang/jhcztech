@@ -15,9 +15,9 @@ import org.slf4j.LoggerFactory;
 
 import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.base.util.ReflectHelper;
+import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.service.TemplateVarService;
 import com.yizhishang.plat.system.Application;
@@ -160,8 +160,8 @@ public final class TemplateParser
         Map<String, Object> templateVars = new HashMap<String, Object>();
 
         //从数据库中提取模板变量
-        TemplateVarService varService = (TemplateVarService) ServiceLocator.getService(TemplateVarService.class);
-        List<Object> dataList = varService.findAllUsableItem();
+        TemplateVarService templateVarService = (TemplateVarService) SpringContextHolder.getBean("templateVarService");
+        List<Object> dataList = templateVarService.findAllUsableItem();
         if (dataList != null && dataList.size() > 0)
         {
             for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)

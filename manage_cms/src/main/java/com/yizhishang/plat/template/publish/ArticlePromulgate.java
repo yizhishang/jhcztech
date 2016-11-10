@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.FileHelper;
+import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Article;
 import com.yizhishang.plat.domain.Catalog;
@@ -33,11 +33,9 @@ public class ArticlePromulgate extends BasePromulgate
     
     private static Logger logger = LoggerFactory.getLogger(ArticlePromulgate.class);
     
-    private static ArticleService articleService = (ArticleService) ServiceLocator.getService(ArticleService.class);
-    
-    private static CatalogService catalogService = (CatalogService) ServiceLocator.getService(CatalogService.class);
-    
-    private static TemplateService templateService = (TemplateService) ServiceLocator.getService(TemplateService.class);
+    private static ArticleService articleService = (ArticleService) SpringContextHolder.getBean("articleService");
+    private static CatalogService catalogService = (CatalogService) SpringContextHolder.getBean("catalogService");
+    private static TemplateService templateService = (TemplateService) SpringContextHolder.getBean("templateService");
     
     /**
     * 文章的ID

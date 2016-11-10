@@ -1,7 +1,5 @@
 package com.yizhishang.base.dao;
 
-import org.springframework.stereotype.Repository;
-
 import com.yizhishang.base.jdbc.JdbcTemplate;
 import com.yizhishang.base.jdbc.session.Session;
 import com.yizhishang.base.jdbc.session.SessionFactory;
@@ -15,7 +13,6 @@ import com.yizhishang.base.jdbc.session.SessionFactory;
  * 创建日期: 2015-12-11
  * 创建时间: 13:47:25
  */
-@Repository
 public class BaseDao
 {
     

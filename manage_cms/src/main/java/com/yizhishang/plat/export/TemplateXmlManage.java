@@ -17,7 +17,6 @@ import com.yizhishang.base.util.FileHelper;
 import com.yizhishang.base.util.XMLHelper;
 import com.yizhishang.plat.domain.Template;
 import com.yizhishang.plat.service.TemplateService;
-import com.yizhishang.plat.service.impl.TemplateServiceImpl;
 
 /**
  * 描述:  
@@ -51,7 +50,7 @@ public class TemplateXmlManage
     public boolean handleXml(int catalogId)
     {
         
-        TemplateService templateService = new TemplateServiceImpl();
+        TemplateService templateService = new TemplateService();
         List<Template> list = templateService.findTemplateByRoute(catalogId);
         
         if (!publishXML(list))
@@ -73,7 +72,7 @@ public class TemplateXmlManage
     */
     public boolean handleXml(int[] templates)
     {
-        TemplateService templateService = new TemplateServiceImpl();
+        TemplateService templateService = new TemplateService();
 
         ArrayList<Template> list = new ArrayList<Template>();
         for (int i = 0; i < templates.length; i++)

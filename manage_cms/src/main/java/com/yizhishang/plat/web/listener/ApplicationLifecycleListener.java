@@ -1,11 +1,17 @@
 package com.yizhishang.plat.web.listener;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.ServletContextAware;
 
 import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.config.SysConfig;
@@ -24,7 +30,8 @@ import com.yizhishang.timerengine.TaskManager;
  * 创建日期: 2015-12-11
  * 创建时间: 11:13:50
  */
-public class ApplicationLifecycleListener implements ServletContextListener
+@Component
+public class ApplicationLifecycleListener implements ApplicationContextAware, ServletContextAware, InitializingBean, ApplicationListener<ContextRefreshedEvent>
 {
 	
 	private ServletContext context = null;
@@ -32,58 +39,23 @@ public class ApplicationLifecycleListener implements ServletContextListener
 	private static Logger logger = LoggerFactory.getLogger(ApplicationLifecycleListener.class);
 	
     /**
-    * 在系统停止时调用
-    * @param event a ServletContextEvent instance
-    */
-    @Override
-    @SuppressWarnings("static-access")
-    public void contextDestroyed(ServletContextEvent event)
-	{
-        //关闭数据源的连接
-		Configure.getInstance().destroyDataSource();
-		
-		if (logger.isInfoEnabled())
-		{
-			logger.info("Stopping application......");
-		}
-	}
-	
-    /**
-    * 在系统启动时调用
-    *
-    * @param event a ServletContextEvent instance
-    */
-	@Override
-    public void contextInitialized(ServletContextEvent event)
-	{
-		if (logger.isInfoEnabled())
-		{
-			logger.info("Starting application......");
-		}
-		
-		context = event.getServletContext();
-		init();
-	}
-	
-    /**
     * 系统启动时初始化相应的数据
     */
     @SuppressWarnings("static-access")
-    private void init()
+	public void onApplicationEvent(ContextRefreshedEvent evt)
 	{
-		//初始应用程序根目录物理路径
-		Application.setRootPath(context.getRealPath("/"));
-
-		//初始应用程序根目录
-		Application.setContextPath(context.getContextPath());
-		
+		logger.info("4.1 => MyApplicationListener.onApplicationEvent");
+        if (evt.getApplicationContext().getParent() == null) {
+            logger.info("4.2 => MyApplicationListener.onApplicationEvent");
+        }
+        
         //读入数据库配置文件
 		Configure.getInstance();
 		
-        //读入所有配置信息
+	      //读入所有配置信息
 		SysConfig.getInstance().loadConfig();
 		
-        /**
+		/**
          * 是否启动模板发布程序，0：不启动 1：启动
          */
 		if (Configuration.getInt("system.isPublish") == 1)
@@ -100,6 +72,37 @@ public class ApplicationLifecycleListener implements ServletContextListener
             TaskManager tm = new TaskManager();
             tm.run();
 		}
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception
+	{
+		logger.info("3 => StartupListener.afterPropertiesSet");
+	}
+
+	@Override
+	public void setServletContext(ServletContext servletContext)
+	{
 		
+		logger.info("2 => StartupListener.setServletContext");
+		
+		//初始应用程序根目录物理路径
+		context = servletContext;
+		Application.setRootPath(context.getRealPath("/"));
+
+		//初始应用程序根目录
+		Application.setContextPath(context.getContextPath());
+	}
+
+	/**
+	 * 在系统启动时调用
+	 */
+	public void setApplicationContext(ApplicationContext ac) throws BeansException
+	{
+		if (logger.isInfoEnabled())
+		{
+			logger.info("Starting application......");
+		}
+		logger.info("1 => StartupListener.setApplicationContext");
 	}
 }

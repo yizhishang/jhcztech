@@ -21,7 +21,6 @@ import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.base.util.XMLHelper;
 import com.yizhishang.plat.export.TemplateXmlManage;
 import com.yizhishang.plat.service.TemplateService;
-import com.yizhishang.plat.service.impl.TemplateServiceImpl;
 import com.yizhishang.plat.system.Application;
 
 /**
@@ -134,7 +133,7 @@ public class TemplateImpManage
                     List<Object> dataList = loadXmlToList(xmlPathMap);
                     
                     //更新模板
-                    TemplateService templateService = new TemplateServiceImpl();
+                    TemplateService templateService = new TemplateService();
                     templateService.editTemplateByList(dataList);
                     
                 }

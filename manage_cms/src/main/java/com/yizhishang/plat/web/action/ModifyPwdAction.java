@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.SysConfig;
 import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.base.util.UserHelper;
 import com.yizhishang.base.util.security.SecurityHelper;
 import com.yizhishang.plat.Constants;
 import com.yizhishang.plat.domain.Result;
@@ -64,7 +65,7 @@ public class ModifyPwdAction extends BaseAction
         DynaForm form = normalize(request);
         String oldPassword = form.getString("oldPassword");
         String newPassword = form.getString("password");
-        int userId = getUserId();
+        int userId = UserHelper.getUserId();
         
         User user = userService.findUserById(userId);
         String password = user.getPassword();

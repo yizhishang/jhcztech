@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.FileHelper;
 import com.yizhishang.base.util.ReflectHelper;
+import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Catalog;
 import com.yizhishang.plat.domain.Template;
@@ -34,9 +34,9 @@ public class CatalogPromulgate extends BasePromulgate
     
     private static Logger logger = LoggerFactory.getLogger(CatalogPromulgate.class);
     
-    private static CatalogService catalogService = (CatalogService) ServiceLocator.getService(CatalogService.class);
+    private static CatalogService catalogService = (CatalogService) SpringContextHolder.getBean("catalogService");
     
-    private static TemplateService templateService = (TemplateService) ServiceLocator.getService(TemplateService.class);
+    private static TemplateService templateService = (TemplateService) SpringContextHolder.getBean("templateService");
     
     /**
     * 栏目的ID
