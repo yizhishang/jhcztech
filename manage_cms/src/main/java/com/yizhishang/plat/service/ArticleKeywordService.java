@@ -2,7 +2,12 @@ package com.yizhishang.plat.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.yizhishang.base.jdbc.DBPage;
+import com.yizhishang.base.service.BaseService;
+import com.yizhishang.plat.dao.ArticleKeywordDao;
 import com.yizhishang.plat.domain.ArticleKeyword;
 
 /**
@@ -12,19 +17,45 @@ import com.yizhishang.plat.domain.ArticleKeyword;
  * 作者:	 袁永君
  * 版本:	 1.0
  * 创建日期: 2015-11-20
- * 创建时间: 12:11:23
+ * 创建时间: 12:11:47
  */
-public interface ArticleKeywordService
+@Service
+public class ArticleKeywordService extends BaseService
 {
-    public void addArticleKeyword(ArticleKeyword articleKeyword);
+	
+	@Autowired
+	ArticleKeywordDao articleKeywordDao;
+	
+    public void addArticleKeyword(ArticleKeyword articleKeyword)
+    {
+        String id = getSeqValue("T_ARTICLE_KEYWORD");
+        articleKeyword.setId(Integer.parseInt(id));
+        
+        articleKeywordDao.addArticleKeyword(articleKeyword);
+    }
 
-    public void deleteArticleKeyword(int id);
+    public void deleteArticleKeyword(int id)
+    {
+        articleKeywordDao.deleteArticleKeyword(id);
+    }
 
-    public List<ArticleKeyword> findAll();
+    public List<ArticleKeyword> findAll()
+    {
+        return articleKeywordDao.findAll();
+    }
 
-    public ArticleKeyword findById(int id);
+    public ArticleKeyword findById(int id)
+    {
+        return articleKeywordDao.findById(id);
+    }
 
-    public DBPage getPageData(int curPage, int numPerPage, String name);
+    public DBPage getPageData(int curPage, int numPerPage, String name)
+    {
+        return articleKeywordDao.getPageData(curPage, numPerPage, name);
+    }
 
-    public void updateArticlKeyword(ArticleKeyword articleKeyword);
+    public void updateArticlKeyword(ArticleKeyword articleKeyword)
+    {
+        articleKeywordDao.updateArticlKeyword(articleKeyword);
+    }
 }
