@@ -5,7 +5,7 @@
 package com.yizhishang.plat.template.publish;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.service.ServiceLocator;
+import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.plat.service.PublishLogService;
 
 /**
@@ -27,8 +27,8 @@ public class BasePromulgate
      */
     public void addPublishLogInfo(int queueId, String description)
     {
-        PublishLogService logService = (PublishLogService) ServiceLocator.getService(PublishLogService.class);
-        logService.add(queueId, description);
+        PublishLogService publishLogService = (PublishLogService) SpringContextHolder.getBean("publishLogService");
+        publishLogService.add(queueId, description);
     }
 
     /**

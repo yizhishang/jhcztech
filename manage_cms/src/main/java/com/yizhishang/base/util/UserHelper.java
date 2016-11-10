@@ -9,6 +9,22 @@ public class UserHelper
 {
 
 	/**
+     * 获得当前后登录用户的userId
+     * @return
+     */
+    public static int getUserId()
+    {
+        HttpSession session = RequestHelper.getSession();
+        return ((Integer) session.getAttribute(Constants.ADMIN_USER_ID)).intValue();
+    }
+    
+    public static String getUserName()
+    {
+        HttpSession session = RequestHelper.getSession();
+        return ((String) session.getAttribute(Constants.ADMIN_USER_NAME));
+    }
+	
+	/**
      * 获得当前后台登录用户的UID
      * @return
      */
@@ -26,5 +42,15 @@ public class UserHelper
     {
         HttpSession session = RequestHelper.getSession();
         return (String) session.getAttribute(Constants.ADMIN_SITENO);
+    }
+    
+    /**
+     * 获得当前后台登录用户的营业部编号
+     * @return
+     */
+    public static String getUserBranch()
+    {
+        HttpSession session = RequestHelper.getSession();
+        return (String) session.getAttribute(Constants.USER_BRANCHNO);
     }
 }

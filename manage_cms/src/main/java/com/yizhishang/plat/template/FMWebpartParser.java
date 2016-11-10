@@ -2,6 +2,11 @@ package com.yizhishang.plat.template;
 
 import java.util.Map;
 
+import com.yizhishang.base.util.SpringContextHolder;
+import com.yizhishang.plat.service.ArticleService;
+import com.yizhishang.plat.service.CatalogService;
+import com.yizhishang.plat.service.SeoService;
+
 /**
  * 描述:
  * 版权:	 Copyright (c) 2009
@@ -13,7 +18,12 @@ import java.util.Map;
  */
 public abstract class FMWebpartParser implements WebpartParser
 {
-    
+	protected static CatalogService catalogService = (CatalogService) SpringContextHolder.getBean("catalogService");
+	
+	protected static ArticleService articleService = (ArticleService) SpringContextHolder.getBean("articleService");
+	
+	protected static SeoService seoService = (SeoService) SpringContextHolder.getBean("seoService");
+	
     /**
      * 使用FreeMarket解析器解析视图
      * @param model   模型数据

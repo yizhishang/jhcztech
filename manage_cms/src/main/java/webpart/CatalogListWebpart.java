@@ -5,12 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Catalog;
-import com.yizhishang.plat.service.ArticleService;
-import com.yizhishang.plat.service.CatalogService;
 import com.yizhishang.plat.system.SysLibrary;
 import com.yizhishang.plat.template.Context;
 import com.yizhishang.plat.template.FMWebpartParser;
@@ -36,7 +33,6 @@ public class CatalogListWebpart extends FMWebpartParser
         dataMap.put("catalogId", catalogId);
         
         boolean showArticleAsCatalog = MapHelper.getBoolean(webpartProp, "showArticleAsCatalog");//是否像栏目那样展示文章--初使用：产品中心
-        CatalogService catalogService = (CatalogService) ServiceLocator.getService(CatalogService.class);
         boolean showBrotherCatalog = MapHelper.getBoolean(webpartProp, "showBrotherCatalog");//展示同级的兄弟栏目--初使用：产品中心
         int rows = MapHelper.getInt(webpartProp, "rows"); //展示行数
         int sortType = MapHelper.getInt(webpartProp, "sortType");//排序方式
@@ -83,7 +79,6 @@ public class CatalogListWebpart extends FMWebpartParser
             if(showArticleAsCatalog && rows > 0)
             {
             	int catalogId = catalog.getId();
-            	ArticleService articleService = (ArticleService) ServiceLocator.getService(ArticleService.class);
             	List<DataRow> articleList = articleService.findPublishArticleById(catalogId, rows, sortType);
             	catalog.setDataList(articleList);
             }

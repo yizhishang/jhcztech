@@ -9,9 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.SessionHelper;
+import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.base.util.UUID;
 import com.yizhishang.plat.Constants;
@@ -20,8 +20,8 @@ import com.yizhishang.plat.domain.Catalog;
 import com.yizhishang.plat.domain.Template;
 import com.yizhishang.plat.service.ArticleService;
 import com.yizhishang.plat.service.CatalogService;
+import com.yizhishang.plat.service.ManageCatalogService;
 import com.yizhishang.plat.service.TemplateService;
-import com.yizhishang.plat.service.impl.ManageCatalogServiceImpl;
 
 /**
  * 描述:
@@ -34,6 +34,10 @@ import com.yizhishang.plat.service.impl.ManageCatalogServiceImpl;
  */
 public class SysLibrary
 {
+	
+	private static CatalogService catalogService = (CatalogService) SpringContextHolder.getBean("catalogService");
+	private static TemplateService templateService = (TemplateService) SpringContextHolder.getBean("templateService");
+	private static ArticleService articleService = (ArticleService) SpringContextHolder.getBean("articleService");
     
     /**
     * 判断用户是否存在模块权限(只要有一个该模块内的功能权限，就表示存在模块权限)
@@ -63,9 +67,6 @@ public class SysLibrary
     */
     public static String getArticleStorePath(int articleId)
     {
-        ArticleService articleService = (ArticleService) ServiceLocator.getService(ArticleService.class);
-        CatalogService catalogService = (CatalogService) ServiceLocator.getService(CatalogService.class);
-        
         Article article = articleService.findArticleById(articleId);
         if (article != null)
         {
@@ -102,9 +103,6 @@ public class SysLibrary
     */
     public static String getArticleUrlPath(int articleId)
     {
-        ArticleService articleService = (ArticleService) ServiceLocator.getService(ArticleService.class);
-        CatalogService catalogService = (CatalogService) ServiceLocator.getService(CatalogService.class);
-        
         Article article = articleService.findArticleById(articleId);
         if (article != null)
         {
@@ -143,7 +141,6 @@ public class SysLibrary
     */
     public static String getCatalogStorePath(int catalogId, String siteNo)
     {
-        CatalogService catalogService = (CatalogService) ServiceLocator.getService(CatalogService.class);
         Catalog catalog = catalogService.findCatalogById(catalogId);
         if (catalog != null)
         {
@@ -213,7 +210,6 @@ public class SysLibrary
     */
     public static String getCatalogUrlPath(int catalogId, String siteNo)
     {
-        CatalogService catalogService = (CatalogService) ServiceLocator.getService(CatalogService.class);
         Catalog catalog = catalogService.findCatalogById(catalogId);
         if (catalog != null)
         {
@@ -313,7 +309,7 @@ public class SysLibrary
     {
         @SuppressWarnings("unchecked")
         List<Object> list = (List<Object>) SessionHelper.getObject(Constants.USER_MENU_CATALOGS, session);
-        return new ManageCatalogServiceImpl().prepareCatalogTree(list);
+        return new ManageCatalogService().prepareCatalogTree(list);
     }
     
     /**
@@ -324,7 +320,6 @@ public class SysLibrary
     */
     public static String getTemplateStorePath(int templateId)
     {
-        TemplateService templateService = (TemplateService) ServiceLocator.getService(TemplateService.class);
         Template template = templateService.findTemplateById(templateId);
         if (template != null)
         {
@@ -354,7 +349,6 @@ public class SysLibrary
     */
     public static String getTemplateUrlPath(int templateId)
     {
-        TemplateService templateService = (TemplateService) ServiceLocator.getService(TemplateService.class);
         Template template = templateService.findTemplateById(templateId);
         if (template != null)
         {

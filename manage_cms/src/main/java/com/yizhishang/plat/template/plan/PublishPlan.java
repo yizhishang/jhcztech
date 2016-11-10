@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.jdbc.JdbcTemplate;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.DateHelper;
+import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.service.PublishQueueService;
 
@@ -173,7 +173,7 @@ public class PublishPlan extends Thread
         }
         data.set("machine_id", machineId);
         
-        PublishQueueService publishQueueService = (PublishQueueService) ServiceLocator.getService(PublishQueueService.class);
+        PublishQueueService publishQueueService = (PublishQueueService) SpringContextHolder.getBean("publishQueueService");
         publishQueueService.add(data);
         
         JdbcTemplate template = new JdbcTemplate();

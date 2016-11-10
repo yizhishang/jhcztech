@@ -4,12 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Catalog;
-import com.yizhishang.plat.service.CatalogService;
-import com.yizhishang.plat.service.SeoService;
 import com.yizhishang.plat.template.Context;
 import com.yizhishang.plat.template.FMWebpartParser;
 
@@ -35,9 +32,6 @@ public class MetaWebpart extends FMWebpartParser
      */
     private DataRow getCatalogSeo(int catalogId, String siteNo)
     {
-        SeoService seoService = (SeoService) ServiceLocator.getService(SeoService.class);
-        CatalogService catalogService = (CatalogService) ServiceLocator.getService(CatalogService.class);
-        
         DataRow dataRow = seoService.findSeoByCatalogid(catalogId, siteNo);
         if (dataRow != null)
         {

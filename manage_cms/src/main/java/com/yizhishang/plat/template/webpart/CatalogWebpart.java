@@ -3,10 +3,8 @@ package com.yizhishang.plat.template.webpart;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.plat.domain.Catalog;
-import com.yizhishang.plat.service.CatalogService;
 import com.yizhishang.plat.template.Context;
 import com.yizhishang.plat.template.FMWebpartParser;
 
@@ -26,7 +24,6 @@ public class CatalogWebpart extends FMWebpartParser
     public Map<String, Object> getModel(Context context, Map<String, Object> webpartProp)
     {
         int catalogId = MapHelper.getInt(webpartProp, "catalogId");//栏目ID
-        CatalogService catalogService = (CatalogService) ServiceLocator.getService(CatalogService.class);
         Catalog catalog = catalogService.findCatalogById(catalogId);
         
         Map<String, Object> dataMap = new HashMap<String, Object>();

@@ -253,15 +253,13 @@ public class EnumAction extends BaseAction
             DataRow data = new DataRow();
             data.putAll(form);
             
-            EnumTypeService service = (EnumTypeService) getService(EnumTypeService.class);
-            service.updateItem(data);
+            enumTypeService.updateItem(data);
             return MESSAGE;
         }
         else
         {
             String id = getStrParameter("id");
-            EnumTypeService service = (EnumTypeService) getService(EnumTypeService.class);
-            DataRow data = service.findItemByVal(id);
+            DataRow data = enumTypeService.findItemByVal(id);
             if (data != null)
                 form.putAll(data);
             return "edit_type";

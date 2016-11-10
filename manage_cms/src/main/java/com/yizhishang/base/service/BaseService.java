@@ -4,7 +4,6 @@ import java.sql.Connection;
 
 import org.springframework.stereotype.Service;
 
-import com.yizhishang.base.dao.factory.DAOFactory;
 import com.yizhishang.base.jdbc.JdbcTemplate;
 import com.yizhishang.base.jdbc.connection.ConnManager;
 import com.yizhishang.base.jdbc.session.Session;
@@ -41,17 +40,6 @@ public class BaseService
     public Connection getConnection(String id)
     {
         return ConnManager.getConnection(id);
-    }
-    
-    /**
-     * 获得相应的DAO对象
-     * @param interfaceClass
-     * @return
-     */
-    @SuppressWarnings("rawtypes")
-    public Object getDao(Class interfaceClass)
-    {
-        return DAOFactory.getDao(interfaceClass);
     }
     
     /**

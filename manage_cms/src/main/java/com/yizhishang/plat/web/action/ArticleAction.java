@@ -16,6 +16,7 @@ import net.sf.json.JSONObject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -93,6 +94,15 @@ public class ArticleAction extends BaseAction
     
     @Resource
     TemplateService templateService;
+    
+    @Autowired
+    CustomFieldService customFieldService;
+    
+    @Autowired
+    CommentService commentService;
+    
+    @Autowired
+    EnumService enumService;
     
     @Override
     @ResponseBody
@@ -205,8 +215,7 @@ public class ArticleAction extends BaseAction
         if (articleId > 0 && extFieldData != null && extFieldData.size() > 0)
         {
             extFieldData.set("article_id", articleId);
-            CustomFieldService fieldService = (CustomFieldService) getService(CustomFieldService.class);
-            fieldService.addExtendFieldContent(extFieldData);
+            customFieldService.addExtendFieldContent(extFieldData);
         }
         
         //复制文章
@@ -257,7 +266,6 @@ public class ArticleAction extends BaseAction
         form.set("sourceList", sourceList);
         
         //查询数据字典，取行业类别 285206405@qq.com add
-        EnumService enumService = (EnumService) getService(EnumService.class);
         List<Object> enumDataList = enumService.getEnumListByType("INDUSTRY_TYPE");
         form.set("industryList", enumDataList);
         
@@ -387,13 +395,12 @@ public class ArticleAction extends BaseAction
     public String doAjaxComment()
     {
         int articleId = RequestHelper.getInt(getRequest(), "articleId");
-        CommentService service = (CommentService) getService(CommentService.class);
         int curPage = this.getIntParameter("page");
         curPage = (curPage <= 0) ? 1 : curPage;
         
         Review review = new Review();
         review.setElemId(articleId);
-        DBPage page = service.getPageData(curPage, SysConfig.getRowOfPage(), 0, 0, 0, null, 0, null);
+        DBPage page = commentService.getPageData(curPage, SysConfig.getRowOfPage(), 0, 0, 0, null, 0, null);
         dataMap.put("page", page);
         return "read_comment";
     }
@@ -415,15 +422,14 @@ public class ArticleAction extends BaseAction
         if (catalogId > 0)
         {
             //查询当前栏目中是否有自定义字段 285206405@qq.com add by 2010-5-15
-            CustomFieldService fieldService = (CustomFieldService) getService(CustomFieldService.class);
             List<Object> extendFieldList = null;
             if (catalog.getInheritField() == 1)//判断当前栏目是否继承父栏目的文档自定义字段
             {
-                extendFieldList = fieldService.cycFindExtendFieldInfo(catalogId);
+                extendFieldList = customFieldService.cycFindExtendFieldInfo(catalogId);
             }
             else
             {
-                extendFieldList = fieldService.findExtendFieldInfo(catalogId);
+                extendFieldList = customFieldService.findExtendFieldInfo(catalogId);
             }
             
             if (extendFieldList != null && extendFieldList.size() > 0)
@@ -443,7 +449,7 @@ public class ArticleAction extends BaseAction
                 DataRow fieldContentData = null;
                 if (articleId > 0 && StringHelper.isNotEmpty(field_codes.toString()))
                 {
-                    fieldContentData = fieldService.findExtendFieldContent(articleId, field_codes.toString());
+                    fieldContentData = customFieldService.findExtendFieldContent(articleId, field_codes.toString());
                     
                     if (fieldContentData != null)
                     {
@@ -837,8 +843,7 @@ public class ArticleAction extends BaseAction
             Article article = new Article();
             BeanHelper.mapToBean(form, article);
             
-            ArticleService service = (ArticleService) getService(ArticleService.class);
-            service.deleteArticle(article.getId());
+            articleService.deleteArticle(article.getId());
             
             String url = article.getUrl();
             if (!StringHelper.isEmpty(url)) //若已经发布，则需要删除已经发布的文件
@@ -873,7 +878,6 @@ public class ArticleAction extends BaseAction
             form.set("sourceList", sourceList);
             
             //查询数据字典，取行业类别 285206405@qq.com add
-            EnumService enumService = (EnumService) getService(EnumService.class);
             List<Object> enumDataList = enumService.getEnumListByType("INDUSTRY_TYPE");
             form.set("industryList", enumDataList);
             
@@ -976,7 +980,6 @@ public class ArticleAction extends BaseAction
         {
             int catalogId = RequestHelper.getInt(getRequest(), "catalogId");
             
-            CatalogService catalogService = (CatalogService) getService(CatalogService.class);
             Catalog catalog = catalogService.findCatalogById(catalogId);
             if (catalog == null || "".equals(catalog.getRoute()))
             {
@@ -1102,7 +1105,6 @@ public class ArticleAction extends BaseAction
             int catalogId = getIntParameter("catalogId");
             int rows = getIntParameter("rows", 200);//发布文章的数据量
             
-            ArticleService articleService = (ArticleService) getService(ArticleService.class);
             List<Object> catalogList = articleService.findUnionArtilceByCatalog(catalogId);
             List<DataRow> articleList = null;
             DataRow articleData = null;
@@ -1490,15 +1492,14 @@ public class ArticleAction extends BaseAction
         if (extFieldData != null && extFieldData.size() > 0)
         {
             extFieldData.set("article_id", article.getId());
-            CustomFieldService fieldService = (CustomFieldService) getService(CustomFieldService.class);
             //判断扩展信息的值是否存在
-            if (fieldService.isExistsExtendFieldById(article.getId()))
+            if (customFieldService.isExistsExtendFieldById(article.getId()))
             {
-                fieldService.editExtendFieldContent(extFieldData);
+                customFieldService.editExtendFieldContent(extFieldData);
             }
             else
             {
-                fieldService.addExtendFieldContent(extFieldData);
+                customFieldService.addExtendFieldContent(extFieldData);
             }
         }
         addLog("编辑文章", "编辑文章[id=" + article.getId() + "]", article.getCatalogId());

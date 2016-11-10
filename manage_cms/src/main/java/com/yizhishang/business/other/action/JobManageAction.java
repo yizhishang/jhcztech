@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.util.UserHelper;
 import com.yizhishang.business.other.service.JobManageService;
 import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.web.action.BaseAction;
@@ -67,7 +68,7 @@ public class JobManageAction extends BaseAction
 		DataRow data = new DataRow();
 		data.putAll(form);
 		String siteno = getLoginSiteNo();
-		String createdby = getUserName();
+		String createdby = UserHelper.getUserName();
 		data.set("siteno", siteno);
 		data.set("createdby", createdby);
 		data.set("createdtime", new java.sql.Timestamp(System.currentTimeMillis()));//添加创建时间
@@ -100,7 +101,7 @@ public class JobManageAction extends BaseAction
 		DataRow data = new DataRow();
 		data.putAll(form);
 		String siteno = getLoginSiteNo();
-		String modifiedby = getUserName();
+		String modifiedby = UserHelper.getUserName();
 		data.set("siteno", siteno);
 		data.set("modifiedby", modifiedby);
 		data.set("modifiedtime", new java.sql.Timestamp(System.currentTimeMillis()));//添加修改时间

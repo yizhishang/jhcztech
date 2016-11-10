@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.ConvertHelper;
+import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.base.util.queue.WorkCallBack;
 import com.yizhishang.plat.domain.Catalog;
@@ -31,11 +31,9 @@ public class PublishCallBack implements WorkCallBack
 	
 	private static Logger logger = LoggerFactory.getLogger(PublishCallBack.class);
 	
-	private static PublishLogService logService = (PublishLogService) ServiceLocator.getService(PublishLogService.class);
-	
-	private static PublishQueueService publishQueueService = (PublishQueueService) ServiceLocator.getService(PublishQueueService.class);
-	
-	private static CatalogService catalogService = (CatalogService) ServiceLocator.getService(CatalogService.class);
+	private static PublishQueueService publishQueueService = (PublishQueueService) SpringContextHolder.getBean("publishQueueService");
+	private static CatalogService catalogService = (CatalogService) SpringContextHolder.getBean("catalogService");
+	private static PublishLogService publishLogService = (PublishLogService) SpringContextHolder.getBean("publishLogService");
 	
 	    /**
      * 发布队列具体内容
@@ -153,7 +151,7 @@ public class PublishCallBack implements WorkCallBack
             String description = "发布[queueId=" + queueId + "]的内容出现错误";
 			logger.error(description, ex);
 			
-			logService.add(queueId, description);
+			publishLogService.add(queueId, description);
             //删除队列
 			if (queueId > 0)
 			{

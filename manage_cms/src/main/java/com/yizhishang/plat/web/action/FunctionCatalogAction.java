@@ -58,8 +58,6 @@ public class FunctionCatalogAction extends BaseAction
         
         //对提交上来的form进行处理
         DynaForm form = normalize(request);
-        ManageCatalogService service = (ManageCatalogService) getService(ManageCatalogService.class);
-        
         MESSAGE = "";
         if (StringHelper.isEmpty(form.getString("catalogNo")))
         {
@@ -87,13 +85,13 @@ public class FunctionCatalogAction extends BaseAction
         catalog.setModifiedBy(getUID());
         catalog.setModifiedDate(DateHelper.formatDate(new Date()));
         
-        service.addCatalog(catalog);
+        manageCatalogService.addCatalog(catalog);
         catalog.setOrderLine(catalog.getId());
-        catalog.setRoute(service.getRoute(catalog.getId()));
-        service.updateCatalog(catalog);
+        catalog.setRoute(manageCatalogService.getRoute(catalog.getId()));
+        manageCatalogService.updateCatalog(catalog);
         
         //更新该目录中的父目录拥有的节点数
-        service.updateParentCatalogNum(catalog.getParentId(), service.findParentCatalogNum(catalog.getParentId()));
+        manageCatalogService.updateParentCatalogNum(catalog.getParentId(), manageCatalogService.findParentCatalogNum(catalog.getParentId()));
         
         addLog("添加功能目录", "添加目录[ID=" + catalog.getId() + ",name=" + catalog.getName() + "]");
         

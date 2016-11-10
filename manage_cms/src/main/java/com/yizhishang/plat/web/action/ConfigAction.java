@@ -12,10 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.yizhishang.base.config.SysConfig;
 import com.yizhishang.base.domain.Config;
 import com.yizhishang.base.jdbc.DBPage;
+import com.yizhishang.base.service.ConfigService;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Result;
-import com.yizhishang.plat.service.ConfigService;
 
 /**
  * 描述:  系统配置管理

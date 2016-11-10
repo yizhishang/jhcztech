@@ -25,7 +25,7 @@
                 <div class="space"></div>
                 <div id="content">
                   <div class="eb0">
-                    <div class="label"> <a href="#" onClick="submitForm('qryparm');"><img src="${ctxPath }/admin/images/ico10.gif" border="0"/>保存</a> </div>
+                    <div class="label"> <a href="#" onClick="submitForm('qryparm', null, true);"><img src="${ctxPath }/admin/images/ico10.gif" border="0"/>保存</a> </div>
                   </div>
                   <div class="space"></div>
                   <div class="databox">

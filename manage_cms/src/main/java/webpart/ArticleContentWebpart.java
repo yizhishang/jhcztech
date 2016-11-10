@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Article;
-import com.yizhishang.plat.service.ArticleService;
 import com.yizhishang.plat.template.Context;
 import com.yizhishang.plat.template.FMWebpartParser;
 
@@ -29,7 +27,6 @@ public class ArticleContentWebpart extends FMWebpartParser
     {
         int articleId = MapHelper.getInt(webpartProp, "articleId");
         String catalogId = MapHelper.getString(webpartProp, "catalogId");
-        ArticleService articleService = (ArticleService) ServiceLocator.getService(ArticleService.class);
         Article article = articleService.findArticleById(articleId);
         
         Map<String, Object> dataMap = new HashMap<String, Object>();

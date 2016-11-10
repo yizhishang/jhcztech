@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.service.ServiceLocator;
 import com.yizhishang.base.util.FileHelper;
+import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Template;
 import com.yizhishang.plat.service.TemplateService;
@@ -27,7 +27,7 @@ public class TemplatePromulgate extends BasePromulgate
     
     private static Logger logger = LoggerFactory.getLogger(TemplatePromulgate.class);
     
-    private static TemplateService templateService = (TemplateService) ServiceLocator.getService(TemplateService.class);
+    private static TemplateService templateService = (TemplateService) SpringContextHolder.getBean("templateService");
     
     /**
     * 需要发布的模板的ID

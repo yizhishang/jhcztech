@@ -8,7 +8,6 @@ import java.util.TreeSet;
 
 import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.plat.service.CustomFieldService;
-import com.yizhishang.plat.service.impl.CustomFieldServiceImpl;
 
 /**
  * 描述:  
@@ -46,7 +45,7 @@ public class ExtendFieldManage
 		{
             Set<Object> fieldSet = new HashSet<Object>();
             //查询已经被使用的字段
-			CustomFieldService fieldService = new CustomFieldServiceImpl();
+			CustomFieldService fieldService = new CustomFieldService();
             List<Object> fieldList = fieldService.findExtendFieldInfo(0);
             for (Iterator<Object> iter = fieldList.iterator(); iter.hasNext();)
 			{

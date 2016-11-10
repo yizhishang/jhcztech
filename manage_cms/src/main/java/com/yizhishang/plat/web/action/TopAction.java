@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yizhishang.base.util.SessionHelper;
+import com.yizhishang.base.util.UserHelper;
 import com.yizhishang.plat.Constants;
 import com.yizhishang.plat.system.SysLibrary;
 
@@ -34,7 +35,7 @@ public class TopAction extends BaseAction
 	{
 		List list = SysLibrary.getSecurityCatalogTree(getSession());
 		dataMap.put("rootMenus", list);
-		dataMap.put("userName", getUserName());
+		dataMap.put("userName", UserHelper.getUserName());
 		
         //允许访问的站点信息
 		List sites = (List) SessionHelper.getObject(Constants.USER_ALL_SITENO, getSession());
