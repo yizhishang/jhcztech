@@ -5,10 +5,6 @@
 <script type="text/javascript" src="${ctxPath }/admin/xtree/js/xloadtree.js"></script>
 <body>
 <script type="text/javascript">
-$(document).ready(function()
-{
-    winResize();
-});
 if (window.frameElement != null && document.all != null)
 {
     window.frameElement.attachEvent("onresize", winResize);
@@ -20,11 +16,6 @@ else if (document.all != null)
 else
 {
     window.onresize = winResize;
-}
-
-function winResize()
-{
-    $(".Frame_tree").css("height", $(window).height() - 20);
 }
 
 function addEnumFunction()

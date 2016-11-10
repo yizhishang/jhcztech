@@ -7,9 +7,6 @@
 <script type="text/javascript" src="${ctxPath }/admin/scripts/bootstrapMenu/js/BootstrapMenu.min.js"></script>
 <body>
 <script type="text/javascript">
-	$(document).ready(function(){
-		winResize();
-	});
 	if(window.frameElement!=null && document.all != null)
 	{
 		window.frameElement.attachEvent("onresize",winResize);
@@ -22,13 +19,8 @@
 	{
 		window.onresize=winResize;
 	}
-		
-	function winResize()
-	{
-		$(".Frame_tree").css("height",$(window).height() - 20);
-	}
 	
-	 function addFunction()
+	function addFunction()
     {
         hideContextMenu();
         hiddenForm.action = "doAdd.action";
