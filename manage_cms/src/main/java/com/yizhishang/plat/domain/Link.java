@@ -13,6 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Link extends DynaModel
 {
+	private static final long serialVersionUID = 1L;
     public int getLinkid()
     {
         return getInt("lnk_id");

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.UserHelper;
 import com.yizhishang.business.other.service.JobManageService;
 import com.yizhishang.plat.domain.Result;
@@ -65,7 +65,7 @@ public class JobManageAction extends BaseAction
 	public Result add(HttpServletRequest request, HttpServletResponse response)
 	{
 		form = normalize(request);
-		DataRow data = new DataRow();
+		DynaModel data = new DynaModel();
 		data.putAll(form);
 		String siteno = getLoginSiteNo();
 		String createdby = UserHelper.getUserName();
@@ -84,7 +84,7 @@ public class JobManageAction extends BaseAction
 	public ModelAndView doEdit()
 	{
 		String jobid = getStrParameter("jobid");
-		DataRow data = jobManageService.findJobById(jobid);
+		DynaModel data = jobManageService.findJobById(jobid);
 		form.putAll(data);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("form", form);
@@ -98,7 +98,7 @@ public class JobManageAction extends BaseAction
 	public Result edit(HttpServletRequest request, HttpServletResponse response)
 	{
 		form = normalize(request);
-		DataRow data = new DataRow();
+		DynaModel data = new DynaModel();
 		data.putAll(form);
 		String siteno = getLoginSiteNo();
 		String modifiedby = UserHelper.getUserName();

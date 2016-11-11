@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.RequestHelper;
 import com.yizhishang.common.table.consts.Consts;
 import com.yizhishang.common.table.service.TableColumnService;
@@ -44,8 +44,8 @@ public class TableColumnAction extends BaseAction
         int table_id = this.getIntParameter("table_id", 0);
         String name_en = getStrParameter("name_en", "").toLowerCase();
         String name_ch = getStrParameter("name_ch", "").toLowerCase();
-        DataRow tableBean = tableService.load(table_id);
-        List<Object> list = tableColumnService.getListData(table_id, name_en, name_ch);
+        DynaModel tableBean = tableService.load(table_id);
+        List<DynaModel> list = tableColumnService.getListData(table_id, name_en, name_ch);
         dataMap.put("tableBean", tableBean);
         dataMap.put("list", list);
         
@@ -59,7 +59,7 @@ public class TableColumnAction extends BaseAction
     public Result doImportCols()
     {
         int table_id = this.getIntParameter("table_id", 0);
-        DataRow tableBean = tableService.load(table_id);
+        DynaModel tableBean = tableService.load(table_id);
         tableColumnService.importCols(tableBean);
         return new Result(0, "操作成功");
     }
@@ -70,9 +70,9 @@ public class TableColumnAction extends BaseAction
     public Result edit(HttpServletRequest request, HttpServletResponse response)
     {
         //        DynaForm form = normalize(request);
-        //        DataRow[] beans = TableColumnBean.getTableColumnBeanArray(form);
-        DataRow[] beans = normalizeList(request);
-        for (DataRow dataRow : beans)
+        //        DynaModel[] beans = TableColumnBean.getTableColumnBeanArray(form);
+        DynaModel[] beans = normalizeList(request);
+        for (DynaModel dataRow : beans)
         {
             dataRow.remove("pageUrl");
         }
@@ -84,9 +84,9 @@ public class TableColumnAction extends BaseAction
     public ModelAndView doConfigSelect()
     {
         int temp_id = getIntParameter("temp_id", 0);
-        List<Object> enumList = tableColumnService.getEnumTypeList();
-        List<Object> cols = tableColumnService.getTableCols(temp_id);
-        DataRow colBean = tableColumnService.load(temp_id);
+        List<DynaModel> enumList = tableColumnService.getEnumTypeList();
+        List<DynaModel> cols = tableColumnService.getTableCols(temp_id);
+        DynaModel colBean = tableColumnService.load(temp_id);
         String input_type = colBean.getString("input_type");
         if (Consts.input_type_open_select_checkbox.equals(input_type) || Consts.input_type_open_select_radio.equals(input_type)
                 || Consts.input_type_checkbox.equals(input_type) || Consts.input_type_radio.equals(input_type) || Consts.input_type_select.equals(input_type))
@@ -103,7 +103,7 @@ public class TableColumnAction extends BaseAction
             else if ("t_b_dictionary".equals(select_table))
             { // 手动配置
                 dataMap.put("select_type", "sdsr");
-                List<Object> table_cols = tableColumnService.getSdsrList(colBean.getString("id"));
+                List<DynaModel> table_cols = tableColumnService.getSdsrList(colBean.getString("id"));
                 dataMap.put("dic_cols", table_cols);
             }
             else
@@ -114,7 +114,7 @@ public class TableColumnAction extends BaseAction
                 dataMap.put("select_value", colBean.getString("select_value"));
                 dataMap.put("select_text", colBean.getString("select_text"));
                 dataMap.put("select_condition", select_condition);
-                List<Object> table_cols = tableColumnService.getTableCols(select_table);
+                List<DynaModel> table_cols = tableColumnService.getTableCols(select_table);
                 dataMap.put("table_cols", table_cols);
             }
             dataMap.put("select_text_column", select_text_column);
@@ -135,7 +135,7 @@ public class TableColumnAction extends BaseAction
         String id = getStrParameter("id", "");
         String txtid = getStrParameter("txtid", "");
         String selected = getStrParameter("selected", "");
-        DataRow colBean = tableColumnService.load(colid);
+        DynaModel colBean = tableColumnService.load(colid);
         String input_type = colBean.getString("input_type");
         if (Consts.input_type_open_select_checkbox.equals(input_type))
         {
@@ -149,7 +149,7 @@ public class TableColumnAction extends BaseAction
         {
             input_type = "";
         }
-        List<Object> list = tableColumnService.getOptionBeans(colBean);
+        List<DynaModel> list = tableColumnService.getOptionBeans(colBean);
         this.setAttribute("id", id);
         this.setAttribute("txtid", txtid);
         this.setAttribute("list", list);
@@ -166,7 +166,7 @@ public class TableColumnAction extends BaseAction
         String table_name_en = RequestHelper.getString(getRequest(), "table_name", "");
         String select_value = RequestHelper.getString(getRequest(), "select_value", "");
         String select_text = RequestHelper.getString(getRequest(), "select_text", "");
-        List<Object> cols = tableColumnService.getTableCols(table_name_en);
+        List<DynaModel> cols = tableColumnService.getTableCols(table_name_en);
         dataMap.put("list", cols);
         dataMap.put("select_value", select_value);
         dataMap.put("select_text", select_text);

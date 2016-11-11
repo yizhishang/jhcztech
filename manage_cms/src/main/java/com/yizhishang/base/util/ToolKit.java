@@ -24,7 +24,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 
 public class ToolKit
 {
@@ -175,59 +175,59 @@ public class ToolKit
     }
     
     /**
-     * 获取request中的所有参数并组成DataRow返回(默认的每个值的默认值是"",默认分隔符是",")
+     * 获取request中的所有参数并组成Object返回(默认的每个值的默认值是"",默认分隔符是",")
      * @param request
      * @return
      */
-    public static DataRow getFormParams(HttpServletRequest request)
+    public static Object getFormParams(HttpServletRequest request)
     {
         return getFormParams(request, ",", "", "");
     }
     
     /**
-     * 获取request中的所有参数并组成DataRow返回(默认的每个值的默认值是"",默认分隔符是",",只取"form."开头的参数)
+     * 获取request中的所有参数并组成Object返回(默认的每个值的默认值是"",默认分隔符是",",只取"form."开头的参数)
      * @param request
      * @return
      */
-    public static DataRow getCmsFormParams(HttpServletRequest request)
+    public static DynaModel getCmsFormParams(HttpServletRequest request)
     {
         return getFormParams(request, ",", "", "form.");
     }
     
     /**
-     * 获取request中的所有参数并组成DataRow返回(默认的每个值的默认值是"")
+     * 获取request中的所有参数并组成Object返回(默认的每个值的默认值是"")
      * @param request
      * @param seperator 分隔符
      * @return
      */
-    public static DataRow getFormParamsDefSep(HttpServletRequest request, String seperator)
+    public static Object getFormParamsDefSep(HttpServletRequest request, String seperator)
     {
         return getFormParams(request, seperator, "", "");
     }
     
     /**
-     * 获取request中的所有参数并组成DataRow返回(默认数组的分隔符是",")
+     * 获取request中的所有参数并组成Object返回(默认数组的分隔符是",")
      * @param request
      * @param default_value 数组里每个值的默认值
      * @return
      */
-    public static DataRow getFormParamsDefDefault(HttpServletRequest request, String default_value)
+    public static Object getFormParamsDefDefault(HttpServletRequest request, String default_value)
     {
         return getFormParams(request, ",", default_value, "");
     }
     
     /**
-     * 获取request中的所有参数并组成DataRow返回
+     * 获取request中的所有参数并组成Object返回
      * @param request
      * @param seperator 分隔符
      * @param default_value 数组里每个值的默认值
      * @return
      */
     @SuppressWarnings("rawtypes")
-    public static DataRow getFormParams(HttpServletRequest request, String seperator, String default_value, String prefix)
+    public static DynaModel getFormParams(HttpServletRequest request, String seperator, String default_value, String prefix)
     {
         Enumeration ema = request.getParameterNames();
-        DataRow param = new DataRow();
+        DynaModel param = new DynaModel();
         while (ema.hasMoreElements())
         {
             String pname = (String) ema.nextElement();
@@ -358,9 +358,9 @@ public class ToolKit
      * @return
      * @throws IOException
      */
-    public static DataRow ftExcelTitle(File file) throws IOException
+    public static DynaModel ftExcelTitle(File file) throws IOException
     {
-        DataRow titlebean = ftExcelRow(file, 1, null, null);
+    	DynaModel titlebean = ftExcelRow(file, 1, null, null);
         return titlebean;
     }
     
@@ -374,9 +374,9 @@ public class ToolKit
      * @throws IOException
      */
     @SuppressWarnings("deprecation")
-    public static DataRow ftExcelRow(File file, int select_row, String[] fieldsName, Map<String, Object> dafaultValue) throws IOException
+    public static DynaModel ftExcelRow(File file, int select_row, String[] fieldsName, Map<String, Object> dafaultValue) throws IOException
     {
-        DataRow rowbean = new DataRow();
+    	DynaModel rowbean = new DynaModel();
         if (!file.isFile())
         {
             return rowbean;
@@ -454,13 +454,13 @@ public class ToolKit
      * @param fieldsName List中Map的键名，可为空，默认为列数索引（首列索引为0）
      * @param hasTitle excel中是否有标题（如果有标题则去掉第一列数据）
      * @param dafaultValue 默认值（和fieldsName对应的值为空时，取默认值）
-     * @return 返回一个包含DataRow的List
+     * @return 返回一个包含Object的List
      * @throws IOException
      */
     @SuppressWarnings("deprecation")
-    public static List<Object> readExcel(File file, Object[] fieldsName, boolean hasTitle, Map<String, Object> dafaultValue) throws IOException
+    public static List<DynaModel> readExcel(File file, Object[] fieldsName, boolean hasTitle, Map<String, Object> dafaultValue) throws IOException
     {
-        List<Object> list = new ArrayList<Object>();
+        List<DynaModel> list = new ArrayList<DynaModel>();
         if (!file.isFile())
         {
             return list;
@@ -482,7 +482,7 @@ public class ToolKit
                     hasTitle = !hasTitle;
                     continue;
                 }
-                DataRow map = new DataRow();
+                DynaModel map = new DynaModel();
                 HSSFRow row = childSheet.getRow(j);
                 if (row != null)
                 {
@@ -573,9 +573,4 @@ public class ToolKit
         return result;
     }
     
-    public static void main(String[] args) throws Exception
-    {
-        DataRow titles = ToolKit.ftExcelTitle(new File("/Volumes/mac/testExcel.xls"));
-        System.out.println(titles);
-    }
 }

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.yizhishang.base.dao.ConfigDao;
 import com.yizhishang.base.domain.Config;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.domain.Right_Url;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.service.BaseService;
 
 /**
  * 描述:
@@ -107,7 +107,7 @@ public class ConfigService extends BaseService
 		return configDao.loadRight();
 	}
 	
-	public List<Object> loadRight(String siteno)
+	public List<DynaModel> loadRight(String siteno)
 	{
 		return configDao.loadRight(siteno);
 	}

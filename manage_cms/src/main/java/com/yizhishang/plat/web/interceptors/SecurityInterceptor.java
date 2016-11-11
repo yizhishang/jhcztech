@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.IPHelper;
 import com.yizhishang.base.util.ScriptHelper;
 import com.yizhishang.base.util.StringHelper;
@@ -83,13 +83,13 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter
         
         if (SysLibrary.isSystemAdmin(session))
         {
-            DataRow rights = new DataRow();
+            DynaModel rights = new DynaModel();
             rights.set("all", "1");
             request.setAttribute("catalogRights", rights);
             return true;
         }
         
-        List<Object> listRightUrl = SysLibrary.getSecurityCatalog(session);
+        List<DynaModel> listRightUrl = SysLibrary.getSecurityCatalog(session);
         
         int codeRight = 0; //权限编码
         for (int i = 0; listRightUrl != null && i < listRightUrl.size(); i++) //如果请求的URL为权限列表中的URL则codeRight获得该URL权限编码

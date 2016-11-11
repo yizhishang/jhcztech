@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.servlet.jsp.JspWriter;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.base.util.ToolKit;
 import com.yizhishang.common.table.consts.Consts;
@@ -17,7 +17,7 @@ public class DynSearchInputTag extends com.yizhishang.common.table.tag.CommonTag
     
     private static final long serialVersionUID = -4495264469438501769L;
     
-    private DataRow colitem = null;
+    private DynaModel colitem = null;
     
     private String colname = "";
     
@@ -144,7 +144,7 @@ public class DynSearchInputTag extends com.yizhishang.common.table.tag.CommonTag
         String name_ch = colitem.getString("name_ch");
         String name_en = colitem.getString("name_en");
         value = ToolKit.nullTrans((String) param.get("eq_search_name_" + name_en), "");
-        List<Object> list = colservice.getOptionBeans(colitem); // 获得列表
+        List<DynaModel> list = colservice.getOptionBeans(colitem); // 获得列表
         StringBuffer sb = new StringBuffer();
         sb.append(name_ch + "：<select name=\"eq_search_name_" + name_en + "\" id='" + id + "'  ");
         if (!StringHelper.isEmpty(css))
@@ -159,7 +159,7 @@ public class DynSearchInputTag extends com.yizhishang.common.table.tag.CommonTag
         sb.append("<option value=''>------</option>\n");
         for (int i = 0; list != null && i < list.size(); i++)
         {
-            DataRow tempBean = (DataRow) list.get(i);
+            DynaModel tempBean = (DynaModel) list.get(i);
             String tempValue = tempBean.getString("optionvalue");
             String tempText = tempBean.getString("optiontext");
             if (value.equals(tempValue))
@@ -175,12 +175,12 @@ public class DynSearchInputTag extends com.yizhishang.common.table.tag.CommonTag
         return sb.toString();
     }
     
-    public DataRow getColitem()
+    public DynaModel getColitem()
     {
         return colitem;
     }
     
-    public void setColitem(DataRow colitem)
+    public void setColitem(DynaModel colitem)
     {
         this.colitem = colitem;
     }

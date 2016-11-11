@@ -8,8 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.jdbc.JdbcTemplate;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.system.Application;
@@ -33,7 +32,7 @@ public class AttachService extends BaseService
     * 时间：Nov 9, 2013 9:06:11 PM
     * @param dataRow
     */
-	public void addAttach(DataRow dataRow)
+	public void addAttach(DynaModel dataRow)
 	{
 		if (dataRow != null)
 		{
@@ -42,10 +41,10 @@ public class AttachService extends BaseService
 			String[] url_list = StringHelper.split(dataRow.getString("url"), "|");
 			if (save_filename_list.length > 0 && save_filename_list.length == real_filaname_list.length && save_filename_list.length == url_list.length)
 			{
-				DataRow tempData = null;
+				DynaModel tempData = null;
 				for (int i = 0; i < save_filename_list.length; i++)
 				{
-					tempData = new DataRow();
+					tempData = new DynaModel();
 					String id = getSeqValue("T_ATTACH_INFO");
 					tempData.set("ATTACH_NO", id);
 					
@@ -58,7 +57,7 @@ public class AttachService extends BaseService
 					tempData.set("CREATE_DATE", dataRow.getString("create_date"));
 					tempData.set("DOWN_COUNT", dataRow.getString("down_count"));
 					
-					getJdbcTemplate().insert("T_ATTACH_INFO", tempData);
+					getJdbcTemplateUtil().insert("T_ATTACH_INFO", tempData);
 				}
 			}
 		}
@@ -77,7 +76,7 @@ public class AttachService extends BaseService
 	public void deleteAttach(int source, int sourceId, String save_filename)
 	{
 		String sql = "SELECT ATTACH_NO,URL FROM T_ATTACH_INFO WHERE SOURCE = ? AND SOURCE_ID = ? AND SAVE_FILENAME = ?";
-		DataRow attachData = getJdbcTemplate().queryMap(sql, new Object[] { source, sourceId, save_filename });
+		DynaModel attachData = getJdbcTemplateUtil().queryMap(sql, new Object[] { source, sourceId, save_filename });
 		if (attachData != null)
 		{
 			int id = attachData.getInt("attach_no");
@@ -106,7 +105,7 @@ public class AttachService extends BaseService
 				{
 					file.delete();
 				}
-				getJdbcTemplate().delete("T_ATTACH_INFO", "attach_no", id);
+				getJdbcTemplateUtil().delete("T_ATTACH_INFO", "attach_no", id);
 			}
 		}
 	}
@@ -120,7 +119,7 @@ public class AttachService extends BaseService
     * @param sourceId
     * @param dataRow
     */
-	public void editAttach(int source, int sourceId, DataRow dataRow)
+	public void editAttach(int source, int sourceId, DynaModel dataRow)
 	{
 		if (dataRow != null)
 		{
@@ -134,7 +133,7 @@ public class AttachService extends BaseService
 			
             //查询已经存在的附件，存在的附件不作更新
 			String sql = "SELECT SAVE_FILENAME FROM T_ATTACH_INFO WHERE SOURCE = ? AND SOURCE_ID = ? ";
-			String[] existsFile = getJdbcTemplate().queryStringArray(sql, new Object[] { new Integer(source), new Integer(sourceId) });
+			String[] existsFile = getJdbcTemplateUtil().queryStringArray(sql, new Object[] { new Integer(source), new Integer(sourceId) });
 			
             List<String> addAttachList = getListDiff(save_filename_list, existsFile);//需要新增的附件
             List<String> delAttachList = getListDiff(existsFile, save_filename_list);//需要删除的附件
@@ -188,11 +187,11 @@ public class AttachService extends BaseService
     * @param sourceId
     * @return
     */
-	public DataRow getAttachBySourceId(int type, int sourceId)
+	public DynaModel getAttachBySourceId(int type, int sourceId)
 	{
-		DataRow resultData = null;
+		DynaModel resultData = null;
 		String sql = "SELECT * FROM T_ATTACH_INFO WHERE SOURCE = ? AND SOURCE_ID = ? ORDER BY ATTACH_NO";
-        List<Object> dataList = getJdbcTemplate().query(sql, new Object[] { type, sourceId });
+        List<DynaModel> dataList = getJdbcTemplateUtil().queryForList(sql, new Object[] { type, sourceId });
 		
 		String save_filename_list = "";
 		String real_filaname_list = "";
@@ -200,7 +199,7 @@ public class AttachService extends BaseService
 		
 		for (int i = 0; i < dataList.size(); i++)
 		{
-			DataRow dataRow = (DataRow) dataList.get(i);
+			DynaModel dataRow = (DynaModel) dataList.get(i);
 			String save_filename = dataRow.getString("save_filename");
 			String real_filaname = dataRow.getString("real_filaname");
 			String url = dataRow.getString("url");
@@ -218,7 +217,7 @@ public class AttachService extends BaseService
 			save_filename_list = save_filename_list.substring(0, save_filename_list.length() - 1);
 			real_filaname_list = real_filaname_list.substring(0, real_filaname_list.length() - 1);
 			url_list = url_list.substring(0, url_list.length() - 1);
-			resultData = new DataRow();
+			resultData = new DynaModel();
 			resultData.set("save_filename", save_filename_list);
 			resultData.set("real_filaname", real_filaname_list);
 			resultData.set("url", url_list);
@@ -227,18 +226,7 @@ public class AttachService extends BaseService
 		return resultData;
 	}
 	
-	                /**
-    * 返回数据操作对象
-    *
-    * @return 返回数据操作对象
-    */
-	@Override
-    public JdbcTemplate getJdbcTemplate()
-	{
-		return new JdbcTemplate();
-	}
-	
-	                /**
+	/**
     * 
     * 描述：比较两个数据的差异，找出在数据2中不存在的数据
     * 作者：袁永君

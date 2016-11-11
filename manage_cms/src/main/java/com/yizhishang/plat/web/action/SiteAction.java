@@ -215,7 +215,7 @@ public class SiteAction extends BaseAction
     		String siteno = "";
             for (Iterator<Site> iter = sites.iterator(); iter.hasNext();)
     		{
-                Site site = iter.next();
+                Site site = (Site)iter.next();
     			siteno += site.getSiteNo();
     			if (iter.hasNext())
     			{

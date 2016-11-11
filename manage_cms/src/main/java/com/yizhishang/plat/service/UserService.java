@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.DateHelper;
@@ -98,7 +99,7 @@ public class UserService extends BaseService
     * @param siteNo 站点编号
     * @return
     */
-    public List<Object> findUserBySiteNo(String siteNo)
+    public List<DynaModel> findUserBySiteNo(String siteNo)
     {
         return userDao.findUserBySiteNo(siteNo);
     }
@@ -117,7 +118,7 @@ public class UserService extends BaseService
     * 得到所有的用户
     * @return
     */
-    public List<Object> getAll()
+    public List<DynaModel> getAll()
     {
         return userDao.getAll();
     }

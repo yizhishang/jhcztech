@@ -6,11 +6,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.yizhishang.base.dao.BaseDao;
 import com.yizhishang.base.domain.Config;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.domain.Right_Url;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.StringHelper;
 
 /**
@@ -36,23 +35,15 @@ public class ConfigDao extends BaseDao
 	
 	public void addConfig(Config config)
 	{
-		DataRow row = new DataRow();
+		DynaModel row = new DynaModel();
 		row.putAll(config.toMap());
-		getJdbcTemplate().insert("T_SYS_CONFIG", row);
+		getJdbcTemplateUtil().insert("T_SYS_CONFIG", row);
 	}
 	
 	public List<Config> getAllSysConfig()
 	{
-        List<Object> configList = getJdbcTemplate().query(GET_ALL);
-        ArrayList<Config> newConfigList = new ArrayList<Config>();
-        for (Iterator<Object> iter = configList.iterator(); iter.hasNext();)
-		{
-			Config config = new Config();
-			DataRow row = (DataRow) iter.next();
-			config.fromMap(row);
-			newConfigList.add(config);
-		}
-		return newConfigList;
+        List<Config> configList = getJdbcTemplateUtil().queryForList(GET_ALL, Config.class);
+		return configList;
 	}
 	
 	public DBPage getPageData(int curPage, int numPerPage, String keyword, String siteNo)
@@ -75,16 +66,16 @@ public class ConfigDao extends BaseDao
 			argList.add(siteNo);
 		}
 		sqlBuffer.append(" order by name");
-		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
 		if (page != null)
 		{
-            List<Object> dataList = page.getData();
-			ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+			ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
 			{
 				Config config = new Config();
-				DataRow row = (DataRow) iter.next();
+				DynaModel row = iter.next();
 				config.fromMap(row);
 				newDataList.add(config);
 			}
@@ -94,7 +85,7 @@ public class ConfigDao extends BaseDao
 		return page;
 	}
 	
-	public List<Object> loadRight(String siteno)
+	public List<DynaModel> loadRight(String siteno)
 	{
 		ArrayList<Object> argList = new ArrayList<Object>();
 		StringBuffer sqlBuf = new StringBuffer();
@@ -104,59 +95,30 @@ public class ConfigDao extends BaseDao
 			sqlBuf.append(" and siteno=?");
 			argList.add(siteno);
 		}
-        List<Object> list = this.getJdbcTemplate().query(sqlBuf.toString(), argList.toArray());
-		ArrayList<Object> dateList = new ArrayList<Object>();
-        for (Iterator<Object> iter = list.iterator(); iter.hasNext();)
-		{
-			Right_Url rightUrl = new Right_Url();
-			DataRow row = (DataRow) iter.next();
-			rightUrl.fromMap(row);
-			dateList.add(rightUrl);
-		}
-		return dateList;
+        List<DynaModel> list = this.getJdbcTemplateUtil().queryForList(sqlBuf.toString(), DynaModel.class, argList.toArray());
+		return list;
 	}
 	
 	public void updateConfig(Config config)
 	{
-		DataRow row = new DataRow();
+		DynaModel row = new DynaModel();
 		row.putAll(config.toMap());
-		getJdbcTemplate().update("T_SYS_CONFIG", row, "id", new Integer(config.getId()));
+		getJdbcTemplateUtil().update("T_SYS_CONFIG", row, "id", new Integer(config.getId()));
 	}
 	
     public void deleteConfig(int id)
 	{
-		getJdbcTemplate().delete("T_SYS_CONFIG", "id", new Integer(id));
+		getJdbcTemplateUtil().delete("T_SYS_CONFIG", "id", new Integer(id));
 	}
 	
     public Config findConfigById(int id)
 	{
-		DataRow row = getJdbcTemplate().queryMap(GET_CONFIG_BY_ID, new Object[] { new Integer(id) });
-		if (row != null)
-		{
-			Config config = new Config();
-			config.fromMap(row);
-			return config;
-		}
-		return null;
+		return getJdbcTemplateUtil().queryMap(GET_CONFIG_BY_ID, Config.class, new Object[] { new Integer(id) });
 	}
 	
     public Config findConfigByName(String name)
 	{
-		try
-		{
-			DataRow row = getJdbcTemplate().queryMap(GET_CONFIG_BY_NAME, new Object[] { name });
-			if (row != null)
-			{
-				Config config = new Config();
-				config.fromMap(row);
-				return config;
-			}
-		}
-		catch (Exception ex)
-		{
-			
-		}
-		return null;
+    	return getJdbcTemplateUtil().queryMap(GET_CONFIG_BY_NAME, Config.class, new Object[] { name });
 	}
 	
     public DBPage getPageData(int curPage, int numPerPage, String keyword)
@@ -174,16 +136,16 @@ public class ConfigDao extends BaseDao
 			argList.add("%" + keyword + "%");
 		}
 		sqlBuffer.append(" order by name");
-		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
 		if (page != null)
 		{
-            List<Object> dataList = page.getData();
-            ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+            ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
 			{
 				Config config = new Config();
-				DataRow row = (DataRow) iter.next();
+				DynaModel row = (DynaModel) iter.next();
 				config.fromMap(row);
 				newDataList.add(config);
 			}
@@ -195,16 +157,8 @@ public class ConfigDao extends BaseDao
 	
     public List<Right_Url> loadRight()
 	{
-        List<Object> list = this.getJdbcTemplate().query(GET_RIGHT_URL);
-        ArrayList<Right_Url> dateList = new ArrayList<Right_Url>();
-        for (Iterator<Object> iter = list.iterator(); iter.hasNext();)
-		{
-			Right_Url rightUrl = new Right_Url();
-			DataRow row = (DataRow) iter.next();
-			rightUrl.fromMap(row);
-			dateList.add(rightUrl);
-		}
-		return dateList;
+        List<Right_Url> list = this.getJdbcTemplateUtil().queryForList(GET_RIGHT_URL, Right_Url.class);
+		return list;
 	}
 	
 }

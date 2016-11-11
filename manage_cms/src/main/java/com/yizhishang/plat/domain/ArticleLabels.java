@@ -5,6 +5,7 @@ import com.yizhishang.base.domain.DynaModel;
 
 public class ArticleLabels extends DynaModel
 {
+	private static final long serialVersionUID = 1L;
 	public int getId()
 	{
 		return getInt("id");

@@ -13,11 +13,11 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yizhishang.base.config.Configuration;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.jdbc.session.Session;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.FileHelper;
@@ -63,10 +63,10 @@ public class TemplateService extends BaseService
         {
             String id = getSeqValue("T_TEMPLATE");
             template.setId(Integer.parseInt(id));
-            DataRow data = new DataRow();
+            DynaModel data = new DynaModel();
             data.putAll(template.toMap());
             
-            getJdbcTemplate().insert("T_TEMPLATE", data);
+            getJdbcTemplateUtil().insert("T_TEMPLATE", data);
             return new Integer(id).intValue();
         }
         catch (Exception ex)
@@ -89,7 +89,7 @@ public class TemplateService extends BaseService
     {
         flag = flag.toUpperCase();//将flag转化为大写
         
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.put("cmd_str", flag + ":" + id);
         if ("A".equals(flag))//发布文章
         {
@@ -126,10 +126,10 @@ public class TemplateService extends BaseService
      * @param catalogId
      * @return
      */
-    public List<Object> cycFindDetailedTemplateByCatalogId(int catalogId, int type)
+    public List<DynaModel> cycFindDetailedTemplateByCatalogId(int catalogId, int type)
     {
         
-        List<Object> dataList = findUsableTemplate(catalogId, type);
+        List<DynaModel> dataList = findUsableTemplate(catalogId, type);
         if (dataList != null && dataList.size() > 0) //找到了，直接返回
         {
             return dataList;
@@ -157,7 +157,7 @@ public class TemplateService extends BaseService
     {
         try
         {
-            getJdbcTemplate().delete("T_TEMPLATE", "id", new Integer(id));
+            getJdbcTemplateUtil().delete("T_TEMPLATE", "id", new Integer(id));
         }
         catch (Exception ex)
         {
@@ -169,9 +169,9 @@ public class TemplateService extends BaseService
     {
         try
         {
-            DataRow data = new DataRow();
+            DynaModel data = new DynaModel();
             data.putAll(template.toMap());
-            getJdbcTemplate().update("T_TEMPLATE", data, "id", new Integer(template.getId()));
+            getJdbcTemplateUtil().update("T_TEMPLATE", data, "id", new Integer(template.getId()));
         }
         catch (Exception ex)
         {
@@ -188,21 +188,19 @@ public class TemplateService extends BaseService
     * @param dataList
     * @throws Exception
     */
-    public void editTemplateByList(List<Object> dataList) throws Exception
+    @Transactional
+    public void editTemplateByList(List<DynaModel> dataList) throws Exception
     {
-        Session session = null;
         try
         {
-            session = getSession();
             int id = 0;
             String name = "";
             int type = 0;
             int catalogId = 0;
             //			String newId = "";
-            session.beginTrans();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
-                DataRow dataRow = (DataRow) iter.next();
+                DynaModel dataRow = (DynaModel) iter.next();
                 id = dataRow.getInt("id");
                 name = dataRow.getString("name");
                 type = dataRow.getInt("type");
@@ -212,32 +210,21 @@ public class TemplateService extends BaseService
                 {
                     throw new Exception("请检查导入的xml文件是否正确！");
                 }
-                if (this.getJdbcTemplate().queryInt("SELECT ID FROM T_TEMPLATE WHERE ID = ?", new Object[] { new Integer(id) }) == 0)
+                if (this.getJdbcTemplateUtil().queryInt("SELECT ID FROM T_TEMPLATE WHERE ID = ?", new Object[] { new Integer(id) }) == 0)
                 {
                     //					newId = this.getSeqValue("T_TEMPLATE");
                     dataRow.set("id", id);//这里还是使用xml中的ID,
-                    session.insert("T_TEMPLATE", dataRow);
+                    getJdbcTemplateUtil().insert("T_TEMPLATE", dataRow);
                 }
                 else
                 {
-                    session.update("T_TEMPLATE", dataRow, "id", dataRow.getString("id"));
+                    getJdbcTemplateUtil().update("T_TEMPLATE", dataRow, "id", dataRow.getString("id"));
                 }
             }
-            session.commitTrans();
         }
         catch (Exception ex)
         {
-            if (session != null)
-                session.rollbackTrans();
             throw new Exception(ex);
-        }
-        finally
-        {
-            if (session != null)
-            {
-                session.close();
-                session = null;
-            }
         }
     }
     
@@ -278,14 +265,14 @@ public class TemplateService extends BaseService
             argList.add(siteNo);
         }
         strBuf.append(" ORDER BY ID DESC");
-        page = getJdbcTemplate().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
+        page = getJdbcTemplateUtil().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
         if (page != null)
         {
-            List<Object> dataList = page.getData();
-            ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+            ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
-                DataRow data = (DataRow) iter.next();
+                DynaModel data = (DynaModel) iter.next();
                 Template template = new Template();
                 template.fromMap(data);
                 newDataList.add(template);
@@ -303,7 +290,7 @@ public class TemplateService extends BaseService
     * @param catalogId
     * @return
     */
-    public List<Object> findTemplate(int catalogId, String siteNo)
+    public List<DynaModel> findTemplate(int catalogId, String siteNo)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         
@@ -317,13 +304,13 @@ public class TemplateService extends BaseService
         }
         sql += "  AND STATE = 1 ORDER BY CREATE_DATE DESC";
         
-        List<Object> dataList = getJdbcTemplate().query(sql, argList.toArray());
-        ArrayList<Object> newDataList = new ArrayList<Object>();
+        List<DynaModel> dataList = getJdbcTemplateUtil().queryForList(sql, argList.toArray());
+        ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
         if (dataList != null && dataList.size() > 0)
         {
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
-                DataRow data = (DataRow) iter.next();
+                DynaModel data = (DynaModel) iter.next();
                 Template template = new Template();
                 template.fromMap(data);
                 newDataList.add(template);
@@ -349,7 +336,7 @@ public class TemplateService extends BaseService
                 sql += " AND SITENO = ?";
                 argList.add(siteNo);
             }
-            DataRow data = getJdbcTemplate().queryMap(sql, argList.toArray());
+            DynaModel data = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
             
             Template template = null;
             if (data != null)
@@ -380,13 +367,13 @@ public class TemplateService extends BaseService
         ArrayList<Object> argList = new ArrayList<Object>();
         String sql = "SELECT * FROM T_TEMPLATE WHERE CATALOG_ID IN (SELECT CATALOG_ID FROM T_CATALOG WHERE ROUTE LIKE ? AND STATE = 1) ORDER BY ID ASC";
         argList.add("%" + route + "%");
-        List<Object> dataList = getJdbcTemplate().query(sql, argList.toArray());
+        List<DynaModel> dataList = getJdbcTemplateUtil().queryForList(sql, argList.toArray());
         ArrayList<Template> newDataList = new ArrayList<Template>();
         if (dataList != null && dataList.size() > 0)
         {
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
-                DataRow data = (DataRow) iter.next();
+                DynaModel data = (DynaModel) iter.next();
                 Template template = new Template();
                 template.fromMap(data);
                 newDataList.add(template);
@@ -395,7 +382,7 @@ public class TemplateService extends BaseService
         return newDataList;
     }
     
-    public List<Object> findUsableTemplate(int catalogId, int type)
+    public List<DynaModel> findUsableTemplate(int catalogId, int type)
     {
         return findUsableTemplate(catalogId, type, "");
     }
@@ -407,7 +394,7 @@ public class TemplateService extends BaseService
     * @param siteNo 站点编号
     * @return
     */
-    public List<Object> findUsableTemplate(int catalogId, int type, String siteNo)
+    public List<DynaModel> findUsableTemplate(int catalogId, int type, String siteNo)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(new Integer(catalogId));
@@ -422,13 +409,13 @@ public class TemplateService extends BaseService
         }
         sql += " order by create_date desc";
         
-        List<Object> dataList = getJdbcTemplate().query(sql, argList.toArray());
-        ArrayList<Object> newDataList = new ArrayList<Object>();
+        List<DynaModel> dataList = getJdbcTemplateUtil().queryForList(sql, argList.toArray());
+        ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
         if (dataList != null && dataList.size() > 0)
         {
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
-                DataRow data = (DataRow) iter.next();
+                DynaModel data = (DynaModel) iter.next();
                 Template template = new Template();
                 template.fromMap(data);
                 newDataList.add(template);
@@ -452,7 +439,7 @@ public class TemplateService extends BaseService
         Catalog catalog = catalogService.findCatalogById(catalogId);
         int inheritMode = catalog.getInheritMode();
         
-        List<Object> dataList = null;
+        List<DynaModel> dataList = null;
         if (inheritMode == 1 || inheritMode == 3) //需要在本目录和父目录中查找信息细览模板
         {
             dataList = cycFindDetailedTemplateByCatalogId(catalogId, type);

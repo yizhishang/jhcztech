@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.plat.dao.Article_SourceDao;
@@ -61,7 +62,7 @@ public class Article_SourceService extends BaseService
      * @param siteNo 站点编号
      * @return
      */
-    public List<Object> findArticle_SourceBySiteNo(String siteNo)
+    public List<DynaModel> findArticle_SourceBySiteNo(String siteNo)
     {
         return dao.findArticle_SourceBySiteNo(siteNo);
     }

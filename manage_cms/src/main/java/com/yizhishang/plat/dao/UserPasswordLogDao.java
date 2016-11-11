@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.yizhishang.base.dao.BaseDao;
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.plat.domain.UserPasswordLog;
 
 /**
@@ -24,14 +24,14 @@ public class UserPasswordLogDao extends BaseDao
 	
 	public void addLog(UserPasswordLog log)
 	{
-		DataRow dataRow = new DataRow();
+		DynaModel dataRow = new DynaModel();
 		dataRow.putAll(log.toMap());
-		getJdbcTemplate().insert("T_USER_PASSWORD_LOG", dataRow);
+		getJdbcTemplateUtil().insert("T_USER_PASSWORD_LOG", dataRow);
 	}
 	
 	public void deleteLog(int id)
 	{
-		getJdbcTemplate().delete("T_USER_PASSWORD_LOG", "LOG_ID", new Integer(id));
+		getJdbcTemplateUtil().delete("T_USER_PASSWORD_LOG", "LOG_ID", new Integer(id));
 	}
 	
     /**
@@ -45,11 +45,11 @@ public class UserPasswordLogDao extends BaseDao
 	public String getPwdValidity(String loginId)
 	{
 		String sql = "SELECT CREATE_DATE FROM T_USER_PASSWORD_LOG WHERE CREATE_BY = ? ORDER BY CREATE_DATE DESC";
-		return getJdbcTemplate().queryString(sql, new Object[] { loginId });
+		return getJdbcTemplateUtil().queryString(sql, new Object[] { loginId });
 	}
 	
-	public List<Object> queryLogByUserId(String uid)
+	public List<DynaModel> queryLogByUserId(String uid)
 	{
-		return getJdbcTemplate().query("SELECT LOG_ID FROM T_USER_PASSWORD_LOG WHERE CREATE_BY = ? ", new Object[]{uid});
+		return getJdbcTemplateUtil().queryForList("SELECT LOG_ID FROM T_USER_PASSWORD_LOG WHERE CREATE_BY = ? ", new Object[]{uid});
 	}
 }

@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.RequestHelper;
@@ -120,7 +120,7 @@ public class CatalogAction extends BaseAction
     public Result addField(HttpServletRequest request)
     {
         DynaForm form = normalize(request);
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.putAll(form);
         
         data.set("code", "EXT_FIELD" + data.getInt("id"));
@@ -183,10 +183,10 @@ public class CatalogAction extends BaseAction
         catalogService.delAttachByCatalogId(catalogId);
         
         //          String[] attachs = StringHelper.split(attachCatalogStr, "|");
-        DataRow data = null;
+        DynaModel data = null;
         for (int i = 0; i < attachs.length; i++)
         {
-            data = new DataRow();
+            data = new DynaModel();
             data.set("catalog_id", new Integer(catalogId));
             data.set("attach_catalog_id", attachs[i]);
             data.set("siteno", getSiteNo());
@@ -249,9 +249,9 @@ public class CatalogAction extends BaseAction
         DBPage page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
         
         //阅读权限
-        List<Object> user_right = null;
+        List<DynaModel> user_right = null;
         //栏目星级
-        List<Object> column_level = null;
+        List<DynaModel> column_level = null;
         
         if (page != null)
         {
@@ -309,7 +309,7 @@ public class CatalogAction extends BaseAction
     public String doAjaxCatalogTree()
     {
         //取所有子栏目信息
-        List<Object> wholeCatalogs = catalogService.findWholeCatalogById(1, getSiteNo());
+        List<DynaModel> wholeCatalogs = catalogService.findWholeCatalogById(1, getSiteNo());
         
         CatalogTreeManage treeManage = new CatalogTreeManage("radio", true);
         String html = treeManage.getChildrenTreeHtml(wholeCatalogs);
@@ -383,26 +383,26 @@ public class CatalogAction extends BaseAction
         int catalogId = getIntParameter("catalogId");
         
         //查询当前类别下，哪个栏目生成了计划
-        List<Object> attachList = catalogService.findAttachCatalog(catalogId, getSiteNo());
+        List<DynaModel> attachList = catalogService.findAttachCatalog(catalogId, getSiteNo());
         
         //将已经生成计划的栏目放入map中，一个栏目只能生成一种计划
         HashSet<String> attachMap = new HashSet<String>();
-        for (Iterator<Object> iter = attachList.iterator(); iter.hasNext();)
+        for (Iterator<DynaModel> iter = attachList.iterator(); iter.hasNext();)
         {
-            DataRow data = (DataRow) iter.next();
+            DynaModel data = (DynaModel) iter.next();
             attachMap.add(data.getString("attach_catalog_id"));
         }
         
         StringBuffer html = new StringBuffer();
         html.append("<li>");
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.set("catalog_id", "1");
         data.set("route", "1");
         data.set("name", "根目录");
         html.append(getRoleFunction(data, attachMap));
         
         //取所有子栏目信息
-        List<Object> childrenCatalog = catalogService.findWholeCatalogById(1, getSiteNo());
+        List<DynaModel> childrenCatalog = catalogService.findWholeCatalogById(1, getSiteNo());
         if (childrenCatalog != null)
         {
             html.append(getRoleTreeHtml(childrenCatalog, attachMap));
@@ -546,9 +546,9 @@ public class CatalogAction extends BaseAction
         DBPage page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
         
         //阅读权限
-        List<Object> user_right = null;
+        List<DynaModel> user_right = null;
         //栏目星级
-        List<Object> column_level = null;
+        List<DynaModel> column_level = null;
         
         if (page != null)
         {
@@ -599,7 +599,7 @@ public class CatalogAction extends BaseAction
         if (isPostBack())
         {
             normalize(form);
-            DataRow data = new DataRow();
+            DynaModel data = new DynaModel();
             data.putAll(form);
             
             String extendContent = data.getString("extend_content");
@@ -619,7 +619,7 @@ public class CatalogAction extends BaseAction
         else
         {
             int id = RequestHelper.getInt(getRequest(), "id");
-            DataRow data = customFieldService.findExtendFieldInfoById(id);
+            DynaModel data = customFieldService.findExtendFieldInfoById(id);
             if (data != null)
             {
                 String extend_content = data.getString("extend_content");
@@ -664,7 +664,7 @@ public class CatalogAction extends BaseAction
     public ModelAndView doListField(HttpServletRequest request)
     {
         int catalogId = RequestHelper.getInt(request, "catalogId");
-        List<Object> fieldList = customFieldService.findExtendFieldInfo(catalogId);
+        List<DynaModel> fieldList = customFieldService.findExtendFieldInfo(catalogId);
         setAttribute("fieldList", fieldList);
         ModelAndView mv = new ModelAndView("/WEB-INF/views/catalog/custom_field/list_field.jsp");
         return mv;
@@ -712,7 +712,7 @@ public class CatalogAction extends BaseAction
     public ModelAndView doSeo()
     {
         int catalogId = getIntParameter("catalogId");
-        DataRow dataRow = seoService.findSeoByCatalogid(catalogId, getSiteNo());
+        DynaModel dataRow = seoService.findSeoByCatalogid(catalogId, getSiteNo());
         if (dataRow != null)
         {
             form.putAll(dataRow);
@@ -853,7 +853,7 @@ public class CatalogAction extends BaseAction
      * @param attachMap
      * @return
      */
-    public String getRoleFunction(DataRow data, HashSet<String> attachMap)
+    public String getRoleFunction(DynaModel data, HashSet<String> attachMap)
     {
         StringBuffer buffer = new StringBuffer();
         int catalogId = data.getInt("catalog_id");
@@ -872,18 +872,18 @@ public class CatalogAction extends BaseAction
      * @return
      */
     @SuppressWarnings("unchecked")
-    private String getRoleTreeHtml(List<Object> list, HashSet<String> map)
+    private String getRoleTreeHtml(List<DynaModel> list, HashSet<String> map)
     {
         StringBuffer buffer = new StringBuffer();
         if (list != null)
         {
             buffer.append("<ul>");
-            for (Iterator<Object> iter = list.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = list.iterator(); iter.hasNext();)
             {
                 buffer.append("<li>");
-                DataRow data = (DataRow) iter.next();
+                DynaModel data = (DynaModel) iter.next();
                 buffer.append(getRoleFunction(data, map));
-                buffer.append(getRoleTreeHtml((List<Object>) data.getObject("children"), map));
+                buffer.append(getRoleTreeHtml((List<DynaModel>) data.getObject("children"), map));
                 buffer.append("</li>");
             }
             buffer.append("</ul>");
@@ -899,10 +899,10 @@ public class CatalogAction extends BaseAction
         //对提交上来的form进行处理
         DynaForm form = normalize(request);
         
-        DataRow dataRow = seoService.findSeoByCatalogid(catalogId, getSiteNo());
+        DynaModel dataRow = seoService.findSeoByCatalogid(catalogId, getSiteNo());
         if (dataRow == null)
         {
-            dataRow = new DataRow();
+            dataRow = new DynaModel();
             dataRow.putAll(form);
             
             dataRow.set("catalog_id", catalogId);

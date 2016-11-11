@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yizhishang.base.config.Configuration;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.FileHelper;
 import com.yizhishang.base.util.ReflectHelper;
 import com.yizhishang.base.util.SpringContextHolder;
@@ -56,10 +57,10 @@ public class CatalogPromulgate extends BasePromulgate
     * @param catalogId
     * @return
     */
-    private List<Object> cycFindListTemplateByCatalogId(int catalogId, String siteNo)
+    private List<DynaModel> cycFindListTemplateByCatalogId(int catalogId, String siteNo)
     {
         
-        List<Object> dataList = templateService.findUsableTemplate(catalogId, 2, siteNo);
+        List<DynaModel> dataList = templateService.findUsableTemplate(catalogId, 2, siteNo);
         if (dataList != null && dataList.size() > 0) //找到了，直接返回
         {
             return dataList;
@@ -84,7 +85,7 @@ public class CatalogPromulgate extends BasePromulgate
     * @param catalogId
     * @return
     */
-    private List<Object> findMainTemplateByCatalogId(int catalogId)
+    private List<DynaModel> findMainTemplateByCatalogId(int catalogId)
     {
         return findMainTemplateByCatalogId(catalogId, "");
     }
@@ -95,7 +96,7 @@ public class CatalogPromulgate extends BasePromulgate
     * @param siteNo
     * @return
     */
-    private List<Object> findMainTemplateByCatalogId(int catalogId, String siteNo)
+    private List<DynaModel> findMainTemplateByCatalogId(int catalogId, String siteNo)
     {
         return templateService.findUsableTemplate(catalogId, 1, siteNo);
     }
@@ -105,7 +106,7 @@ public class CatalogPromulgate extends BasePromulgate
     * @param catalogId
     * @return
     */
-    private List<Object> findOtherTemplateByCatalogId(int catalogId)
+    private List<DynaModel> findOtherTemplateByCatalogId(int catalogId)
     {
         return templateService.findUsableTemplate(catalogId, 4);
     }
@@ -150,7 +151,7 @@ public class CatalogPromulgate extends BasePromulgate
         * 第二步：若没有发布首页模板，则再查看该栏目下及其上级父目录中是否有信息列表模板，若有，则发布
         * 第三步：查看该栏目下是否有其它模板，若有，则发布所有其它模板
         */
-        List<Object> dataList = null;
+        List<DynaModel> dataList = null;
         String tempSite = catalog.getSiteNo();
         if (tempSite.indexOf("|") > 0)//如果有子站时，发布根栏目
         {
@@ -217,7 +218,7 @@ public class CatalogPromulgate extends BasePromulgate
         dataList = findOtherTemplateByCatalogId(catalogId);
         if (dataList != null && dataList.size() > 0)
         {
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
                 Template template = (Template) iter.next();
                 int templateId = template.getId();

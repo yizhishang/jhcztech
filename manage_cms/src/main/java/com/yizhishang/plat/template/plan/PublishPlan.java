@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.jdbc.JdbcTemplate;
+import com.yizhishang.base.domain.DynaModel;
+import com.yizhishang.base.jdbc.JdbcTemplateUtil;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
@@ -31,7 +31,7 @@ public class PublishPlan extends Thread
     
     private static Logger logger = LoggerFactory.getLogger(PublishPlan.class);
 
-    private static List<Object> dataList = null;
+    private static List<DynaModel> dataList = null;
     
     /**
     * 
@@ -82,16 +82,16 @@ public class PublishPlan extends Thread
     private void disposeTask()
     {
         String machineId = Configuration.getString("system.machineId");
-        JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        dataList = jdbcTemplate.query(
+        JdbcTemplateUtil jdbcTemplateUtil = SpringContextHolder.getBean("jdbcTemplateUtil");
+        dataList = jdbcTemplateUtil.queryForList(
                 "SELECT ID,CATALOG_ID,TYPE,RECURSION,TIME,PUBLISHTIME,MACHINE_ID FROM T_PUBLISH_PLAN WHERE MACHINE_ID = ? ORDER BY ID ASC",
                 new Object[] { machineId });
         if (dataList != null && dataList.size() > 0)
         {
-            DataRow data = null;
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            DynaModel data = null;
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
-                data = (DataRow) iter.next();
+                data = (DynaModel) iter.next();
                 if (data != null)
                 {
                     int type = data.getInt("type");//计划类型
@@ -152,7 +152,7 @@ public class PublishPlan extends Thread
     private void publishCatalog(int id, int catalogId, int recursion, String machineId)
     {
         //把要发布的栏目添加入发布队列
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         if (recursion == 0)
         {
             data.put("cmd_str", "C:" + catalogId);
@@ -176,9 +176,9 @@ public class PublishPlan extends Thread
         PublishQueueService publishQueueService = (PublishQueueService) SpringContextHolder.getBean("publishQueueService");
         publishQueueService.add(data);
         
-        JdbcTemplate template = new JdbcTemplate();
+        JdbcTemplateUtil jdbcTemplateUtil = SpringContextHolder.getBean("jdbcTemplateUtil");
         //发布完成，更新发布时间
-        template.update("UPDATE T_PUBLISH_PLAN SET PUBLISHTIME = ? WHERE ID = ?", new Object[] { DateHelper.formatDate(new Date()), new Integer(id) });
+        jdbcTemplateUtil.update("UPDATE T_PUBLISH_PLAN SET PUBLISHTIME = ? WHERE ID = ?", new Object[] { DateHelper.formatDate(new Date()), new Integer(id) });
     }
     
     @Override

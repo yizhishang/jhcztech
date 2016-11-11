@@ -10,6 +10,7 @@ import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.plat.dao.GroupDao;
 import com.yizhishang.plat.domain.Group;
+import com.yizhishang.plat.domain.User;
 
 /**
  * 描述: GroupServiceImpl.java
@@ -86,7 +87,7 @@ public class GroupService extends BaseService
      * 获得该组下的所有用户
      */
     
-    public List<Object> getGroupUser(int groupId)
+    public List<User> getGroupUser(int groupId)
     {
         return groupDao.getGroupUser(groupId);
     }

@@ -13,13 +13,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.ServletContextAware;
 
-import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.config.SysConfig;
-import com.yizhishang.base.jdbc.connection.Configure;
 import com.yizhishang.plat.system.Application;
-import com.yizhishang.plat.template.plan.PublishPlan;
-import com.yizhishang.plat.template.publish.PublishEngine;
-import com.yizhishang.timerengine.TaskManager;
 
 /**
  * 描述:
@@ -41,37 +35,37 @@ public class ApplicationLifecycleListener implements ApplicationContextAware, Se
     /**
     * 系统启动时初始化相应的数据
     */
-    @SuppressWarnings("static-access")
 	public void onApplicationEvent(ContextRefreshedEvent evt)
 	{
 		logger.info("4.1 => MyApplicationListener.onApplicationEvent");
         if (evt.getApplicationContext().getParent() == null) {
             logger.info("4.2 => MyApplicationListener.onApplicationEvent");
         }
+
+//        //读入数据库配置文件
+//		Configure.getInstance();
+//		
+//	    //读入所有配置信息
+//		SysConfig.getInstance().loadConfig();
+//		
+//		/**
+//         * 是否启动模板发布程序，0：不启动 1：启动
+//         */
+//		if (Configuration.getInt("system.isPublish") == 1)
+//		{
+//            //启动模板发布引擎
+//            PublishEngine pe = new PublishEngine();
+//            pe.run();
+//			
+//            //启动发布计划
+//			PublishPlan publishPlan = new PublishPlan();
+//			publishPlan.start();
+//			
+//            //启动任务管理器
+//            TaskManager tm = new TaskManager();
+//            tm.run();
+//		}
         
-        //读入数据库配置文件
-		Configure.getInstance();
-		
-	      //读入所有配置信息
-		SysConfig.getInstance().loadConfig();
-		
-		/**
-         * 是否启动模板发布程序，0：不启动 1：启动
-         */
-		if (Configuration.getInt("system.isPublish") == 1)
-		{
-            //启动模板发布引擎
-            PublishEngine pe = new PublishEngine();
-            pe.run();
-			
-            //启动发布计划
-			PublishPlan publishPlan = new PublishPlan();
-			publishPlan.start();
-			
-            //启动任务管理器
-            TaskManager tm = new TaskManager();
-            tm.run();
-		}
 	}
 
 	@Override

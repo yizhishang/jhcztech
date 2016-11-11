@@ -7,12 +7,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.dao.BaseDao;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.jdbc.session.Session;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Article;
 
@@ -31,53 +30,29 @@ public class ArticleDao extends BaseDao
     
     private static Logger logger = LoggerFactory.getLogger(ArticleDao.class);
     
+    @Transactional
     public int addArticle(Article article)
     {
-        Session session = null;
         try
         {
-            session = getSession();
-            session.beginTrans();
-            
             //添加文章基本信息
-            DataRow dataRow = new DataRow();
+            DynaModel dataRow = new DynaModel();
             dataRow.putAll(article.toMap());
             dataRow.remove("content");
-            session.insert("T_ARTICLE", dataRow);
+            getJdbcTemplateUtil().insert("T_ARTICLE", dataRow);
             
             //添加文章内容信息
-            DataRow contentRow = new DataRow();
-            if (1 == Configuration.getInt("system.isAutoIncrement"))
-            {
-                contentRow.set("article_id", session.getGeneratedKeys());
-                article.setId(new Integer(session.getGeneratedKeys()).intValue());
-            }
-            else
-            {
-                contentRow.set("article_id", article.getId());
-            }
+            DynaModel contentRow = new DynaModel();
+            contentRow.set("article_id", article.getId());
             contentRow.set("content", article.getContent());
-            session.insert("T_ARTICLE_CONTENT", contentRow);
+            getJdbcTemplateUtil().insert("T_ARTICLE_CONTENT", contentRow);
             
-            session.commitTrans();
             return article.getId();
         }
         catch (Exception ex)
         {
-            if (session != null)
-            {
-                session.rollbackTrans();
-            }
             logger.error(ex.getMessage());
             throw new RuntimeException(ex);
-        }
-        finally
-        {
-            if (session != null)
-            {
-                session.close();
-                session = null;
-            }
         }
     }
     
@@ -90,11 +65,11 @@ public class ArticleDao extends BaseDao
      * @param data 
      * @return
      */
-    public void addAuthor(DataRow data)
+    public void addAuthor(DynaModel data)
     {
         try
         {
-            getJdbcTemplate().insert("T_ARTICLE_AUTHOR", data);
+            getJdbcTemplateUtil().insert("T_ARTICLE_AUTHOR", data);
         }
         catch (Exception ex)
         {
@@ -115,7 +90,7 @@ public class ArticleDao extends BaseDao
     {
         try
         {
-            getJdbcTemplate().delete("T_ARTICLE_AUTHOR", "id", id);
+            getJdbcTemplateUtil().delete("T_ARTICLE_AUTHOR", "id", id);
         }
         catch (Exception ex)
         {
@@ -125,45 +100,29 @@ public class ArticleDao extends BaseDao
     
     public void deleteArticle(int articleId)
     {
-        Session session = null;
         try
         {
-            session = getSession();
-            session.beginTrans();
-            session.delete("T_ARTICLE", "article_id", new Integer(articleId));
-            session.delete("T_ARTICLE_CONTENT", "article_id", new Integer(articleId));
-            session.delete("T_ARTICLE_EXTEND_FIELD", "article_id", new Integer(articleId));//删除扩展字段
-            session.commitTrans();
+            getJdbcTemplateUtil().delete("T_ARTICLE", "article_id", new Integer(articleId));
+            getJdbcTemplateUtil().delete("T_ARTICLE_CONTENT", "article_id", new Integer(articleId));
+            getJdbcTemplateUtil().delete("T_ARTICLE_EXTEND_FIELD", "article_id", new Integer(articleId));//删除扩展字段
         }
         catch (Exception ex)
         {
-            if (session != null)
-            {
-                session.rollbackTrans();
-            }
             throw new RuntimeException(ex);
-        }
-        finally
-        {
-            if (session != null)
-            {
-                session.close();
-                session = null;
-            }
         }
     }
     
     public Article findArticleById(int articleId)
     {
         String sql = "select * from T_ARTICLE where article_id=?";
-        DataRow dataRow = getJdbcTemplate().queryMap(sql, new Object[] { new Integer(articleId) });
+        DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(articleId) });
         if (dataRow == null)
         {
             return null;
         }
         
         sql = "select content from T_ARTICLE_CONTENT where article_id=?";
-        String content = getJdbcTemplate().queryString(sql, new Object[] { new Integer(articleId) });
+        String content = getJdbcTemplateUtil().queryString(sql, new Object[] { new Integer(articleId) });
         Article article = new Article();
         article.fromMap(dataRow);
         article.setContent(content);
@@ -194,7 +153,7 @@ public class ArticleDao extends BaseDao
                 argList.add("%" + keyword + "%");
             }
             sql.append(" ORDER BY NAME");
-            return getJdbcTemplate().queryPage(sql.toString(), argList.toArray(), curPage, numPerPage);
+            return getJdbcTemplateUtil().queryPage(sql.toString(), argList.toArray(), curPage, numPerPage);
         }
         catch (Exception ex)
         {
@@ -210,7 +169,7 @@ public class ArticleDao extends BaseDao
      * @param catalogId 传0则视为查询所有已发布的文章
      * @return
      */
-    public List findPublishArticleById(int catalogId, int rows, int sortType)
+    public List<DynaModel> findPublishArticleById(int catalogId, int rows, int sortType)
     {
         try
         {
@@ -227,7 +186,7 @@ public class ArticleDao extends BaseDao
             }else if(sortType == 1){
             	sql.append(" ORDER BY T1.PUBLISH_DATE DESC");
             }
-            return getJdbcTemplate().query(sql.toString(), argList.toArray(), rows);
+            return getJdbcTemplateUtil().queryForList(sql.toString(), DynaModel.class, argList.toArray(), rows);
         }
         catch (Exception ex)
         {
@@ -244,14 +203,14 @@ public class ArticleDao extends BaseDao
      * @param catalogId
      * @return
      */
-    public List<Object> findUnionArtilceByCatalog(int catalogId)
+    public List<DynaModel> findUnionArtilceByCatalog(int catalogId)
     {
         try
         {
             List<String> argList = new ArrayList<String>();
             String sql = "SELECT C.CATALOG_ID FROM T_ARTICLE A,T_CATALOG C WHERE A.CATALOG_ID = C.CATALOG_ID AND C.ROUTE LIKE ? GROUP BY C.CATALOG_ID";
             argList.add("%" + catalogId + "%");
-            return getJdbcTemplate().query(sql, argList.toArray());
+            return getJdbcTemplateUtil().queryForList(sql, DynaModel.class, argList.toArray());
         }
         catch (Exception ex)
         {
@@ -308,16 +267,16 @@ public class ArticleDao extends BaseDao
         }
         
         sqlBuffer.append(" order by is_head desc,create_date desc,article_id desc ");
-        page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+        page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
         
         if (page != null)
         {
-            List<Object> dataList = page.getData();
-            List<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+            List<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
                 Article article = new Article();
-                DataRow row = (DataRow) iter.next();
+                DynaModel row = (DynaModel) iter.next();
                 article.fromMap(row);
                 newDataList.add(article);
             }
@@ -364,7 +323,7 @@ public class ArticleDao extends BaseDao
         sqlBuffer.append(" and c.branchno = ?");
         argList.add(branchno);
         sqlBuffer.append(" order by a.article_id desc ");
-        page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+        page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
         
         return page;
     }
@@ -384,7 +343,7 @@ public class ArticleDao extends BaseDao
             List<Integer> argList = new ArrayList<Integer>();
             String sql = "SELECT ARTICLE_ID FROM T_ARTICLE_CONTENT WHERE ARTICLE_ID = ?";
             argList.add(new Integer(articleId));
-            DataRow data = getJdbcTemplate().queryMap(sql, argList.toArray());
+            DynaModel data = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
             if (data != null && StringHelper.isNotEmpty(data.getString("article_id")))
             {
                 return true;
@@ -416,7 +375,7 @@ public class ArticleDao extends BaseDao
             List<String> argList = new ArrayList<String>();
             String sql = "SELECT ID FROM T_ARTICLE_AUTHOR WHERE NAME = ?";
             argList.add(name);
-            DataRow data = getJdbcTemplate().queryMap(sql, argList.toArray());
+            DynaModel data = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
             return (data == null) ? false : true;
         }
         catch (Exception ex)
@@ -429,64 +388,47 @@ public class ArticleDao extends BaseDao
     public boolean isEndNode(int catalogId)
     {
         String sql = "select * from T_Catalog where parent_id=?";
-        DataRow dataRow = getJdbcTemplate().queryMap(sql, new Object[] { new Integer(catalogId) });
+        DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(catalogId) });
         return (dataRow == null);
     }
     
     public boolean isTitleExist(String title)
     {
         String sql = "select * from T_ARTICLE where title=?";
-        DataRow dataRow = getJdbcTemplate().queryMap(sql, new Object[] { title });
+        DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { title });
         return (dataRow != null);
     }
     
     public void updateArticle(Article article)
     {
-        Session session = null;
         try
         {
-            session = getSession();
-            session.beginTrans();
-            
-            DataRow dataRow = new DataRow();
+            DynaModel dataRow = new DynaModel();
             dataRow.putAll(article.toMap());
             
             //若设了文章的内容字段，则需要先更新内容字段
             if (dataRow.containsKey("content"))
             {
-                DataRow contentRow = new DataRow();
+                DynaModel contentRow = new DynaModel();
                 contentRow.set("content", article.getContent());
                 //判断文章ID是否存在于文章内容表中，如果有则修改，没有就增加  2009-6-1 modify
                 if (isArticleContent(dataRow.getInt("article_id")))
                 {
-                    session.update("T_ARTICLE_CONTENT", contentRow, "article_id", new Integer(article.getId()));
+                	getJdbcTemplateUtil().update("T_ARTICLE_CONTENT", contentRow, "article_id", new Integer(article.getId()));
                 }
                 else
                 {
                     contentRow.set("article_id", dataRow.getInt("article_id"));
-                    session.insert("T_ARTICLE_CONTENT", contentRow);
+                    getJdbcTemplateUtil().insert("T_ARTICLE_CONTENT", contentRow);
                 }
             }
             
             dataRow.remove("content");
-            session.update("T_ARTICLE", dataRow, "article_id", new Integer(article.getId()));
-            session.commitTrans();
+            getJdbcTemplateUtil().update("T_ARTICLE", dataRow, "article_id", new Integer(article.getId()));
         }
         catch (Exception ex)
         {
-            if (session != null)
-            {
-                session.rollbackTrans();
-            }
             throw new RuntimeException(ex);
-        }
-        finally
-        {
-            if (session != null)
-            {
-                session.close();
-                session = null;
-            }
         }
     }
     
@@ -494,16 +436,16 @@ public class ArticleDao extends BaseDao
 	 * 查询当前文章的上一条和下一条数据
 	 * @return
 	 */
-	public DataRow findUpAndDown(String curArticleId,String catalog_id)
+	public DynaModel findUpAndDown(String curArticleId,String catalog_id)
 	{
 		String sql ="SELECT * FROM (SELECT ARTICLE_ID, LEAD(ARTICLE_ID, 1, 0) OVER(ORDER BY PUBLISH_DATE DESC) AS DOWN_ID, LAG(ARTICLE_ID, 1, 0) OVER(ORDER BY PUBLISH_DATE DESC) AS UP_ID FROM T_ARTICLE WHERE CATALOG_ID = ? AND STATE = 3) WHERE ARTICLE_ID = ?";
-		DataRow row = getJdbcTemplate().queryMap(sql, new Object[]{catalog_id,curArticleId});
-		DataRow temp = new DataRow();
+		DynaModel row = getJdbcTemplateUtil().queryMap(sql, new Object[]{catalog_id,curArticleId});
+		DynaModel temp = new DynaModel();
 		sql = "select title,url from t_article where article_id = ?";
-		DataRow down  = getJdbcTemplate().queryMap(sql, new Object[]{row.getString("down_id")});
+		DynaModel down  = getJdbcTemplateUtil().queryMap(sql, new Object[]{row.getString("down_id")});
 		temp.set("downTitle", row.getString("down_id").equals("0")?"没有了":down.getString("title"));
 		temp.set("downUrl", row.getString("down_id").equals("0")?"javascript:":down.getString("url"));
-		DataRow up  = getJdbcTemplate().queryMap(sql, new Object[]{row.getString("up_id")});
+		DynaModel up  = getJdbcTemplateUtil().queryMap(sql, new Object[]{row.getString("up_id")});
 		temp.set("upTitle", row.getString("up_id").equals("0")?"没有了":up.getString("title"));
 		temp.set("upUrl", row.getString("up_id").equals("0")?"javascript:":up.getString("url"));
 		return temp;

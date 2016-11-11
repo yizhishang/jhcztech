@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 
@@ -24,26 +24,26 @@ public class PublishPlanService extends BaseService
 {
 	
 	
-	public void addPublishPlan(DataRow data)
+	public void addPublishPlan(DynaModel data)
 	{
 		String id = getSeqValue("T_PUBLISH_PLAN");
 		data.set("id", id);
-		getJdbcTemplate().insert("T_PUBLISH_PLAN", data);
+		getJdbcTemplateUtil().insert("T_PUBLISH_PLAN", data);
 	}
 	
 	public void delAllPublishPlan()
 	{
-		getJdbcTemplate().update("DELETE FROM T_PUBLISH_PLAN");
+		getJdbcTemplateUtil().update("DELETE FROM T_PUBLISH_PLAN");
 	}
 	
 	public void delPublishPlan(int id)
 	{
-		getJdbcTemplate().delete("T_PUBLISH_PLAN", "id", new Integer(id));
+		getJdbcTemplateUtil().delete("T_PUBLISH_PLAN", "id", new Integer(id));
 	}
 	
-	public void editPublishPlan(DataRow data)
+	public void editPublishPlan(DynaModel data)
 	{
-		getJdbcTemplate().update("T_PUBLISH_PLAN", data, "id", data.getString("id"));
+		getJdbcTemplateUtil().update("T_PUBLISH_PLAN", data, "id", data.getString("id"));
 	}
 	
 	public DBPage findPublishPlan(int curPage, int numPerPage, String catalogId, String name)
@@ -62,22 +62,22 @@ public class PublishPlanService extends BaseService
 		}
 		strBuf.append("  ORDER BY B.ORDERLINE");
 		
-		return getJdbcTemplate().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
+		return getJdbcTemplateUtil().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
 	}
 	
-	public DataRow findPublishPlanById(String id)
+	public DynaModel findPublishPlanById(String id)
 	{
         ArrayList<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT A.*,B.NAME FROM T_PUBLISH_PLAN A,T_CATALOG B WHERE A.CATALOG_ID = B.CATALOG_ID AND A.ID = ?";
 		argList.add(id);
-		return getJdbcTemplate().queryMap(sql, argList.toArray());
+		return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 	}
 	
-	public List<Object> findPublishPlanByType(String type)
+	public List<DynaModel> findPublishPlanByType(String type)
 	{
         ArrayList<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT * FROM T_PUBLISH_PLAN WHERE TYPE = ?";
 		argList.add(type);
-		return getJdbcTemplate().query(sql, argList.toArray());
+		return getJdbcTemplateUtil().queryForList(sql, argList.toArray());
 	}
 }

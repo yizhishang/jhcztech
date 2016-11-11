@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 
@@ -32,11 +32,11 @@ public class TemplateVarService extends BaseService
     * @return void
     * @throws
     */
-    public void addTemplateVar(DataRow data)
+    public void addTemplateVar(DynaModel data)
     {
         String id = getSeqValue("T_TEMPLATE_VAR");
         data.set("id", id);
-        getJdbcTemplate().insert("T_TEMPLATE_VAR", data);
+        getJdbcTemplateUtil().insert("T_TEMPLATE_VAR", data);
     }
     
     /**
@@ -50,7 +50,7 @@ public class TemplateVarService extends BaseService
     */
     public void deleteTemplateVar(int id)
     {
-        getJdbcTemplate().delete("T_TEMPLATE_VAR", "id", new Integer(id));
+        getJdbcTemplateUtil().delete("T_TEMPLATE_VAR", "id", new Integer(id));
     }
     
     /**
@@ -62,20 +62,20 @@ public class TemplateVarService extends BaseService
     * @return void
     * @throws
     */
-    public void editTemplateVar(DataRow data)
+    public void editTemplateVar(DynaModel data)
     {
-        getJdbcTemplate().update("T_TEMPLATE_VAR", data, "id", data.getString("id"));
+        getJdbcTemplateUtil().update("T_TEMPLATE_VAR", data, "id", data.getString("id"));
     }
     
     /**
     * 查找所有可用的模板变量
     * @return
     */
-    public List<Object> findAllUsableItem()
+    public List<DynaModel> findAllUsableItem()
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(new Integer(1));
-        return getJdbcTemplate().query("select * from T_TEMPLATE_VAR where state=?", argList.toArray());
+        return getJdbcTemplateUtil().queryForList("select * from T_TEMPLATE_VAR where state=?", argList.toArray());
     }
     
     /**
@@ -101,7 +101,7 @@ public class TemplateVarService extends BaseService
             argList.add(siteNo);
         }
         strBuf.append(" ORDER BY ID DESC");
-        return getJdbcTemplate().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
+        return getJdbcTemplateUtil().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
     }
     
     /**
@@ -110,15 +110,15 @@ public class TemplateVarService extends BaseService
     * 作者:	 
     * 创建日期: 2010-1-19
     * 创建时间: 下午04:06:55
-    * @return DataRow
+    * @return DynaModel
     * @throws
     */
-    public DataRow findTemplateVarById(int id, String siteNo)
+    public DynaModel findTemplateVarById(int id, String siteNo)
     {
         List<Object> argList = new ArrayList<Object>();
         String sql = "SELECT * FROM T_TEMPLATE_VAR WHERE ID = ? AND SITENO = ?";
         argList.add(new Integer(id));
         argList.add(siteNo);
-        return getJdbcTemplate().queryMap(sql, argList.toArray());
+        return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
     }
 }

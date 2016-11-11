@@ -2,6 +2,8 @@ package com.yizhishang.base.jdbc;
 
 import java.util.List;
 
+import com.yizhishang.base.domain.DynaModel;
+
 /**
  * 描述:	 数据页，方便分页数据存取
  * 版权:	 Copyright (c) 2015
@@ -36,7 +38,7 @@ public class DBPage
     private int lastIndex;
     
     //结果集存放List
-    private List<Object> dataList;
+    private List<DynaModel> dataList;
     
     private boolean firstFlag = true;
     
@@ -114,7 +116,7 @@ public class DBPage
      * 获得分页数据
      * @return
      */
-    public List<Object> getData()
+    public List<DynaModel> getData()
     {
         if (dataList != null && dataList.size() > getNumPerPage())
         {
@@ -273,7 +275,7 @@ public class DBPage
      * 设置分页对象的数据
      * @param dataList
      */
-    public void setData(List<Object> dataList)
+    public void setData(List<DynaModel> dataList)
     {
         this.dataList = dataList;
     }

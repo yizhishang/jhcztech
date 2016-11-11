@@ -8,10 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.dao.BaseDao;
-import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.jdbc.JdbcTemplate;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Catalog;
 
@@ -37,28 +35,16 @@ public class CatalogDao extends BaseDao
 	* @时间：2010-04-02 17:11:33
 	* @param data
 	*/
-	public void addAttachCatalog(DataRow data)
+	public void addAttachCatalog(DynaModel data)
 	{
-		getJdbcTemplate().insert("T_PUBLISH_ATTACH", data);
+		getJdbcTemplateUtil().insert("T_PUBLISH_ATTACH", data);
 	}
 	
 	public void addCatalog(Catalog catalog)
 	{
-		JdbcTemplate jdbcTempate = getJdbcTemplate();
-		DataRow dataRow = new DataRow();
+		DynaModel dataRow = new DynaModel();
 		dataRow.putAll(catalog.toMap());
-		jdbcTempate.insert("T_CATALOG", dataRow);
-		if (1 == Configuration.getInt("system.isAutoIncrement"))
-		{
-			try
-			{
-				catalog.setId(Integer.parseInt(jdbcTempate.getGeneratedKeys()));
-			}
-			catch (Exception ex)
-			{
-				logger.error(ex.getMessage());
-			}
-		}
+		getJdbcTemplateUtil().insert("T_CATALOG", dataRow);
 	}
 	
 	/**
@@ -70,12 +56,12 @@ public class CatalogDao extends BaseDao
 	*/
 	public void delAttachByCatalogId(int catalogId)
 	{
-		getJdbcTemplate().delete("T_PUBLISH_ATTACH", "catalog_id", new Integer(catalogId));
+		getJdbcTemplateUtil().delete("T_PUBLISH_ATTACH", "catalog_id", new Integer(catalogId));
 	}
 	
 	public void deleteCatalog(int catalogId)
 	{
-		getJdbcTemplate().delete("T_CATALOG", "catalog_id", new Integer(catalogId));
+		getJdbcTemplateUtil().delete("T_CATALOG", "catalog_id", new Integer(catalogId));
 	}
 	
 	/**
@@ -86,19 +72,19 @@ public class CatalogDao extends BaseDao
 	* @param catalogId
 	* @return
 	*/
-	public List<Object> findAttachCatalog(int catalogId, String siteNo)
+	public List<DynaModel> findAttachCatalog(int catalogId, String siteNo)
 	{
 		List<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT * FROM T_PUBLISH_ATTACH WHERE CATALOG_ID = ? AND SITENO = ?";
 		argList.add(new Integer(catalogId));
 		argList.add(siteNo);
-		return getJdbcTemplate().query(sql, argList.toArray());
+		return getJdbcTemplateUtil().queryForList(sql, DynaModel.class, argList.toArray());
 	}
 	
 	public Catalog findCatalogById(int catalogId)
 	{
 		String sql = "select * from T_CATALOG where catalog_id=?";
-		DataRow dataRow = getJdbcTemplate().queryMap(sql, new Object[] { new Integer(catalogId) });
+		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(catalogId) });
 		if (dataRow == null)
 			return null;
 		Catalog catalog = new Catalog();
@@ -116,8 +102,8 @@ public class CatalogDao extends BaseDao
 			sql += " and siteno like ?";
 			argList.add("%" + siteno + "%");
 		}
-		//DataRow dataRow = getJdbcTemplate().queryMap(sql, new Object[]{new Integer(catalogId)});
-		DataRow dataRow = getJdbcTemplate().queryMap(sql, argList.toArray());
+		//DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[]{new Integer(catalogId)});
+		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 		if (dataRow == null)
 			return null;
 		Catalog catalog = new Catalog();
@@ -140,7 +126,7 @@ public class CatalogDao extends BaseDao
 		String sql = "SELECT * FROM T_CATALOG WHERE CATALOG_NO = ? AND SITENO = ?";
 		argList.add(catalogNo);
 		argList.add(siteNo);
-		DataRow dataRow = getJdbcTemplate().queryMap(sql, argList.toArray());
+		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 		
 		if (dataRow == null)
 			return null;
@@ -162,13 +148,13 @@ public class CatalogDao extends BaseDao
 		ArrayList<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT * FROM T_CATALOG WHERE ROUTE LIKE ? ORDER BY CATALOG_ID ";
 		argList.add("%" + catalogId + "%");
-		List<Object> dataList = getJdbcTemplate().query(sql, argList.toArray());
+		List<DynaModel> dataList = getJdbcTemplateUtil().queryForList(sql, DynaModel.class, argList.toArray());
 		ArrayList<Catalog> newDataList = new ArrayList<Catalog>();
 		if (dataList != null)
 		{
-			for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+			for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
 			{
-				DataRow dataRow = (DataRow) iter.next();
+				DynaModel dataRow = (DynaModel) iter.next();
 				Catalog catalog = new Catalog();
 				catalog.fromMap(dataRow);
 				newDataList.add(catalog);
@@ -180,20 +166,8 @@ public class CatalogDao extends BaseDao
 	public List<Catalog> findChildrenById(int catalogId)
 	{
 		String sql = "select * from T_CATALOG where parent_id=? order by orderline";
-		
-		List<Object> dataList = getJdbcTemplate().query(sql, new Object[] { new Integer(catalogId) });
-		ArrayList<Catalog> newDataList = new ArrayList<Catalog>();
-		if (dataList != null)
-		{
-			for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
-			{
-				DataRow dataRow = (DataRow) iter.next();
-				Catalog catalog = new Catalog();
-				catalog.fromMap(dataRow);
-				newDataList.add(catalog);
-			}
-		}
-		return newDataList;
+		List<Catalog> dataList = getJdbcTemplateUtil().queryForList(sql, Catalog.class, new Object[] { new Integer(catalogId) });
+		return dataList;
 	}
 	
 	public List<Catalog> findChildrenById(int catalogId, String siteNo)
@@ -208,19 +182,8 @@ public class CatalogDao extends BaseDao
 		}
 		sql += " order by orderline";
 		
-		List<Object> dataList = getJdbcTemplate().query(sql, argList.toArray());
-		ArrayList<Catalog> newDataList = new ArrayList<Catalog>();
-		if (dataList != null)
-		{
-			for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
-			{
-				DataRow dataRow = (DataRow) iter.next();
-				Catalog catalog = new Catalog();
-				catalog.fromMap(dataRow);
-				newDataList.add(catalog);
-			}
-		}
-		return newDataList;
+		List<Catalog> dataList = getJdbcTemplateUtil().queryForList(sql, Catalog.class, argList.toArray());
+		return dataList;
 	}
 	
 	/**
@@ -239,7 +202,7 @@ public class CatalogDao extends BaseDao
 			String sql = "SELECT COUNT(CATALOG_ID) FROM T_CATALOG WHERE PARENT_ID = ?";
 			List<Object> argList = new ArrayList<Object>();
 			argList.add(new Integer(parentId));
-			return getJdbcTemplate().queryInt(sql, argList.toArray());
+			return getJdbcTemplateUtil().queryInt(sql, argList.toArray());
 		}
 		catch (Exception ex)
 		{
@@ -253,8 +216,8 @@ public class CatalogDao extends BaseDao
 		ArrayList<Object> argList = new ArrayList<Object>();
 		String sql = "select * from T_CATALOG where siteno like ? and parent_id=0";
 		argList.add("%" + siteNo + "%");
-		//DataRow dataRow = getJdbcTemplate().queryMap(sql, new Object[]{siteNo});
-		DataRow dataRow = getJdbcTemplate().queryMap(sql, argList.toArray());
+		//DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[]{siteNo});
+		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 		if (dataRow == null)
 			return null;
 		Catalog catalog = new Catalog();
@@ -267,7 +230,7 @@ public class CatalogDao extends BaseDao
 	* @param route    线路
 	* @return
 	*/
-	public List<Object> findRouteCatalogById(int catalogId, String siteNo)
+	public List<DynaModel> findRouteCatalogById(int catalogId, String siteNo)
 	{
 		ArrayList<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT CATALOG_ID,PARENT_ID,NAME,CATALOG_NO,ROUTE,LINK_URL,CHILDRENNUM FROM T_CATALOG WHERE STATE = 1 AND ROUTE like ? AND SITENO = ? ORDER BY ORDERLINE";
@@ -281,13 +244,13 @@ public class CatalogDao extends BaseDao
 		}
 		
 		argList.add(siteNo);
-		return getJdbcTemplate().query(sql, argList.toArray());
+		return getJdbcTemplateUtil().queryForList(sql, DynaModel.class, argList.toArray());
 	}
 	
 	public Catalog getParent(int catalogId)
 	{
 		String sql = "select parent_id from T_CATALOG where catalog_id=?";
-		int parentId = getJdbcTemplate().queryInt(sql, new Object[] { new Integer(catalogId) });
+		int parentId = getJdbcTemplateUtil().queryInt(sql, new Object[] { new Integer(catalogId) });
 		if (parentId > 0)
 			return findCatalogById(parentId);
 		else
@@ -311,9 +274,9 @@ public class CatalogDao extends BaseDao
 	
 	public void updateCatalog(Catalog catalog)
 	{
-		DataRow dataRow = new DataRow();
+		DynaModel dataRow = new DynaModel();
 		dataRow.putAll(catalog.toMap());
-		getJdbcTemplate().update("T_CATALOG", dataRow, "catalog_id", new Integer(catalog.getId()));
+		getJdbcTemplateUtil().update("T_CATALOG", dataRow, "catalog_id", new Integer(catalog.getId()));
 	}
 	
 	/**
@@ -331,6 +294,6 @@ public class CatalogDao extends BaseDao
 		List<Object> argList = new ArrayList<Object>();
 		argList.add(new Integer(childrennum));
 		argList.add(new Integer(catalogId));
-		getJdbcTemplate().update(sql, argList.toArray());
+		getJdbcTemplateUtil().update(sql, argList.toArray());
 	}
 }

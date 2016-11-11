@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.yizhishang.base.dao.BaseDao;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Site;
 
@@ -32,20 +32,20 @@ public class SiteDao extends BaseDao
 
     public void addSite(Site site)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         dataRow.putAll(site.toMap());
-        getJdbcTemplate().insert("T_SITE", dataRow);
+        getJdbcTemplateUtil().insert("T_SITE", dataRow);
     }
 
     public void deleteSite(int id)
     {
-        getJdbcTemplate().delete("T_SITE", "id", new Integer(id));
+        getJdbcTemplateUtil().delete("T_SITE", "id", new Integer(id));
     }
 
-    public List<Object> findAllSiteInfo()
+    public List<DynaModel> findAllSiteInfo()
     {
         String sql = "select * from t_site where state='1' order by id";
-        List<Object> list = getJdbcTemplate().query(sql);
+        List<DynaModel> list = getJdbcTemplateUtil().queryForList(sql, DynaModel.class);
         return list;
     }
 
@@ -56,7 +56,7 @@ public class SiteDao extends BaseDao
      */
     public Site findSiteById(int id)
     {
-        DataRow dataRow = getJdbcTemplate().queryMap(FIND_SITE_BY_ID, new Object[]{new Integer(id)});
+        DynaModel dataRow = getJdbcTemplateUtil().queryMap(FIND_SITE_BY_ID, new Object[]{new Integer(id)});
         if (dataRow == null)
             return null;
         Site site = new Site();
@@ -74,7 +74,7 @@ public class SiteDao extends BaseDao
      */
     public Site findSiteBySiteName(String siteName)
     {
-    	DataRow row = getJdbcTemplate().queryMap(FIND_SITE_BY_SITENAME, new Object[]{siteName});
+    	DynaModel row = getJdbcTemplateUtil().queryMap(FIND_SITE_BY_SITENAME, new Object[]{siteName});
         if (row != null)
         {
             Site site = new Site();
@@ -84,29 +84,22 @@ public class SiteDao extends BaseDao
         return null;
     }
 
-    public List<Object> findSiteBySiteno(String siteno)
+    public List<DynaModel> findSiteBySiteno(String siteno)
     {
         String sql = "select * from t_site where siteno in (" + siteno + ") and state='1' order by id";
-        List<Object> list = getJdbcTemplate().query(sql);
+        List<DynaModel> list = getJdbcTemplateUtil().queryForList(sql, DynaModel.class);
         return list;
     }
 
     public Site findSiteBySiteNO(String siteNO)
     {
-        DataRow row = getJdbcTemplate().queryMap(FIND_SITE_BY_SITENO, new Object[]{siteNO});
-        if (row != null)
-        {
-            Site site = new Site();
-            site.fromMap(row);
-            return site;
-        }
-        return null;
+    	return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_SITENO, Site.class, new Object[]{siteNO});
     }
 
     public boolean findSiteIsMain(String isMain)
     {
         String sql = "select is_main from t_site where is_main=?";
-        List<Object> list = getJdbcTemplate().query(sql, new Object[] { isMain });
+        List<DynaModel> list = getJdbcTemplateUtil().queryForList(sql, DynaModel.class, new Object[] { isMain });
         if(list.size() == 0)
         {
             return false;
@@ -116,16 +109,7 @@ public class SiteDao extends BaseDao
 
     public List<Site> getAllSite()
     {
-        List<Object> siteList = getJdbcTemplate().query(GET_ALL);
-        ArrayList<Site> newSiteList = new ArrayList<Site>();
-        for (Iterator<Object> iter = siteList.iterator(); iter.hasNext();)
-        {
-            Site site = new Site();
-            DataRow row = (DataRow) iter.next();
-            site.fromMap(row);
-            newSiteList.add(site);
-        }
-        return newSiteList;
+        return getJdbcTemplateUtil().queryForList(GET_ALL, Site.class);
     }
 
     public DBPage getPageData(int curPage, int numPerPage, String keyword)
@@ -147,16 +131,16 @@ public class SiteDao extends BaseDao
             argList.add("%" + keyword + "%");
         }
         sqlBuffer.append(" order by id desc ");
-        page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+        page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 
         if (page != null)
         {
-            List<Object> dataList = page.getData();
-            ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+            ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
                 Site site = new Site();
-                DataRow row = (DataRow) iter.next();
+                DynaModel row = (DynaModel) iter.next();
                 site.fromMap(row);
                 newDataList.add(site);
             }
@@ -172,8 +156,8 @@ public class SiteDao extends BaseDao
      */
     public void updateSite(Site site)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         dataRow.putAll(site.toMap());
-        getJdbcTemplate().update("T_SITE", dataRow, "id", new Integer(site.getId()));
+        getJdbcTemplateUtil().update("T_SITE", dataRow, "id", new Integer(site.getId()));
     }
 }

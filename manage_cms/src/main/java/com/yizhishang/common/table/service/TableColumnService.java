@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.common.table.consts.Consts;
@@ -14,7 +14,7 @@ import com.yizhishang.common.table.consts.Consts;
 public class TableColumnService extends BaseService
 {
     
-    public void importCols(DataRow tableBean)
+    public void importCols(DynaModel tableBean)
     {
         if (tableBean != null && tableBean.get("name_en") != null)
         {
@@ -22,8 +22,8 @@ public class TableColumnService extends BaseService
             ArrayList<Object> argList = new ArrayList<Object>();
             argList.add(table_name_en.toUpperCase());
             String sql = "select * from user_tab_columns where Table_Name=?";
-            List<Object> cols = getJdbcTemplate().query(sql, argList.toArray());
-            DataRow colBean = new DataRow();
+            List<DynaModel> cols = getJdbcTemplateUtil().queryForList(sql, DynaModel.class, argList.toArray());
+            DynaModel colBean = new DynaModel();
             colBean.set("table_name_en", table_name_en.toLowerCase());
             colBean.set("table_name_ch", tableBean.getString("name_ch"));
             colBean.set("table_id", tableBean.getString("id"));
@@ -45,7 +45,7 @@ public class TableColumnService extends BaseService
             delArgList.add(tableBean.getString("id"));
             for (int i = 0; cols != null && i < cols.size(); i++)
             {
-                DataRow col = (DataRow) cols.get(i);
+                DynaModel col = (DynaModel) cols.get(i);
                 colBean.set("name_en", col.getString("column_name").toLowerCase());
                 colBean.set("name_ch", col.getString("column_name").toLowerCase());
                 colBean.set("orderno", i);
@@ -68,7 +68,7 @@ public class TableColumnService extends BaseService
                 colstr = colstr.substring(1);
                 deleteSql += " and name_en not in (" + colstr + ")";
             }
-            getJdbcTemplate().update(deleteSql, delArgList.toArray());
+            getJdbcTemplateUtil().update(deleteSql, delArgList.toArray());
         }
     }
     
@@ -79,7 +79,7 @@ public class TableColumnService extends BaseService
         argList.add(table_name_en);
         argList.add(name_en);
         String sql = "select count(*) from t_b_table_column where table_name_en=? and name_en=?";
-        int num = getJdbcTemplate().queryInt(sql, argList.toArray());
+        int num = getJdbcTemplateUtil().queryInt(sql, argList.toArray());
         if (num > 0)
         {
             flag = true;
@@ -87,37 +87,37 @@ public class TableColumnService extends BaseService
         return flag;
     }
     
-    private void add(DataRow data)
+    private void add(DynaModel data)
     {
         String id = getSeqValue("t_b_table_column");
         data.set("id", id);
-        getJdbcTemplate().insert("t_b_table_column", data);
+        getJdbcTemplateUtil().insert("t_b_table_column", data);
     }
     
-    public DataRow load(int id)
+    public DynaModel load(int id)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(id);
         String sql = "select * from t_b_table_column where id=?";
-        DataRow result = getJdbcTemplate().queryMap(sql, argList.toArray());
+        DynaModel result = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
         return result;
     }
     
-    public void update(DataRow[] beans)
+    public void update(DynaModel[] beans)
     {
         for (int i = 0; beans != null && i < beans.length; i++)
         {
-            DataRow col = beans[i];
+            DynaModel col = beans[i];
             int id = col.getInt("id");
-            getJdbcTemplate().update("t_b_table_column", col, "id", new Integer(id));
+            getJdbcTemplateUtil().update("t_b_table_column", col, "id", new Integer(id));
         }
     }
     
     // 数据字典的select
-    public List<Object> getEnumTypeList()
+    public List<DynaModel> getEnumTypeList()
     {
         String sql = "select distinct ta.enum_name,ta.enum_value from t_enum_type ta right join t_enum_value tb on ta.enum_value=tb.enum_type order by ta.enum_name";
-        return getJdbcTemplate().query(sql);
+        return getJdbcTemplateUtil().queryForList(sql, DynaModel.class);
     }
     
     // 数据字段选中的项
@@ -127,31 +127,31 @@ public class TableColumnService extends BaseService
         if (!StringHelper.isEmpty(enum_condition))
         {
             String sql = "select distinct enum_type from t_enum_value where 1=1 " + enum_condition;
-            result = getJdbcTemplate().queryString(sql);
+            result = getJdbcTemplateUtil().queryString(sql);
         }
         return result;
     }
     
     // 查出当前表的字段
-    public List<Object> getTableCols(int colid)
+    public List<DynaModel> getTableCols(int colid)
     {
         String sql = "select tb.name_en,tb.name_ch from t_b_table_column tb left join t_b_table_column ta on ta.table_id=tb.table_id and ta.id<>tb.id where ta.id=? order by tb.orderno";
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(colid);
-        List<Object> cols = getJdbcTemplate().query(sql, argList.toArray());
+        List<DynaModel> cols = getJdbcTemplateUtil().queryForList(sql, DynaModel.class, argList.toArray());
         return cols;
     }
     
-    public List<Object> getTableCols(String table_name_en)
+    public List<DynaModel> getTableCols(String table_name_en)
     {
         String sql = "select * from user_tab_columns where Table_Name=?";
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(table_name_en.toUpperCase());
-        List<Object> cols = getJdbcTemplate().query(sql, argList.toArray());
+        List<DynaModel> cols = getJdbcTemplateUtil().queryForList(sql, DynaModel.class, argList.toArray());
         return cols;
     }
     
-    public List<Object> getListData(int table_id, String table_name_en, String table_name_ch)
+    public List<DynaModel> getListData(int table_id, String table_name_en, String table_name_ch)
     {
         StringBuffer sqlBuf = new StringBuffer();
         sqlBuf.append("select * from t_b_table_column where table_id=? ");
@@ -168,10 +168,10 @@ public class TableColumnService extends BaseService
             argList.add("%" + table_name_ch + "%");
         }
         sqlBuf.append(" order by orderno ");
-        return getJdbcTemplate().query(sqlBuf.toString(), argList.toArray());
+        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), DynaModel.class, argList.toArray());
     }
     
-    public List<Object> getOptionBeans(DataRow bean)
+    public List<DynaModel> getOptionBeans(DynaModel bean)
     {
         String select_value = bean.getString("select_value");
         String select_text = bean.getString("select_text");
@@ -186,7 +186,7 @@ public class TableColumnService extends BaseService
         {
             orderbyStr = "sortnum";
         }
-        List<Object> list = null;
+        List<DynaModel> list = null;
         if (!StringHelper.isEmpty(select_table) && !StringHelper.isEmpty(select_text) && !StringHelper.isEmpty(select_value))
         {
             // 找出配置的字段的值列表
@@ -201,7 +201,7 @@ public class TableColumnService extends BaseService
                 sql += " order by " + orderbyStr;
             }
             BaseService bservice = new BaseService();
-            list = bservice.getJdbcTemplate().query(sql);
+            list = bservice.getJdbcTemplateUtil().queryForList(sql, DynaModel.class);
         }
         return list;
     }
@@ -211,7 +211,7 @@ public class TableColumnService extends BaseService
      * @param bean
      * @return
      */
-    public String getImportOptionValue(DataRow bean, String import_value)
+    public String getImportOptionValue(DynaModel bean, String import_value)
     {
         if (StringHelper.isEmpty(import_value))
         {
@@ -231,7 +231,7 @@ public class TableColumnService extends BaseService
         {
             orderbyStr = "sortnum";
         }
-        List<Object> list = null;
+        List<DynaModel> list = null;
         if (!StringHelper.isEmpty(select_table) && !StringHelper.isEmpty(select_text) && !StringHelper.isEmpty(select_value))
         {
             // 找出配置的字段的值列表
@@ -245,10 +245,10 @@ public class TableColumnService extends BaseService
             {
                 sql += " order by " + orderbyStr;
             }
-            list = getJdbcTemplate().query(sql);
+            list = getJdbcTemplateUtil().queryForList(sql, DynaModel.class);
             for (int i = 0; list != null && i < list.size(); i++)
             {
-                DataRow option = (DataRow) list.get(i);
+                DynaModel option = (DynaModel) list.get(i);
                 String text = option.getString("optiontext");
                 String value = option.getString("optionvalue");
                 if (import_value.equals(text) || import_value.equals(value))
@@ -264,7 +264,7 @@ public class TableColumnService extends BaseService
     // 手动添加的字典项添加
     public void updateSdsr(String temp_id, String[] values, String[] texts)
     {
-        DataRow bean = new DataRow();
+        DynaModel bean = new DynaModel();
         bean.set("column_id", temp_id);
         // 删除已经不存在的字段的定义
         String deleteSql = "delete from t_b_dictionary where column_id=?";
@@ -300,31 +300,31 @@ public class TableColumnService extends BaseService
             value_str = value_str.substring(1);
             deleteSql += " and item_value not in (" + value_str + ")";
         }
-        getJdbcTemplate().update(deleteSql, delArgList.toArray());
+        getJdbcTemplateUtil().update(deleteSql, delArgList.toArray());
     }
     
-    private String addSdsr(DataRow bean)
+    private String addSdsr(DynaModel bean)
     {
         String id = getSeqValue("t_b_dictionary");
         bean.set("id", id);
-        getJdbcTemplate().insert("t_b_dictionary", bean);
+        getJdbcTemplateUtil().insert("t_b_dictionary", bean);
         return id;
     }
     
-    private void updateSdsr(DataRow bean)
+    private void updateSdsr(DynaModel bean)
     {
         int id = bean.getInt("id");
-        getJdbcTemplate().update("t_b_dictionary", bean, "id", new Integer(id));
+        getJdbcTemplateUtil().update("t_b_dictionary", bean, "id", new Integer(id));
     }
     
-    private int getSdsrExisits(DataRow bean)
+    private int getSdsrExisits(DynaModel bean)
     {
         int id = -1;
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(bean.getString("column_id"));
         argList.add(bean.getString("item_value"));
         String sql = "select id from t_b_dictionary where column_id=? and item_value=?";
-        int num = getJdbcTemplate().queryInt(sql, argList.toArray());
+        int num = getJdbcTemplateUtil().queryInt(sql, argList.toArray());
         if (num > 0)
         {
             id = num;
@@ -332,11 +332,11 @@ public class TableColumnService extends BaseService
         return id;
     }
     
-    public List<Object> getSdsrList(String column_id)
+    public List<DynaModel> getSdsrList(String column_id)
     {
         String sql = "select * from t_b_dictionary where column_id=? order by sortnum";
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(column_id);
-        return getJdbcTemplate().query(sql, argList.toArray());
+        return getJdbcTemplateUtil().queryForList(sql, DynaModel.class, argList.toArray());
     }
 }

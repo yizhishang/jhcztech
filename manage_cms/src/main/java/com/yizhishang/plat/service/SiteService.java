@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.plat.dao.SiteDao;
@@ -64,7 +65,7 @@ public class SiteService extends BaseService
     * 描述：查找所有站点信息
     * @return
     */
-    public List<Object> findAllSiteInfo()
+    public List<DynaModel> findAllSiteInfo()
     {
         return siteDao.findAllSiteInfo();
     }
@@ -97,7 +98,7 @@ public class SiteService extends BaseService
     * @param siteno
     * @return
     */
-    public List<Object> findSiteBySiteno(String siteno)
+    public List<DynaModel> findSiteBySiteno(String siteno)
     {
         return siteDao.findSiteBySiteno(siteno);
     }

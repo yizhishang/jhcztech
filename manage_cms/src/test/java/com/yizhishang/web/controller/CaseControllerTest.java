@@ -12,7 +12,9 @@ import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 import com.yizhishang.base.domain.Config;
+import com.yizhishang.base.jdbc.JdbcTemplateUtil;
 import com.yizhishang.base.service.ConfigService;
+import com.yizhishang.plat.domain.Site;
 
 public class CaseControllerTest
 {
@@ -37,10 +39,19 @@ public class CaseControllerTest
 		ctx.close();
 	}
 
-	@Test public void getSite()
+	public void getSite()
 	{
 		ConfigService configService = (ConfigService) ctx.getBean("configService");
 		List<Config> list = configService.getAllSysConfig();
 		System.out.println(list.size());
 	}
+	
+	@Test
+    public void testJdbc()
+    {
+		String sql = "select * from t_site order by id";
+        JdbcTemplateUtil jdbc = (JdbcTemplateUtil) ctx.getBean("jdbcTemplateUtil");
+        List<Site> list = jdbc.queryForList(sql, Site.class);
+        System.out.println(list);
+    }
 }

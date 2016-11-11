@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.yizhishang.base.dao.BaseDao;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Review;
@@ -22,14 +22,14 @@ public class CommentDao extends BaseDao
         String id = BaseService.getSequenceGenerator().getNextSequence("T_B_COMMENT");
         int pk = Integer.parseInt(id);
         review.setId(pk);
-        DataRow dr = new DataRow();
+        DynaModel dr = new DynaModel();
         dr.putAll(review.toMap());
-        this.getJdbcTemplate().insert("T_B_COMMENT", dr);
+        this.getJdbcTemplateUtil().insert("T_B_COMMENT", dr);
     }
     
     public void deleteComment(int id)
     {
-        this.getJdbcTemplate().delete("T_B_COMMENT", "ID", new Integer(id));
+        this.getJdbcTemplateUtil().delete("T_B_COMMENT", "ID", new Integer(id));
     }
     
     /**
@@ -37,7 +37,7 @@ public class CommentDao extends BaseDao
     * @param Comment 查询条件
     * @return
     */
-    public List<Object> findComment(Review review)
+    public List<DynaModel> findComment(Review review)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         StringBuffer sqlBuffer = new StringBuffer();
@@ -76,7 +76,7 @@ public class CommentDao extends BaseDao
         }
         
         sqlBuffer.append(" ORDER BY NAME,ID DESC");
-        return getJdbcTemplate().query(sqlBuffer.toString(), argList.toArray());
+        return getJdbcTemplateUtil().queryForList(sqlBuffer.toString(), DynaModel.class, argList.toArray());
     }
     
     /**
@@ -87,7 +87,7 @@ public class CommentDao extends BaseDao
     */
     public Review findCommentById(int id)
     {
-        DataRow dw = this.getJdbcTemplate().queryMap(" SELECT * FROM T_B_COMMENT WHERE ID = ? ", new Object[] { new Integer(id) });
+        DynaModel dw = this.getJdbcTemplateUtil().queryMap(" SELECT * FROM T_B_COMMENT WHERE ID = ? ", new Object[] { new Integer(id) });
         if (dw != null)
         {
             Review review = new Review();
@@ -148,16 +148,16 @@ public class CommentDao extends BaseDao
         }
         
         sqlBuffer.append(" order by id desc ");
-        page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+        page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
         
         if (page != null)
         {
-            List<Object> dataList = page.getData();
-            ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+            ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
                 Review review = new Review();
-                DataRow row = (DataRow) iter.next();
+                DynaModel row = (DynaModel) iter.next();
                 review.fromMap(row);
                 newDataList.add(review);
             }
@@ -168,8 +168,8 @@ public class CommentDao extends BaseDao
     
     public void updateComment(Review review)
     {
-        DataRow dr = new DataRow();
+        DynaModel dr = new DynaModel();
         dr.putAll(review.toMap());
-        this.getJdbcTemplate().update("T_B_COMMENT", dr, "ID", review.getId());
+        this.getJdbcTemplateUtil().update("T_B_COMMENT", dr, "ID", review.getId());
     }
 }

@@ -13,6 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Role extends DynaModel
 {
+	private static final long serialVersionUID = 1L;
 	
 	public int getId()
 	{

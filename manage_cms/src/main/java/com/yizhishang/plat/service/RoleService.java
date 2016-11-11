@@ -10,9 +10,9 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.domain.Right_Url;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.dao.RoleDao;
@@ -101,7 +101,7 @@ public class RoleService extends BaseService
         roleDao.addRoleUser(roleId, userId, siteNo);
     }
     
-    private void catalogsToArr(List<Object> catalogs, List<Object> arrayList, HashSet<String> rights)
+    private void catalogsToArr(List<ManageCatalog> catalogs, List<DynaModel> arrayList, HashSet<String> rights)
     {
         
         if (catalogs != null)
@@ -109,7 +109,7 @@ public class RoleService extends BaseService
             for (int i = 0; i < catalogs.size(); i++)
             {
                 ManageCatalog catalog = (ManageCatalog) catalogs.get(i);
-                DataRow dataRow = new DataRow();
+                DynaModel dataRow = new DynaModel();
                 String catalogId = String.valueOf(catalog.getId());
                 dataRow.set("catalog_id", catalogId);
                 dataRow.set("name", catalog.getName());
@@ -123,7 +123,7 @@ public class RoleService extends BaseService
                 dataRow.set("rownum", StringHelper.count(route, '|'));
                 
                 arrayList.add(dataRow);
-                List<Object> children = catalog.getChildren();
+                List<ManageCatalog> children = catalog.getChildren();
                 if (children != null && children.size() > 0)
                 {
                     catalogsToArr(children, arrayList, rights);
@@ -205,14 +205,14 @@ public class RoleService extends BaseService
         roleDao.delRightUrl(module_code, siteno);
     }
     
-    private void docToArr(List<Object> catalogs, List<Object> arrayList, DataRow rights)
+    private void docToArr(List<DynaModel> catalogs, List<DynaModel> arrayList, DynaModel rights)
     {
         
         if (catalogs != null)
         {
             for (int i = 0; i < catalogs.size(); i++)
             {
-                DataRow dataRow = (DataRow) catalogs.get(i);
+                DynaModel dataRow = (DynaModel) catalogs.get(i);
                 String catalogId = dataRow.getString("catalog_id");
                 String route = dataRow.getString("route");
                 String attribute = "";
@@ -225,7 +225,7 @@ public class RoleService extends BaseService
                 
                 arrayList.add(dataRow);
                 @SuppressWarnings("unchecked")
-                List<Object> children = (List<Object>) dataRow.getObject("children");
+                List<DynaModel> children = (List<DynaModel>) dataRow.getObject("children");
                 if (children != null && children.size() > 0)
                 {
                     docToArr(children, arrayList, rights);
@@ -297,7 +297,7 @@ public class RoleService extends BaseService
      * @param siteno
      * @return
      */
-    public List<Object> findCatalogRight(int roleId, String siteno)
+    public List<DynaModel> findCatalogRight(int roleId, String siteno)
     {
         Role_Right roleRight = roleDao.getRoleRight_by_Id(roleId, siteno);
         HashSet<String> catalogRight = new HashSet<String>();
@@ -311,9 +311,9 @@ public class RoleService extends BaseService
             }
         }
         
-        List<Object> catalogs = manageService.findAllChildrenCatalogsById(1, "");
+        List<ManageCatalog> catalogs = manageService.findAllChildrenCatalogsById(1, "");
         
-        ArrayList<Object> dataList = new ArrayList<Object>();
+        ArrayList<DynaModel> dataList = new ArrayList<DynaModel>();
         catalogsToArr(catalogs, dataList, catalogRight);
         
         return dataList;
@@ -326,13 +326,13 @@ public class RoleService extends BaseService
      * @时间：2011-3-12 上午08:48:02
      * @return
      */
-    public List<Object> findDocRight(int roleId, String siteNo)
+    public List<DynaModel> findDocRight(int roleId, String siteNo)
     {
-        DataRow catalogRole = getDocRight(roleId, siteNo);
+        DynaModel catalogRole = getDocRight(roleId, siteNo);
         
-        List<Object> catalogs = catalogService.findWholeCatalogById(1, siteNo);
+        List<DynaModel> catalogs = catalogService.findWholeCatalogById(1, siteNo);
         
-        ArrayList<Object> dataList = new ArrayList<Object>();
+        ArrayList<DynaModel> dataList = new ArrayList<DynaModel>();
         
         docToArr(catalogs, dataList, catalogRole);
         return dataList;
@@ -343,7 +343,7 @@ public class RoleService extends BaseService
      * 描述：根据父级栏目编号查找模块表中是否有相关数据
      * @return
      */
-    public List<Object> findModuleByParentId(int parentId, String siteno)
+    public List<DynaModel> findModuleByParentId(int parentId, String siteno)
     {
         return roleDao.findModuleByParentId(parentId, siteno);
     }
@@ -353,7 +353,7 @@ public class RoleService extends BaseService
      * @param module_code
      * @return
      */
-    public List<Object> findRightFunction(int module_code, String siteno)
+    public List<DynaModel> findRightFunction(int module_code, String siteno)
     {
         return roleDao.findRightFunction(module_code, siteno);
     }
@@ -389,7 +389,7 @@ public class RoleService extends BaseService
      * @param siteno
      * @return
      */
-    public List<Object> findRoleBySiteno(String siteno)
+    public List<DynaModel> findRoleBySiteno(String siteno)
     {
         return roleDao.findRoleBySiteno(siteno);
     }
@@ -400,7 +400,7 @@ public class RoleService extends BaseService
      * @param siteNo 站点编号
      * @return
      */
-    public List<Object> findRoleBySiteNo(String siteNo)
+    public List<Role> findRoleBySiteNo(String siteNo)
     {
         return roleDao.findRoleBySiteNo(siteNo);
     }
@@ -414,9 +414,9 @@ public class RoleService extends BaseService
      * @param siteNo
      * @return
      */
-    public List<Object> findSiteRight(int roleId)
+    public List<DynaModel> findSiteRight(int roleId)
     {
-        List<Object> dataList = new ArrayList<Object>();
+        List<DynaModel> dataList = new ArrayList<DynaModel>();
         
         Role_Site_Right roleSiteRight = getRoleSiteRight_by_id(roleId);
         
@@ -435,11 +435,11 @@ public class RoleService extends BaseService
         
         if (siteList != null)
         {
-            DataRow dataRow = null;
+        	Site dataRow = null;
             for (Iterator<Site> iter = siteList.iterator(); iter.hasNext();)
             {
-                dataRow = new DataRow();
-                Site site = iter.next();
+                dataRow = new Site();
+                Site site = (Site)iter.next();
                 String no = site.getSiteNo();
                 String name = site.getName();
                 dataRow.set("siteNo", no);
@@ -454,7 +454,7 @@ public class RoleService extends BaseService
         return dataList;
     }
     
-    public List<Object> findUserCatalogRightList(int userId)
+    public List<DynaModel> findUserCatalogRightList(int userId)
     {
         return roleDao.findUserCatalogRightList(userId);
     }
@@ -464,7 +464,7 @@ public class RoleService extends BaseService
      * 通过用户ID查找该用户具有的功能权限
      * @param userId
      */
-    public DataRow findUserCatalogRights(int userId, String siteNo)
+    public DynaModel findUserCatalogRights(int userId, String siteNo)
     {
         return roleDao.findUserCatalogRights(userId, siteNo);
     }
@@ -488,7 +488,7 @@ public class RoleService extends BaseService
      * @param userId
      * @return
      */
-    public List<Object> findUserRoleById(int userId)
+    public List<DynaModel> findUserRoleById(int userId)
     {
         return roleDao.findUserRoleById(userId);
     }
@@ -513,7 +513,7 @@ public class RoleService extends BaseService
      * @param siteNo
      * @return
      */
-    public DataRow getDocRight(int roleId, String siteNo)
+    public DynaModel getDocRight(int roleId, String siteNo)
     {
         
         Role_Catalog_Right catalogRight = null;
@@ -522,7 +522,7 @@ public class RoleService extends BaseService
             catalogRight = getRoleCatalogRight_by_id(roleId, siteNo);
         }
         
-        DataRow catalogRole = new DataRow();
+        DynaModel catalogRole = new DynaModel();
         if (catalogRight != null)
         {
             String catalogIdList = catalogRight.getCatalogIdList();
@@ -560,10 +560,10 @@ public class RoleService extends BaseService
      * @param attribute
      * @return
      */
-    private DataRow getDocRight(String attribute)
+    private DynaModel getDocRight(String attribute)
     {
         String[] temp = StringHelper.split(attribute, ":");
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         if (temp.length > 0)
         {
             for (int i = 0; i < temp.length; i++)
@@ -608,7 +608,7 @@ public class RoleService extends BaseService
      * @return
      */
     
-    public List<Object> getRightFunctionAll()
+    public List<DynaModel> getRightFunctionAll()
     {
         return roleDao.getRightFunctionAll();
         
@@ -619,7 +619,7 @@ public class RoleService extends BaseService
      * @param siteno
      * @return
      */
-    public List<Object> getRightFunctionAll(String siteno)
+    public List<DynaModel> getRightFunctionAll(String siteno)
     {
         return roleDao.getRightFunctionAll(siteno);
     }
@@ -629,7 +629,7 @@ public class RoleService extends BaseService
      *
      * @return
      */
-    public List<Object> getRightModuleAll()
+    public List<DynaModel> getRightModuleAll()
     {
         return roleDao.getRightModuleAll();
         
@@ -640,7 +640,7 @@ public class RoleService extends BaseService
      * @param siteno
      * @return
      */
-    public List<Object> getRightModuleAll(String siteno)
+    public List<DynaModel> getRightModuleAll(String siteno)
     {
         return roleDao.getRightModuleAll(siteno);
     }
@@ -722,7 +722,7 @@ public class RoleService extends BaseService
      * @param roleId 角色ID
      * @return
      */
-    public List<Object> getRoleUser(int roleId, String siteNo)
+    public List<DynaModel> getRoleUser(int roleId, String siteNo)
     {
         return roleDao.getRoleUser(roleId, siteNo);
     }
@@ -733,7 +733,7 @@ public class RoleService extends BaseService
      * @param userId
      * @return
      */
-    public int[] getUserRole(int userId)
+    public Integer[] getUserRole(int userId)
     {
         return roleDao.getUserRole(userId);
     }

@@ -1,8 +1,7 @@
 package com.yizhishang.base.dao;
 
-import com.yizhishang.base.jdbc.JdbcTemplate;
-import com.yizhishang.base.jdbc.session.Session;
-import com.yizhishang.base.jdbc.session.SessionFactory;
+import com.yizhishang.base.jdbc.JdbcTemplateUtil;
+import com.yizhishang.base.util.SpringContextHolder;
 
 /**
  * 描述:
@@ -17,67 +16,13 @@ public class BaseDao
 {
     
     /**
-     * 获得数据库访问Session
-     *
-     * @return
-     */
-    public Session getSession()
-    {
-        return SessionFactory.getSession();
-    }
-    
-    /**
-     * 返回根据datasource.xml文件中配置数据源ID，得到的会话对象
-     * @param id 数据源ID
-     * @return
-     */
-    public Session getSession(String id)
-    {
-        return SessionFactory.getSession(id);
-    }
-    
-    /**
      * 返回数据操作对象
      *
      * @return 返回数据操作对象
      */
-    public JdbcTemplate getJdbcTemplate()
+    public JdbcTemplateUtil getJdbcTemplateUtil()
     {
-        return new JdbcTemplate();
+        return SpringContextHolder.getBean("jdbcTemplateUtil");
     }
     
-    /**
-     * 返回根据datasource.xml文件中配置的数据源ID，构造的数据操作对象
-     *
-     * @param id 数据源的ID
-     */
-    public JdbcTemplate getJdbcTemplate(String id)
-    {
-        return new JdbcTemplate(id);
-    }
-    
-    /**
-     * 根据一个整型数组，返回带括号的以","分隔的sql语句字串
-     *
-     * @param intArray
-     * @return
-     */
-    public String getBracketSqlStr(int[] intArray)
-    {
-        int length = intArray.length;
-        if (length == 0)
-            return "";
-        
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("(");
-        for (int i = 0; i < intArray.length; i++)
-        {
-            if (i == length - 1)
-                buffer.append(String.valueOf(intArray[i]));
-            else
-                buffer.append(String.valueOf(intArray[i] + ","));
-        }
-        buffer.append(")");
-        return buffer.toString();
-    }
 }

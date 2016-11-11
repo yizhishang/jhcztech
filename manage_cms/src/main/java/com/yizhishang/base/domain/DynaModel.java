@@ -12,22 +12,32 @@ import java.util.Map;
  * 创建日期: 2015-12-18
  * 创建时间: 13:53:48
  */
-public class DynaModel
+public class DynaModel extends HashMap<String, Object>
 {
     
-    private final HashMap<String, Object> innerMap = new HashMap<String, Object>();
+	private static final long serialVersionUID = 1L;
+	private final HashMap<String, Object> innerMap = new HashMap<String, Object>();
 
     /**
      * 从Map中初始化动态Domain
      * @param map
      */
-    public DynaModel fromMap(Map<String, Object> map)
+    public DynaModel fromMap(DynaModel map)
     {
-        innerMap.putAll(map);
+        innerMap.putAll(map.toMap());
         return this;        
     }
-
-    protected boolean getBoolean(String name)
+    
+    /**
+     * 把Domain模型转化为Map
+     * @return
+     */
+    public Map<String, Object> toMap()
+    {
+        return innerMap;
+    }
+    
+	public boolean getBoolean(String name)
     {
         if (name == null || name.equals(""))
             return false;
@@ -49,7 +59,7 @@ public class DynaModel
         return value;
     }
 
-    protected double getDouble(String name)
+    public double getDouble(String name)
     {
         if (name == null || name.equals(""))
             return 0;
@@ -82,7 +92,7 @@ public class DynaModel
         return value;
     }
 
-    protected float getFloat(String name)
+    public float getFloat(String name)
     {
         if (name == null || name.equals(""))
             return 0;
@@ -115,7 +125,7 @@ public class DynaModel
         return value;
     }
 
-    protected int getInt(String name)
+    public int getInt(String name)
     {
         if (name == null || name.equals(""))
             return 0;
@@ -148,7 +158,7 @@ public class DynaModel
         return value;
     }
 
-    protected long getLong(String name)
+    public long getLong(String name)
     {
         if (name == null || name.equals(""))
             return 0;
@@ -181,7 +191,7 @@ public class DynaModel
         return value;
     }
 
-    protected Object getObject(String name)
+    public Object getObject(String name)
     {
         if (name == null || name.equals(""))
             return null;
@@ -191,7 +201,7 @@ public class DynaModel
         return innerMap.get(name);
     }
 
-    protected String getString(String name)
+    public String getString(String name)
     {
         if (name == null || name.equals(""))
             return "";
@@ -213,39 +223,39 @@ public class DynaModel
     }
 
 
-    protected void set(String name, boolean value)
+    public void set(String name, boolean value)
     {
         innerMap.put(name, new Boolean(value));
     }
 
 
-    protected void set(String name, double value)
+    public void set(String name, double value)
     {
         innerMap.put(name, new Double(value));
     }
 
 
-    protected void set(String name, float value)
+    public void set(String name, float value)
     {
         innerMap.put(name, new Float(value));
     }
 
-    protected void set(String name, int value)
+    public void set(String name, int value)
     {
         innerMap.put(name, new Integer(value));
     }
 
-    protected void set(String name, long value)
+    public void set(String name, long value)
     {
         innerMap.put(name, new Long(value));
     }
 
-    protected void set(String name, Object value)
+    public void set(String name, Object value)
     {
         innerMap.put(name, value);
     }
 
-    protected void set(String name, String value)
+    public void set(String name, String value)
     {
         if (name == null || name.equals(""))
             return;
@@ -256,17 +266,13 @@ public class DynaModel
             innerMap.put(name, value);
     }
     
-    /**
-     * 把Domain模型转化为Map
-     * @return
-     */
-    public Map<String, Object> toMap()
-    {
-        return innerMap;
+//    @Override
+//    public String toString(){
+//        return innerMap.toString();
+//    }
+    
+    public int size(){
+    	return innerMap.size();
     }
     
-    @Override
-    public String toString(){
-        return innerMap.toString();
-    }
 }

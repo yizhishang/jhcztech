@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.dao.CatalogDao;
@@ -35,7 +35,7 @@ public class CatalogService extends BaseService
     * @时间：2010-04-02 17:12:52
     * @param data
     */
-	public void addAttachCatalog(DataRow data)
+	public void addAttachCatalog(DynaModel data)
 	{
 		String id = getSeqValue("T_PUBLISH_ATTACH");
 		data.set("id", id);
@@ -75,13 +75,13 @@ public class CatalogService extends BaseService
 		catalogDao.deleteCatalog(catalogId);
 	}
 	
-    private void docToArr(List<Object> catalogs, List<DataRow> arrayList, boolean isSystemAdmin, DataRow rights)
+    private void docToArr(List<DynaModel> catalogs, List<DynaModel> arrayList, boolean isSystemAdmin, DynaModel rights)
 	{
 		if (catalogs != null)
 		{
 			for (int i = 0; i < catalogs.size(); i++)
 			{
-				DataRow dataRow = (DataRow) catalogs.get(i);
+				DynaModel dataRow = (DynaModel) catalogs.get(i);
 				String catalogId = dataRow.getString("catalog_id");
 				String route = dataRow.getString("route");
                 //				String attribute = "";
@@ -91,7 +91,7 @@ public class CatalogService extends BaseService
 					
 					arrayList.add(dataRow);
                     @SuppressWarnings("unchecked")
-                    List<Object> children = (List<Object>) dataRow.getObject("children");
+                    List<DynaModel> children = (List<DynaModel>) dataRow.getObject("children");
 					if (children != null && children.size() > 0)
 					{
 						docToArr(children, arrayList, isSystemAdmin, rights);
@@ -117,7 +117,7 @@ public class CatalogService extends BaseService
     * @param catalogId
     * @return
     */
-	public List<Object> findAttachCatalog(int catalogId, String siteNo)
+	public List<DynaModel> findAttachCatalog(int catalogId, String siteNo)
 	{
 		
 		return catalogDao.findAttachCatalog(catalogId, siteNo);
@@ -184,13 +184,13 @@ public class CatalogService extends BaseService
     * @时间：2011-3-12 上午08:48:02
     * @return
     */
-	public List<DataRow> findCatalogTrue(int roleId, String siteNo, boolean isSystemAdmin, DataRow catalogRole)
+	public List<DynaModel> findCatalogTrue(int roleId, String siteNo, boolean isSystemAdmin, DynaModel catalogRole)
 	{
 		
 		CatalogService catalogService = new CatalogService();
-        List<Object> catalogs = catalogService.findWholeCatalogById(1, siteNo);
+        List<DynaModel> catalogs = catalogService.findWholeCatalogById(1, siteNo);
 		
-        ArrayList<DataRow> dataList = new ArrayList<DataRow>();
+        ArrayList<DynaModel> dataList = new ArrayList<DynaModel>();
 		
 		docToArr(catalogs, dataList, isSystemAdmin, catalogRole);
 		return dataList;
@@ -242,30 +242,30 @@ public class CatalogService extends BaseService
 		return catalogDao.findRootCatalog(siteNo);
 	}
 	
-	public List<Object> findRouteCatalogById(int catalogId, String siteNo)
+	public List<DynaModel> findRouteCatalogById(int catalogId, String siteNo)
 	{
 		
 		return catalogDao.findRouteCatalogById(catalogId, siteNo);
 	}
 	
     /**
-    *描述：可以根据一个栏目的ID查出该栏目的信息，包括子栏目，子栏目在DataRow里面的key是"children"，值类型是一个List。该方法依赖于方法findRouteCatalogById 
+    *描述：可以根据一个栏目的ID查出该栏目的信息，包括子栏目，子栏目在DynaModel里面的key是"children"，值类型是一个List。该方法依赖于方法findRouteCatalogById 
     *作者：袁永君
     *时间：2016-02-24 下午03:44:56
     * @param catalogId 栏目ID
     * @return
     */
-	public List<Object> findWholeCatalogById(int catalogId, String siteNo)
+	public List<DynaModel> findWholeCatalogById(int catalogId, String siteNo)
 	{
-		List<Object> list = new ArrayList<Object>();
+		List<DynaModel> list = new ArrayList<DynaModel>();
 		
-        List<Object> catalogs = catalogDao.findRouteCatalogById(catalogId, siteNo);
-		Object[] array = catalogs.toArray();
+        List<DynaModel> catalogs = catalogDao.findRouteCatalogById(catalogId, siteNo);
+        DynaModel[] array = (DynaModel[]) catalogs.toArray();
 		Collections.addAll(list, array);
 		for (int i = 0; i < array.length; i++)
 		{
-			DataRow catalog = (DataRow) array[i];
-            List<Object> children = new ArrayList<Object>();
+			DynaModel catalog = (DynaModel) array[i];
+            List<DynaModel> children = new ArrayList<DynaModel>();
 			for (int j = 0; j < list.size();)
 			{
                 //根据正则表达式得到子栏目的在catalogs链表中的位置
@@ -279,7 +279,7 @@ public class CatalogService extends BaseService
 					break;
 				}
 			}
-            //如果有子栏目则添加到栏目的DataRow当中，key是children
+            //如果有子栏目则添加到栏目的DynaModel当中，key是children
 			if (children.size() > 0)
 			{
 				catalog.put("children", children);
@@ -296,11 +296,11 @@ public class CatalogService extends BaseService
     * @param catalogs 所有相关栏目的集合
     * @return 返回-1表示不存在子栏目
     */
-    private int getChildCatalogIndex(DataRow data, List<Object> catalogs)
+    private int getChildCatalogIndex(DynaModel data, List<DynaModel> catalogs)
 	{
 		for (int i = 0; i < catalogs.size(); i++)
 		{
-			DataRow catalog = (DataRow) catalogs.get(i);
+			DynaModel catalog = (DynaModel) catalogs.get(i);
 			String regex = data.getString("route").replaceAll("\\|", "\\\\|") + "\\|\\d+";
 			if (catalog.getString("route").matches(regex))
 			{

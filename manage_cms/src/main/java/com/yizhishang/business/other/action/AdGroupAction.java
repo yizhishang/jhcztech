@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
@@ -167,7 +168,7 @@ public class AdGroupAction extends BaseAction
         int[] idArray = getIntArrayParameter("id");
         for (int i = 0; i < idArray.length; i++)
         {
-            List<Object> list = adGroupService.findAdById(idArray[i], getSiteNo());
+            List<DynaModel> list = adGroupService.findAdById(idArray[i], getSiteNo());
             if (list.size() > 0)
             {
                 request.setAttribute("error", "请删除该广告组下的广告在进行删除");

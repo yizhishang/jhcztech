@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Catalog;
@@ -79,7 +79,7 @@ public class CatalogListWebpart extends FMWebpartParser
             if(showArticleAsCatalog && rows > 0)
             {
             	int catalogId = catalog.getId();
-            	List<DataRow> articleList = articleService.findPublishArticleById(catalogId, rows, sortType);
+            	List<DynaModel> articleList = articleService.findPublishArticleById(catalogId, rows, sortType);
             	catalog.setDataList(articleList);
             }
         }

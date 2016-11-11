@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.yizhishang.base.domain.Config;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.domain.Right_Url;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.ConfigService;
 import com.yizhishang.base.util.ReflectHelper;
 import com.yizhishang.base.util.SpringContextHolder;
@@ -24,7 +24,7 @@ import com.yizhishang.base.util.StringHelper;
 public class SysConfig
 {
     
-    private static DataRow itemMap = new DataRow();
+    private static DynaModel itemMap = new DynaModel();
     
     public static ArrayList<Right_Url> rightUrl = new ArrayList<Right_Url>();
     
@@ -87,7 +87,7 @@ public class SysConfig
     */
     public static void loadConfig()
     {
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         List<Config> configList = null;
         /**
         * 考虑到很多项目不能直接操作jdbc，这里增加一个数据来源的实现类
@@ -117,7 +117,7 @@ public class SysConfig
                 data.set(name, value);
             }
         }
-        DataRow tempMap = itemMap;
+        DynaModel tempMap = itemMap;
         itemMap = data;
         tempMap.clear();
     }

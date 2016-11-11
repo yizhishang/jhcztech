@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.StringHelper;
@@ -30,10 +30,10 @@ public class PublishQueueService extends BaseService
 	 * 添加一条发布队列信息
 	 * @param data
 	 */
-	public void add(DataRow data)
+	public void add(DynaModel data)
 	{
 		data.set("id", getSeqValue("T_PUBLISH_QUEUE"));
-		getJdbcTemplate().insert("T_PUBLISH_QUEUE", data);
+		getJdbcTemplateUtil().insert("T_PUBLISH_QUEUE", data);
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class PublishQueueService extends BaseService
 	{
         ArrayList<Integer> argList = new ArrayList<Integer>();
 		argList.add(new Integer(queueId));
-		getJdbcTemplate().update("delete from T_PUBLISH_QUEUE where id=?", argList.toArray());
+		getJdbcTemplateUtil().update("delete from T_PUBLISH_QUEUE where id=?", argList.toArray());
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class PublishQueueService extends BaseService
 	 */
 	public void deleteAllLog()
 	{
-		getJdbcTemplate().update("delete from T_PUBLISH_QUEUE WHERE STATE != 1");
+		getJdbcTemplateUtil().update("delete from T_PUBLISH_QUEUE WHERE STATE != 1");
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class PublishQueueService extends BaseService
 	{
         ArrayList<Integer> argList = new ArrayList<Integer>();
 		argList.add(new Integer(queueId));
-		return getJdbcTemplate().queryString("select cmd_str from T_PUBLISH_QUEUE where id=?", argList.toArray());
+		return getJdbcTemplateUtil().queryString("select cmd_str from T_PUBLISH_QUEUE where id=?", argList.toArray());
 	}
 	
 	/**
@@ -93,17 +93,17 @@ public class PublishQueueService extends BaseService
 			argList.add(siteNo);
 		}
 		strBuf.append(" ORDER BY ID DESC");
-		return getJdbcTemplate().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
+		return getJdbcTemplateUtil().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
 	}
 	
 	public void resetExceptionQueue()
 	{
         List<String> argList = new ArrayList<String>();
 		String sql = "SELECT ID,CREATE_DATE FROM T_PUBLISH_QUEUE WHERE STATE = 1 ORDER BY ID";
-        List<Object> queueList = getJdbcTemplate().query(sql);
-        for (Iterator<Object> iter = queueList.iterator(); iter.hasNext();)
+        List<DynaModel> queueList = getJdbcTemplateUtil().queryForList(sql);
+        for (Iterator<DynaModel> iter = queueList.iterator(); iter.hasNext();)
 		{
-			DataRow dataRow = (DataRow) iter.next();
+			DynaModel dataRow = (DynaModel) iter.next();
 			String id = dataRow.getString("id");
 			Date publishDate = DateHelper.parseString(dataRow.getString("create_date"));
 			if (publishDate != null)
@@ -117,7 +117,7 @@ public class PublishQueueService extends BaseService
 			else
 			{
 				//将附件的创建时间更改为正确格式
-				getJdbcTemplate().update("UPDATE T_PUBLISH_QUEUE SET CREATE_DATE = ? WHERE ID = ?", new Object[] { DateHelper.formatDate(new Date()), id });
+				getJdbcTemplateUtil().update("UPDATE T_PUBLISH_QUEUE SET CREATE_DATE = ? WHERE ID = ?", new Object[] { DateHelper.formatDate(new Date()), id });
 				argList.add(id);
 			}
 		}
@@ -134,7 +134,7 @@ public class PublishQueueService extends BaseService
 				}
 			}
 			buffer.append(")");
-			getJdbcTemplate().update(buffer.toString(), argList.toArray());
+			getJdbcTemplateUtil().update(buffer.toString(), argList.toArray());
 		}
 		
 	}
@@ -150,6 +150,6 @@ public class PublishQueueService extends BaseService
         ArrayList<Integer> argList = new ArrayList<Integer>();
 		argList.add(new Integer(state));
 		argList.add(new Integer(queueId));
-		getJdbcTemplate().update("update T_PUBLISH_QUEUE set state=? where id=?", argList.toArray());
+		getJdbcTemplateUtil().update("update T_PUBLISH_QUEUE set state=? where id=?", argList.toArray());
 	}
 }

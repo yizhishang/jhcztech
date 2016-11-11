@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.servlet.jsp.JspWriter;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.base.util.ToolKit;
@@ -28,9 +28,9 @@ public class DynSelectTag extends CommonTag
         value = ToolKit.nullTrans(value, "");
         // 获取字段配置信息
         TableColumnService colService = new TableColumnService();
-        DataRow bean = colService.load(Integer.parseInt(colId));
+        DynaModel bean = colService.load(Integer.parseInt(colId));
         
-        List<Object> list = getOptionBeans(bean); // 获得列表
+        List<DynaModel> list = getOptionBeans(bean); // 获得列表
         
         try
         {
@@ -50,7 +50,7 @@ public class DynSelectTag extends CommonTag
             }
             for (int i = 0; list != null && i < list.size(); i++)
             {
-                DataRow tempBean = (DataRow) list.get(i);
+                DynaModel tempBean = (DynaModel) list.get(i);
                 String tempValue = tempBean.getString("optionvalue");
                 String tempText = tempBean.getString("optiontext");
                 if (value.equals(tempValue))
@@ -76,7 +76,7 @@ public class DynSelectTag extends CommonTag
      * 获得值和对应的文本的列表
      * @return
      */
-    public List<Object> getOptionBeans(DataRow bean)
+    public List<DynaModel> getOptionBeans(DynaModel bean)
     {
         String select_value = bean.getString("select_value");
         String select_text = bean.getString("select_text");
@@ -86,7 +86,7 @@ public class DynSelectTag extends CommonTag
         String sql = "select distinct " + select_text + " as optiontext," + select_value + " as optionvalue from " + select_table + " where 1=1 "
                 + select_condition;
         BaseService bservice = new BaseService();
-        List<Object> list = bservice.getJdbcTemplate().query(sql);
+        List<DynaModel> list = bservice.getJdbcTemplateUtil().queryForList(sql, DynaModel.class);
         return list;
     }
     

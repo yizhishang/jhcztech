@@ -4,6 +4,7 @@ import com.yizhishang.base.domain.DynaModel;
 
 public class Group extends DynaModel {
 
+	private static final long serialVersionUID = 1L;
 	public int getGroup_Id() {
 		return getInt("group_id");
 	}

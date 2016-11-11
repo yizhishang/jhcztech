@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.yizhishang.base.domain.DynaModel;
-import com.yizhishang.base.jdbc.DataRow;
 
 /**
  * 描述:
@@ -362,12 +361,12 @@ public class Catalog extends DynaModel implements Serializable
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<DataRow> getDataList()
+	public List<DynaModel> getDataList()
 	{
-		return ((List<DataRow>) getObject("dataList"));
+		return ((List<DynaModel>) getObject("dataList"));
 	}
 	
-	public void setDataList(List<DataRow> dataList)
+	public void setDataList(List<DynaModel> dataList)
 	{
 		set("dataList", dataList);
 	}

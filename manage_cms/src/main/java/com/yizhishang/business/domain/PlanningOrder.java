@@ -13,7 +13,8 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class PlanningOrder extends DynaModel
 {
-	
+
+	private static final long serialVersionUID = 1L;
 	public void setId(int id)
 	{
 		set("order_id", id);

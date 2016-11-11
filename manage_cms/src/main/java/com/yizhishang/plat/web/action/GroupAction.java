@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.ScriptHelper;
@@ -115,9 +115,9 @@ public class GroupAction extends BaseAction
             return null;
         }
         StringTokenizer tokenizer = new StringTokenizer(userIdStr, "|");
-        List<Object> userList = groupService.getGroupUser(group_Id);
-        DataRow existIdMap = new DataRow();
-        for (Iterator<Object> iter = userList.iterator(); iter.hasNext();)
+        List<User> userList = groupService.getGroupUser(group_Id);
+        DynaModel existIdMap = new DynaModel();
+        for (Iterator<User> iter = userList.iterator(); iter.hasNext();)
         {
             User user = (User) iter.next();
             existIdMap.set(String.valueOf(user.getId()), user.getId());

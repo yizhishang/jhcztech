@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 
 /**
  * 描述:  数据类型转换
@@ -210,7 +210,7 @@ public class ConvertHelper
         int i = 0;
         for (Iterator<Object> it = list.iterator(); it.hasNext();)
         {
-            DataRow data = (DataRow) it.next();
+            DynaModel data = (DynaModel) it.next();
             arr[i] = data.getString(lineName);
             
             i++;
@@ -324,7 +324,7 @@ public class ConvertHelper
                     for (Iterator<Object> it = dataList.iterator(); it.hasNext();)
                     {
                         
-                        DataRow dataRow = (DataRow) it.next();
+                        DynaModel dataRow = (DynaModel) it.next();
                         if (quarters[j - 1 - itemp].equals(dataRow.get(quartersFields)))
                         {
                             Object obj = dataRow.get(rowLieldsName[i]);
@@ -432,7 +432,7 @@ public class ConvertHelper
                         map.put(lineFieldsName[j], null);
                         continue;
                     }
-                    DataRow dr = (DataRow) dataList.get(j - 1 + itemp);
+                    DynaModel dr = (DynaModel) dataList.get(j - 1 + itemp);
                     
                     Object obj = dr.get(rowLieldsName[i]);
                     
@@ -476,7 +476,7 @@ public class ConvertHelper
     * @param separation 间隔符
     * @return
     */
-    public static String listToString(List<Object> list)
+    public static String listToString(List<DynaModel> list)
     {
         return listToString(list, ",");
     }
@@ -489,7 +489,7 @@ public class ConvertHelper
     * @param separation 间隔符
     * @return
     */
-    public static String listToString(List<Object> list, String separation)
+    public static String listToString(List<DynaModel> list, String separation)
     {
         return arrToString(listToStringArray(list), separation);
     }
@@ -501,7 +501,7 @@ public class ConvertHelper
     * @param list
     * @return
     */
-    public static String[] listToStringArray(List<Object> list)
+    public static String[] listToStringArray(List<DynaModel> list)
     {
         if (list == null || list.size() == 0)
         {

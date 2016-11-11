@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.FileHelper;
 import com.yizhishang.base.util.StringHelper;
@@ -52,9 +52,9 @@ public class TemplateImpManage
     * @param element
     * @return
     */
-    private DataRow elementToMap(Element element)
+    private DynaModel elementToMap(Element element)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         
         //处理该元素的属性
         @SuppressWarnings("unchecked")
@@ -130,7 +130,7 @@ public class TemplateImpManage
                     templateXmlManage.handleXml(templateIds);
                     
                     //将xml文件读到list对象
-                    List<Object> dataList = loadXmlToList(xmlPathMap);
+                    List<DynaModel> dataList = loadXmlToList(xmlPathMap);
                     
                     //更新模板
                     TemplateService templateService = new TemplateService();
@@ -152,9 +152,9 @@ public class TemplateImpManage
     * @时间：2011-3-3 下午04:08:14
     * @param xmlPathMap
     */
-    private List<Object> loadXmlToList(HashMap<String, String> xmlPathMap) throws Exception
+    private List<DynaModel> loadXmlToList(HashMap<String, String> xmlPathMap) throws Exception
     {
-        ArrayList<Object> dataList = new ArrayList<Object>();
+        ArrayList<DynaModel> dataList = new ArrayList<DynaModel>();
         for (Iterator<String> iter = xmlPathMap.keySet().iterator(); iter.hasNext();)
         {
             String id = iter.next();
@@ -168,7 +168,7 @@ public class TemplateImpManage
             Element rootElement = document.getRootElement();
             
             Element tmpElement = rootElement.element("template");
-            DataRow dataRow = elementToMap(tmpElement);
+            DynaModel dataRow = elementToMap(tmpElement);
             dataList.add(dataRow);
         }
         return dataList;

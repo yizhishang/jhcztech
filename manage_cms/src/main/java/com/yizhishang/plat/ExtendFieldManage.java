@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.plat.service.CustomFieldService;
 
 /**
@@ -46,10 +46,10 @@ public class ExtendFieldManage
             Set<Object> fieldSet = new HashSet<Object>();
             //查询已经被使用的字段
 			CustomFieldService fieldService = new CustomFieldService();
-            List<Object> fieldList = fieldService.findExtendFieldInfo(0);
-            for (Iterator<Object> iter = fieldList.iterator(); iter.hasNext();)
+            List<DynaModel> fieldList = fieldService.findExtendFieldInfo(0);
+            for (Iterator<DynaModel> iter = fieldList.iterator(); iter.hasNext();)
 			{
-                DataRow data = (DataRow) iter.next();
+                DynaModel data = (DynaModel) iter.next();
 				fieldSet.add(new Integer(data.getInt("id")));
 			}
 			

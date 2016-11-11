@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.StringHelper;
@@ -30,10 +30,10 @@ public class PublishLogService extends BaseService
      *
      * @param log
      */
-	public void add(DataRow log)
+	public void add(DynaModel log)
 	{
 		log.set("id", getSeqValue("T_PUBLISH_LOG"));
-		getJdbcTemplate().insert("T_PUBLISH_LOG", log);
+		getJdbcTemplateUtil().insert("T_PUBLISH_LOG", log);
 	}
 	
 	
@@ -46,13 +46,13 @@ public class PublishLogService extends BaseService
     */
 	public void add(int queueId, String description)
 	{
-		DataRow data = new DataRow();
+		DynaModel data = new DynaModel();
 		data.set("id", getSeqValue("T_PUBLISH_LOG"));
 		data.set("queue_id", queueId);
 		data.set("description", description);
 		data.set("create_by", "system");
 		data.set("create_date", DateHelper.formatDate(new Date()));
-		getJdbcTemplate().insert("T_PUBLISH_LOG", data);
+		getJdbcTemplateUtil().insert("T_PUBLISH_LOG", data);
 	}
 	
 	
@@ -68,7 +68,7 @@ public class PublishLogService extends BaseService
     */
 	public void delete(int id)
 	{
-		getJdbcTemplate().delete("T_PUBLISH_LOG", "id", new Integer(id));
+		getJdbcTemplateUtil().delete("T_PUBLISH_LOG", "id", new Integer(id));
 	}
 	
 	
@@ -78,7 +78,7 @@ public class PublishLogService extends BaseService
     */
 	public void deleteAllLog()
 	{
-		getJdbcTemplate().update("delete from T_PUBLISH_LOG");
+		getJdbcTemplateUtil().update("delete from T_PUBLISH_LOG");
 	}
 	
 	
@@ -103,6 +103,6 @@ public class PublishLogService extends BaseService
 			argList.add(endDate);
 		}
 		strBuf.append(" ORDER BY ID DESC");
-		return getJdbcTemplate().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
+		return getJdbcTemplateUtil().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
 	}
 }

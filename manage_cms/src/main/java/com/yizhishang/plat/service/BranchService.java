@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 
@@ -31,11 +31,11 @@ public class BranchService extends BaseService
     * 添加营业网点信息
     * @param data
     */
-    public void add(DataRow data)
+    public void add(DynaModel data)
     {
         String branchId = getSeqValue("T_B_BRANCH");
         data.set("branchid", branchId);
-        getJdbcTemplate().insert("T_B_BRANCH", data);
+        getJdbcTemplateUtil().insert("T_B_BRANCH", data);
     }
     
     /**
@@ -45,7 +45,7 @@ public class BranchService extends BaseService
     */
     public void delte(int branchId)
     {
-        getJdbcTemplate().delete("T_B_BRANCH", "BranchId", new Integer(branchId));
+        getJdbcTemplateUtil().delete("T_B_BRANCH", "BranchId", new Integer(branchId));
     }
     
     /**
@@ -54,12 +54,12 @@ public class BranchService extends BaseService
     * @param branchId
     * @return
     */
-    public DataRow findBranchById(int branchId)
+    public DynaModel findBranchById(int branchId)
     {
         String sql = "select * from T_B_BRANCH where BranchId=?";
         ArrayList<Integer> argList = new ArrayList<Integer>();
         argList.add(new Integer(branchId));
-        return getJdbcTemplate().queryMap(sql, argList.toArray());
+        return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
     }
     
     /**
@@ -68,7 +68,7 @@ public class BranchService extends BaseService
     * @param siteNo
     * @return
     */
-    public DataRow findBranchById(int branchId, String siteNo)
+    public DynaModel findBranchById(int branchId, String siteNo)
     {
         String sql = "select * from T_B_BRANCH where 1=1";
         ArrayList<Object> argList = new ArrayList<Object>();
@@ -83,7 +83,7 @@ public class BranchService extends BaseService
             sql += " and siteno=?";
             argList.add(siteNo);
         }
-        return getJdbcTemplate().queryMap(sql, argList.toArray());
+        return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
     }
     
     /**
@@ -91,12 +91,12 @@ public class BranchService extends BaseService
     * @param branchNo
     * @return
     */
-    public DataRow findBranchByNo(String branchNo)
+    public DynaModel findBranchByNo(String branchNo)
     {
         String sql = "select * from T_B_BRANCH where BranchNo=?";
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(branchNo);
-        return getJdbcTemplate().queryMap(sql, argList.toArray());
+        return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
     }
     
     /**
@@ -105,7 +105,7 @@ public class BranchService extends BaseService
     * @param siteNo   站点编号
     * @return
     */
-    public DataRow findBranchByNo(String branchNo, String siteNo)
+    public DynaModel findBranchByNo(String branchNo, String siteNo)
     {
         String sql = "select * from T_B_BRANCH where 1=1";
         ArrayList<Object> argList = new ArrayList<Object>();
@@ -120,7 +120,7 @@ public class BranchService extends BaseService
             sql += " and siteno=?";
             argList.add(siteNo);
         }
-        return getJdbcTemplate().queryMap(sql, argList.toArray());
+        return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
     }
     
     /**
@@ -131,13 +131,13 @@ public class BranchService extends BaseService
     * 创建时间: 下午12:51:24
     * @return
     */
-    public List<Object> findInfoType()
+    public List<DynaModel> findInfoType()
     {
-        List<Object> rstList = null;
+        List<DynaModel> rstList = null;
         try
         {
             String sql = "SELECT ID,NAME FROM T_B_BRANCH_INFOTYPE ORDER BY ID ASC";
-            rstList = getJdbcTemplate().query(sql);
+            rstList = getJdbcTemplateUtil().queryForList(sql);
         }
         catch (Exception ex)
         {
@@ -150,10 +150,10 @@ public class BranchService extends BaseService
     * 查询所有的营业网点信息
     * @return
     */
-    public List<Object> getAll()
+    public List<DynaModel> getAll()
     {
         String sql = "select * from T_B_BRANCH order by Branchno asc";
-        return getJdbcTemplate().query(sql);
+        return getJdbcTemplateUtil().queryForList(sql);
     }
     
     /**
@@ -186,7 +186,7 @@ public class BranchService extends BaseService
             argList.add(String.valueOf(branchNo));
         }
         sqlBuf.append(" order by A.ORDERNUM ASC ");
-        return getJdbcTemplate().queryPage(sqlBuf.toString(), argList.toArray(), curPage, rowOfPage);
+        return getJdbcTemplateUtil().queryPage(sqlBuf.toString(), argList.toArray(), curPage, rowOfPage);
     }
     
     /**
@@ -200,7 +200,7 @@ public class BranchService extends BaseService
         String sql = "select BranchNo from T_B_BRANCH where BranchNo=?";
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(branchNo);
-        return (getJdbcTemplate().queryMap(sql, argList.toArray()) != null);
+        return (getJdbcTemplateUtil().queryMap(sql, argList.toArray()) != null);
     }
     
     /**
@@ -224,7 +224,7 @@ public class BranchService extends BaseService
             sql += " and siteno=?";
             argList.add(siteNo);
         }
-        return (getJdbcTemplate().queryMap(sql, argList.toArray()) != null);
+        return (getJdbcTemplateUtil().queryMap(sql, argList.toArray()) != null);
     }
     
     /**
@@ -232,9 +232,9 @@ public class BranchService extends BaseService
     *
     * @param data
     */
-    public void update(DataRow data)
+    public void update(DynaModel data)
     {
         int branchId = data.getInt("branchid");
-        getJdbcTemplate().update("T_B_BRANCH", data, "BranchId", new Integer(branchId));
+        getJdbcTemplateUtil().update("T_B_BRANCH", data, "BranchId", new Integer(branchId));
     }
 }

@@ -1,17 +1,14 @@
 package com.yizhishang.plat.dao;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.dao.BaseDao;
-import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.jdbc.JdbcTemplate;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.ManageCatalog;
 
@@ -32,26 +29,14 @@ public class ManageCatalogDao extends BaseDao
 	
 	public void addCatalog(ManageCatalog catalog)
 	{
-		JdbcTemplate jdbcTempate = getJdbcTemplate();
-		DataRow dataRow = new DataRow();
+		DynaModel dataRow = new DynaModel();
 		dataRow.putAll(catalog.toMap());
-		jdbcTempate.insert("T_MANAGE_CATALOG", dataRow);
-		if (1 == Configuration.getInt("system.isAutoIncrement"))
-		{
-			try
-			{
-				catalog.setId(Integer.parseInt(jdbcTempate.getGeneratedKeys()));
-			}
-			catch (Exception ex)
-			{
-				
-			}
-		}
+		getJdbcTemplateUtil().insert("T_MANAGE_CATALOG", dataRow);
 	}
 	
 	public void deleteCatalog(int catalogId)
 	{
-		getJdbcTemplate().delete("T_MANAGE_CATALOG", "catalog_id", new Integer(catalogId));
+		getJdbcTemplateUtil().delete("T_MANAGE_CATALOG", "catalog_id", new Integer(catalogId));
 	}
 	
 	public void deleteCatalog(int catalogId, String siteno)
@@ -61,13 +46,13 @@ public class ManageCatalogDao extends BaseDao
 		sqlBuf.append("delete from T_MANAGE_CATALOG where catalog_id=? and siteno=?");
 		argList.add(new Integer(catalogId));
 		argList.add(siteno);
-		getJdbcTemplate().update(sqlBuf.toString(), argList.toArray());
+		getJdbcTemplateUtil().update(sqlBuf.toString(), argList.toArray());
 	}
 	
 	public ManageCatalog findCatalogById(int catalogId)
 	{
 		String sql = "select * from T_MANAGE_CATALOG where catalog_id=?";
-		DataRow dataRow = getJdbcTemplate().queryMap(sql, new Object[] { new Integer(catalogId) });
+		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(catalogId) });
 		if (dataRow == null)
 			return null;
 		ManageCatalog catalog = new ManageCatalog();
@@ -78,7 +63,7 @@ public class ManageCatalogDao extends BaseDao
 	public ManageCatalog findCatalogById(int catalogId, String siteno)
 	{
 		String sql = "select * from T_MANAGE_CATALOG where catalog_id=?";
-		DataRow dataRow = getJdbcTemplate().queryMap(sql, new Object[] { new Integer(catalogId) });
+		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(catalogId) });
 		if (dataRow == null)
 			return null;
 		ManageCatalog catalog = new ManageCatalog();
@@ -86,7 +71,7 @@ public class ManageCatalogDao extends BaseDao
 		return catalog;
 	}
 	
-	public List<Object> findCatalogInfoByParentId(int parentId, String siteno)
+	public List<ManageCatalog> findCatalogInfoByParentId(int parentId, String siteno)
 	{
 		ArrayList<Object> argList = new ArrayList<Object>();
 		StringBuffer sqlBuf = new StringBuffer();
@@ -102,19 +87,11 @@ public class ManageCatalogDao extends BaseDao
 			argList.add(siteno);
 		}
 		sqlBuf.append(" order by orderline");
-        List<Object> list = getJdbcTemplate().query(sqlBuf.toString(), argList.toArray());
-        List<Object> rlist = new ArrayList<Object>();
-		for (int i = 0; i < list.size(); i++)
-		{
-			DataRow dr = (DataRow) list.get(i);
-			ManageCatalog menuCatalog = new ManageCatalog();
-			menuCatalog.fromMap(dr);
-			rlist.add(menuCatalog);
-		}
-		return rlist;
+        List<ManageCatalog> list = getJdbcTemplateUtil().queryForList(sqlBuf.toString(), ManageCatalog.class, argList.toArray());
+		return list;
 	}
 	
-	public List<Object> findCatalogLikeRoute(int catalogId, String siteno)
+	public List<ManageCatalog> findCatalogLikeRoute(int catalogId, String siteno)
 	{
 		ArrayList<Object> argList = new ArrayList<Object>();
 		StringBuffer sqlBuf = new StringBuffer();
@@ -137,38 +114,18 @@ public class ManageCatalogDao extends BaseDao
 			argList.add(siteno);
 		}
 		sqlBuf.append(" order by orderline");
-		List<Object> list = getJdbcTemplate().query(sqlBuf.toString(), argList.toArray());
-        List<Object> rlist = new ArrayList<Object>();
-		for (int i = 0; i < list.size(); i++)
-		{
-			DataRow dr = (DataRow) list.get(i);
-			ManageCatalog menuCatalog = new ManageCatalog();
-			menuCatalog.fromMap(dr);
-            rlist.add(menuCatalog);
-		}
-		return rlist;
+		List<ManageCatalog> list = getJdbcTemplateUtil().queryForList(sqlBuf.toString(), ManageCatalog.class, argList.toArray());
+		return list;
 	}
 	
-	public List<Object> findChildrenById(int catalogId)
+	public List<ManageCatalog> findChildrenById(int catalogId)
 	{
 		String sql = "select * from T_MANAGE_CATALOG where parent_id=? order by orderline";
-		
-		List<Object> dataList = getJdbcTemplate().query(sql, new Object[] { new Integer(catalogId) });
-		ArrayList<Object> newDataList = new ArrayList<Object>();
-		if (dataList != null)
-		{
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
-			{
-				DataRow dataRow = (DataRow) iter.next();
-				ManageCatalog catalog = new ManageCatalog();
-				catalog.fromMap(dataRow);
-				newDataList.add(catalog);
-			}
-		}
-		return newDataList;
+		List<ManageCatalog> dataList = getJdbcTemplateUtil().queryForList(sql, ManageCatalog.class, new Object[] { new Integer(catalogId) });
+		return dataList;
 	}
 	
-	public List<Object> findChildrenById(int catalogId, String siteNo)
+	public List<ManageCatalog> findChildrenById(int catalogId, String siteNo)
 	{
 		ArrayList<Object> argList = new ArrayList<Object>();
 		String sql = "select * from T_MANAGE_CATALOG where parent_id=? ";
@@ -180,19 +137,8 @@ public class ManageCatalogDao extends BaseDao
 		}
 		sql += " order by orderline";
 		
-        List<Object> dataList = getJdbcTemplate().query(sql, argList.toArray());
-		ArrayList<Object> newDataList = new ArrayList<Object>();
-		if (dataList != null)
-		{
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
-			{
-				DataRow dataRow = (DataRow) iter.next();
-				ManageCatalog catalog = new ManageCatalog();
-				catalog.fromMap(dataRow);
-				newDataList.add(catalog);
-			}
-		}
-		return newDataList;
+        List<ManageCatalog> dataList = getJdbcTemplateUtil().queryForList(sql, ManageCatalog.class, argList.toArray());
+		return dataList;
 	}
 	
 	                                /**
@@ -211,7 +157,7 @@ public class ManageCatalogDao extends BaseDao
 			String sql = "SELECT COUNT(CATALOG_ID) FROM T_MANAGE_CATALOG WHERE PARENT_ID = ?";
 			List<Object> argList = new ArrayList<Object>();
 			argList.add(new Integer(parentId));
-			return getJdbcTemplate().queryInt(sql, argList.toArray());
+			return getJdbcTemplateUtil().queryInt(sql, argList.toArray());
 		}
 		catch (Exception ex)
 		{
@@ -225,8 +171,8 @@ public class ManageCatalogDao extends BaseDao
 		ArrayList<Object> argList = new ArrayList<Object>();
 		String sql = "select * from T_MANAGE_CATALOG where siteno like ? and parent_id=0";
 		argList.add("%" + siteNo + "%");
-		//DataRow dataRow = getJdbcTemplate().queryMap(sql, new Object[]{siteNo});
-		DataRow dataRow = getJdbcTemplate().queryMap(sql, argList.toArray());
+		//DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[]{siteNo});
+		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 		if (dataRow == null)
 			return null;
 		ManageCatalog catalog = new ManageCatalog();
@@ -237,7 +183,7 @@ public class ManageCatalogDao extends BaseDao
 	public ManageCatalog getParent(int catalogId)
 	{
 		String sql = "select parent_id from T_MANAGE_CATALOG where catalog_id=?";
-		int parentId = getJdbcTemplate().queryInt(sql, new Object[] { new Integer(catalogId) });
+		int parentId = getJdbcTemplateUtil().queryInt(sql, new Object[] { new Integer(catalogId) });
 		if (parentId > 0)
 			return findCatalogById(parentId);
 		else
@@ -261,9 +207,9 @@ public class ManageCatalogDao extends BaseDao
 	
 	public void updateCatalog(ManageCatalog catalog)
 	{
-		DataRow dataRow = new DataRow();
+		DynaModel dataRow = new DynaModel();
 		dataRow.putAll(catalog.toMap());
-		getJdbcTemplate().update("T_MANAGE_CATALOG", dataRow, "catalog_id", new Integer(catalog.getId()));
+		getJdbcTemplateUtil().update("T_MANAGE_CATALOG", dataRow, "catalog_id", new Integer(catalog.getId()));
 	}
 	
 	                                    /**
@@ -281,6 +227,6 @@ public class ManageCatalogDao extends BaseDao
 		List<Object> argList = new ArrayList<Object>();
 		argList.add(new Integer(childrennum));
 		argList.add(new Integer(catalogId));
-		getJdbcTemplate().update(sql, argList.toArray());
+		getJdbcTemplateUtil().update(sql, argList.toArray());
 	}
 }

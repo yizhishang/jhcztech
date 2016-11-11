@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.jsp.JspWriter;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.base.util.ToolKit;
@@ -17,9 +17,9 @@ public class DynInputTag extends CommonTag
     
     private static final long serialVersionUID = -4495264469438501769L;
     
-    private DataRow item = null;
+    private DynaModel item = null;
     
-    private DataRow colitem = null;
+    private DynaModel colitem = null;
     
     private String colname = "";
     
@@ -35,7 +35,7 @@ public class DynInputTag extends CommonTag
         colname = ToolKit.nullTrans(colname, "");
         if (item == null)
         {
-            item = new DataRow();
+            item = new DynaModel();
         }
         String defaultvalue = ToolKit.nullTrans(colitem.getString("default_value"), "");
         value = ToolKit.nullTrans(item.getString(colname), defaultvalue);
@@ -285,11 +285,11 @@ public class DynInputTag extends CommonTag
      */
     private String makeRadioTag(String tagname)
     {
-        List<Object> list = colservice.getOptionBeans(colitem); // 获得列表
+        List<DynaModel> list = colservice.getOptionBeans(colitem); // 获得列表
         StringBuffer sb = new StringBuffer();
         for (int i = 0; list != null && i < list.size(); i++)
         {
-            DataRow tempBean = (DataRow) list.get(i);
+            DynaModel tempBean = (DynaModel) list.get(i);
             String tempValue = tempBean.getString("optionvalue");
             String tempText = tempBean.getString("optiontext");
             if ("radio".equals(tagname) && value.equals(tempValue))
@@ -323,7 +323,7 @@ public class DynInputTag extends CommonTag
      */
     private String makeOpenRadioTag(String tagname)
     {
-        List<Object> list = colservice.getOptionBeans(colitem); // 获得列表
+        List<DynaModel> list = colservice.getOptionBeans(colitem); // 获得列表
         String select_text_column = colitem.getString("select_text_column");
         String colid = colitem.getString("id");
         String txtValue = "";
@@ -342,7 +342,7 @@ public class DynInputTag extends CommonTag
             }
             for (int i = 0; list != null && i < list.size(); i++)
             {
-                DataRow tempBean = (DataRow) list.get(i);
+                DynaModel tempBean = (DynaModel) list.get(i);
                 String tempValue = tempBean.getString("optionvalue");
                 String tempText = tempBean.getString("optiontext");
                 if (tvalue.indexOf("," + tempValue + ",") != -1)
@@ -371,7 +371,7 @@ public class DynInputTag extends CommonTag
      */
     private String makeSelectTag()
     {
-        List<Object> list = colservice.getOptionBeans(colitem); // 获得列表
+        List<DynaModel> list = colservice.getOptionBeans(colitem); // 获得列表
         StringBuffer sb = new StringBuffer();
         sb.append("<select name='" + name + "' id='" + id + "' " + makeVerificationStr() + makeReadonly() + "");
         if (!StringHelper.isEmpty(css))
@@ -384,7 +384,7 @@ public class DynInputTag extends CommonTag
         sb.append("<option value=''>------</option>\n");
         for (int i = 0; list != null && i < list.size(); i++)
         {
-            DataRow tempBean = (DataRow) list.get(i);
+            DynaModel tempBean = (DynaModel) list.get(i);
             String tempValue = tempBean.getString("optionvalue");
             String tempText = tempBean.getString("optiontext");
             if (value.equals(tempValue))
@@ -400,22 +400,22 @@ public class DynInputTag extends CommonTag
         return sb.toString();
     }
     
-    public DataRow getItem()
+    public DynaModel getItem()
     {
         return item;
     }
     
-    public void setItem(DataRow item)
+    public void setItem(DynaModel item)
     {
         this.item = item;
     }
     
-    public DataRow getColitem()
+    public DynaModel getColitem()
     {
         return colitem;
     }
     
-    public void setColitem(DataRow colitem)
+    public void setColitem(DynaModel colitem)
     {
         this.colitem = colitem;
     }

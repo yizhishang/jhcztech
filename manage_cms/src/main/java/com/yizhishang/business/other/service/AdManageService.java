@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 
@@ -45,7 +45,7 @@ public class AdManageService extends BaseService
             argList.add("%" + keyword + "%");
         }
         sqlBuf.append(" ORDER BY A.ORDERLINE");
-        page = getJdbcTemplate().queryPage(sqlBuf.toString(), argList.toArray(), curPage, numPerPage);
+        page = getJdbcTemplateUtil().queryPage(sqlBuf.toString(), argList.toArray(), curPage, numPerPage);
         /*
          if (page != null)
          {
@@ -54,7 +54,7 @@ public class AdManageService extends BaseService
          for (Iterator iter = dataList.iterator(); iter.hasNext();)
          {
          Ad ad = new Ad();
-         DataRow row = (DataRow) iter.next();
+         DynaModel row = (DynaModel) iter.next();
          ad.fromMap(row);
          newDataList.add(ad);
          }
@@ -67,24 +67,24 @@ public class AdManageService extends BaseService
      * 添加广告
      * @param ad
      */
-    public void addAd(DataRow ad)
+    public void addAd(DynaModel ad)
     {
         String id = getSeqValue("T_AD");
         ad.set("ad_id", id);
         ad.set("orderline", id);
-        getJdbcTemplate().insert("T_AD", ad);
+        getJdbcTemplateUtil().insert("T_AD", ad);
     }
     
     /**
      * 修改广告
      * @param ad
      */
-    public void updateAd(DataRow ad)
+    public void updateAd(DynaModel ad)
     {
-        getJdbcTemplate().update("t_ad", ad, "ad_id", ad.getString("ad_id"));
+        getJdbcTemplateUtil().update("t_ad", ad, "ad_id", ad.getString("ad_id"));
     }
     
-    public DataRow findAdById(int ad_id, String siteno)
+    public DynaModel findAdById(int ad_id, String siteno)
     {
         StringBuffer sqlBuf = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
@@ -102,7 +102,7 @@ public class AdManageService extends BaseService
         }
         sqlBuf.append(" order by ad_id desc");
         
-        return getJdbcTemplate().queryMap(sqlBuf.toString(), argList.toArray());
+        return getJdbcTemplateUtil().queryMap(sqlBuf.toString(), argList.toArray());
     }
     
     public void deteleAdInfo(int ad_id, String siteno)
@@ -121,14 +121,14 @@ public class AdManageService extends BaseService
             sqlBuf.append(" and siteno=?");
             argList.add(siteno);
         }
-        getJdbcTemplate().update(sqlBuf.toString(), argList.toArray());
+        getJdbcTemplateUtil().update(sqlBuf.toString(), argList.toArray());
     }
     
-    public List<Object> findAllAdGroup()
+    public List<DynaModel> findAllAdGroup()
     {
         StringBuffer sqlBuf = new StringBuffer();
         sqlBuf.append("select * from t_ad_group order by orderline desc, id desc");
-        return getJdbcTemplate().query(sqlBuf.toString());
+        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), DynaModel.class);
     }
     
     public void linkYes(int id, String siteno)
@@ -148,7 +148,7 @@ public class AdManageService extends BaseService
             argList.add(siteno);
         }
         
-        getJdbcTemplate().update(sqlBuf.toString(), argList.toArray());
+        getJdbcTemplateUtil().update(sqlBuf.toString(), argList.toArray());
     }
     
     public void linkNo(int id, String siteno)
@@ -168,7 +168,7 @@ public class AdManageService extends BaseService
             argList.add(siteno);
         }
         
-        getJdbcTemplate().update(sqlBuf.toString(), argList.toArray());
+        getJdbcTemplateUtil().update(sqlBuf.toString(), argList.toArray());
     }
     
     public void showYes(int id, String siteno)
@@ -188,7 +188,7 @@ public class AdManageService extends BaseService
             argList.add(siteno);
         }
         
-        getJdbcTemplate().update(sqlBuf.toString(), argList.toArray());
+        getJdbcTemplateUtil().update(sqlBuf.toString(), argList.toArray());
     }
     
     public void showNo(int id, String siteno)
@@ -208,13 +208,13 @@ public class AdManageService extends BaseService
             argList.add(siteno);
         }
         
-        getJdbcTemplate().update(sqlBuf.toString(), argList.toArray());
+        getJdbcTemplateUtil().update(sqlBuf.toString(), argList.toArray());
     }
     
-    public List<Object> findAdsByGroupNo(int groupNo)
+    public List<DynaModel> findAdsByGroupNo(int groupNo)
     {
         String sql = "SELECT * FROM T_AD WHERE STATE = 1 AND GROUP_NO = ? ORDER BY ORDERLINE";
-        return getJdbcTemplate().query(sql, new Object[] { groupNo });
+        return getJdbcTemplateUtil().queryForList(sql, DynaModel.class, new Object[] { groupNo });
     }
     
 }
