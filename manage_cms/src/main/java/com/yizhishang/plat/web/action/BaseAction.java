@@ -21,7 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.ConvertHelper;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.SpringContextHolder;
@@ -184,7 +184,7 @@ public class BaseAction
     {
         flag = flag.toUpperCase();
         
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.put("cmd_str", flag + ":" + id);
         if ("A".equals(flag))
         {
@@ -810,7 +810,7 @@ public class BaseAction
      * @return
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public DataRow[] normalizeList(HttpServletRequest request)
+    public DynaModel[] normalizeList(HttpServletRequest request)
     {
         Enumeration<String> paramNames = request.getParameterNames();
         int length = 1;
@@ -822,10 +822,10 @@ public class BaseAction
             length = request.getParameterValues(thisName).length;
         }
         
-        DataRow[] forms = new DataRow[length];
+        DynaModel[] forms = new DynaModel[length];
         for (int i = 0; i < length; i++)
         {
-            forms[i] = new DataRow();
+            forms[i] = new DynaModel();
         }
         for (String thisName : thisNameList)
         {

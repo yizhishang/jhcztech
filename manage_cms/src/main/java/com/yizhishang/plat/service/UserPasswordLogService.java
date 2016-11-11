@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.StringHelper;
@@ -55,10 +55,10 @@ public class UserPasswordLogService extends BaseService
     */
     public void deleteLogByUserId(String uid)
     {
-        List<Object> dataList = passwordLogDao.queryLogByUserId(uid);
+        List<DynaModel> dataList = passwordLogDao.queryLogByUserId(uid);
         for (Object data : dataList)
         {
-            int id = ((DataRow) data).getInt("log_id");
+            int id = ((DynaModel) data).getInt("log_id");
             passwordLogDao.deleteLog(id);
         }
     }

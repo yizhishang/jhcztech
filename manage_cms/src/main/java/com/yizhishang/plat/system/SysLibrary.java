@@ -8,7 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.SessionHelper;
 import com.yizhishang.base.util.SpringContextHolder;
@@ -17,6 +17,7 @@ import com.yizhishang.base.util.UUID;
 import com.yizhishang.plat.Constants;
 import com.yizhishang.plat.domain.Article;
 import com.yizhishang.plat.domain.Catalog;
+import com.yizhishang.plat.domain.ManageCatalog;
 import com.yizhishang.plat.domain.Template;
 import com.yizhishang.plat.service.ArticleService;
 import com.yizhishang.plat.service.CatalogService;
@@ -292,9 +293,9 @@ public class SysLibrary
     * @return
     */
     @SuppressWarnings("unchecked")
-    public static List<Object> getSecurityCatalog(HttpSession session)
+    public static List<DynaModel> getSecurityCatalog(HttpSession session)
     {
-        return (List<Object>) SessionHelper.getObject(Constants.USER_MENU_CATALOGS, session);
+        return (List<DynaModel>) SessionHelper.getObject(Constants.USER_MENU_CATALOGS, session);
     }
     
     /**
@@ -305,10 +306,10 @@ public class SysLibrary
     * @param session
     * @return
     */
-    public static List<Object> getSecurityCatalogTree(HttpSession session)
+    public static List<ManageCatalog> getSecurityCatalogTree(HttpSession session)
     {
         @SuppressWarnings("unchecked")
-        List<Object> list = (List<Object>) SessionHelper.getObject(Constants.USER_MENU_CATALOGS, session);
+        List<ManageCatalog> list = (List<ManageCatalog>) SessionHelper.getObject(Constants.USER_MENU_CATALOGS, session);
         return new ManageCatalogService().prepareCatalogTree(list);
     }
     
@@ -410,9 +411,9 @@ public class SysLibrary
     * @param session
     * @return
     */
-    public static DataRow getUserCatalogRight(HttpSession session)
+    public static DynaModel getUserCatalogRight(HttpSession session)
     {
-        return (DataRow) session.getAttribute(Constants.USER_CATALOG_RIGHT);
+        return (DynaModel) session.getAttribute(Constants.USER_CATALOG_RIGHT);
     }
     
     /**

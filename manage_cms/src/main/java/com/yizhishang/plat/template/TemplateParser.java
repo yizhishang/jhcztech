@@ -14,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.base.util.ReflectHelper;
 import com.yizhishang.base.util.SpringContextHolder;
@@ -161,12 +161,12 @@ public final class TemplateParser
 
         //从数据库中提取模板变量
         TemplateVarService templateVarService = (TemplateVarService) SpringContextHolder.getBean("templateVarService");
-        List<Object> dataList = templateVarService.findAllUsableItem();
+        List<DynaModel> dataList = templateVarService.findAllUsableItem();
         if (dataList != null && dataList.size() > 0)
         {
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
-                DataRow var = (DataRow) iter.next();
+                DynaModel var = (DynaModel) iter.next();
                 String name = var.getString("item_name").trim();
                 String value = var.getString("item_value").trim();
                 templateVars.put(name, value);

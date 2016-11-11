@@ -22,7 +22,8 @@
 		<jackson.version>2.2.3</jackson.version>
 		<fastjson.version>1.1.40</fastjson.version>
 		<freemarker.version>2.3.20</freemarker.version>
-
+		<guava.version>17.0</guava.version>
+		<druid.version>1.0.18</druid.version>
 		<aspectj.version>1.7.4</aspectj.version>
 		<fasterxml.jackson.version>2.6.5</fasterxml.jackson.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -124,7 +125,11 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.1.1</version>
 		</dependency>
-		
+		<dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
 		<!-- LOGGING begin -->
 		<dependency>
             <groupId>org.slf4j</groupId>
@@ -208,7 +213,11 @@
 			</exclusions>
 		</dependency>
 		
-		
+		<dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
 		
 		<!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
 		<dependency>

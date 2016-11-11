@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.common.table.service.TableService;
 import com.yizhishang.plat.domain.Result;
@@ -54,7 +54,7 @@ public class TableAction extends BaseAction
     public Result add(HttpServletRequest request, HttpServletResponse response)
     {
         normalize(form);
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.putAll(form);
         data.set("create_time", DateHelper.formatDate(new Date(), "yyyy-MM-dd"));
         data.set("create_by", getUID());
@@ -78,7 +78,7 @@ public class TableAction extends BaseAction
     public ModelAndView doEdit(HttpServletResponse response)
     {
         int id = this.getIntParameter("id", 0);
-        DataRow bean = new DataRow();
+        DynaModel bean = new DynaModel();
         if (id > 0)
         {
             bean = tableService.load(id);
@@ -93,7 +93,7 @@ public class TableAction extends BaseAction
     public Result edit(HttpServletRequest request, HttpServletResponse response)
     {
         form = normalize(request);
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.putAll(form);
         data.set("update_time", DateHelper.formatDate(new Date(), "yyyy-MM-dd"));
         data.set("update_by", getUID());

@@ -3,7 +3,7 @@ package com.yizhishang.plat;
 import java.util.Iterator;
 import java.util.List;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 
 /**
  * 描述:  
@@ -37,7 +37,7 @@ public class CatalogTreeManage
         this.isCheckParent = isCheckParent;
     }
     
-    private String getCatalogFunction(DataRow data)
+    private String getCatalogFunction(DynaModel data)
     {
         String catalogId = data.getString("catalog_id");
         String route = data.getString("route");
@@ -76,12 +76,12 @@ public class CatalogTreeManage
     * @return
     */
     @SuppressWarnings("unchecked")
-    public String getCatalogTreeHtml(DataRow wholeCatalogs, boolean isSystemAdmin, DataRow catalogRole)
+    public String getCatalogTreeHtml(DynaModel wholeCatalogs, boolean isSystemAdmin, DynaModel catalogRole)
     {
         String html = "";
         if (wholeCatalogs != null)
         {
-            List<Object> children = (List<Object>) wholeCatalogs.getObject("children");
+            List<DynaModel> children = (List<DynaModel>) wholeCatalogs.getObject("children");
             html = getChildrenTreeHtml(children, isSystemAdmin, catalogRole);
         }
         return html;
@@ -96,18 +96,18 @@ public class CatalogTreeManage
     * @return
     */
     @SuppressWarnings("unchecked")
-    public String getChildrenTreeHtml(List<Object> list)
+    public String getChildrenTreeHtml(List<DynaModel> list)
     {
         StringBuffer buffer = new StringBuffer();
         if (list != null)
         {
             buffer.append("<ul>");
-            for (Iterator<Object> iter = list.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = list.iterator(); iter.hasNext();)
             {
                 buffer.append("<li>");
-                DataRow data = (DataRow) iter.next();
+                DynaModel data = (DynaModel) iter.next();
                 buffer.append(getCatalogFunction(data));
-                buffer.append(getChildrenTreeHtml((List<Object>) data.getObject("children")));
+                buffer.append(getChildrenTreeHtml((List<DynaModel>) data.getObject("children")));
                 buffer.append("</li>");
             }
             buffer.append("</ul>");
@@ -124,22 +124,22 @@ public class CatalogTreeManage
     * @return
     */
     @SuppressWarnings("unchecked")
-    public String getChildrenTreeHtml(List<Object> list, boolean isSystemAdmin, DataRow catalogRole)
+    public String getChildrenTreeHtml(List<DynaModel> list, boolean isSystemAdmin, DynaModel catalogRole)
     {
         String catalogId = "";
         StringBuffer buffer = new StringBuffer();
         if (list != null)
         {
             buffer.append("<ul>");
-            for (Iterator<Object> iter = list.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = list.iterator(); iter.hasNext();)
             {
-                DataRow data = (DataRow) iter.next();
+                DynaModel data = (DynaModel) iter.next();
                 catalogId = data.getString("catalog_id");
                 if (isSystemAdmin || (catalogRole != null && catalogRole.containsKey(catalogId)))
                 {
                     buffer.append("<li>");
                     buffer.append(getCatalogFunction(data));
-                    buffer.append(getChildrenTreeHtml((List<Object>) data.getObject("children"), isSystemAdmin, catalogRole));
+                    buffer.append(getChildrenTreeHtml((List<DynaModel>) data.getObject("children"), isSystemAdmin, catalogRole));
                     buffer.append("</li>");
                 }
                 else

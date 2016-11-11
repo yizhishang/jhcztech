@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.yizhishang.base.dao.BaseDao;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.User;
 
@@ -31,19 +31,19 @@ public class UserDao extends BaseDao
 	
 	public void addUser(User user)
 	{
-		DataRow dataRow = new DataRow();
+		DynaModel dataRow = new DynaModel();
 		dataRow.putAll(user.toMap());
-		getJdbcTemplate().insert("T_USER", dataRow);
+		getJdbcTemplateUtil().insert("T_USER", dataRow);
 	}
 	
 	public void deleteUser(int id)
 	{
-		getJdbcTemplate().delete("T_USER", "id", new Integer(id));
+		getJdbcTemplateUtil().delete("T_USER", "id", new Integer(id));
 	}
 	
 	public User findUserById(int id)
 	{
-		DataRow dataRow = getJdbcTemplate().queryMap(FIND_USER_BY_ID, new Object[] { new Integer(id) });
+		DynaModel dataRow = getJdbcTemplateUtil().queryMap(FIND_USER_BY_ID, new Object[] { new Integer(id) });
 		if (dataRow == null)
 			return null;
 		User user = new User();
@@ -51,16 +51,16 @@ public class UserDao extends BaseDao
 		return user;
 	}
 	
-	public List<Object> findUserBySiteNo(String siteNo)
+	public List<DynaModel> findUserBySiteNo(String siteNo)
 	{
-        List<Object> dataList = getJdbcTemplate().query("select * from T_USER where siteno = ? ", new Object[] { siteNo });
-		ArrayList<Object> newDataList = new ArrayList<Object>();
+        List<DynaModel> dataList = getJdbcTemplateUtil().queryForList("select * from T_USER where siteno = ? ", new Object[] { siteNo });
+		ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
 		if (dataList != null)
 		{
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
 			{
 				User user = new User();
-				DataRow row = (DataRow) iter.next();
+				DynaModel row = (DynaModel) iter.next();
 				user.fromMap(row);
 				newDataList.add(user);
 			}
@@ -70,23 +70,17 @@ public class UserDao extends BaseDao
 	
 	public User findUserByUID(String uid)
 	{
-		DataRow dataRow = getJdbcTemplate().queryMap(FIND_USER_BY_UID, new Object[] { uid });
-		if (dataRow == null)
-			return null;
-		
-		User user = new User();
-		user.fromMap(dataRow);
-		return user;
+		return getJdbcTemplateUtil().queryMap(FIND_USER_BY_UID, User.class, new Object[] { uid });
 	}
 	
-    public List<Object> getAll()
+    public List<DynaModel> getAll()
 	{
-        List<Object> dataList = getJdbcTemplate().query("select * from T_USER order by id desc ");
-		ArrayList<Object> newDataList = new ArrayList<Object>();
-        for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+        List<DynaModel> dataList = getJdbcTemplateUtil().queryForList("select * from T_USER order by id desc ");
+		ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+        for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
 		{
 			User user = new User();
-			DataRow row = (DataRow) iter.next();
+			DynaModel row = (DynaModel) iter.next();
 			user.fromMap(row);
 			newDataList.add(user);
 		}
@@ -124,16 +118,16 @@ public class UserDao extends BaseDao
 		{
 			sqlBuffer.append(" order by id desc ");
 		}
-		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
 		if (page != null)
 		{
-            List<Object> dataList = page.getData();
-			ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+			ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
 			{
 				User user = new User();
-				DataRow row = (DataRow) iter.next();
+				DynaModel row = (DynaModel) iter.next();
 				user.fromMap(row);
 				newDataList.add(user);
 			}
@@ -173,16 +167,16 @@ public class UserDao extends BaseDao
 		{
 			sqlBuffer.append(" order by id desc ");
 		}
-		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
 		if (page != null)
 		{
-            List<Object> dataList = page.getData();
-			ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+			ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
 			{
 				User user = new User();
-				DataRow row = (DataRow) iter.next();
+				DynaModel row = (DynaModel) iter.next();
 				user.fromMap(row);
 				newDataList.add(user);
 			}
@@ -225,16 +219,16 @@ public class UserDao extends BaseDao
 		}
 		sqlBuffer.append(" AND U.IS_SYSTEM = 0");
 		sqlBuffer.append(" ORDER BY ID DESC");
-		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
 		//		if (page != null)
 		//		{
-        //			List<Object> dataList = page.getData();
-		//			ArrayList<Object> newDataList = new ArrayList<Object>();
-        //			for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+        //			List<DynaModel> dataList = page.getData();
+		//			ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+        //			for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
 		//			{
 		//				User user = new User();
-		//				DataRow row = (DataRow) iter.next();
+		//				DynaModel row = (DynaModel) iter.next();
 		//				user.fromMap(row);
 		//				newDataList.add(user);
 		//			}
@@ -266,16 +260,16 @@ public class UserDao extends BaseDao
 		sqlBuffer.append(" and id not in (select user_id from T_ROLE_USER where role_id=?)");
 		argList.add(new Integer(roleId));
 		sqlBuffer.append(" order by id desc ");
-		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
 		if (page != null)
 		{
-            List<Object> dataList = page.getData();
-			ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+			ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
 			{
 				User user = new User();
-				DataRow row = (DataRow) iter.next();
+				DynaModel row = (DynaModel) iter.next();
 				user.fromMap(row);
 				newDataList.add(user);
 			}
@@ -287,15 +281,15 @@ public class UserDao extends BaseDao
 	
     public void updateUser(User user)
 	{
-		DataRow dataRow = new DataRow();
-		dataRow.putAll(user.toMap());
+		DynaModel dataRow = new DynaModel();
+		dataRow.fromMap(user);
 		if (user.getId() > 0)
 		{
-			getJdbcTemplate().update("T_USER", dataRow, "id", new Integer(user.getId()));
+			getJdbcTemplateUtil().update("T_USER", dataRow, "id", new Integer(user.getId()));
 		}
 		else
 		{
-			getJdbcTemplate().update("T_USER", dataRow, "uid2", user.getUid());
+			getJdbcTemplateUtil().update("T_USER", dataRow, "uid2", user.getUid());
 		}
 	}
 }

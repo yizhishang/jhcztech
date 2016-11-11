@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.StringHelper;
@@ -175,7 +175,7 @@ public class UserAction extends BaseAction
     public ModelAndView doAdd()
     {
         //查找所有营业部信息
-        List<Object> dataList = branchService.getAll();
+        List<DynaModel> dataList = branchService.getAll();
         dataMap.put("branchList", dataList);
         //查找所有站点信息
         List<Site> siteList = siteService.getAllSite();
@@ -228,17 +228,17 @@ public class UserAction extends BaseAction
         */
         if (page != null)
         {
-            List<Object> dataList = page.getData();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
-                DataRow userData = (DataRow) iter.next();
-                List<Object> roleInfo = roleService.findUserRoleById(userData.getInt("user_id"));
+                DynaModel userData = (DynaModel) iter.next();
+                List<DynaModel> roleInfo = roleService.findUserRoleById(userData.getInt("user_id"));
                 if (roleInfo != null)
                 {
                     String roleStr = "";
                     for (int i = 0; i < roleInfo.size(); i++)
                     {
-                        DataRow roleData = (DataRow) roleInfo.get(i);
+                        DynaModel roleData = (DynaModel) roleInfo.get(i);
                         roleStr += roleData.getString("roleno");
                         if (i < roleInfo.size() - 1)
                         {
@@ -252,13 +252,13 @@ public class UserAction extends BaseAction
         }
         
         //查询所有营业部
-        List<Object> branchs = branchService.getAll();
+        List<DynaModel> branchs = branchService.getAll();
         if (branchs != null)
         {
             dataMap.put("branchs", branchs);
         }
         //查询所有角色
-        List<Object> roles = roleService.findRoleBySiteno(getSiteNo());
+        List<DynaModel> roles = roleService.findRoleBySiteno(getSiteNo());
         if (roles != null)
         {
             dataMap.put("roles", roles);
@@ -303,7 +303,7 @@ public class UserAction extends BaseAction
     public ModelAndView doEdit(HttpServletResponse response)
     {
         //获得所有营业部信息
-        List<Object> dataList = branchService.getAll();
+        List<DynaModel> dataList = branchService.getAll();
         dataMap.put("branchList", dataList);
         
         //根据用户登陆的编号，查询用户的信息
@@ -370,7 +370,7 @@ public class UserAction extends BaseAction
         UserExcelServeice service = new UserExcelServeice();
         keyword = StringHelper.trim(keyword);
         loanNo = StringHelper.trim(loanNo);
-        List<Object> list = service.getUser(keyword, loanNo);
+        List<DynaModel> list = service.getUser(keyword, loanNo);
         exportToExcel(list, "user", request);
         return "";
     }
@@ -514,7 +514,7 @@ public class UserAction extends BaseAction
         
     }
     
-    private void exportToExcel(List<Object> list, String value, HttpServletRequest request) throws Exception
+    private void exportToExcel(List<DynaModel> list, String value, HttpServletRequest request) throws Exception
     {
         if (list == null)
         {
@@ -570,11 +570,11 @@ public class UserAction extends BaseAction
         
         /*label = new Label(0,1,"adsf",wcf);
           ws.addCell(label);*/
-        DataRow row;
+        DynaModel row;
         
         for (int i = 1; i <= list.size(); i++)
         {
-            row = (DataRow) list.get(i - 1);
+            row = (DynaModel) list.get(i - 1);
             //System.out.println("##############"+row);
             label = new Label(0, i, row.getString("uid2"), wcf);
             ws.addCell(label);

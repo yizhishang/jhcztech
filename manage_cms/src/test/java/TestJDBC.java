@@ -1,9 +1,7 @@
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Test;
 
-import com.yizhishang.base.jdbc.JdbcTemplate;
+import com.yizhishang.base.domain.DynaModel;
+import com.yizhishang.plat.domain.Site;
 
 
 /**
@@ -17,32 +15,13 @@ import com.yizhishang.base.jdbc.JdbcTemplate;
  */
 public class TestJDBC
 {
-	@Test
-    public void testJdbc()
-    {
-        JdbcTemplate jdbc = new JdbcTemplate();
-        String sql = "select sysdate from dual";
-        System.out.println(jdbc.queryString(sql));
-    }
-    
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public void testMap()
-    {
-        Map map1 = new HashMap();
-        map1.put("name", "Jack");
-        map1.put("age", "14");
-        Map map2 = new HashMap();
-        map2.put("name", "Lucy");
-        System.out.println(map1);
-        map1.putAll(map2);
-        System.out.println(map1);
-    }
-    
-    public void testSplit()
-    {
-        String str = "form.is_special_format";
-        System.out.println(str.indexOf("form."));
-        String thisName = str.split("form\\.")[1];
-        System.out.println(thisName);
+    @Test
+    public void testMap(){
+    	DynaModel dm = new DynaModel();
+    	dm.set("name", "main");
+    	Site site = new Site();
+    	site.fromMap(dm);
+    	System.out.println(site);
+    	System.out.println(site.toMap());
     }
 }

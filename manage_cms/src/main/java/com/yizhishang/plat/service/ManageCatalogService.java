@@ -1,12 +1,12 @@
 package com.yizhishang.plat.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.plat.dao.ManageCatalogDao;
 import com.yizhishang.plat.domain.ManageCatalog;
@@ -54,9 +54,9 @@ public class ManageCatalogService extends BaseService
         catalogDao.deleteCatalog(catalogId, siteno);
     }
     
-    public List<Object> findAllChildrenCatalogsById(int parentId, String siteno)
+    public List<ManageCatalog> findAllChildrenCatalogsById(int parentId, String siteno)
     {
-        List<Object> catalogs = catalogDao.findCatalogLikeRoute(parentId, siteno);
+        List<ManageCatalog> catalogs = catalogDao.findCatalogLikeRoute(parentId, siteno);
         return prepareCatalogTree(catalogs);
     }
     
@@ -89,7 +89,7 @@ public class ManageCatalogService extends BaseService
     * @param siteno
     * @return
     */
-    public List<Object> findCatalogInfoByParentId(int parentId, String siteno)
+    public List<ManageCatalog> findCatalogInfoByParentId(int parentId, String siteno)
     {
         return catalogDao.findCatalogInfoByParentId(parentId, siteno);
     }
@@ -103,7 +103,7 @@ public class ManageCatalogService extends BaseService
     * @param siteno
     * @return
     */
-    public List<Object> findCatalogLikeRoute(int catalogId, String siteno)
+    public List<ManageCatalog> findCatalogLikeRoute(int catalogId, String siteno)
     {
         return catalogDao.findCatalogLikeRoute(catalogId, siteno);
     }
@@ -114,7 +114,7 @@ public class ManageCatalogService extends BaseService
     * @param catalogId 当前栏目的ID
     * @return
     */
-    public List<Object> findChildrenById(int catalogId)
+    public List<ManageCatalog> findChildrenById(int catalogId)
     {
         return catalogDao.findChildrenById(catalogId);
     }
@@ -125,14 +125,14 @@ public class ManageCatalogService extends BaseService
     * @param siteNo    栏目所属站点
     * @return
     */
-    public List<Object> findChildrenById(int catalogId, String siteNo)
+    public List<ManageCatalog> findChildrenById(int catalogId, String siteNo)
     {
         return catalogDao.findChildrenById(catalogId, siteNo);
     }
     
-    public List<Object> findManageCatalogLikePId(int parentId, String siteno)
+    public List<ManageCatalog> findManageCatalogLikePId(int parentId, String siteno)
     {
-        List<Object> catalogs = catalogDao.findCatalogLikeRoute(parentId, siteno);
+        List<ManageCatalog> catalogs = catalogDao.findCatalogLikeRoute(parentId, siteno);
         return catalogs;
     }
     
@@ -163,7 +163,7 @@ public class ManageCatalogService extends BaseService
     * @param catalogs 所有相关栏目的集合
     * @return 返回-1表示不存在子栏目
     */
-    private int getChildCatalogIndex(ManageCatalog data, List<Object> catalogs)
+    private int getChildCatalogIndex(ManageCatalog data, List<ManageCatalog> catalogs)
     {
         for (int i = 0; i < catalogs.size(); i++)
         {
@@ -206,7 +206,7 @@ public class ManageCatalogService extends BaseService
      */
     public boolean hasChildren(int catalogId)
     {
-        List<Object> childrenList = findChildrenById(catalogId);
+        List<ManageCatalog> childrenList = findChildrenById(catalogId);
         return childrenList != null && childrenList.size() > 0;
     }
     
@@ -217,16 +217,15 @@ public class ManageCatalogService extends BaseService
     * @param list
     * @return
     */
-    public List<Object> prepareCatalogTree(@SuppressWarnings("rawtypes")
-    List srcList)
+    public List<ManageCatalog> prepareCatalogTree(List<ManageCatalog> srcList)
     {
-        List<Object> list = new ArrayList<Object>();
-        Object[] catalogs = srcList.toArray();
-        Collections.addAll(list, catalogs);
-        for (int k = 0; k < catalogs.length; k++)
+        List<ManageCatalog> list = Lists.newLinkedList();
+        list.addAll(srcList);
+        
+        for (int k = 0; k < list.size(); k++)
         {
-            ManageCatalog menuCatalog = (ManageCatalog) catalogs[k];
-            List<Object> children = new ArrayList<Object>();
+            ManageCatalog menuCatalog = (ManageCatalog) list.get(k);
+            List<ManageCatalog> children = new ArrayList<ManageCatalog>();
             for (int i = 0; i < list.size();)
             {
                 //根据正则表达式得到子栏目的在catalogs链表中的位置
@@ -240,7 +239,7 @@ public class ManageCatalogService extends BaseService
                     break;
                 }
             }
-            //如果有子栏目则添加到栏目的DataRow当中，key是children
+            //如果有子栏目则添加到栏目的DynaModel当中，key是children
             if (children.size() > 0)
             {
                 menuCatalog.setChildren(children);

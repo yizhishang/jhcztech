@@ -3,7 +3,7 @@ package webpart;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Catalog;
@@ -30,9 +30,9 @@ public class MetaWebpart extends FMWebpartParser
      * @param siteNo
      * @return
      */
-    private DataRow getCatalogSeo(int catalogId, String siteNo)
+    private DynaModel getCatalogSeo(int catalogId, String siteNo)
     {
-        DataRow dataRow = seoService.findSeoByCatalogid(catalogId, siteNo);
+        DynaModel dataRow = seoService.findSeoByCatalogid(catalogId, siteNo);
         if (dataRow != null)
         {
             return dataRow;
@@ -61,8 +61,8 @@ public class MetaWebpart extends FMWebpartParser
         {
             siteNo = "main";
         }
-        DataRow seoData = getCatalogSeo(catalogId, siteNo);
-        seoData = (seoData == null) ? new DataRow() : seoData;
+        DynaModel seoData = getCatalogSeo(catalogId, siteNo);
+        seoData = (seoData == null) ? new DynaModel() : seoData;
         dataMap.put("data", seoData);
         dataMap.put("catalogId", catalogId);
         return dataMap;

@@ -5,9 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.jdbc.JdbcTemplate;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 
@@ -25,16 +24,15 @@ public class EnumTypeService extends BaseService
 {
 	
 	/** 
-	 * @see com.yizhishang.plat.service.EnumTypeService#addItem(com.yizhishang.base.jdbc.DataRow)
+	 * @see com.yizhishang.plat.service.EnumTypeService#addItem(com.yizhishang.base.jdbc.DynaModel)
 	 * 描述：增加枚举类型
 	 * 作者：袁永君  lijian@yizhishang.com
 	 * 时间：May 18, 2010 10:56:39 AM
 	 * @param data
 	 */
-	public void addItem(DataRow data)
+	public void addItem(DynaModel data)
 	{
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		jdbcTemplate.insert("T_ENUM_TYPE", data);
+		getJdbcTemplateUtil().insert("T_ENUM_TYPE", data);
 	}
 	
 	/**
@@ -45,8 +43,7 @@ public class EnumTypeService extends BaseService
 	 */
 	public void delItemByName(String enum_name)
 	{
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		jdbcTemplate.delete("T_ENUM_TYPE", "ENUM_NAME", enum_name);
+		getJdbcTemplateUtil().delete("T_ENUM_TYPE", "ENUM_NAME", enum_name);
 	}
 	
 	/**
@@ -61,8 +58,7 @@ public class EnumTypeService extends BaseService
 		String sql = "DELETE FROM T_ENUM_TYPE WHERE ENUM_VALUE=? AND SITENO = ?";
 		argList.add(enumValue);
 		argList.add(siteno);
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		jdbcTemplate.update(sql, argList.toArray());
+		getJdbcTemplateUtil().update(sql, argList.toArray());
 	}
 	
 	/**
@@ -72,11 +68,10 @@ public class EnumTypeService extends BaseService
 	 * @param enum_name
 	 * @return
 	 */
-	public DataRow findItemByName(String enum_name)
+	public DynaModel findItemByName(String enum_name)
 	{
 		String sql = "select * from T_ENUM_TYPE where enum_name=?";
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		return jdbcTemplate.queryMap(sql, new Object[] { enum_name });
+		return getJdbcTemplateUtil().queryMap(sql, new Object[] { enum_name });
 	}
 	
 	/**
@@ -86,22 +81,20 @@ public class EnumTypeService extends BaseService
 	 * @param enum_value
 	 * @return
 	 */
-	public DataRow findItemByVal(String enum_value)
+	public DynaModel findItemByVal(String enum_value)
 	{
 		String sql = "select * from T_ENUM_TYPE where enum_value=?";
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		return jdbcTemplate.queryMap(sql, new Object[] { enum_value });
+		return getJdbcTemplateUtil().queryMap(sql, new Object[] { enum_value });
 	}
 	
 	/**
 	 * 获得系统枚举类型的分类
 	 * @return
 	 */
-    public List<Object> getEnumTypeList()
+    public List<DynaModel> getEnumTypeList()
 	{
 		String sql = "select * from T_ENUM_TYPE";
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		return jdbcTemplate.query(sql);
+		return getJdbcTemplateUtil().queryForList(sql);
 	}
 	
 	/**
@@ -123,8 +116,7 @@ public class EnumTypeService extends BaseService
 			argList.add(enum_value);
 		}
 		sqlBuffer.append(" ORDER BY ENUM_NAME");
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		return jdbcTemplate.queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		return getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 	}
 	
 	/** 
@@ -139,32 +131,30 @@ public class EnumTypeService extends BaseService
 	 */
 	public boolean isExitDictItem(String enum_name, String enum_value, String siteno)
 	{
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		boolean isExit = true;
 		ArrayList<Object> list = new ArrayList<Object>();
 		String sql = "SELECT COUNT(*) COUNT FROM T_ENUM_TYPE T WHERE T.ENUM_NAME=? AND T.ENUM_VALUE=? AND T.SITENO=? ";
 		list.add(enum_name);
 		list.add(enum_value);
 		list.add(siteno);
-		int num = jdbcTemplate.queryInt(sql, list.toArray());
+		int num = getJdbcTemplateUtil().queryInt(sql, list.toArray());
 		if (num <= 0)
 			isExit = false;
 		return isExit;
 	}
 	
 	/** 
-	 * @see com.yizhishang.plat.service.EnumTypeService#updateItem(com.yizhishang.base.jdbc.DataRow)
+	 * @see com.yizhishang.plat.service.EnumTypeService#updateItem(com.yizhishang.base.jdbc.DynaModel)
 	 * 描述：更新具体的枚举类型
 	 * 作者：袁永君  lijian@yizhishang.com
 	 * 时间：May 18, 2010 10:52:45 AM
 	 * @param data
 	 */
-	public void updateItem(DataRow data)
+	public void updateItem(DynaModel data)
 	{
 		String enumValue = data.getString("enum_value");
 		data.remove(enumValue);
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		jdbcTemplate.update("T_ENUM_TYPE", data, "ENUM_VALUE", enumValue);
+		getJdbcTemplateUtil().update("T_ENUM_TYPE", data, "ENUM_VALUE", enumValue);
 	}
 	
 }

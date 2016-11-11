@@ -1,13 +1,9 @@
 package com.yizhishang.base.service;
 
-import java.sql.Connection;
-
 import org.springframework.stereotype.Service;
 
-import com.yizhishang.base.jdbc.JdbcTemplate;
-import com.yizhishang.base.jdbc.connection.ConnManager;
-import com.yizhishang.base.jdbc.session.Session;
-import com.yizhishang.base.jdbc.session.SessionFactory;
+import com.yizhishang.base.jdbc.JdbcTemplateUtil;
+import com.yizhishang.base.util.SpringContextHolder;
 
 /**
  * 描述:
@@ -23,41 +19,12 @@ public class BaseService
 {
     
     /**
-     * 根据datasource.xml文件中配置的缺省数据源，得到对应的连接对象
-     * @param id 数据源ID
-     * @return
-     */
-    public Connection getConnection()
-    {
-        return ConnManager.getConnection();
-    }
-    
-    /**
-     * 根据datasource.xml文件中配置的数据源ID，得到对应的连接对象
-     * @param id 数据源ID
-     * @return
-     */
-    public Connection getConnection(String id)
-    {
-        return ConnManager.getConnection(id);
-    }
-    
-    /**
     * 返回缺省数据源的数据操作对象
     * @return
     */
-    public JdbcTemplate getJdbcTemplate()
+    public JdbcTemplateUtil getJdbcTemplateUtil()
     {
-        return new JdbcTemplate();
-    }
-    
-    /**
-    * 返回根据datasource.xml文件中配置的数据源ID，构造的数据操作对象
-    * @param id 数据源的ID
-    */
-    public JdbcTemplate getJdbcTemplate(String id)
-    {
-        return new JdbcTemplate(id);
+    	return SpringContextHolder.getBean("jdbcTemplateUtil");
     }
     
     /**
@@ -89,22 +56,4 @@ public class BaseService
         return SequenceGenerator.getInstance().getNextSequence(id, seqName);
     }
     
-    /**
-     * 根据datasource.xml文件中配置的缺省数据源，得到对应的会话对象
-     * @return
-     */
-    public Session getSession()
-    {
-        return SessionFactory.getSession();
-    }
-    
-    /**
-    * 返回根据datasource.xml文件中配置数据源ID，得到的会话对象
-    * @param id 数据源ID
-    * @return
-    */
-    public Session getSession(String id)
-    {
-        return SessionFactory.getSession(id);
-    }
 }

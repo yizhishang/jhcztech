@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.domain.Right_Url;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
@@ -194,7 +195,7 @@ public class LeftAction extends BaseAction
     */
     public boolean checkModuleIsEmpty(int parentId, String siteno)
     {
-        List<Object> argList = roleService.findModuleByParentId(parentId, siteno);
+        List<DynaModel> argList = roleService.findModuleByParentId(parentId, siteno);
         //如果list里面的没有数据，则表示权限模块表中不存在父级栏目的数据，返回false，反之表示有数据，
         //返回true
         if (argList.isEmpty())
@@ -273,9 +274,9 @@ public class LeftAction extends BaseAction
             //默认是系统管理菜单1766
             manageCatalogId = 1766;
         }
-        List<Object> menus = SysLibrary.getSecurityCatalogTree(getSession());
+        List<ManageCatalog> menus = SysLibrary.getSecurityCatalogTree(getSession());
         dataMap.put("rootMenus", menus);
-        for (Iterator<Object> iter = menus.iterator(); iter.hasNext();)
+        for (Iterator<ManageCatalog> iter = menus.iterator(); iter.hasNext();)
         {
             ManageCatalog menu = (ManageCatalog) iter.next();
             if (menu.getId() == manageCatalogId)
@@ -349,9 +350,9 @@ public class LeftAction extends BaseAction
         }
         BeanHelper.beanToMap(catalog, form);
         String siteno = getLoginSiteNo();
-        List<Object> list = roleService.findRightFunction(catalogId, siteno);
+        List<DynaModel> list = roleService.findRightFunction(catalogId, siteno);
         //查找本栏目下是否还有子栏目
-        List<Object> valiList = manageCatalogService.findCatalogInfoByParentId(catalogId, siteno);
+        List<ManageCatalog> valiList = manageCatalogService.findCatalogInfoByParentId(catalogId, siteno);
         RequestHelper.setAttribute(getRequest(), "list", list);
         //查找登陆的人是否是管理员
         boolean sysAdmin = isSystemAdmin();
@@ -398,8 +399,8 @@ public class LeftAction extends BaseAction
         buffer.append("<tree>\n");
         
         //		String siteno = getLoginSiteNo();
-        List<Object> childrenList = manageCatalogService.findChildrenById(parentId, "");
-        for (Iterator<Object> iter = childrenList.iterator(); iter.hasNext();)
+        List<ManageCatalog> childrenList = manageCatalogService.findChildrenById(parentId, "");
+        for (Iterator<ManageCatalog> iter = childrenList.iterator(); iter.hasNext();)
         {
             ManageCatalog menuCatalog = (ManageCatalog) iter.next();
             
@@ -466,9 +467,9 @@ public class LeftAction extends BaseAction
     * 描述：查找菜单信息
     * @return
     */
-    public List<Object> findMenuInfo()
+    public List<DynaModel> findMenuInfo()
     {
-        List<Object> list = null;
+        List<DynaModel> list = null;
         //获得登陆用的ID
         int user_id = UserHelper.getUserId();
         //查找其相应的信息

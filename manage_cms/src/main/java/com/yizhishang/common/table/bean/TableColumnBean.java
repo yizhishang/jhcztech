@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.MethodUtils;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.plat.web.form.DynaForm;
 
 public class TableColumnBean
@@ -77,18 +77,18 @@ public class TableColumnBean
         System.out.println(bb);
     }
     
-    public static DataRow[] getTableColumnBeanArray(DynaForm form)
+    public static DynaModel[] getTableColumnBeanArray(DynaForm form)
     {
-        DataRow[] reuslt = null;
+        DynaModel[] reuslt = null;
         if (form != null)
         {
             String[] ids = form.getStrArray("id");
             if (ids != null && ids.length > 0)
             {
-                reuslt = new DataRow[ids.length];
+                reuslt = new DynaModel[ids.length];
                 for (int i = 0; i < ids.length; i++)
                 {
-                    DataRow tempBean = putAllByArray(form, i, ids.length);
+                    DynaModel tempBean = putAllByArray(form, i, ids.length);
                     reuslt[i] = tempBean;
                 }
             }
@@ -97,9 +97,9 @@ public class TableColumnBean
     }
     
     //  多对单复制
-    private static DataRow putAllByArray(Map<String, Object> map, int step, int length)
+    private static DynaModel putAllByArray(Map<String, Object> map, int step, int length)
     {
-        DataRow bean = new DataRow();
+        DynaModel bean = new DynaModel();
         Field[] fields = TableColumnBean.class.getDeclaredFields();
         for (int i = 0; i < fields.length; i++)
         {

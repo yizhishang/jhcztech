@@ -25,9 +25,9 @@ public class ManageCatalog extends DynaModel implements Serializable
     }
     
     @SuppressWarnings("unchecked")
-    public List<Object> getChildren()
+    public List<ManageCatalog> getChildren()
     {
-        return (List<Object>) getObject("children");
+        return (List<ManageCatalog>) getObject("children");
     }
     
     public int getChildrennum()
@@ -125,7 +125,7 @@ public class ManageCatalog extends DynaModel implements Serializable
         set("catalog_no", catalogNo);
     }
     
-    public void setChildren(List<Object> children)
+    public void setChildren(List<ManageCatalog> children)
     {
         set("children", children);
     }

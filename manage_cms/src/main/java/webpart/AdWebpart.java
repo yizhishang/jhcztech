@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.business.other.service.AdManageService;
 import com.yizhishang.plat.template.Context;
@@ -27,7 +28,7 @@ public class AdWebpart extends FMWebpartParser
         Map<String, Object> dataMap = new HashMap<String, Object>();
         int groupNo = MapHelper.getInt(webpartProp, "groupNo");//栏目ID
         AdManageService service = new AdManageService();
-        List<Object> adList = service.findAdsByGroupNo(groupNo);
+        List<DynaModel> adList = service.findAdsByGroupNo(groupNo);
         dataMap.put("groupNo", groupNo);
         dataMap.put("adList", adList);
         return dataMap;

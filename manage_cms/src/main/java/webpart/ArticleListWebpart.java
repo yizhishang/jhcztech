@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.yizhishang.base.config.SysConfig;
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.plat.template.Context;
 import com.yizhishang.plat.template.FMWebpartParser;
@@ -21,7 +21,7 @@ public class ArticleListWebpart extends FMWebpartParser
         rows = rows == 0 ? SysConfig.getRowOfPage() : rows;
 
         int sortType = MapHelper.getInt(webpartProp, "sortType");//排序方式
-        List<DataRow> articleList = articleService.findPublishArticleById(catalogId, rows, sortType);
+        List<DynaModel> articleList = articleService.findPublishArticleById(catalogId, rows, sortType);
         
         Map<String, Object> dataMap = new HashMap<String, Object>();
         dataMap.put("catalogId", catalogId);

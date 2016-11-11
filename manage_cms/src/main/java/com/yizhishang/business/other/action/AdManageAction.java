@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.ScriptHelper;
 import com.yizhishang.base.util.StringHelper;
@@ -51,7 +51,7 @@ public class AdManageAction extends BaseAction
         //对提交上来的form进行处理
         DynaForm form = normalize(request);
         
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.putAll(form);
         data.set("group_no", data.getString("type"));
         data.set("siteno", getSiteNo());
@@ -119,7 +119,7 @@ public class AdManageAction extends BaseAction
         dataMap.put("page", page);
         
         //查询广告组
-        List<Object> groupList = adManageService.findAllAdGroup();
+        List<DynaModel> groupList = adManageService.findAllAdGroup();
         dataMap.put("groupList", groupList);
         
         mv.addObject("data", dataMap);
@@ -137,7 +137,7 @@ public class AdManageAction extends BaseAction
     {
         int id = this.getIntParameter("id");
         String siteno = getSiteNo();
-        DataRow data = adManageService.findAdById(id, siteno);
+        DynaModel data = adManageService.findAdById(id, siteno);
         
         if (data == null)
         {
@@ -241,7 +241,7 @@ public class AdManageAction extends BaseAction
     {
         //对提交上来的form进行处理
         DynaForm form = normalize(request);
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.putAll(form);
         data.set("group_no", data.getString("type"));
         data.set("siteno", getSiteNo());
@@ -260,7 +260,7 @@ public class AdManageAction extends BaseAction
      */
     private void publishAdCatalog(String name)
     {
-        DataRow catalog = WebCatalogService.findCatalogByNo(name);
+        DynaModel catalog = WebCatalogService.findCatalogByNo(name);
         if (catalog != null)
         {
             addToPublishQueue(catalog.getInt("catalog_id"), "C");

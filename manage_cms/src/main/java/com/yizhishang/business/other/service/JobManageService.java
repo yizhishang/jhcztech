@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 
@@ -48,7 +48,7 @@ public class JobManageService extends BaseService
 			argList.add(siteNo);
 		}
 		sqlBuf.append(" ORDER BY JOBID DESC ");
-		return getJdbcTemplate().queryPage(sqlBuf.toString(), argList.toArray(), curPage, rowOfPage);
+		return getJdbcTemplateUtil().queryPage(sqlBuf.toString(), argList.toArray(), curPage, rowOfPage);
 	}
 	
 	/**
@@ -57,11 +57,11 @@ public class JobManageService extends BaseService
 	 * 创建时间: 下午1:23:21
 	 * @param data
 	 */
-	public void add(DataRow data)
+	public void add(DynaModel data)
 	{
 		String id = getSeqValue("T_B_JOB");
 		data.set("jobid", id);
-		getJdbcTemplate().insert("T_B_JOB", data);
+		getJdbcTemplateUtil().insert("T_B_JOB", data);
 	}
 	
 	/**
@@ -70,9 +70,9 @@ public class JobManageService extends BaseService
 	 * 创建时间: 下午1:23:21
 	 * @param data
 	 */
-	public void update(DataRow data)
+	public void update(DynaModel data)
 	{
-		getJdbcTemplate().update("T_B_JOB", data, "jobid", data.getString("jobid"));
+		getJdbcTemplateUtil().update("T_B_JOB", data, "jobid", data.getString("jobid"));
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class JobManageService extends BaseService
 	 */
 	public void delte(int jobid)
 	{
-		getJdbcTemplate().delete("T_B_JOB", "jobid", new Integer(jobid));
+		getJdbcTemplateUtil().delete("T_B_JOB", "jobid", new Integer(jobid));
 	}
 	
 	/**
@@ -89,9 +89,9 @@ public class JobManageService extends BaseService
 	 * @param jobid
 	 * @return
 	 */
-	public DataRow findJobById(String jobid)
+	public DynaModel findJobById(String jobid)
 	{
 		String sql = "SELECT * FROM T_B_JOB WHERE JOBID = ?";
-		return getJdbcTemplate().queryMap(sql, new Object[] { jobid });
+		return getJdbcTemplateUtil().queryMap(sql, new Object[] { jobid });
 	}
 }

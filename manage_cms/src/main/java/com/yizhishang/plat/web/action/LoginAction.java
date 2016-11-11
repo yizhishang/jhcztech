@@ -1,9 +1,11 @@
 package com.yizhishang.plat.web.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.yizhishang.base.config.SysConfig;
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.IPHelper;
 import com.yizhishang.base.util.SessionHelper;
 import com.yizhishang.base.util.StringHelper;
@@ -78,9 +82,9 @@ public class LoginAction extends BaseAction
     * @param roleString
     * @return
     */
-    private List<Object> createSecureCatalog(HashSet<String> roleString, User user, String siteno)
+    private List<ManageCatalog> createSecureCatalog(HashSet<String> roleString, User user, String siteno)
     {
-        List<Object> result = new ArrayList<Object>();
+        List<ManageCatalog> result = new ArrayList<ManageCatalog>();
         if (user.getIsSystem() > 0)
         {
             //result = catalogService.findAllChildrenCatalogsById(1, siteno);
@@ -89,8 +93,8 @@ public class LoginAction extends BaseAction
         else
         {
             //List list = catalogService.findManageCatalogLikePId(1, siteno);
-            List<Object> list = manageCatalogService.findManageCatalogLikePId(1, "");
-            for (Iterator<Object> iter = list.iterator(); iter.hasNext();)
+            List<ManageCatalog> list = manageCatalogService.findManageCatalogLikePId(1, "");
+            for (Iterator<ManageCatalog> iter = list.iterator(); iter.hasNext();)
             {
                 ManageCatalog manageCatalog = (ManageCatalog) iter.next();
                 if (roleString.contains(String.valueOf(manageCatalog.getId())))
@@ -103,11 +107,15 @@ public class LoginAction extends BaseAction
     }
     
     @RequestMapping("/login.action")
-    public String doLogin(Model model) throws InstantiationException, IllegalAccessException, ClassNotFoundException
+    public String doLogin(Model model)
     {
         List<Site> list = siteService.getAllSite();
+        HashMap<String, Object> map = Maps.newHashMap();
+        map.putAll(list.get(0).toMap());
+        List<Map<String, Object>> list1 = Lists.newArrayList();
+        list1.add(map);
         model.addAttribute("list", list);
-        return "/WEB-INF/views/login.jsp";
+        return "/WEB-INF/views/test.jsp";
     }
     
     @RequestMapping("/loginOut.action")
@@ -258,9 +266,9 @@ public class LoginAction extends BaseAction
         HashSet<String> roleString = roleService.findUserRights(user.getId(), siteno);
         
         //查询用户具有的栏目权限
-        DataRow CatalogRoleString = roleService.findUserCatalogRights(user.getId(), siteno);
+        DynaModel CatalogRoleString = roleService.findUserCatalogRights(user.getId(), siteno);
         
-        List<Object> menuCatalogs = createSecureCatalog(roleString, user, siteno);
+        List<ManageCatalog> menuCatalogs = createSecureCatalog(roleString, user, siteno);
         //如果是超级管理员
         if ("all".equals(user.getSiteNo()))
         {
@@ -268,7 +276,7 @@ public class LoginAction extends BaseAction
             dataMap.put("list", list);
         }
         /**************************************** 判断用户权限模块结束 ***********************************************/
-        int[] roleArray = roleService.getUserRole(user.getId());
+        Integer[] roleArray = roleService.getUserRole(user.getId());
         //设置相应的会话数据
         session.setAttribute(Constants.ADMIN_UID, user.getUid());//用户编码
         session.setAttribute(Constants.ADMIN_USER_ID, new Integer(user.getId()));//用户loginid
@@ -295,7 +303,7 @@ public class LoginAction extends BaseAction
         {
             //允许登录的站点
             HashSet<String> siteRights = roleService.findUserSiteRights(user.getId());
-            sites = new ArrayList<Site>();
+            sites = Lists.newArrayList();
             for (Iterator<String> iter = siteRights.iterator(); iter.hasNext();)
             {
                 String siteNo = iter.next();
@@ -311,7 +319,7 @@ public class LoginAction extends BaseAction
         
         //更新在线状态
         //		ExpertService exr = new ExpertService();
-        //		DataRow data = new DataRow();
+        //		DynaModel data = new DynaModel();
         //		data.set("expid", user.getId());
         //		exr.getUpdateOnlineType(data, "1");
     }

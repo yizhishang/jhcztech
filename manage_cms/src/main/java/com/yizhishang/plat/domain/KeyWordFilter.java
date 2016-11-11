@@ -13,6 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class KeyWordFilter extends DynaModel
 {
+	private static final long serialVersionUID = 1L;
     public void setId(int filter_id)
     {
         set("filter_id", filter_id);

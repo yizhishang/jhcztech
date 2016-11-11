@@ -3,13 +3,17 @@ package com.yizhishang.plat.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 
+@Service
 public class UserExcelServeice extends BaseService
 {
 
-	public List<Object> getUser(String keyword, String loanNo)
+	public List<DynaModel> getUser(String keyword, String loanNo)
 	{
 		StringBuffer sqlBuffer = new StringBuffer();
 		ArrayList<Object> argList = new ArrayList<Object>();
@@ -28,7 +32,7 @@ public class UserExcelServeice extends BaseService
 		{
 			sqlBuffer.append(" order by id desc ");
 		}
-		return getJdbcTemplate().query(sqlBuffer.toString(), argList.toArray());
+		return getJdbcTemplateUtil().queryForList(sqlBuffer.toString(), argList.toArray());
 	}
 	
 }

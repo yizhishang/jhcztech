@@ -9,6 +9,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Review extends DynaModel
 {
+	private static final long serialVersionUID = 1L;
 	public int getId()
 	{
 		return getInt("id");

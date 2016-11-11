@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 
@@ -13,31 +13,31 @@ import com.yizhishang.base.util.StringHelper;
 public class TableService extends BaseService
 {
     
-    public void add(DataRow data)
+    public void add(DynaModel data)
     {
         String id = getSeqValue("t_b_table");
         data.set("id", id);
-        getJdbcTemplate().insert("t_b_table", data);
+        getJdbcTemplateUtil().insert("t_b_table", data);
     }
     
-    public DataRow load(int id)
+    public DynaModel load(int id)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(id);
         String sql = "select * from t_b_table where id=?";
-        DataRow result = getJdbcTemplate().queryMap(sql, argList.toArray());
+        DynaModel result = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
         return result;
     }
     
-    public void update(DataRow data)
+    public void update(DynaModel data)
     {
         int id = data.getInt("id");
-        getJdbcTemplate().update("t_b_table", data, "id", new Integer(id));
+        getJdbcTemplateUtil().update("t_b_table", data, "id", new Integer(id));
     }
     
     public void delte(int id)
     {
-        getJdbcTemplate().delete("t_b_table", "id", new Integer(id));
+        getJdbcTemplateUtil().delete("t_b_table", "id", new Integer(id));
     }
     
     public DBPage getPageData(int curPage, int rowOfPage, String table_name_en, String table_name_ch)
@@ -56,6 +56,6 @@ public class TableService extends BaseService
             argList.add("%" + table_name_ch + "%");
         }
         sqlBuf.append(" order by update_time desc ");
-        return getJdbcTemplate().queryPage(sqlBuf.toString(), argList.toArray(), curPage, rowOfPage);
+        return getJdbcTemplateUtil().queryPage(sqlBuf.toString(), argList.toArray(), curPage, rowOfPage);
     }
 }

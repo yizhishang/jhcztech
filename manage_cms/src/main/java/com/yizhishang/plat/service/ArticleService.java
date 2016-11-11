@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.plat.dao.ArticleDao;
 import com.yizhishang.plat.domain.Article;
@@ -48,7 +48,7 @@ public class ArticleService extends BaseService
     * @param data
     * @return
     */
-    public void addAuthor(DataRow data)
+    public void addAuthor(DynaModel data)
     {
         String id = getSeqValue("T_ARTICLE_AUTHOR");
         data.set("id", id);
@@ -112,7 +112,7 @@ public class ArticleService extends BaseService
     * 					1--publish_date
     * @return
     */
-    public List<DataRow> findPublishArticleById(int catalogId, int rows, int sortType)
+    public List<DynaModel> findPublishArticleById(int catalogId, int rows, int sortType)
     {
         return articleDao.findPublishArticleById(catalogId, rows, sortType);
     }
@@ -125,7 +125,7 @@ public class ArticleService extends BaseService
     * @param catalogId
     * @return
     */
-    public List<Object> findUnionArtilceByCatalog(int catalogId)
+    public List<DynaModel> findUnionArtilceByCatalog(int catalogId)
     {
         return articleDao.findUnionArtilceByCatalog(catalogId);
     }
@@ -140,7 +140,7 @@ public class ArticleService extends BaseService
     {
         ArrayList<Integer> argList = new ArrayList<Integer>();
         argList.add(new Integer(articleId));
-        return getJdbcTemplate().queryString("select url from T_ARTICLE where article_id=?", argList.toArray());
+        return getJdbcTemplateUtil().queryString("select url from T_ARTICLE where article_id=?", argList.toArray());
     }
     
     /**
@@ -212,7 +212,7 @@ public class ArticleService extends BaseService
      * 查询当前文章的上一条和下一条数据
      * @param article
      */
-    public DataRow findUpAndDown(String curArticleId, String catalog_id)
+    public DynaModel findUpAndDown(String curArticleId, String catalog_id)
     {
     	return articleDao.findUpAndDown(curArticleId, catalog_id);
     }

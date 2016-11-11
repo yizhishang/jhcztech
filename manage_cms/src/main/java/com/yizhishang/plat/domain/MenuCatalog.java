@@ -16,16 +16,17 @@ import com.yizhishang.base.util.StringHelper;
  */
 public class MenuCatalog extends DynaModel
 {
-    
+
+	private static final long serialVersionUID = 1L;
     public String getCatalogNo()
     {
         return getString("catalog_no");
     }
     
     @SuppressWarnings("unchecked")
-    public List<Object> getChildren()
+    public List<DynaModel> getChildren()
     {
-        return (List<Object>) toMap().get("children");
+        return (List<DynaModel>) toMap().get("children");
     }
     
     public String getDescription()
@@ -78,7 +79,7 @@ public class MenuCatalog extends DynaModel
         this.set("catalog_no", catalogNo);
     }
     
-    public void setChildren(List<Object> children)
+    public void setChildren(List<DynaModel> children)
     {
         this.set("children", children);
     }

@@ -16,8 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.RequestHelper;
 import com.yizhishang.base.util.ScriptHelper;
 import com.yizhishang.base.util.StringHelper;
@@ -52,7 +52,7 @@ public class PublishPlanAction extends BaseAction
     {
         //对提交上来的form进行处理
         DynaForm form = normalize(request);
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.putAll(form);
         
         String machineId = Configuration.getString("system.machineId");
@@ -112,25 +112,25 @@ public class PublishPlanAction extends BaseAction
         String type = RequestHelper.getString(request, "type", "0");
         
         //查询当前类别下，哪个栏目生成了计划
-        List<Object> planList = publishPlanService.findPublishPlanByType(type);
+        List<DynaModel> planList = publishPlanService.findPublishPlanByType(type);
         
         //将已经生成计划的栏目放入map中，一个栏目只能生成一种计划
         Map<String, String> catalogPlanMap = new HashMap<String, String>();
-        for (Iterator<Object> iter = planList.iterator(); iter.hasNext();)
+        for (Iterator<DynaModel> iter = planList.iterator(); iter.hasNext();)
         {
-            DataRow data = (DataRow) iter.next();
+            DynaModel data = (DynaModel) iter.next();
             catalogPlanMap.put(data.getString("catalog_id"), data.getString("catalog_id"));
         }
         
         //取所有子栏目信息
-        DataRow wholeCatalogs = webCatalogService.findWholeCatalogById("1");
+        DynaModel wholeCatalogs = webCatalogService.findWholeCatalogById("1");
         StringBuffer html = new StringBuffer();
         if (wholeCatalogs != null)
         {
-            List<Object> children = (List<Object>) wholeCatalogs.getObject("children");
+            List<DynaModel> children = (List<DynaModel>) wholeCatalogs.getObject("children");
             html.append("<ul>");
             html.append("<li>");
-            DataRow data = new DataRow();
+            DynaModel data = new DynaModel();
             data.set("catalog_id", "1");
             data.set("route", "1");
             data.set("name", "根目录");
@@ -208,7 +208,7 @@ public class PublishPlanAction extends BaseAction
     public ModelAndView doEdit(HttpServletRequest request)
     {
         String id = RequestHelper.getString(request, "id");
-        DataRow data = publishPlanService.findPublishPlanById(id);
+        DynaModel data = publishPlanService.findPublishPlanById(id);
         DynaForm form = new DynaForm();
         form.putAll(data);
         
@@ -233,7 +233,7 @@ public class PublishPlanAction extends BaseAction
     public Result edit(HttpServletRequest request, HttpServletResponse response)
     {
         DynaForm form = normalize(request);
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.putAll(form);
         publishPlanService.editPublishPlan(data);
         
@@ -247,7 +247,7 @@ public class PublishPlanAction extends BaseAction
         return null;
     }
     
-    public String getRoleFunction(DataRow data, Map<String, String> catalogPlanMap)
+    public String getRoleFunction(DynaModel data, Map<String, String> catalogPlanMap)
     {
         StringBuffer buffer = new StringBuffer();
         int catalogId = data.getInt("catalog_id");
@@ -265,16 +265,16 @@ public class PublishPlanAction extends BaseAction
     * @return
     */
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    private String getRoleTreeHtml(List<Object> list, Map<String, String> map)
+    private String getRoleTreeHtml(List<DynaModel> list, Map<String, String> map)
     {
         StringBuffer buffer = new StringBuffer();
         if (list != null)
         {
             buffer.append("<ul>");
-            for (Iterator<Object> iter = list.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = list.iterator(); iter.hasNext();)
             {
                 buffer.append("<li>");
-                DataRow data = (DataRow) iter.next();
+                DynaModel data = (DynaModel) iter.next();
                 buffer.append(getRoleFunction(data, map));
                 buffer.append(getRoleTreeHtml((List) data.getObject("children"), map));
                 buffer.append("</li>");

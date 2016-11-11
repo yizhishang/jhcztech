@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.yizhishang.base.config.Configuration;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.FileHelper;
 import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.base.util.StringHelper;
@@ -56,9 +57,9 @@ public class ArticlePromulgate extends BasePromulgate
     * @param catalogId
     * @return
     */
-    private List<Object> cycFindDetailedTemplateByCatalogId(int catalogId, String siteNo)
+    private List<DynaModel> cycFindDetailedTemplateByCatalogId(int catalogId, String siteNo)
     {
-        List<Object> dataList = templateService.findUsableTemplate(catalogId, 3, siteNo);
+        List<DynaModel> dataList = templateService.findUsableTemplate(catalogId, 3, siteNo);
         if (dataList != null && dataList.size() > 0) //找到了，直接返回
         {
             return dataList;
@@ -108,7 +109,7 @@ public class ArticlePromulgate extends BasePromulgate
         Catalog catalog = catalogService.findCatalogById(catalogId);
         int inheritMode = catalog.getInheritMode();
 
-        List<Object> dataList = null;
+        List<DynaModel> dataList = null;
         if (inheritMode == 1 || inheritMode == 3) //需要在本目录和父目录中查找信息细览模板
         {
             dataList = cycFindDetailedTemplateByCatalogId(catalogId, catalog.getSiteNo());

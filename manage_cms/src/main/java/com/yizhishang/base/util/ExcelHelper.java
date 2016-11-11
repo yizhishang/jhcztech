@@ -27,7 +27,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 
 /**
  * 描述: excel 操作类<br />
@@ -483,7 +483,7 @@ public class ExcelHelper
      * @param hasIndex 是否有序号
      * @return
      */
-    public static HSSFWorkbook createExcel(List<Object> list, String[] titles, String[] mappingFileds, int[] columnWidth, boolean hasIndex)
+    public static HSSFWorkbook createExcel(List<DynaModel> list, String[] titles, String[] mappingFileds, int[] columnWidth, boolean hasIndex)
     {
         return createExcel(null, list, titles, mappingFileds, columnWidth, null, null, null, null, null, null, hasIndex);
     }
@@ -500,7 +500,7 @@ public class ExcelHelper
      * @param hasIndex 是否有序号
      * @return
      */
-    public static HSSFWorkbook createExcel(HSSFWorkbook workbook, List<Object> list, String[] titles, String[] mappingFileds, int[] columnWidth,
+    public static HSSFWorkbook createExcel(HSSFWorkbook workbook, List<DynaModel> list, String[] titles, String[] mappingFileds, int[] columnWidth,
             boolean hasIndex)
     {
         return createExcel(workbook, list, titles, mappingFileds, columnWidth, null, null, null, null, null, null, hasIndex);
@@ -524,7 +524,8 @@ public class ExcelHelper
      * @param hasIndex 是否有序号
      * @return
      */
-    public static HSSFWorkbook createExcel(HSSFWorkbook workbook, List<Object> list, String[] titles, String[] mappingFileds, int[] columnWidth,
+    @SuppressWarnings("deprecation")
+	public static HSSFWorkbook createExcel(HSSFWorkbook workbook, List<DynaModel> list, String[] titles, String[] mappingFileds, int[] columnWidth,
             HSSFCellStyle titleStyle, int[] rows, HSSFCellStyle[] rowsStyle, int[] column, HSSFCellStyle[] columnsStyle, HSSFCellStyle otherStyle,
             boolean hasIndex)
     {
@@ -633,9 +634,9 @@ public class ExcelHelper
             }
             
             //生成数据
-            for (Iterator<Object> it = list.iterator(); it.hasNext();)
+            for (Iterator<DynaModel> it = list.iterator(); it.hasNext();)
             {
-                DataRow data = (DataRow) it.next();
+                DynaModel data = (DynaModel) it.next();
                 
                 //              创建行
                 HSSFRow row = sheet.createRow(rownum);

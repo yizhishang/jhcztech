@@ -8,9 +8,9 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.yizhishang.base.dao.BaseDao;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.domain.Right_Url;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Right_Function;
@@ -60,30 +60,30 @@ public class RoleDao extends BaseDao
     
     public void addModule(Right_Module right_module)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         dataRow.putAll(right_module.toMap());
-        getJdbcTemplate().insert("t_right_module", dataRow);
+        getJdbcTemplateUtil().insert("t_right_module", dataRow);
     }
     
     public void addRightFunction(Right_Function right_function)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         dataRow.putAll(right_function.toMap());
-        getJdbcTemplate().insert("t_right_function", dataRow);
+        getJdbcTemplateUtil().insert("t_right_function", dataRow);
     }
     
     public void addRightUrl(Right_Url right_url)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         dataRow.putAll(right_url.toMap());
-        getJdbcTemplate().insert("t_right_url", dataRow);
+        getJdbcTemplateUtil().insert("t_right_url", dataRow);
     }
     
     public void addRole(Role role)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         dataRow.putAll(role.toMap());
-        getJdbcTemplate().insert("T_ROLE", dataRow);
+        getJdbcTemplateUtil().insert("T_ROLE", dataRow);
         
         addRoleRight(role.getId(), "", role.getSiteNo());
         addRoleCatalogRight(role.getId(), "", role.getSiteNo());
@@ -94,7 +94,7 @@ public class RoleDao extends BaseDao
     {
         String id = BaseService.getSequenceGenerator().getNextSequence("T_ROLE_CATALOG_RIGHT");
         
-        DataRow dataRowRight = new DataRow();
+        DynaModel dataRowRight = new DynaModel();
         Role_Catalog_Right roleCatalogRight = new Role_Catalog_Right();
         
         roleCatalogRight.setRole_id(role_id);
@@ -102,14 +102,14 @@ public class RoleDao extends BaseDao
         roleCatalogRight.setSiteNo(siteNo);
         roleCatalogRight.setCatalogIdList(catalog_no_list);
         dataRowRight.putAll(roleCatalogRight.toMap());
-        this.getJdbcTemplate().insert("T_ROLE_CATALOG_RIGHT", dataRowRight);
+        this.getJdbcTemplateUtil().insert("T_ROLE_CATALOG_RIGHT", dataRowRight);
     }
     
     public void addRoleRight(int role_id, String catalog_no_list, String siteNo)
     {
         String id = BaseService.getSequenceGenerator().getNextSequence("T_GROUP_USER");
         
-        DataRow dataRowRight = new DataRow();
+        DynaModel dataRowRight = new DynaModel();
         
         Role_Right roleRight = new Role_Right();
         roleRight.setRole_id(role_id);
@@ -117,26 +117,26 @@ public class RoleDao extends BaseDao
         roleRight.setSiteNo(siteNo);
         roleRight.setCatalogNoList(catalog_no_list);
         dataRowRight.putAll(roleRight.toMap());
-        this.getJdbcTemplate().insert("T_ROLE_RIGHT", dataRowRight);
+        this.getJdbcTemplateUtil().insert("T_ROLE_RIGHT", dataRowRight);
     }
     
-    public void addRoleRights(DataRow data)
+    public void addRoleRights(DynaModel data)
     {
-        getJdbcTemplate().insert("T_ROLE_RIGHT", data);
+        getJdbcTemplateUtil().insert("T_ROLE_RIGHT", data);
     }
     
     public void addRoleSiteRight(int role_id, String site_no_list)
     {
         String id = BaseService.getSequenceGenerator().getNextSequence("T_ROLE_SITE_RIGHT");
         
-        DataRow dataRowRight = new DataRow();
+        DynaModel dataRowRight = new DynaModel();
         Role_Site_Right roleCatalogRight = new Role_Site_Right();
         
         roleCatalogRight.setRole_id(role_id);
         roleCatalogRight.setId(Integer.parseInt(id));
         roleCatalogRight.setSiteNoList(site_no_list);
         dataRowRight.putAll(roleCatalogRight.toMap());
-        this.getJdbcTemplate().insert("T_ROLE_SITE_RIGHT", dataRowRight);
+        this.getJdbcTemplateUtil().insert("T_ROLE_SITE_RIGHT", dataRowRight);
     }
     
     public void addRoleUser(int roleId, int userId, String siteNo)
@@ -146,14 +146,14 @@ public class RoleDao extends BaseDao
         argList.add(new Integer(roleId));
         argList.add(new Integer(userId));
         argList.add(siteNo);
-        getJdbcTemplate().update(sql, argList.toArray());
+        getJdbcTemplateUtil().update(sql, argList.toArray());
     }
     
     public void deleteRole(int id)
     {
-        getJdbcTemplate().delete("T_ROLE", "role_id", new Integer(id));
-        this.getJdbcTemplate().delete("T_ROLE_RIGHT", "ROLE_ID", new Integer(id));
-        this.getJdbcTemplate().delete("T_ROLE_CATALOG_RIGHT", "ROLE_ID", new Integer(id));
+        getJdbcTemplateUtil().delete("T_ROLE", "role_id", new Integer(id));
+        this.getJdbcTemplateUtil().delete("T_ROLE_RIGHT", "ROLE_ID", new Integer(id));
+        this.getJdbcTemplateUtil().delete("T_ROLE_CATALOG_RIGHT", "ROLE_ID", new Integer(id));
     }
     
     public void deleteRoleModule(int module_code, String siteno)
@@ -162,17 +162,17 @@ public class RoleDao extends BaseDao
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(new Integer(module_code));
         argList.add(siteno);
-        getJdbcTemplate().update(sql, argList.toArray());
+        getJdbcTemplateUtil().update(sql, argList.toArray());
     }
     
     public void deleteRoleRight(int roleId)
     {
-        getJdbcTemplate().update("delete from T_ROLE_RIGHT where role_id = ?", new Object[] { new Integer(roleId) });
+        getJdbcTemplateUtil().update("delete from T_ROLE_RIGHT where role_id = ?", new Object[] { new Integer(roleId) });
     }
     
     public void deleteRoleUser(int roleId)
     {
-        getJdbcTemplate().update("delete from T_ROLE_USER where role_id = ?", new Object[] { new Integer(roleId) });
+        getJdbcTemplateUtil().update("delete from T_ROLE_USER where role_id = ?", new Object[] { new Integer(roleId) });
     }
     
     public void deleteRoleUser(int roleId, int userId)
@@ -181,7 +181,7 @@ public class RoleDao extends BaseDao
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(new Integer(roleId));
         argList.add(new Integer(userId));
-        getJdbcTemplate().update(sql, argList.toArray());
+        getJdbcTemplateUtil().update(sql, argList.toArray());
     }
     
     public void delRightFunction(int module_code, String siteno)
@@ -190,7 +190,7 @@ public class RoleDao extends BaseDao
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(new Integer(module_code));
         argList.add(siteno);
-        getJdbcTemplate().update(sql, argList.toArray());
+        getJdbcTemplateUtil().update(sql, argList.toArray());
     }
     
     public void delRightUrl(int module_code, String siteno)
@@ -199,36 +199,36 @@ public class RoleDao extends BaseDao
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(new Integer(module_code));
         argList.add(siteno);
-        getJdbcTemplate().update(sql, argList.toArray());
+        getJdbcTemplateUtil().update(sql, argList.toArray());
     }
     
     public void editCatalogRoleRights(String editString, int role_id, String siteNo)
     {
-        ArrayList<Object> list = new ArrayList<Object>();
+    	ArrayList<Object> list = new ArrayList<Object>();
         list.add(editString);
         list.add(new Integer(role_id));
         list.add(siteNo);
-        this.getJdbcTemplate().update(UPDATE_CATALOG_ROLE_RIGHT, list.toArray());
+        this.getJdbcTemplateUtil().update(UPDATE_CATALOG_ROLE_RIGHT, list.toArray());
     }
     
     public void editRoleRights(String editString, int role_id, String siteNo)
     {
-        ArrayList<Object> list = new ArrayList<Object>();
+    	ArrayList<Object> list = new ArrayList<Object>();
         list.add(editString);
         list.add(new Integer(role_id));
         list.add(siteNo);
-        this.getJdbcTemplate().update(UPDATE_ROLE_RIGHT, list.toArray());
+        this.getJdbcTemplateUtil().update(UPDATE_ROLE_RIGHT, list.toArray());
     }
     
     public void editSiteRoleRights(String editString, int role_id)
     {
-        ArrayList<Object> list = new ArrayList<Object>();
+    	ArrayList<Object> list = new ArrayList<Object>();
         list.add(editString);
         list.add(new Integer(role_id));
-        this.getJdbcTemplate().update(UPDATE_SITE_ROLE_RIGHT, list.toArray());
+        this.getJdbcTemplateUtil().update(UPDATE_SITE_ROLE_RIGHT, list.toArray());
     }
     
-    public List<Object> findModuleByParentId(int parentId, String siteno)
+    public List<DynaModel> findModuleByParentId(int parentId, String siteno)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         StringBuffer sqlBuf = new StringBuffer();
@@ -244,10 +244,10 @@ public class RoleDao extends BaseDao
             sqlBuf.append(" and siteno=?");
             argList.add(siteno);
         }
-        return getJdbcTemplate().query(sqlBuf.toString(), argList.toArray());
+        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), DynaModel.class, argList.toArray());
     }
     
-    public List<Object> findRightFunction(int module_code, String siteno)
+    public List<DynaModel> findRightFunction(int module_code, String siteno)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         StringBuffer sqlBuf = new StringBuffer();
@@ -265,7 +265,7 @@ public class RoleDao extends BaseDao
         }
         sqlBuf.append(" and a.function_code=b.function_code_list order by a.function_code");
         
-        return getJdbcTemplate().query(sqlBuf.toString(), argList.toArray());
+        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), DynaModel.class, argList.toArray());
     }
     
     public Role findRoleById(int id, String siteNo)
@@ -278,7 +278,7 @@ public class RoleDao extends BaseDao
             sql += " and siteno = ?";
             argList.add(siteNo);
         }
-        DataRow dataRow = getJdbcTemplate().queryMap(sql, argList.toArray());
+        DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
         if (dataRow == null)
             return null;
         Role role = new Role();
@@ -288,7 +288,7 @@ public class RoleDao extends BaseDao
     
     public Role findRoleByRoleNo(String roleNo)
     {
-        DataRow dataRow = getJdbcTemplate().queryMap(FIND_ROLE_BY_ROLENO, new Object[] { roleNo });
+        DynaModel dataRow = getJdbcTemplateUtil().queryMap(FIND_ROLE_BY_ROLENO, new Object[] { roleNo });
         if (dataRow == null)
             return null;
         Role role = new Role();
@@ -304,13 +304,13 @@ public class RoleDao extends BaseDao
     * @param siteno
     * @return
     */
-    public List<Object> findRoleBySiteno(String siteno)
+    public List<DynaModel> findRoleBySiteno(String siteno)
     {
         String sql = "SELECT ID,ROLENO,NAME,IS_SYSTEM FROM T_ROLE WHERE SITENO = ? ORDER BY ID DESC";
-        return getJdbcTemplate().query(sql, new Object[] { siteno });
+        return getJdbcTemplateUtil().queryForList(sql, DynaModel.class, new Object[] { siteno });
     }
     
-    public List<Object> findRoleBySiteNo(String siteNo)
+    public List<Role> findRoleBySiteNo(String siteNo)
     {
         List<Object> argList = new ArrayList<Object>();
         String sql = "select * from T_ROLE where 1 = 1 ";
@@ -322,38 +322,25 @@ public class RoleDao extends BaseDao
         }
         sql += " order by id";
         
-        List<Object> dataList = getJdbcTemplate().query(sql, argList.toArray());
-        ArrayList<Object> newDataList = new ArrayList<Object>();
-        if (dataList != null)
-        {
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
-            {
-                Role role = new Role();
-                DataRow row = (DataRow) iter.next();
-                role.fromMap(row);
-                newDataList.add(role);
-            }
-        }
-        return newDataList;
+        List<Role> dataList = getJdbcTemplateUtil().queryForList(sql, Role.class, argList.toArray());
+        return dataList;
     }
     
-    public List<Object> findUserCatalogRightList(int userId)
+    public List<DynaModel> findUserCatalogRightList(int userId)
     {
-        return this.getJdbcTemplate().query(FIND_USER_CATALOG_RIGHTS, new Object[] { new Integer(userId) });
+        return getJdbcTemplateUtil().queryForList(FIND_USER_CATALOG_RIGHTS, DynaModel.class, new Object[] { new Integer(userId) });
     }
     
-    public DataRow findUserCatalogRights(int userId, String siteNo)
+    public DynaModel findUserCatalogRights(int userId, String siteNo)
     {
-        List<Object> list = this.getJdbcTemplate().query(FIND_USER_CATALOG_RIGHTS, new Object[] { siteNo, new Integer(userId) });
+        List<Role_Catalog_Right> list = this.getJdbcTemplateUtil().queryForList(FIND_USER_CATALOG_RIGHTS, Role_Catalog_Right.class, new Object[] { siteNo, new Integer(userId) });
         
-        DataRow rights = new DataRow();
+        DynaModel rights = new DynaModel();
         String key = "";
         String value = "";
         for (int i = 0; i < list.size(); i++)
         {
-            DataRow dr = (DataRow) list.get(i);
-            Role_Catalog_Right roleRight = new Role_Catalog_Right();
-            roleRight.fromMap(dr);
+            Role_Catalog_Right roleRight = list.get(i);
             String[] strRight = StringHelper.split(roleRight.getCatalogIdList(), "|");
             for (int k = 0; k < strRight.length; k++)
             {
@@ -394,13 +381,11 @@ public class RoleDao extends BaseDao
     
     public HashSet<String> findUserRights(int userId, String siteNo)
     {
-        List<Object> list = this.getJdbcTemplate().query(FIND_USER_RIGHTS, new Object[] { siteNo, new Integer(userId) });
+        List<Role_Right> list = this.getJdbcTemplateUtil().queryForList(FIND_USER_RIGHTS, Role_Right.class, new Object[] { siteNo, new Integer(userId) });
         HashSet<String> hs = new HashSet<String>();
         for (int i = 0; i < list.size(); i++)
         {
-            DataRow dr = (DataRow) list.get(i);
-            Role_Right roleRight = new Role_Right();
-            roleRight.fromMap(dr);
+            Role_Right roleRight = list.get(i);
             String[] strRight = StringHelper.split(roleRight.getCatalogNoList(), "|");
             for (int k = 0; k < strRight.length; k++)
             {
@@ -418,21 +403,19 @@ public class RoleDao extends BaseDao
     * @param userId
     * @return
     */
-    public List<Object> findUserRoleById(int userId)
+    public List<DynaModel> findUserRoleById(int userId)
     {
         String sql = "SELECT ROLE_ID,ROLENO,NAME FROM T_ROLE WHERE ROLE_ID IN (SELECT ROLE_ID FROM T_ROLE_USER WHERE USER_ID = ?)";
-        return getJdbcTemplate().query(sql, new Object[] { new Integer(userId) });
+        return getJdbcTemplateUtil().queryForList(sql, new Object[] { new Integer(userId) });
     }
     
     public HashSet<String> findUserSiteRights(int userId)
     {
-        List<Object> list = this.getJdbcTemplate().query(FIND_USER_SITE_RIGHTS, new Object[] { new Integer(userId) });
+        List<Role_Site_Right> list = this.getJdbcTemplateUtil().queryForList(FIND_USER_SITE_RIGHTS, Role_Site_Right.class, new Object[] { new Integer(userId) });
         HashSet<String> hs = new HashSet<String>();
         for (int i = 0; i < list.size(); i++)
         {
-            DataRow dr = (DataRow) list.get(i);
-            Role_Site_Right roleRight = new Role_Site_Right();
-            roleRight.fromMap(dr);
+            Role_Site_Right roleRight = list.get(i);
             String[] strRight = StringHelper.split(roleRight.getSiteNoList(), "|");
             for (int k = 0; k < strRight.length; k++)
             {
@@ -460,16 +443,16 @@ public class RoleDao extends BaseDao
         
         sqlBuffer.append(" order by id desc ");
         
-        page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+        page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
         
         if (page != null)
         {
-            List<Object> dataList = page.getData();
-            ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+            ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
                 User user = new User();
-                DataRow row = (DataRow) iter.next();
+                DynaModel row = (DynaModel) iter.next();
                 user.fromMap(row);
                 newDataList.add(user);
             }
@@ -507,16 +490,16 @@ public class RoleDao extends BaseDao
             argList.add("%" + keyword + "%");
         }
         sqlBuffer.append(" order by role_id desc ");
-        page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+        page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
         
         if (page != null)
         {
-            List<Object> dataList = page.getData();
-            ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+            ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
                 Role role = new Role();
-                DataRow row = (DataRow) iter.next();
+                DynaModel row = (DynaModel) iter.next();
                 role.fromMap(row);
                 newDataList.add(role);
             }
@@ -526,13 +509,13 @@ public class RoleDao extends BaseDao
         return page;
     }
     
-    public List<Object> getRightFunctionAll()
+    public List<DynaModel> getRightFunctionAll()
     {
-        List<Object> list = this.getJdbcTemplate().query(FIND_RIGHT_MODULE_FUNCTION_ALL);
-        ArrayList<Object> drList = new ArrayList<Object>();
+        List<DynaModel> list = this.getJdbcTemplateUtil().queryForList(FIND_RIGHT_MODULE_FUNCTION_ALL, DynaModel.class);
+        ArrayList<DynaModel> drList = new ArrayList<DynaModel>();
         for (int i = 0; i < list.size(); i++)
         {
-            DataRow dr = (DataRow) list.get(i);
+            DynaModel dr = (DynaModel) list.get(i);
             Right_Function right_function = new Right_Function();
             right_function.fromMap(dr);
             drList.add(right_function);
@@ -540,7 +523,7 @@ public class RoleDao extends BaseDao
         return drList;
     }
     
-    public List<Object> getRightFunctionAll(String siteno)
+    public List<DynaModel> getRightFunctionAll(String siteno)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         String sql = "select * from T_RIGHT_FUNCTION";
@@ -550,11 +533,11 @@ public class RoleDao extends BaseDao
             argList.add(siteno);
         }
         sql += " order by function_code";
-        List<Object> list = this.getJdbcTemplate().query(sql, argList.toArray());
-        ArrayList<Object> drList = new ArrayList<Object>();
+        List<DynaModel> list = this.getJdbcTemplateUtil().queryForList(sql, argList.toArray());
+        ArrayList<DynaModel> drList = new ArrayList<DynaModel>();
         for (int i = 0; i < list.size(); i++)
         {
-            DataRow dr = (DataRow) list.get(i);
+            DynaModel dr = (DynaModel) list.get(i);
             Right_Function right_function = new Right_Function();
             right_function.fromMap(dr);
             drList.add(right_function);
@@ -562,13 +545,13 @@ public class RoleDao extends BaseDao
         return drList;
     }
     
-    public List<Object> getRightModuleAll()
+    public List<DynaModel> getRightModuleAll()
     {
-        List<Object> list = this.getJdbcTemplate().query(FIND_RIGHT_MODULE_ALL);
-        ArrayList<Object> drList = new ArrayList<Object>();
+        List<DynaModel> list = this.getJdbcTemplateUtil().queryForList(FIND_RIGHT_MODULE_ALL);
+        ArrayList<DynaModel> drList = new ArrayList<DynaModel>();
         for (int i = 0; i < list.size(); i++)
         {
-            DataRow dr = (DataRow) list.get(i);
+            DynaModel dr = (DynaModel) list.get(i);
             Right_Module right_module = new Right_Module();
             right_module.fromMap(dr);
             drList.add(right_module);
@@ -577,7 +560,7 @@ public class RoleDao extends BaseDao
     }
     
     //"select * from T_RIGHT_MODULE where enable=1 order by module_code"
-    public List<Object> getRightModuleAll(String siteno)
+    public List<DynaModel> getRightModuleAll(String siteno)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         //        String sql = "select * from T_RIGHT_MODULE where enable=1";
@@ -595,11 +578,11 @@ public class RoleDao extends BaseDao
         }
         sql += " AND B.STATE = 1 ORDER BY B.PARENT_ID,B.ORDERLINE";
         
-        List<Object> list = this.getJdbcTemplate().query(sql, argList.toArray());
-        ArrayList<Object> drList = new ArrayList<Object>();
+        List<DynaModel> list = this.getJdbcTemplateUtil().queryForList(sql, argList.toArray());
+        ArrayList<DynaModel> drList = new ArrayList<DynaModel>();
         for (int i = 0; i < list.size(); i++)
         {
-            DataRow dr = (DataRow) list.get(i);
+            DynaModel dr = (DynaModel) list.get(i);
             Right_Module right_module = new Right_Module();
             right_module.fromMap(dr);
             drList.add(right_module);
@@ -609,7 +592,7 @@ public class RoleDao extends BaseDao
     
     public Role_Catalog_Right getRoleCatalogRight_by_id(int roleId, String siteNo)
     {
-        DataRow dr = this.getJdbcTemplate().queryMap(FIND_ROLE_CATALOG_RIGHT_BY_ID, new Object[] { new Integer(roleId), siteNo });
+        DynaModel dr = this.getJdbcTemplateUtil().queryMap(FIND_ROLE_CATALOG_RIGHT_BY_ID, new Object[] { new Integer(roleId), siteNo });
         if (dr != null)
         {
             Role_Catalog_Right role_right = new Role_Catalog_Right();
@@ -621,7 +604,7 @@ public class RoleDao extends BaseDao
     
     public Role_Right getRoleRight_by_Id(int roleId)
     {
-        DataRow dr = this.getJdbcTemplate().queryMap(FIND_ROLE_RIGHT_BY_ID, new Object[] { new Integer(roleId) });
+        DynaModel dr = this.getJdbcTemplateUtil().queryMap(FIND_ROLE_RIGHT_BY_ID, new Object[] { new Integer(roleId) });
         if (dr != null)
         {
             Role_Right role_right = new Role_Right();
@@ -633,7 +616,7 @@ public class RoleDao extends BaseDao
     
     public Role_Right getRoleRight_by_Id(int roleId, String siteNo)
     {
-        ArrayList<Object> arrayList = new ArrayList<Object>();
+    	ArrayList<Object> arrayList = new ArrayList<Object>();
         String sql = "select * from T_ROLE_RIGHT where role_id=?";
         arrayList.add(new Integer(roleId));
         if (StringHelper.isNotEmpty(siteNo))
@@ -641,7 +624,7 @@ public class RoleDao extends BaseDao
             sql += " and siteno=?";
             arrayList.add(siteNo);
         }
-        DataRow dr = this.getJdbcTemplate().queryMap(sql, arrayList.toArray());
+        DynaModel dr = this.getJdbcTemplateUtil().queryMap(sql, arrayList.toArray());
         if (dr != null)
         {
             Role_Right role_right = new Role_Right();
@@ -653,7 +636,7 @@ public class RoleDao extends BaseDao
     
     public Role_Site_Right getRoleSiteRight_by_id(int roleId)
     {
-        DataRow dr = this.getJdbcTemplate().queryMap(FIND_ROLE_SITE_RIGHT_BY_ID, new Object[] { new Integer(roleId) });
+        DynaModel dr = this.getJdbcTemplateUtil().queryMap(FIND_ROLE_SITE_RIGHT_BY_ID, new Object[] { new Integer(roleId) });
         if (dr != null)
         {
             Role_Site_Right role_right = new Role_Site_Right();
@@ -663,18 +646,18 @@ public class RoleDao extends BaseDao
         return null;
     }
     
-    public List<Object> getRoleUser(int roleId, String siteNo)
+    public List<DynaModel> getRoleUser(int roleId, String siteNo)
     {
-        List<Object> dataList = getJdbcTemplate().query(
+        List<DynaModel> dataList = getJdbcTemplateUtil().queryForList(
                 "select * from T_USER where id in (select user_id from T_ROLE_USER where role_id = ? and siteno = ?)",
                 new Object[] { new Integer(roleId), siteNo });
-        ArrayList<Object> newDataList = new ArrayList<Object>();
+        ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
         
         if (dataList != null)
         {
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
-                DataRow row = (DataRow) iter.next();
+                DynaModel row = (DynaModel) iter.next();
                 User user = new User();
                 user.fromMap(row);
                 newDataList.add(user);
@@ -683,23 +666,23 @@ public class RoleDao extends BaseDao
         return newDataList;
     }
     
-    public int[] getUserRole(int userId)
+    public Integer[] getUserRole(int userId)
     {
         String sql = "select role_id from T_ROLE_USER where user_id=" + userId;
-        return getJdbcTemplate().queryIntArray(sql);
+        return getJdbcTemplateUtil().queryIntArray(sql);
     }
     
     public void updateModule(Right_Module right_module)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         dataRow.putAll(right_module.toMap());
-        getJdbcTemplate().update("t_right_module", dataRow, "module_code", new Integer(right_module.getModule_code()));
+        getJdbcTemplateUtil().update("t_right_module", dataRow, "module_code", new Integer(right_module.getModule_code()));
     }
     
     public void updateRole(Role role)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         dataRow.putAll(role.toMap());
-        getJdbcTemplate().update("T_ROLE", dataRow, "id", new Integer(role.getId()));
+        getJdbcTemplateUtil().update("T_ROLE", dataRow, "id", new Integer(role.getId()));
     }
 }

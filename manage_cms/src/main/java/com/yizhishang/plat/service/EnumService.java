@@ -5,9 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
-import com.yizhishang.base.jdbc.JdbcTemplate;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 
@@ -33,13 +32,12 @@ public class EnumService extends BaseService
      * @return void
      * @throws
      */
-	public void addItem(DataRow data)
+	public void addItem(DynaModel data)
 	{
 		String itemcode = getSeqValue("T_ENUM_VALUE");
 		data.set("item_code", itemcode);
 		data.set("orderline", itemcode);
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		jdbcTemplate.insert("T_ENUM_VALUE", data);
+		getJdbcTemplateUtil().insert("T_ENUM_VALUE", data);
 	}
 	
 	    /**
@@ -53,8 +51,7 @@ public class EnumService extends BaseService
      */
 	public void delItem(int itemCode)
 	{
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		jdbcTemplate.delete("T_ENUM_VALUE", "ITEM_CODE", new Integer(itemCode));
+		getJdbcTemplateUtil().delete("T_ENUM_VALUE", "ITEM_CODE", new Integer(itemCode));
 	}
 	
 	    /**
@@ -73,9 +70,7 @@ public class EnumService extends BaseService
 		argList.add(type);
 		//argList.add(siteno);
 		
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		
-		jdbcTemplate.update(sql, argList.toArray());
+		getJdbcTemplateUtil().update(sql, argList.toArray());
 	}
 	
 	    /**
@@ -93,8 +88,7 @@ public class EnumService extends BaseService
 		List<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT * FROM T_ENUM_TYPE WHERE SITENO = ? ORDER BY ENUM_NAME";
 		argList.add(siteNo);
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		return jdbcTemplate.queryPage(sql, argList.toArray(), curPage, numPerPage);
+		return getJdbcTemplateUtil().queryPage(sql, argList.toArray(), curPage, numPerPage);
 		
 	}
 	
@@ -104,13 +98,12 @@ public class EnumService extends BaseService
     * @param itemCode
     * @return
     */
-	public DataRow findItemByCode(String itemCode)
+	public DynaModel findItemByCode(String itemCode)
 	{
 		String sql = "select * from T_ENUM_VALUE where ITEM_CODE=?";
 		ArrayList<Object> argList = new ArrayList<Object>();
 		argList.add(itemCode);
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		return jdbcTemplate.queryMap(sql, argList.toArray());
+		return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 	}
 	
 	    /**
@@ -137,8 +130,7 @@ public class EnumService extends BaseService
 			argList.add(siteno);
 		}
 		sqlBuffer.append(" order by A.enum_type desc,A.orderline desc ");
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		return jdbcTemplate.queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		return getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 	}
 	
 	    /** 
@@ -147,11 +139,9 @@ public class EnumService extends BaseService
      *@param dictName
      *@return
      */
-	public List<Object> getEnumListByType(String dictName)
+	public List<DynaModel> getEnumListByType(String dictName)
 	{
-		ArrayList<Object> list = new ArrayList<Object>();
-		list.add(dictName);
-		return getJdbcTemplate().query("SELECT * FROM T_ENUM_VALUE WHERE ENUM_TYPE = ? ORDER BY ORDERLINE", list.toArray());
+		return getJdbcTemplateUtil().queryForList("SELECT * FROM T_ENUM_VALUE WHERE ENUM_TYPE = ? ORDER BY ORDERLINE", new Object[]{dictName});
 	}
 	
 	    /**
@@ -159,7 +149,7 @@ public class EnumService extends BaseService
      *
      * @return
      */
-	public List<Object> getEnumTypeList(String siteNo)
+	public List<DynaModel> getEnumTypeList(String siteNo)
 	{
 		List<Object> argList = new ArrayList<Object>();
 		StringBuffer buffer = new StringBuffer("select * from T_ENUM_TYPE where 1 = 1");
@@ -171,19 +161,17 @@ public class EnumService extends BaseService
 		}
 		buffer.append(" order by enum_name");
 		
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		return jdbcTemplate.query(buffer.toString(), argList.toArray());
+		return getJdbcTemplateUtil().queryForList(buffer.toString(), argList.toArray());
 	}
 	
 	public boolean isExitDictItem(String enum_type, String item_name)
 	{
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		boolean isExit = true;
 		ArrayList<Object> list = new ArrayList<Object>();
 		String sql = "select count(*) count from t_enum_value t where t.enum_type=? and t.item_name=? ";
 		list.add(enum_type);
 		list.add(item_name);
-		int num = jdbcTemplate.queryInt(sql, list.toArray());
+		int num = getJdbcTemplateUtil().queryInt(sql, list.toArray());
 		if (num <= 0)
 			isExit = false;
 		return isExit;
@@ -193,11 +181,10 @@ public class EnumService extends BaseService
      * 更新具体的枚举值
      * @param data
      */
-	public void updateItem(DataRow data)
+	public void updateItem(DynaModel data)
 	{
 		String itemCode = data.getString("item_code");
-		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		jdbcTemplate.update("T_ENUM_VALUE", data, "ITEM_CODE", itemCode);
+		getJdbcTemplateUtil().update("T_ENUM_VALUE", data, "ITEM_CODE", itemCode);
 	}
 	
 }

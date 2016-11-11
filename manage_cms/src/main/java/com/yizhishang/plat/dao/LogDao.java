@@ -8,8 +8,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.yizhishang.base.dao.BaseDao;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Log;
@@ -29,9 +29,9 @@ public class LogDao extends BaseDao
 	
 	public void addLog(Log log)
 	{
-		DataRow dataRow = new DataRow();
-		dataRow.putAll(log.toMap());
-		getJdbcTemplate().insert("T_LOG", dataRow);
+		DynaModel dataRow = new DynaModel();
+		dataRow.fromMap(log);
+		getJdbcTemplateUtil().insert("T_LOG", dataRow);
 	}
 	
 	/**
@@ -44,17 +44,17 @@ public class LogDao extends BaseDao
 	public void clearErrorPwdNum(int userId)
 	{
 		String sql = "DELETE FROM T_LOG WHERE CREATE_BY = (SELECT UID2 FROM T_USER WHERE ID = ?) AND CREATE_DATE > ? AND DESCRIPTION LIKE '%密码错误%'";
-		getJdbcTemplate().update(sql, new Object[] { new Integer(userId), DateHelper.formatDate(new Date(), DateHelper.pattern_date) });
+		getJdbcTemplateUtil().update(sql, new Object[] { new Integer(userId), DateHelper.formatDate(new Date(), DateHelper.pattern_date) });
 	}
 	
 	public void deleteAllLog()
 	{
-		getJdbcTemplate().update("delete from T_LOG");
+		getJdbcTemplateUtil().update("delete from T_LOG");
 	}
 	
 	public void deleteLog(int id)
 	{
-		getJdbcTemplate().delete("T_LOG", "ID", new Integer(id));
+		getJdbcTemplateUtil().delete("T_LOG", "ID", new Integer(id));
 	}
 	
 	    /**
@@ -68,7 +68,7 @@ public class LogDao extends BaseDao
 	public int getNowErrorPwdNum(String loginId)
 	{
         String sql = "SELECT COUNT(ID) FROM T_LOG WHERE CREATE_BY = ? AND CREATE_DATE > ? AND DESCRIPTION LIKE '%密码错误%'";
-		return getJdbcTemplate().queryInt(sql, new Object[] { loginId, DateHelper.formatDate(new Date(), DateHelper.pattern_date) });
+		return getJdbcTemplateUtil().queryInt(sql, new Object[] { loginId, DateHelper.formatDate(new Date(), DateHelper.pattern_date) });
 		
 	}
 	
@@ -95,16 +95,16 @@ public class LogDao extends BaseDao
 			argList.add("%" + uid + "%");
 		}
 		sqlBuffer.append(" order by id desc ");
-		page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 		
 		if (page != null)
 		{
-			List<Object> dataList = page.getData();
-			ArrayList<Object> newDataList = new ArrayList<Object>();
-			for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+			List<DynaModel> dataList = page.getData();
+			ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+			for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
 			{
 				Log log = new Log();
-				DataRow row = (DataRow) iter.next();
+				DynaModel row = (DynaModel) iter.next();
 				log.fromMap(row);
 				newDataList.add(log);
 			}
@@ -125,6 +125,6 @@ public class LogDao extends BaseDao
 	{
         //String sql = "SELECT TRUNC(SYSDATE - TO_DATE(CREATE_DATE,'yyyy-MM-dd HH24:mi:ss')) FROM T_LOG WHERE CREATE_BY = ? AND DESCRIPTION LIKE '修改密码成功%' ORDER BY CREATE_DATE DESC";
         String sql = "SELECT CREATE_DATE FROM T_LOG WHERE CREATE_BY = ? AND DESCRIPTION LIKE '修改密码成功%' ORDER BY CREATE_DATE DESC";
-		return getJdbcTemplate().queryString(sql, new Object[] { loginId });
+		return getJdbcTemplateUtil().queryString(sql, new Object[] { loginId });
 	}
 }

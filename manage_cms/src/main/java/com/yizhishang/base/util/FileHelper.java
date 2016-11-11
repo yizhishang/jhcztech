@@ -553,7 +553,7 @@ public class FileHelper
     * @param file 需要读取的文件路径
     * @return 按行内容分开的List
     */
-    /*public static List<Object> readLines(String file)
+    /*public static List<DynaModel> readLines(String file)
     {
         return readLines(file, "GBK");
     }*/
@@ -564,7 +564,7 @@ public class FileHelper
     * @return 按行内容分开的List
     */
     /*@SuppressWarnings("unchecked")
-    public static List<Object> readLines(String file, String encoding)
+    public static List<DynaModel> readLines(String file, String encoding)
     {
         
         try
@@ -573,7 +573,7 @@ public class FileHelper
             {
                 encoding = "GBK";
             }
-            List<Object> lineList = FileUtils.readLines(new File(file), encoding);
+            List<DynaModel> lineList = FileUtils.readLines(new File(file), encoding);
             FileUtils.readLines(new File(file), encoding);
             return lineList;
         }

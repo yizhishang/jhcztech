@@ -11,7 +11,8 @@ package com.yizhishang.base.domain;
  */
 public class Config extends DynaModel
 {
-    public static int IS_SYSTEM_VALUE = 1;
+	private static final long serialVersionUID = 1L;
+	public static int IS_SYSTEM_VALUE = 1;
     public static int IS_NOT_SYSTEM_VALUE = 0;
 
     public int getId()

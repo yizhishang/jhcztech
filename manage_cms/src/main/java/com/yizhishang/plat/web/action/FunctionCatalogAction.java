@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
@@ -150,9 +151,9 @@ public class FunctionCatalogAction extends BaseAction
         DBPage page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
         
         //阅读权限
-        List<Object> user_right = null;
+        List<DynaModel> user_right = null;
         //目录星级
-        List<Object> column_level = null;
+        List<DynaModel> column_level = null;
         
         if (page != null)
         {
@@ -203,9 +204,9 @@ public class FunctionCatalogAction extends BaseAction
         DBPage page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
         
         //阅读权限
-        List<Object> user_right = null;
+        List<DynaModel> user_right = null;
         //目录星级
-        List<Object> column_level = null;
+        List<DynaModel> column_level = null;
         
         if (page != null)
         {
@@ -273,8 +274,8 @@ public class FunctionCatalogAction extends BaseAction
         buffer.append("<tree>\n");
         
         String siteno = getLoginSiteNo();
-        List<Object> childrenList = manageCatalogService.findChildrenById(parentId, siteno);
-        for (Iterator<Object> iter = childrenList.iterator(); iter.hasNext();)
+        List<ManageCatalog> childrenList = manageCatalogService.findChildrenById(parentId, siteno);
+        for (Iterator<ManageCatalog> iter = childrenList.iterator(); iter.hasNext();)
         {
             ManageCatalog menuCatalog = (ManageCatalog) iter.next();
             String name = menuCatalog.getName();
@@ -374,10 +375,10 @@ public class FunctionCatalogAction extends BaseAction
         //更新该目录中的父目录拥有的节点数
         manageCatalogService.updateParentCatalogNum(catalogId, manageCatalogService.findParentCatalogNum(catalogId));
         
-        List<Object> childrenList = manageCatalogService.findChildrenById(catalogId);
+        List<ManageCatalog> childrenList = manageCatalogService.findChildrenById(catalogId);
         if (childrenList != null && childrenList.size() > 0)
         {
-            for (Iterator<Object> iter = childrenList.iterator(); iter.hasNext();)
+            for (Iterator<ManageCatalog> iter = childrenList.iterator(); iter.hasNext();)
             {
                 ManageCatalog catalog = (ManageCatalog) iter.next();
                 if (catalog != null)

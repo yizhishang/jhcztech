@@ -12,14 +12,11 @@
             http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd    
             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"> 
 
-
 	<!-- 启动spring自动扫描 -->
 	<aop:aspectj-autoproxy />
 	<context:component-scan base-package="com.yizhishang"/>
 
 	<!-- 支持spring3.0新的mvc注解 -->
-	<!-- 
-	 -->
 	<mvc:annotation-driven />
 	
 
@@ -101,7 +98,6 @@
         p:uploadTempDir="fileUpload/temp" />
     
     <mvc:interceptors>
-    	<!-- <bean class="com.yizhishang.plat.web.interceptors.SessionInterceptor" /> -->
     	<bean class="com.yizhishang.plat.web.interceptors.SecurityInterceptor" />
     </mvc:interceptors>
     

@@ -53,7 +53,7 @@ public class BaseActionInterceptor
 			request.setAttribute("menu", manageCatalog);
 			if (subManageCatalogId > 0)
 			{
-				List<Object> children = manageCatalogService.findChildrenById(manageCatalogId, SysLibrary.getCurrentSiteNo(request.getSession()));
+				List<ManageCatalog> children = manageCatalogService.findChildrenById(manageCatalogId, SysLibrary.getCurrentSiteNo(request.getSession()));
 				if (children != null && children.size() > 0)
 				{
 					request.setAttribute("subManageCatalogId", String.valueOf(manageCatalogId));

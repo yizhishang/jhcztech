@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.business.domain.Ad_Group;
@@ -43,16 +43,16 @@ public class AdGroupService extends BaseService
             argList.add("%" + keyword + "%");
         }
         sqlBuf.append(" order by orderline");
-        page = getJdbcTemplate().queryPage(sqlBuf.toString(), argList.toArray(), curPage, numPerPage);
+        page = getJdbcTemplateUtil().queryPage(sqlBuf.toString(), argList.toArray(), curPage, numPerPage);
         
         if (page != null)
         {
-            List<Object> dataList = page.getData();
-            ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+            ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
                 Ad_Group ad_group = new Ad_Group();
-                DataRow row = (DataRow) iter.next();
+                DynaModel row = (DynaModel) iter.next();
                 ad_group.fromMap(row);
                 newDataList.add(ad_group);
             }
@@ -67,12 +67,12 @@ public class AdGroupService extends BaseService
      */
     public void addAdGroup(Ad_Group ad_group)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         dataRow.putAll(ad_group.toMap());
         String id = getSeqValue("T_AD_GROUP");
         dataRow.set("id", id);
         dataRow.set("orderline", id);
-        getJdbcTemplate().insert("T_AD_GROUP", dataRow);
+        getJdbcTemplateUtil().insert("T_AD_GROUP", dataRow);
     }
     
     /**
@@ -81,9 +81,9 @@ public class AdGroupService extends BaseService
      */
     public void updateAdGroup(Ad_Group ad_group)
     {
-        DataRow dataRow = new DataRow();
+        DynaModel dataRow = new DynaModel();
         dataRow.putAll(ad_group.toMap());
-        getJdbcTemplate().update("T_AD_GROUP", dataRow, "id", new Integer(ad_group.getId()));
+        getJdbcTemplateUtil().update("T_AD_GROUP", dataRow, "id", new Integer(ad_group.getId()));
     }
     
     public void deleteAdGroup(int id, String siteno)
@@ -102,7 +102,7 @@ public class AdGroupService extends BaseService
             sqlBuf.append(" and siteno=?");
             argList.add(siteno);
         }
-        getJdbcTemplate().update(sqlBuf.toString(), argList.toArray());
+        getJdbcTemplateUtil().update(sqlBuf.toString(), argList.toArray());
     }
     
     public Ad_Group findAdGroupById(int id, String siteno)
@@ -121,7 +121,7 @@ public class AdGroupService extends BaseService
             sqlBuf.append(" and siteno=?");
             argList.add(siteno);
         }
-        DataRow dataRow = getJdbcTemplate().queryMap(sqlBuf.toString(), argList.toArray());
+        DynaModel dataRow = getJdbcTemplateUtil().queryMap(sqlBuf.toString(), argList.toArray());
         if (dataRow != null)
         {
             Ad_Group ad_group = new Ad_Group();
@@ -131,7 +131,7 @@ public class AdGroupService extends BaseService
         return null;
     }
     
-    public List<Object> findAdById(int id, String siteno)
+    public List<DynaModel> findAdById(int id, String siteno)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         StringBuffer sqlBuf = new StringBuffer();
@@ -147,6 +147,6 @@ public class AdGroupService extends BaseService
             sqlBuf.append(" AND B.SITENO = ?");
             argList.add(siteno);
         }
-        return getJdbcTemplate().query(sqlBuf.toString(), argList.toArray());
+        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), DynaModel.class, argList.toArray());
     }
 }

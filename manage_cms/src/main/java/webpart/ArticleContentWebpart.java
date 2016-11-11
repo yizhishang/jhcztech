@@ -3,7 +3,7 @@ package webpart;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.MapHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Article;
@@ -32,7 +32,7 @@ public class ArticleContentWebpart extends FMWebpartParser
         Map<String, Object> dataMap = new HashMap<String, Object>();
         if (StringHelper.isNotEmpty(catalogId))
 		{
-        	DataRow row = articleService.findUpAndDown("" + articleId, catalogId);
+        	DynaModel row = articleService.findUpAndDown("" + articleId, catalogId);
         	dataMap.put("row", row);
 		}
         

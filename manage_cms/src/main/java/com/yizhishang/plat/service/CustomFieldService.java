@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.plat.domain.Catalog;
 
@@ -38,14 +38,14 @@ public class CustomFieldService extends BaseService
     * @时间：2015-12-17 15:02:46
     * @param data
     */
-	public boolean addExtendField(DataRow data)
+	public boolean addExtendField(DynaModel data)
 	{
 		try
 		{
 			String id = getSeqValue("T_ARTICLE_EXTEND_INFO");
 			data.set("orderline", id);
 			
-			getJdbcTemplate().insert("T_ARTICLE_EXTEND_INFO", data);
+			getJdbcTemplateUtil().insert("T_ARTICLE_EXTEND_INFO", data);
 			return true;
 		}
 		catch (Exception ex)
@@ -62,11 +62,11 @@ public class CustomFieldService extends BaseService
     * @时间：2015-12-17 17:32:59
     * @param data
     */
-	public void addExtendFieldContent(DataRow data)
+	public void addExtendFieldContent(DynaModel data)
 	{
 		try
 		{
-			getJdbcTemplate().insert("T_ARTICLE_EXTEND_FIELD", data);
+			getJdbcTemplateUtil().insert("T_ARTICLE_EXTEND_FIELD", data);
 		}
 		catch (Exception ex)
 		{
@@ -80,9 +80,9 @@ public class CustomFieldService extends BaseService
     * @param catalogId
     * @return
     */
-	public List<Object> cycFindExtendFieldInfo(int catalogId)
+	public List<DynaModel> cycFindExtendFieldInfo(int catalogId)
 	{
-        List<Object> dataList = findExtendFieldInfo(catalogId);
+        List<DynaModel> dataList = findExtendFieldInfo(catalogId);
         if (dataList != null && dataList.size() > 0) //找到了，直接返回
 		{
 			return dataList;
@@ -113,7 +113,7 @@ public class CustomFieldService extends BaseService
 	{
 		try
 		{
-			getJdbcTemplate().delete("T_ARTICLE_EXTEND_INFO", "id", new Integer(id));
+			getJdbcTemplateUtil().delete("T_ARTICLE_EXTEND_INFO", "id", new Integer(id));
 			return true;
 		}
 		catch (Exception ex)
@@ -130,11 +130,11 @@ public class CustomFieldService extends BaseService
     * @时间：2015-12-17 19:19:36
     * @param data
     */
-	public void editExtendFieldContent(DataRow data)
+	public void editExtendFieldContent(DynaModel data)
 	{
 		try
 		{
-			getJdbcTemplate().update("T_ARTICLE_EXTEND_FIELD", data, "article_id", data.getString("article_id"));
+			getJdbcTemplateUtil().update("T_ARTICLE_EXTEND_FIELD", data, "article_id", data.getString("article_id"));
 		}
 		catch (Exception ex)
 		{
@@ -149,9 +149,9 @@ public class CustomFieldService extends BaseService
     * @时间：2015-12-17 16:35:34
     * @param data
     */
-	public void editFieldInfo(DataRow data)
+	public void editFieldInfo(DynaModel data)
 	{
-		getJdbcTemplate().update("T_ARTICLE_EXTEND_INFO", data, "id", data.getString("id"));
+		getJdbcTemplateUtil().update("T_ARTICLE_EXTEND_INFO", data, "id", data.getString("id"));
 	}
 	
 	                                                                                                /**
@@ -165,7 +165,7 @@ public class CustomFieldService extends BaseService
 	public String[] findExtendFieldCodeById(int catalogId)
 	{
 		String sql = "SELECT CODE FROM T_ARTICLE_EXTEND_INFO ORDER BY CREATE_DATE DESC";
-		return getJdbcTemplate().queryStringArray(sql);
+		return getJdbcTemplateUtil().queryStringArray(sql);
 	}
 	
 	                                                                                                /**
@@ -176,14 +176,14 @@ public class CustomFieldService extends BaseService
     * @param articleId
     * @return
     */
-    public DataRow findExtendFieldContent(int articleId)
+    public DynaModel findExtendFieldContent(int articleId)
 	{
 		try
 		{
             List<Object> argList = new ArrayList<Object>();
 			String sql = "SELECT  * FROM T_ARTICLE_EXTEND_FIELD WHERE ARTICLE_ID = ?";
 			argList.add(new Integer(articleId));
-			DataRow dataRow = getJdbcTemplate().queryMap(sql, argList.toArray());
+			DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 			if (dataRow != null)
 			{
                 HashSet<String> set = new HashSet<String>();
@@ -227,14 +227,14 @@ public class CustomFieldService extends BaseService
     * @param fileCodes 查询的字段，每个字段间用逗号分隔
     * @return
     */
-	public DataRow findExtendFieldContent(int articleId, String fileCodes)
+	public DynaModel findExtendFieldContent(int articleId, String fileCodes)
 	{
 		try
 		{
             List<Object> argList = new ArrayList<Object>();
 			String sql = "SELECT " + fileCodes + " FROM T_ARTICLE_EXTEND_FIELD WHERE ARTICLE_ID = ?";
 			argList.add(new Integer(articleId));
-			return getJdbcTemplate().queryMap(sql, argList.toArray());
+			return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 		}
 		catch (Exception ex)
 		{
@@ -251,7 +251,7 @@ public class CustomFieldService extends BaseService
     * @param catalogId
     * @return
     */
-	public List<Object> findExtendFieldInfo(int catalogId)
+	public List<DynaModel> findExtendFieldInfo(int catalogId)
 	{
 		List<Object> argList = new ArrayList<Object>();
 		StringBuffer buffer = new StringBuffer("SELECT ID,CATALOG_ID,INPUT_TYPE,NAME,CODE,ISMANDATORY,DEFAULT_VALUE,MAX_NUM,WIDTH,HEIGHT,EXTEND_CONTENT,ORDERLINE,ALIAS ");
@@ -263,7 +263,7 @@ public class CustomFieldService extends BaseService
 		}
 		buffer.append(" ORDER BY ORDERLINE DESC,ID DESC");
 		
-		return getJdbcTemplate().query(buffer.toString(), argList.toArray());
+		return getJdbcTemplateUtil().queryForList(buffer.toString(), argList.toArray());
 	}
 	
 	                                                                                                /**
@@ -274,12 +274,12 @@ public class CustomFieldService extends BaseService
     * @param code
     * @return
     */
-	public DataRow findExtendFieldInfoByCode(String code)
+	public DynaModel findExtendFieldInfoByCode(String code)
 	{
         List<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT ID,CATALOG_ID,INPUT_TYPE,NAME,CODE,ISMANDATORY,DEFAULT_VALUE,MAX_NUM,WIDTH,HEIGHT,EXTEND_CONTENT,ORDERLINE FROM T_ARTICLE_EXTEND_INFO WHERE CODE = ?";
 		argList.add(code);
-		return getJdbcTemplate().queryMap(sql, argList.toArray());
+		return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 	}
 	
 	                                                                                                /**
@@ -290,12 +290,12 @@ public class CustomFieldService extends BaseService
     * @param id
     * @return
     */
-	public DataRow findExtendFieldInfoById(int id)
+	public DynaModel findExtendFieldInfoById(int id)
 	{
         List<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT ID,CATALOG_ID,INPUT_TYPE,NAME,CODE,ISMANDATORY,DEFAULT_VALUE,MAX_NUM,WIDTH,HEIGHT,EXTEND_CONTENT,ORDERLINE,ALIAS FROM T_ARTICLE_EXTEND_INFO WHERE ID = ?";
 		argList.add(new Integer(id));
-		return getJdbcTemplate().queryMap(sql, argList.toArray());
+		return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 	}
 	
 	                                                                                                /**
@@ -313,7 +313,7 @@ public class CustomFieldService extends BaseService
             List<Object> argList = new ArrayList<Object>();
 			String sql = "SELECT ARTICLE_ID FROM T_ARTICLE_EXTEND_FIELD WHERE ARTICLE_ID = ?";
 			argList.add(new Integer(articleId));
-			DataRow resultData = getJdbcTemplate().queryMap(sql, argList.toArray());
+			DynaModel resultData = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
 			return resultData != null;
 		}
 		catch (Exception ex)

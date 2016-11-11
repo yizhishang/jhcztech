@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.RequestHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Result;
@@ -57,7 +57,7 @@ public class EnumAction extends BaseAction
     Result addItem()
     {
         
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         Result result = new Result();
         
         data.set("is_system", "0");
@@ -113,7 +113,7 @@ public class EnumAction extends BaseAction
     public @ResponseBody
     Result addType()
     {
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         
         String siteno = getSiteNo();
         data.set("siteno", siteno);
@@ -237,7 +237,7 @@ public class EnumAction extends BaseAction
     public String doEditItem(Model model)
     {
         String id = getStrParameter("id");
-        DataRow data = enumService.findItemByCode(id);
+        DynaModel data = enumService.findItemByCode(id);
         if (data != null)
         {
             model.addAttribute("form", data);
@@ -250,7 +250,7 @@ public class EnumAction extends BaseAction
         if (isPostBack())
         {
             normalize(form);
-            DataRow data = new DataRow();
+            DynaModel data = new DynaModel();
             data.putAll(form);
             
             enumTypeService.updateItem(data);
@@ -259,7 +259,7 @@ public class EnumAction extends BaseAction
         else
         {
             String id = getStrParameter("id");
-            DataRow data = enumTypeService.findItemByVal(id);
+            DynaModel data = enumTypeService.findItemByVal(id);
             if (data != null)
                 form.putAll(data);
             return "edit_type";
@@ -289,7 +289,7 @@ public class EnumAction extends BaseAction
         DBPage page = enumService.getEnumItemByType(curPage, SysConfig.getRowOfPage(), type, siteno);
         dataMap.put("page", page);
         
-        List<Object> typeList = enumService.getEnumTypeList(siteno);
+        List<DynaModel> typeList = enumService.getEnumTypeList(siteno);
         dataMap.put("typeList", typeList);
         model.addAttribute("data", dataMap);
         return "/WEB-INF/views/enum/list_enum_item.jsp";
@@ -311,10 +311,10 @@ public class EnumAction extends BaseAction
         
         //String siteno = getLoginSiteNo();
         String siteno = "";
-        List<Object> enumList = enumService.getEnumTypeList(siteno);
-        for (Iterator<Object> iter = enumList.iterator(); iter.hasNext();)
+        List<DynaModel> enumList = enumService.getEnumTypeList(siteno);
+        for (Iterator<DynaModel> iter = enumList.iterator(); iter.hasNext();)
         {
-            DataRow dataRow = (DataRow) iter.next();
+            DynaModel dataRow = (DynaModel) iter.next();
             buffer.append("   <tree text=\"" + dataRow.getString("enum_name") + "\" target=\"roleRightFrame\" action=\"list.action?type="
                     + dataRow.getString("enum_value") + "\" value=\"" + dataRow.getString("enum_value") + "\" src=\"\"  oncontextmenu=\"true\" />\n");
         }
@@ -327,7 +327,7 @@ public class EnumAction extends BaseAction
     public @ResponseBody
     Result editItem()
     {
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         Result result = new Result();
         
         //类型名称

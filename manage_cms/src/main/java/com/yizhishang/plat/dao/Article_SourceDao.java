@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.yizhishang.base.dao.BaseDao;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Article_Source;
@@ -35,14 +35,14 @@ public class Article_SourceDao extends BaseDao
         String id = BaseService.getSequenceGenerator().getNextSequence("T_ARTICLE_SOURCE");
         int id_article_source = Integer.parseInt(id);
         article_source.setId(id_article_source);
-        DataRow dr = new DataRow();
+        DynaModel dr = new DynaModel();
         dr.putAll(article_source.toMap());
-        this.getJdbcTemplate().insert("T_ARTICLE_SOURCE", dr);
+        this.getJdbcTemplateUtil().insert("T_ARTICLE_SOURCE", dr);
     }
     
     public void deleteArticle_Source(int id)
     {
-        this.getJdbcTemplate().delete("T_ARTICLE_SOURCE", "ID", new Integer(id));
+        this.getJdbcTemplateUtil().delete("T_ARTICLE_SOURCE", "ID", new Integer(id));
     }
     
     /**
@@ -53,7 +53,7 @@ public class Article_SourceDao extends BaseDao
      */
     public Article_Source findArticle_SourceById(int id)
     {
-        DataRow dw = this.getJdbcTemplate().queryMap(FIND_ARTICLE_SOURCE_ID, new Object[] { new Integer(id) });
+        DynaModel dw = this.getJdbcTemplateUtil().queryMap(FIND_ARTICLE_SOURCE_ID, new Object[] { new Integer(id) });
         if (dw != null)
         {
             Article_Source as = new Article_Source();
@@ -72,7 +72,7 @@ public class Article_SourceDao extends BaseDao
      * @param siteNo
      * @return
      */
-    public List<Object> findArticle_SourceBySiteNo(String siteNo)
+    public List<DynaModel> findArticle_SourceBySiteNo(String siteNo)
     {
         ArrayList<String> argList = new ArrayList<String>();
         StringBuffer sqlBuf = new StringBuffer();
@@ -86,7 +86,7 @@ public class Article_SourceDao extends BaseDao
         }
         
         sqlBuf.append(" ORDER BY NAME,ID DESC");
-        return getJdbcTemplate().query(sqlBuf.toString(), argList.toArray());
+        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), DynaModel.class, argList.toArray());
     }
     
     public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword)
@@ -107,16 +107,16 @@ public class Article_SourceDao extends BaseDao
             argList.add("%" + keyword + "%");
         }
         sqlBuffer.append(" order by id desc ");
-        page = getJdbcTemplate().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+        page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
         
         if (page != null)
         {
-            List<Object> dataList = page.getData();
-            ArrayList<Object> newDataList = new ArrayList<Object>();
-            for (Iterator<Object> iter = dataList.iterator(); iter.hasNext();)
+            List<DynaModel> dataList = page.getData();
+            ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
             {
                 Article_Source article_source = new Article_Source();
-                DataRow row = (DataRow) iter.next();
+                DynaModel row = (DynaModel) iter.next();
                 article_source.fromMap(row);
                 newDataList.add(article_source);
             }
@@ -133,6 +133,6 @@ public class Article_SourceDao extends BaseDao
         list.add(article_source.getModified_by());
         list.add(article_source.getModified_date());
         list.add(new Integer(article_source.getId()));
-        this.getJdbcTemplate().update(UPDATE_ARTICLE_SOURCE_ID, list.toArray());
+        this.getJdbcTemplateUtil().update(UPDATE_ARTICLE_SOURCE_ID, list.toArray());
     }
 }

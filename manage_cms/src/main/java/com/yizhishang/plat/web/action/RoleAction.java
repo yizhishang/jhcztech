@@ -34,8 +34,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.RequestHelper;
@@ -170,9 +170,9 @@ public class RoleAction extends BaseAction
         }
         StringTokenizer tokenizer = new StringTokenizer(userIdStr, "|");
         String siteno = getLoginSiteNo();
-        List<Object> userList = roleService.getRoleUser(roleId, siteno);
-        DataRow existIdMap = new DataRow();
-        for (Iterator<Object> iter = userList.iterator(); iter.hasNext();)
+        List<DynaModel> userList = roleService.getRoleUser(roleId, siteno);
+        DynaModel existIdMap = new DynaModel();
+        for (Iterator<DynaModel> iter = userList.iterator(); iter.hasNext();)
         {
             User user = (User) iter.next();
             existIdMap.set(String.valueOf(user.getId()), user.getId());
@@ -336,19 +336,6 @@ public class RoleAction extends BaseAction
     @RequestMapping("/doEditArticleRoleRight.action")
     public ModelAndView doEditArticleRoleRight(HttpServletRequest request)
     {
-//        int roleId = RequestHelper.getInt(request, "roleId");
-        
-        //          RoleService service = (RoleService) getService(RoleService.class);
-        //          //查找角色信息
-        //          Role role = service.findRoleById(roleId, "");
-        //          if (role != null)
-        //          {
-        //              BeanHelper.beanToMap(role, form);
-        //          }
-        //          
-        //          List dataList = service.findDocRight(roleId, siteNo);
-        //          dataMap.put("dataList", dataList);
-        
         List<Site> siteList = siteService.getAllSite();
         dataMap.put("siteList", siteList);
         mv.setViewName("/WEB-INF/views/role/edit_article_right.jsp");
@@ -403,7 +390,7 @@ public class RoleAction extends BaseAction
             BeanHelper.beanToMap(role, form);
         }
         
-        List<Object> siteList = roleService.findSiteRight(roleId);
+        List<DynaModel> siteList = roleService.findSiteRight(roleId);
         dataMap.put("dataList", siteList);
         
         mv.addObject("form", form);
@@ -424,20 +411,20 @@ public class RoleAction extends BaseAction
     {
         String siteno = getSiteNo();
         
-        List<Object> excelList = new ArrayList<Object>();
-        DataRow excelData = null;
+        List<DynaModel> excelList = new ArrayList<DynaModel>();
+        DynaModel excelData = null;
         
         //查询所有角色信息
-        List<Object> allRoleList = roleService.findRoleBySiteNo(siteno);
+        List<Role> allRoleList = roleService.findRoleBySiteNo(siteno);
         for (int i = 0; i < allRoleList.size(); i++)
         {
             Role role = (Role) allRoleList.get(i);
             //查询角色下的所有用户
-            List<Object> roleUser = roleService.getRoleUser(role.getId(), siteno);
+            List<DynaModel> roleUser = roleService.getRoleUser(role.getId(), siteno);
             for (int j = 0; j < roleUser.size(); j++)
             {
                 User user = (User) roleUser.get(j);
-                excelData = new DataRow();
+                excelData = new DynaModel();
                 excelData.set("roleno", role.getRoleNo());//角色标识
                 excelData.set("roleName", role.getName());//角色名称
                 excelData.set("roleCreateDate", role.getCreateDate());//角色创建时间
@@ -476,7 +463,7 @@ public class RoleAction extends BaseAction
             
             for (int i = 1; i <= excelList.size(); i++)
             {
-                DataRow data = (DataRow) excelList.get(i - 1);
+                DynaModel data = (DynaModel) excelList.get(i - 1);
                 
                 label = new Label(0, i, data.getString("roleno"), wcf);
                 wsheet.addCell(label);
@@ -540,7 +527,7 @@ public class RoleAction extends BaseAction
         //查找角色信息
         Role role = roleService.findRoleById(roleId, siteno);
         
-        List<Object> roleUser = roleService.getRoleUser(roleId, siteno);
+        List<DynaModel> roleUser = roleService.getRoleUser(roleId, siteno);
         
         try
         {
@@ -689,8 +676,8 @@ public class RoleAction extends BaseAction
         buffer.append("<tree>\n");
         
         String siteno = getLoginSiteNo();
-        List<Object> roles = roleService.findRoleBySiteNo(siteno);
-        for (Iterator<Object> iter = roles.iterator(); iter.hasNext();)
+        List<Role> roles = roleService.findRoleBySiteNo(siteno);
+        for (Iterator<Role> iter = roles.iterator(); iter.hasNext();)
         {
             Role role = (Role) iter.next();
             buffer.append("   <tree text=\"" + role.getRoleNo() + "(" + role.getName() + ")\" target=\"roleRightFrame\" action=\"doList.action?&amp;roleId="
@@ -875,14 +862,14 @@ public class RoleAction extends BaseAction
     {
         JSONArray jsonArray = new JSONArray();
         
-        DataRow rightMap = roleService.getDocRight(roleId, siteNo);
+        DynaModel rightMap = roleService.getDocRight(roleId, siteNo);
         
-        List<Object> catalogs = catalogService.findRouteCatalogById(1, siteNo);
+        List<DynaModel> catalogs = catalogService.findRouteCatalogById(1, siteNo);
         if (catalogs != null)
         {
-            for (Iterator<Object> iter = catalogs.iterator(); iter.hasNext();)
+            for (Iterator<DynaModel> iter = catalogs.iterator(); iter.hasNext();)
             {
-                DataRow catalog = (DataRow) iter.next();
+                DynaModel catalog = (DynaModel) iter.next();
                 String catalogId = catalog.getString("catalog_id");
                 String pid = catalog.getString("parent_id");
                 String name = catalog.getString("name");
@@ -930,10 +917,10 @@ public class RoleAction extends BaseAction
         
         HashSet<String> roleRight = roleService.getRoleCatalogRight(roleId, siteNo);
         
-        List<Object> catalogs = manageCatalogService.findCatalogLikeRoute(1, "");
+        List<ManageCatalog> catalogs = manageCatalogService.findCatalogLikeRoute(1, "");
         if (catalogs != null)
         {
-            for (Iterator<Object> iter = catalogs.iterator(); iter.hasNext();)
+            for (Iterator<ManageCatalog> iter = catalogs.iterator(); iter.hasNext();)
             {
                 ManageCatalog catalog = (ManageCatalog) iter.next();
                 String id = String.valueOf(catalog.getId());

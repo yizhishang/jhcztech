@@ -24,8 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.CharHelper;
 import com.yizhishang.base.util.DateHelper;
@@ -114,7 +114,7 @@ public class ArticleAction extends BaseAction
         BeanHelper.mapToBean(form, article);
         
         extFieldform = normalize(request, "extFieldform");
-        DataRow extFieldData = new DataRow();
+        DynaModel extFieldData = new DynaModel();
         extFieldData.putAll(extFieldform);
         
         //需要复制文章的栏目ID
@@ -194,7 +194,7 @@ public class ArticleAction extends BaseAction
         String attach_realname = getStrParameter("attach_realname");
         if (articleId > 0 && StringHelper.isNotEmpty(attach_url) && StringHelper.isNotEmpty(attach_savename) && StringHelper.isNotEmpty(attach_realname))
         {
-            DataRow fileUploadData = new DataRow();
+            DynaModel fileUploadData = new DynaModel();
             fileUploadData.set("source", "0");
             fileUploadData.set("source_id", articleId);
             fileUploadData.set("save_filename", attach_savename);
@@ -262,16 +262,16 @@ public class ArticleAction extends BaseAction
         }
         
         //取文章来源
-        List<Object> sourceList = article_SourceService.findArticle_SourceBySiteNo(getSiteNo());
+        List<DynaModel> sourceList = article_SourceService.findArticle_SourceBySiteNo(getSiteNo());
         form.set("sourceList", sourceList);
         
         //查询数据字典，取行业类别 285206405@qq.com add
-        List<Object> enumDataList = enumService.getEnumListByType("INDUSTRY_TYPE");
+        List<DynaModel> enumDataList = enumService.getEnumListByType("INDUSTRY_TYPE");
         form.set("industryList", enumDataList);
         
         //取栏目级别
         DBPage page = enumService.getEnumItemByType(1, 20, "COLUMN_LEVEL", getSiteNo());
-        List<Object> column_level = null;
+        List<DynaModel> column_level = null;
         if (page != null)
         {
             column_level = page.getData();
@@ -325,7 +325,7 @@ public class ArticleAction extends BaseAction
             {
                 //获得用户登陆的站点
                 String siteno = getLoginSiteNo();
-                DataRow data = new DataRow();
+                DynaModel data = new DynaModel();
                 data.set("name", author);
                 data.set("create_date", DateHelper.formatDate(new Date()));
                 data.set("modify_date", DateHelper.formatDate(new Date()));
@@ -349,9 +349,9 @@ public class ArticleAction extends BaseAction
             DBPage page = articleService.findAuthor(1, 100, getLoginSiteNo(), "");
             if (page != null && page.getData() != null)
             {
-                for (Iterator<Object> iter = page.getData().iterator(); iter.hasNext();)
+                for (Iterator<DynaModel> iter = page.getData().iterator(); iter.hasNext();)
                 {
-                    DataRow authoerData = (DataRow) iter.next();
+                    DynaModel authoerData = (DynaModel) iter.next();
                     jsonObj = new JSONObject();
                     jsonObj.put("author", authoerData.getString("name"));
                     jsonArr.add(jsonObj);
@@ -422,7 +422,7 @@ public class ArticleAction extends BaseAction
         if (catalogId > 0)
         {
             //查询当前栏目中是否有自定义字段 285206405@qq.com add by 2010-5-15
-            List<Object> extendFieldList = null;
+            List<DynaModel> extendFieldList = null;
             if (catalog.getInheritField() == 1)//判断当前栏目是否继承父栏目的文档自定义字段
             {
                 extendFieldList = customFieldService.cycFindExtendFieldInfo(catalogId);
@@ -436,9 +436,9 @@ public class ArticleAction extends BaseAction
             {
                 //将自定义字段组成需要查询的字段
                 StringBuffer field_codes = new StringBuffer();
-                for (Iterator<Object> iter = extendFieldList.iterator(); iter.hasNext();)
+                for (Iterator<DynaModel> iter = extendFieldList.iterator(); iter.hasNext();)
                 {
-                    DataRow fieldData = (DataRow) iter.next();
+                    DynaModel fieldData = (DynaModel) iter.next();
                     String code = fieldData.getString("code");
                     
                     field_codes.append(code);
@@ -446,16 +446,16 @@ public class ArticleAction extends BaseAction
                         field_codes.append(",");
                 }
                 
-                DataRow fieldContentData = null;
+                DynaModel fieldContentData = null;
                 if (articleId > 0 && StringHelper.isNotEmpty(field_codes.toString()))
                 {
                     fieldContentData = customFieldService.findExtendFieldContent(articleId, field_codes.toString());
                     
                     if (fieldContentData != null)
                     {
-                        for (Iterator<Object> iter = extendFieldList.iterator(); iter.hasNext();)
+                        for (Iterator<DynaModel> iter = extendFieldList.iterator(); iter.hasNext();)
                         {
-                            DataRow fieldData = (DataRow) iter.next();
+                            DynaModel fieldData = (DynaModel) iter.next();
                             String code = fieldData.getString("code");
                             
                             if (fieldContentData != null)
@@ -505,9 +505,9 @@ public class ArticleAction extends BaseAction
         //		}
         //		
         
-        DataRow catalogRole = SysLibrary.getUserCatalogRight(getSession());
+        DynaModel catalogRole = SysLibrary.getUserCatalogRight(getSession());
         
-        List<DataRow> dataList = catalogService.findCatalogTrue(0, siteNo, SysLibrary.isSystemAdmin(getSession()), catalogRole);
+        List<DynaModel> dataList = catalogService.findCatalogTrue(0, siteNo, SysLibrary.isSystemAdmin(getSession()), catalogRole);
         dataMap.put("dataList", dataList);
         
         //		SiteService siteService = (SiteService) getService(SiteService.class);
@@ -530,10 +530,10 @@ public class ArticleAction extends BaseAction
     */
     public String doAjaxShowCatalogRoleRight()
     {
-        DataRow catalogRole = SysLibrary.getUserCatalogRight(getSession());
+        DynaModel catalogRole = SysLibrary.getUserCatalogRight(getSession());
         
         //取所有子栏目信息
-        List<Object> childrenCatalogs = catalogService.findWholeCatalogById(1, getSiteNo());
+        List<DynaModel> childrenCatalogs = catalogService.findWholeCatalogById(1, getSiteNo());
         CatalogTreeManage treeManage = new CatalogTreeManage();
         String html = treeManage.getChildrenTreeHtml(childrenCatalogs, SysLibrary.isSystemAdmin(getSession()), catalogRole);
         ResponseHelper.print(response, html);
@@ -874,16 +874,16 @@ public class ArticleAction extends BaseAction
             int catalogId = article.getCatalogId();
             form.set("catalogId", catalogId);
             
-            List<Object> sourceList = article_SourceService.findArticle_SourceBySiteNo(getSiteNo());
+            List<DynaModel> sourceList = article_SourceService.findArticle_SourceBySiteNo(getSiteNo());
             form.set("sourceList", sourceList);
             
             //查询数据字典，取行业类别 285206405@qq.com add
-            List<Object> enumDataList = enumService.getEnumListByType("INDUSTRY_TYPE");
+            List<DynaModel> enumDataList = enumService.getEnumListByType("INDUSTRY_TYPE");
             form.set("industryList", enumDataList);
             
             //取栏目级别
             DBPage page = enumService.getEnumItemByType(1, 20, "COLUMN_LEVEL", getSiteNo());
-            List<Object> column_level = null;
+            List<DynaModel> column_level = null;
             if (page != null)
             {
                 column_level = page.getData();
@@ -892,7 +892,7 @@ public class ArticleAction extends BaseAction
             form.set("column_level", column_level);
             
             AttachService serivce = new AttachService();
-            DataRow attachData = serivce.getAttachBySourceId(0, id);
+            DynaModel attachData = serivce.getAttachBySourceId(0, id);
             if (attachData != null)
             {
                 dataMap.put("attach", attachData);
@@ -1105,16 +1105,16 @@ public class ArticleAction extends BaseAction
             int catalogId = getIntParameter("catalogId");
             int rows = getIntParameter("rows", 200);//发布文章的数据量
             
-            List<Object> catalogList = articleService.findUnionArtilceByCatalog(catalogId);
-            List<DataRow> articleList = null;
-            DataRow articleData = null;
-            for (Iterator<Object> catalogIter = catalogList.iterator(); catalogIter.hasNext();)
+            List<DynaModel> catalogList = articleService.findUnionArtilceByCatalog(catalogId);
+            List<DynaModel> articleList = null;
+            DynaModel articleData = null;
+            for (Iterator<DynaModel> catalogIter = catalogList.iterator(); catalogIter.hasNext();)
             {
-                DataRow catalog = (DataRow) catalogIter.next();
+                DynaModel catalog = (DynaModel) catalogIter.next();
                 articleList = articleService.findPublishArticleById(catalog.getInt("catalog_id"), rows, 1);
                 for (int i = 0; i < articleList.size(); i++)
                 {
-                    articleData = (DataRow) articleList.get(i);
+                    articleData = (DynaModel) articleList.get(i);
                     //把要发布的文章添加入发布队列
                     addToPublishQueue(articleData.getInt("article_id"), "A");
                     
@@ -1147,10 +1147,10 @@ public class ArticleAction extends BaseAction
             
             //判断该栏目下是否有需要附带发布的栏目
             //CatalogService catalogService = (CatalogService) getService(CatalogService.class);
-            List<Object> attachList = catalogService.findAttachCatalog(catalogId, getSiteNo());
-            for (Iterator<Object> iter = attachList.iterator(); iter.hasNext();)
+            List<DynaModel> attachList = catalogService.findAttachCatalog(catalogId, getSiteNo());
+            for (Iterator<DynaModel> iter = attachList.iterator(); iter.hasNext();)
             {
-                DataRow data = (DataRow) iter.next();
+                DynaModel data = (DynaModel) iter.next();
                 addToPublishQueue(data.getInt("attach_catalog_id"), "C");
             }
             result.setErrorInfo("栏目[catalogId=" + catalogId + "]发布已经添加到发布队列中");
@@ -1336,7 +1336,7 @@ public class ArticleAction extends BaseAction
         else
         {
             HttpSession session = request.getSession();
-            DataRow rights = SysLibrary.getUserCatalogRight(session);
+            DynaModel rights = SysLibrary.getUserCatalogRight(session);
             
             //查询子栏目
             List<Catalog> childrenList = catalogService.findChildrenById(catalogId, siteno);
@@ -1412,7 +1412,7 @@ public class ArticleAction extends BaseAction
         BeanHelper.mapToBean(form, article);
         
         extFieldform = normalize(request, "extFieldform");
-        DataRow extFieldData = new DataRow();
+        DynaModel extFieldData = new DynaModel();
         extFieldData.putAll(extFieldform);
         
         int isPublish = Configuration.getInt("system.isPublish", 1);//是否启动发布队列
@@ -1474,7 +1474,7 @@ public class ArticleAction extends BaseAction
         String attach_savename = getStrParameter("attach_savename");
         String attach_realname = getStrParameter("attach_realname");
         
-        DataRow fileUploadData = new DataRow();
+        DynaModel fileUploadData = new DynaModel();
         fileUploadData.set("source", "0");
         fileUploadData.set("source_id", article.getId());
         fileUploadData.set("save_filename", attach_savename);

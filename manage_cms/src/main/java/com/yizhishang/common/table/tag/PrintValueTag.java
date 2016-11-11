@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.jsp.JspWriter;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.base.util.ToolKit;
@@ -16,9 +16,9 @@ public class PrintValueTag extends CommonTag
     
     private static final long serialVersionUID = -5587142182111678087L;
     
-    private DataRow item = null;
+    private DynaModel item = null;
     
-    private DataRow colitem = null;
+    private DynaModel colitem = null;
     
     private String is_pk = "";
     
@@ -43,7 +43,7 @@ public class PrintValueTag extends CommonTag
         is_pk = ToolKit.nullTrans(is_pk, "N");
         if (colitem == null)
         {
-            colitem = new DataRow();
+            colitem = new DynaModel();
         }
         input_type = ToolKit.nullTrans(colitem.getString("input_type"), Consts.input_type_input);
         String reuslt = item.getString(colname);
@@ -108,10 +108,10 @@ public class PrintValueTag extends CommonTag
                 ArrayList<Object> argList = new ArrayList<Object>();
                 argList.add(colvalue);
                 BaseService bservice = new BaseService();
-                List<Object> list = bservice.getJdbcTemplate().query(sql, argList.toArray());
+                List<DynaModel> list = bservice.getJdbcTemplateUtil().queryForList(sql, DynaModel.class, argList.toArray());
                 if (list != null && list.size() > 0)
                 {
-                    DataRow dr = (DataRow) list.get(0);
+                    DynaModel dr = (DynaModel) list.get(0);
                     result = dr.getString("optiontext");
                 }
             }
@@ -124,7 +124,7 @@ public class PrintValueTag extends CommonTag
                 String sql = "select distinct " + select_text + " as optiontext from " + select_table + " where " + select_value + " in (" + colvalue + ") "
                         + select_condition;
                 BaseService bservice = new BaseService();
-                String[] texts = bservice.getJdbcTemplate().queryStringArray(sql);
+                String[] texts = bservice.getJdbcTemplateUtil().queryStringArray(sql);
                 if (texts != null && texts.length > 0)
                 {
                     result = "";
@@ -192,12 +192,12 @@ public class PrintValueTag extends CommonTag
         select_condition = selectCondition;
     }
     
-    public DataRow getItem()
+    public DynaModel getItem()
     {
         return item;
     }
     
-    public void setItem(DataRow item)
+    public void setItem(DynaModel item)
     {
         this.item = item;
     }
@@ -212,12 +212,12 @@ public class PrintValueTag extends CommonTag
         this.colname = colname;
     }
     
-    public DataRow getColitem()
+    public DynaModel getColitem()
     {
         return colitem;
     }
     
-    public void setColitem(DataRow colitem)
+    public void setColitem(DynaModel colitem)
     {
         this.colitem = colitem;
     }

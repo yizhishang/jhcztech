@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.jdbc.DataRow;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.ScriptHelper;
 import com.yizhishang.plat.domain.Result;
@@ -41,7 +41,7 @@ public class TemplateVarAction extends BaseAction
     public Result add(HttpServletRequest request)
     {
         form = normalize(request);
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.putAll(form);
         
         String siteno = getSiteNo();
@@ -126,7 +126,7 @@ public class TemplateVarAction extends BaseAction
     public ModelAndView doEdit(HttpServletResponse response)
     {
         int id = getIntParameter("id");
-        DataRow data = templateVarService.findTemplateVarById(id, getSiteNo());
+        DynaModel data = templateVarService.findTemplateVarById(id, getSiteNo());
         if (data != null)
         {
             form.putAll(data);
@@ -156,10 +156,10 @@ public class TemplateVarAction extends BaseAction
     {
         int state = getIntParameter("state");
         int[] idArray = getIntArrayParameter("id");
-        DataRow data = null;
+        DynaModel data = null;
         for (int i = 0; i < idArray.length; i++)
         {
-            data = new DataRow();
+            data = new DynaModel();
             data.set("id", idArray[i]);
             data.set("state", state);
             templateVarService.editTemplateVar(data);
@@ -173,7 +173,7 @@ public class TemplateVarAction extends BaseAction
     public Result edit(HttpServletRequest request, HttpServletResponse reponse)
     {
         form = normalize(request);
-        DataRow data = new DataRow();
+        DynaModel data = new DynaModel();
         data.putAll(form);
         
         templateVarService.editTemplateVar(data);

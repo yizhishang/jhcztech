@@ -24,7 +24,7 @@
 	<form method="post" id="loginForm">
 		<select name="siteno" id="siteno">
         <c:forEach var="siteItem" items="${list }">
-            <option value="${siteItem.siteNo }">${siteItem.name }</option>
+            <option value="${siteItem.siteno }">${siteItem.name }</option>
         </c:forEach>
        	</select>
 		<input type="text" id="name" name="name" placeholder="请输入用户名"/>
@@ -37,7 +37,6 @@
 </body>
 <script type="text/javascript">
 	$(function(){
-		
 		$("#name").focus();
 		$.formValidator.initConfig({formid:"loginForm",alertmessage:false,onerror:function(msg){alert(msg);}});
 		$("#siteno").formValidator().regexValidator({regexp:regexEnum.notempty,onerror:"请选择登录站点"});

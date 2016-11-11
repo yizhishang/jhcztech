@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.yizhishang.base.jdbc.DataRow;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.ConvertHelper;
 import com.yizhishang.plat.Constants;
@@ -31,10 +31,10 @@ public class WebCatalogService extends BaseService
     * @param catalogId 栏目id
     * @return
     */
-	public DataRow findCatalogById(String catalogId)
+	public DynaModel findCatalogById(String catalogId)
 	{
 		String sql = "SELECT CATALOG_ID,NAME,CATALOG_NO, SITENO,LINK_URL,PARENT_ID,USER_RIGHT FROM T_CATALOG WHERE CATALOG_ID=? AND STATE=1 AND SITENO=? order  BY ORDERLINE";
-		return getJdbcTemplate().queryMap(sql, new Object[] { new Integer(ConvertHelper.strToInt(catalogId)), Constants.MAIN_SITENO });
+		return getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(ConvertHelper.strToInt(catalogId)), Constants.MAIN_SITENO });
 	}
 	
 	/**
@@ -45,10 +45,10 @@ public class WebCatalogService extends BaseService
 	 * @param catalogNo
 	 * @return
 	 */
-	public DataRow findCatalogByNo(String catalogNo)
+	public DynaModel findCatalogByNo(String catalogNo)
 	{
 	    String sql = "SELECT CATALOG_ID,NAME,CATALOG_NO, SITENO,LINK_URL,PARENT_ID,USER_RIGHT FROM T_CATALOG WHERE CATALOG_ID=? AND STATE=1 AND CATALOG_NO=? order  BY ORDERLINE";
-	    return getJdbcTemplate().queryMap(sql, new Object[] { new Integer(ConvertHelper.strToInt(catalogNo)), Constants.MAIN_SITENO });
+	    return getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(ConvertHelper.strToInt(catalogNo)), Constants.MAIN_SITENO });
 	}
 	                            
     /**
@@ -58,10 +58,10 @@ public class WebCatalogService extends BaseService
     * @param catalogId 栏目id
     * @return
     */
-	public List<Object> findChildrenById(String catalogId)
+	public List<DynaModel> findChildrenById(String catalogId)
 	{
 		String sql = "SELECT CATALOG_ID,NAME,CATALOG_NO FROM T_CATALOG WHERE PARENT_ID=? ORDER BY ORDERLINE";
-        List<Object> dataList = getJdbcTemplate().query(sql, new Object[] { new Integer(catalogId) });
+        List<DynaModel> dataList = getJdbcTemplateUtil().queryForList(sql, new Object[] { new Integer(catalogId) });
 		return dataList;
 	}
 	                                
@@ -70,29 +70,29 @@ public class WebCatalogService extends BaseService
     * @param route    线路
     * @return
     */
-	public List<Object> findRouteCatalogById(String route)
+	public List<DynaModel> findRouteCatalogById(String route)
 	{
 		String sql = "SELECT CATALOG_ID,NAME,CATALOG_NO,ROUTE,LINK_URL,CHILDRENNUM FROM T_CATALOG WHERE STATE = 1 AND ROUTE like ? ORDER BY ORDERLINE";
-        List<Object> dataList = getJdbcTemplate().query(sql, new Object[] { "%" + route + "%" });
+        List<DynaModel> dataList = getJdbcTemplateUtil().queryForList(sql, new Object[] { "%" + route + "%" });
 		return dataList;
 	}
 	                                        
     /**
-    *描述：可以根据一个栏目的ID查出该栏目的信息，包括子栏目，子栏目在DataRow里面的key是"children"，值类型是一个List。该方法依赖于方法findRouteCatalogById 
+    *描述：可以根据一个栏目的ID查出该栏目的信息，包括子栏目，子栏目在DynaModel里面的key是"children"，值类型是一个List。该方法依赖于方法findRouteCatalogById 
     *作者：袁永君
     *时间：2016-02-24 下午03:44:56
     * @param catalogId 栏目ID
     * @return
     */
-	public DataRow findWholeCatalogById(String catalogId)
+	public DynaModel findWholeCatalogById(String catalogId)
 	{
-		DataRow wholeCatalog = new DataRow();
-        List<Object> catalogs = findRouteCatalogById(catalogId);
+		DynaModel wholeCatalog = new DynaModel();
+        List<DynaModel> catalogs = findRouteCatalogById(catalogId);
 		Object[] array = catalogs.toArray();
 		for (int i = 0; i < array.length; i++)
 		{
-			DataRow catalog = (DataRow) array[i];
-            List<Object> children = new ArrayList<Object>();
+			DynaModel catalog = (DynaModel) array[i];
+            List<DynaModel> children = new ArrayList<DynaModel>();
 			for (int j = 0; j < catalogs.size();)
 			{
                 //根据正则表达式得到子栏目的在catalogs链表中的位置
@@ -104,7 +104,7 @@ public class WebCatalogService extends BaseService
 					break;
 				}
 			}
-            //如果有子栏目则添加到栏目的DataRow当中，key是children
+            //如果有子栏目则添加到栏目的DynaModel当中，key是children
 			if (children.size() > 0)
 			{
 				catalog.put("children", children);
@@ -126,11 +126,11 @@ public class WebCatalogService extends BaseService
     * @param catalogs 所有相关栏目的集合
     * @return 返回-1表示不存在子栏目
     */
-	public int getChildCatalogIndex(DataRow data, List<Object> catalogs)
+	public int getChildCatalogIndex(DynaModel data, List<DynaModel> catalogs)
 	{
 		for (int i = 0; i < catalogs.size(); i++)
 		{
-			DataRow catalog = (DataRow) catalogs.get(i);
+			DynaModel catalog = (DynaModel) catalogs.get(i);
 			String regex = data.getString("route").replaceAll("\\|", "\\\\|") + "\\|\\d+";
 			if (catalog.getString("route").matches(regex))
 			{
