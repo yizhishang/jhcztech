@@ -93,6 +93,9 @@
 	</bean>
 	
 	<!-- 文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:defaultEncoding="UTF-8"  
+        p:maxUploadSize="5400000"  
+        p:uploadTempDir="fileUpload/temp" />
     
     <mvc:interceptors>
     	<bean class="com.yizhishang.plat.web.interceptors.SecurityInterceptor" />
