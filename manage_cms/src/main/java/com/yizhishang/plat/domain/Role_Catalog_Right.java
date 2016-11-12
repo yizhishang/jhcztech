@@ -14,7 +14,7 @@ import com.yizhishang.base.domain.DynaModel;
 public class Role_Catalog_Right extends DynaModel
 {
 
-	private static final long serialVersionUID = 1L;
+	
 	
 	public int getId()
 	{

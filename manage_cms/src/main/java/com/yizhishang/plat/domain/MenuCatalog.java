@@ -17,7 +17,7 @@ import com.yizhishang.base.util.StringHelper;
 public class MenuCatalog extends DynaModel
 {
 
-	private static final long serialVersionUID = 1L;
+	
     public String getCatalogNo()
     {
         return getString("catalog_no");

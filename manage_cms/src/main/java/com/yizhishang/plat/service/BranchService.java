@@ -163,7 +163,7 @@ public class BranchService extends BaseService
     * @param branchName 网点名称，模糊匹配
     * @return
     */
-    public DBPage getPageData(int curPage, int rowOfPage, String branchName, String branchNo, String siteNo)
+    public DBPage<DynaModel> getPageData(int curPage, int rowOfPage, String branchName, String branchNo, String siteNo)
     {
         StringBuffer sqlBuf = new StringBuffer();
         sqlBuf.append("select A.*,B.REGIONNAME,B.AREA from T_B_BRANCH A LEFT JOIN T_B_REGION B ON A.REGION = B.ID  WHERE 1 = 1");

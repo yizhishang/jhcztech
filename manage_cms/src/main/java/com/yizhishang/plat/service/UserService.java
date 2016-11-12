@@ -2,6 +2,7 @@ package com.yizhishang.plat.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -133,7 +134,7 @@ public class UserService extends BaseService
     * @param loanNo
     * @return
     */
-    public DBPage getPageData(int curPage, int numPerPage, int group_id, String siteNo, String keyword, String loanNo, boolean isSystem)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, int group_id, String siteNo, String keyword, String loanNo, boolean isSystem)
     {
         return userDao.getPageData(curPage, numPerPage, group_id, siteNo, keyword, loanNo, isSystem);
     }
@@ -147,7 +148,7 @@ public class UserService extends BaseService
     * @param loanNo
     * @return
     */
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword, String loanNo, boolean isSystem)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword, String loanNo, boolean isSystem)
     {
         return userDao.getPageData(curPage, numPerPage, siteNo, keyword, loanNo, isSystem);
     }
@@ -160,7 +161,8 @@ public class UserService extends BaseService
     * @param keyword    关键词
     * @return
     */
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword, String branchno, String roleid)
+    @SuppressWarnings("rawtypes")
+	public DBPage<Map> getPageData(int curPage, int numPerPage, String siteNo, String keyword, String branchno, String roleid)
     {
         return userDao.getPageData(curPage, numPerPage, siteNo, keyword, branchno, roleid);
     }
@@ -175,7 +177,7 @@ public class UserService extends BaseService
     * @param roleId     角色ID
     * @return
     */
-    public DBPage getPageDataNotInRole(int curPage, int numPerPage, String siteNo, String keyword, int roleId)
+    public DBPage<DynaModel> getPageDataNotInRole(int curPage, int numPerPage, String siteNo, String keyword, int roleId)
     {
         return userDao.getPageDataNotInRole(curPage, numPerPage, siteNo, keyword, roleId);
     }

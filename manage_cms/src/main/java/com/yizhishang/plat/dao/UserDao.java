@@ -3,6 +3,7 @@ package com.yizhishang.plat.dao;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -87,9 +88,9 @@ public class UserDao extends BaseDao
 		return newDataList;
 	}
 	
-	public DBPage getPageData(int curPage, int numPerPage, int group_id, String siteNo, String keyword, String loanNo, boolean isSystem)
+	public DBPage<DynaModel> getPageData(int curPage, int numPerPage, int group_id, String siteNo, String keyword, String loanNo, boolean isSystem)
 	{
-		DBPage page = null;
+		DBPage<DynaModel> page = null;
 		
 		StringBuffer sqlBuffer = new StringBuffer();
 		ArrayList<Object> argList = new ArrayList<Object>();
@@ -137,9 +138,9 @@ public class UserDao extends BaseDao
 		return page;
 	}
 	
-	public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword, String loanNo, boolean isSystem)
+	public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword, String loanNo, boolean isSystem)
 	{
-		DBPage page = null;
+		DBPage<DynaModel> page = null;
 		
 		StringBuffer sqlBuffer = new StringBuffer();
 		ArrayList<Object> argList = new ArrayList<Object>();
@@ -186,9 +187,9 @@ public class UserDao extends BaseDao
 		return page;
 	}
 	
-	public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword, String branchno, String roleid)
+	@SuppressWarnings("rawtypes")
+	public DBPage<Map> getPageData(int curPage, int numPerPage, String siteNo, String keyword, String branchno, String roleid)
 	{
-		DBPage page = null;
 		StringBuffer sqlBuffer = new StringBuffer();
 		ArrayList<Object> argList = new ArrayList<Object>();
 		sqlBuffer.append("SELECT U.ID,U.SITENO,U.NAME,U.PASSWORD,U.STATE,U.LOGIN_TIMES,U.LAST_TIME,U.EMAIL,U.PHONE,U.MOBILE,U.UID2,U.BRANCHNO,B.BRANCHNAME");
@@ -219,28 +220,13 @@ public class UserDao extends BaseDao
 		}
 		sqlBuffer.append(" AND U.IS_SYSTEM = 0");
 		sqlBuffer.append(" ORDER BY ID DESC");
-		page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
-		
-		//		if (page != null)
-		//		{
-        //			List<DynaModel> dataList = page.getData();
-		//			ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
-        //			for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
-		//			{
-		//				User user = new User();
-		//				DynaModel row = (DynaModel) iter.next();
-		//				user.fromMap(row);
-		//				newDataList.add(user);
-		//			}
-		//			page.setData(newDataList);
-		//		}
-		
+		DBPage<Map> page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), Map.class, argList.toArray(), curPage, numPerPage);
 		return page;
 	}
 	
-	public DBPage getPageDataNotInRole(int curPage, int numPerPage, String siteNo, String keyword, int roleId)
+	public DBPage<DynaModel> getPageDataNotInRole(int curPage, int numPerPage, String siteNo, String keyword, int roleId)
 	{
-		DBPage page = null;
+		DBPage<DynaModel> page = null;
 		
 		StringBuffer sqlBuffer = new StringBuffer();
 		ArrayList<Object> argList = new ArrayList<Object>();

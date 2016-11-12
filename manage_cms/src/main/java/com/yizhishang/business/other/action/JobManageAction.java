@@ -1,5 +1,7 @@
 package com.yizhishang.business.other.action;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +43,8 @@ public class JobManageAction extends BaseAction
 		curPage = (curPage <= 0) ? 1 : curPage;
 		String position = getStrParameter("position");
 		String siteno = getLoginSiteNo();
-		DBPage page = jobManageService.getPageData(curPage, 20, position, siteno);
+		@SuppressWarnings("rawtypes")
+		DBPage<Map> page = jobManageService.getPageData(curPage, 20, position, siteno);
 		dataMap.put("page", page);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("data", dataMap);

@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class User extends DynaModel
 {
-	private static final long serialVersionUID = 1L;
+	
     public static int STATE_CLOSE = 0;
     public static int STATE_OPEN = 1;
 

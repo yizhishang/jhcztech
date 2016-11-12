@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.SysConfig;
 import com.yizhishang.base.domain.Config;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.ConfigService;
 import com.yizhishang.base.util.BeanHelper;
@@ -75,7 +76,7 @@ public class ConfigAction extends BaseAction
         String siteno = getLoginSiteNo();
         curPage = (curPage <= 0) ? 1 : curPage;
         keyword = StringHelper.trim(keyword);
-        DBPage page = configService.getPageData(curPage, SysConfig.getRowOfPage(), keyword, siteno);
+        DBPage<DynaModel> page = configService.getPageData(curPage, SysConfig.getRowOfPage(), keyword, siteno);
         dataMap.put("page", page);
         request.setAttribute("data", dataMap);
         return "/WEB-INF/views/config/list_config.jsp";

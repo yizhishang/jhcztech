@@ -28,6 +28,7 @@ import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.CatalogTreeManage;
 import com.yizhishang.plat.ExtendFieldManage;
 import com.yizhishang.plat.domain.Catalog;
+import com.yizhishang.plat.domain.EnumItem;
 import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.service.CatalogService;
 import com.yizhishang.plat.service.CustomFieldService;
@@ -246,19 +247,18 @@ public class CatalogAction extends BaseAction
         DynaForm form = new DynaForm();
         form.set("parentId", parentId);
         
-        DBPage page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
+        DBPage<EnumItem> page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
         
         //阅读权限
-        List<DynaModel> user_right = null;
-        //栏目星级
-        List<DynaModel> column_level = null;
-        
+        List<EnumItem> user_right = null;
         if (page != null)
         {
             user_right = page.getData();
             page = null;
         }
         
+      //栏目星级
+        List<EnumItem> column_level = null;
         page = enumService.getEnumItemByType(1, 20, "COLUMN_LEVEL", getSiteNo());
         if (page != null)
         {
@@ -543,19 +543,18 @@ public class CatalogAction extends BaseAction
             }
         }
         
-        DBPage page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
+        DBPage<EnumItem> page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
         
         //阅读权限
-        List<DynaModel> user_right = null;
-        //栏目星级
-        List<DynaModel> column_level = null;
-        
+        List<EnumItem> user_right = null;
         if (page != null)
         {
             user_right = page.getData();
             page = null;
         }
         
+        //栏目星级
+        List<EnumItem> column_level = null;
         page = enumService.getEnumItemByType(1, 20, "COLUMN_LEVEL", getSiteNo());
         if (page != null)
         {

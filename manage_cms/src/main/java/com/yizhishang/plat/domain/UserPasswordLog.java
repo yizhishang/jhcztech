@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class UserPasswordLog extends DynaModel
 {
-	private static final long serialVersionUID = 1L;
+	
 	
 	public int getLogId()
 	{

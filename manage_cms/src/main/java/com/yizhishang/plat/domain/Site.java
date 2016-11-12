@@ -1,7 +1,5 @@
 package com.yizhishang.plat.domain;
 
-import java.io.Serializable;
-
 import com.yizhishang.base.domain.DynaModel;
 
 /**
@@ -13,12 +11,12 @@ import com.yizhishang.base.domain.DynaModel;
  * 创建日期: 2015-12-23
  * 创建时间: 16:13:06
  */
-public class Site extends DynaModel implements Serializable
+public class Site extends DynaModel
 {
-	private static final long serialVersionUID = 1L;
+	
 	public static int STATE_CLOSE = 0;
     public static int STATE_OPEN = 1;
-    
+
     public int getId()
     {
         return getInt("id");

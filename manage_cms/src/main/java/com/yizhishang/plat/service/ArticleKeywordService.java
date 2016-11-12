@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.plat.dao.ArticleKeywordDao;
@@ -49,7 +50,7 @@ public class ArticleKeywordService extends BaseService
         return articleKeywordDao.findById(id);
     }
 
-    public DBPage getPageData(int curPage, int numPerPage, String name)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String name)
     {
         return articleKeywordDao.getPageData(curPage, numPerPage, name);
     }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
@@ -186,7 +187,7 @@ public class SiteAction extends BaseAction
 		String keyword = getStrParameter("keyword");
 		curPage = (curPage <= 0) ? 1 : curPage;
 		keyword = StringHelper.trim(keyword);
-        DBPage page = siteService.getPageData(curPage, SysConfig.getRowOfPage(), keyword);
+        DBPage<DynaModel> page = siteService.getPageData(curPage, SysConfig.getRowOfPage(), keyword);
 		dataMap.put("page", page);
         ModelAndView mv = new ModelAndView("/WEB-INF/views/site/list_site.jsp");
         mv.addObject("data", dataMap);

@@ -87,7 +87,7 @@ public class PublishLogService extends BaseService
     * 查询日志信息
     * 
     */
-	public DBPage findPublishLog(int curPage, int numPerPage, String startDate, String endDate)
+	public DBPage<DynaModel> findPublishLog(int curPage, int numPerPage, String startDate, String endDate)
 	{
 		List<Object> argList = new ArrayList<Object>();
 		StringBuffer strBuf = new StringBuffer("SELECT * FROM T_PUBLISH_LOG WHERE 1 = 1");

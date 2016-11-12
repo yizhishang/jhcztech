@@ -96,7 +96,7 @@ public class ArticleService extends BaseService
     * @param siteno
     * @return
     */
-    public DBPage findAuthor(int curPage, int numPerPage, String siteno, String keyword)
+    public DBPage<DynaModel> findAuthor(int curPage, int numPerPage, String siteno, String keyword)
     {
         return articleDao.findAuthor(curPage, numPerPage, siteno, keyword);
     }
@@ -155,13 +155,13 @@ public class ArticleService extends BaseService
     * @param author
     * @return
     */
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, int catalogId, String title, int state, String author, String startDate,
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, int catalogId, String title, int state, String author, String startDate,
             String endDate)
     {
         return articleDao.getPageData(curPage, numPerPage, siteNo, catalogId, title, state, author, startDate, endDate);
     }
     
-    public DBPage getPageDataByEmail(int curPage, int numPerPage, String siteNo, int catalogId, String title, int state, String author, String branchno)
+    public DBPage<DynaModel> getPageDataByEmail(int curPage, int numPerPage, String siteNo, int catalogId, String title, int state, String author, String branchno)
     {
         return articleDao.getPageDataByEmail(curPage, numPerPage, siteNo, catalogId, title, state, author, branchno);
     }

@@ -46,10 +46,8 @@ public class ConfigDao extends BaseDao
 		return configList;
 	}
 	
-	public DBPage getPageData(int curPage, int numPerPage, String keyword, String siteNo)
+	public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String keyword, String siteNo)
 	{
-		
-		DBPage page = null;
 		
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select * from T_SYS_CONFIG where 1=1 ");
@@ -66,7 +64,7 @@ public class ConfigDao extends BaseDao
 			argList.add(siteNo);
 		}
 		sqlBuffer.append(" order by name");
-		page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		DBPage<DynaModel> page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), DynaModel.class, argList.toArray(), curPage, numPerPage);
 		
 		if (page != null)
 		{
@@ -121,10 +119,10 @@ public class ConfigDao extends BaseDao
     	return getJdbcTemplateUtil().queryMap(GET_CONFIG_BY_NAME, Config.class, new Object[] { name });
 	}
 	
-    public DBPage getPageData(int curPage, int numPerPage, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String keyword)
 	{
 		
-		DBPage page = null;
+		DBPage<DynaModel> page = null;
 		
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select * from T_SYS_CONFIG where 1=1 ");

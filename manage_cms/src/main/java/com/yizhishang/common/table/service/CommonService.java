@@ -174,9 +174,9 @@ public class CommonService extends BaseService
     }
     
     // 获取分页列表数据
-    public DBPage getPageData(String table_name, String orderby, String orderbysort, int curPage, int numPerPage, List<DynaModel> params)
+    public DBPage<DynaModel> getPageData(String table_name, String orderby, String orderbysort, int curPage, int numPerPage, List<DynaModel> params)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         StringBuffer sqlBuf = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
         sqlBuf.append("select * from " + table_name + " where 1=1 ");

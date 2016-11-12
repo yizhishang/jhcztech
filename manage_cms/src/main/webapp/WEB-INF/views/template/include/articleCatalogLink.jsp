@@ -8,7 +8,6 @@
 <jsp:directive.page import="com.yizhishang.plat.service.CatalogService" />
 <jsp:directive.page import="com.yizhishang.plat.domain.Catalog" />
 <jsp:directive.page import="java.util.LinkedList"/>
-<jsp:directive.page import="com.yizhishang.base.jdbc.DataRow"/>
 <%
 	int catalogId = RequestHelper.getInt(request, "catalogId");
 	if (catalogId > 0)

@@ -228,9 +228,9 @@ public class TemplateService extends BaseService
         }
     }
     
-    public DBPage findTemplate(int curPage, int numPerPage, int catalogId, String keyword, int state, String startDate, String endDate, String siteNo)
+    public DBPage<DynaModel> findTemplate(int curPage, int numPerPage, int catalogId, String keyword, int state, String startDate, String endDate, String siteNo)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         ArrayList<Object> argList = new ArrayList<Object>();
         StringBuffer strBuf = new StringBuffer("SELECT * FROM T_TEMPLATE WHERE 1 = 1");
         if (catalogId > 0)

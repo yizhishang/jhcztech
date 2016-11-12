@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class ExpertOnline extends DynaModel
 {
-	private static final long serialVersionUID = 1L;
+	
     public String getT_question_id()
     {
         return getString("t_question_id");

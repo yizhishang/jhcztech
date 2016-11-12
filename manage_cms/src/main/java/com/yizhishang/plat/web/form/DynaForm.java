@@ -2,6 +2,8 @@ package com.yizhishang.plat.web.form;
 
 import java.util.HashMap;
 
+import com.yizhishang.base.domain.DynaModel;
+
 /**
  * 描述:
  * 版权:	 Copyright (c) 2015
@@ -253,5 +255,9 @@ public void set(String name, long value)
             put(name, "");
         else
             put(name, value);
+    }
+    
+    public void putAll(DynaModel map){
+    	putAll(map.toMap());
     }
 }

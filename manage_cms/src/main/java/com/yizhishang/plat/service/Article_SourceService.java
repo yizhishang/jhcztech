@@ -62,7 +62,7 @@ public class Article_SourceService extends BaseService
      * @param siteNo 站点编号
      * @return
      */
-    public List<DynaModel> findArticle_SourceBySiteNo(String siteNo)
+    public List<Article_Source> findArticle_SourceBySiteNo(String siteNo)
     {
         return dao.findArticle_SourceBySiteNo(siteNo);
     }
@@ -76,7 +76,7 @@ public class Article_SourceService extends BaseService
      * @param keyword    关键词
      * @return
      */
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword)
     {
         return dao.getPageData(curPage, numPerPage, siteNo, keyword);
     }

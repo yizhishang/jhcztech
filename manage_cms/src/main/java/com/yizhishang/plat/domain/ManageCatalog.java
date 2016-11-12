@@ -1,6 +1,5 @@
 package com.yizhishang.plat.domain;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.yizhishang.base.domain.DynaModel;
@@ -14,10 +13,8 @@ import com.yizhishang.base.domain.DynaModel;
  * 创建日期: 2010-1-13 
  * 创建时间: 下午02:54:48
  */
-public class ManageCatalog extends DynaModel implements Serializable
+public class ManageCatalog extends DynaModel
 {
-    
-    private static final long serialVersionUID = 1L;
     
     public String getCatalogNo()
     {

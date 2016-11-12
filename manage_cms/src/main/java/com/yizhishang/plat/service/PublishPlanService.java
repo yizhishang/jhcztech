@@ -46,7 +46,7 @@ public class PublishPlanService extends BaseService
 		getJdbcTemplateUtil().update("T_PUBLISH_PLAN", data, "id", data.getString("id"));
 	}
 	
-	public DBPage findPublishPlan(int curPage, int numPerPage, String catalogId, String name)
+	public DBPage<DynaModel> findPublishPlan(int curPage, int numPerPage, String catalogId, String name)
 	{
         ArrayList<Object> argList = new ArrayList<Object>();
 		StringBuffer strBuf = new StringBuffer("SELECT A.*,B.NAME FROM T_PUBLISH_PLAN A,T_CATALOG B WHERE A.CATALOG_ID = B.CATALOG_ID");

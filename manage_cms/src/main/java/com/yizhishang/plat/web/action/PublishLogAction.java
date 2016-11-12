@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.service.PublishLogService;
@@ -41,7 +42,7 @@ public class PublishLogAction extends BaseAction
         int curPage = getIntParameter("page");
         curPage = (curPage <= 0) ? 1 : curPage;
         
-        DBPage page = publishLogService.findPublishLog(curPage, SysConfig.getRowOfPage(), startDate, endDate);
+        DBPage<DynaModel> page = publishLogService.findPublishLog(curPage, SysConfig.getRowOfPage(), startDate, endDate);
         HashMap<String, Object> dataMap = new HashMap<String, Object>();
         dataMap.put("page", page);
         ModelAndView mv = new ModelAndView();

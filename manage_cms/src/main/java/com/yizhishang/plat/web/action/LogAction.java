@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Result;
@@ -51,7 +52,7 @@ public class LogAction extends BaseAction
         uid = StringHelper.trim(uid);
         //获得登陆的站点
         String siteno = getLoginSiteNo();
-        DBPage page = logService.getPageData(curPage, SysConfig.getRowOfPage(), siteno, keyword, uid);
+        DBPage<DynaModel> page = logService.getPageData(curPage, SysConfig.getRowOfPage(), siteno, keyword, uid);
         dataMap.put("page", page);
         
         model.addAttribute("data", dataMap);

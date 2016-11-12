@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.ScriptHelper;
 import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.plat.domain.EnumItem;
 import com.yizhishang.plat.domain.ManageCatalog;
 import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.service.EnumService;
@@ -148,12 +148,12 @@ public class FunctionCatalogAction extends BaseAction
         int parentId = getIntParameter("catalogId");
         DynaForm form = new DynaForm();
         form.set("parentId", parentId);
-        DBPage page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
+        DBPage<EnumItem> page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
         
         //阅读权限
-        List<DynaModel> user_right = null;
+        List<EnumItem> user_right = null;
         //目录星级
-        List<DynaModel> column_level = null;
+        List<EnumItem> column_level = null;
         
         if (page != null)
         {
@@ -201,12 +201,12 @@ public class FunctionCatalogAction extends BaseAction
         }
         BeanHelper.beanToMap(catalog, form);
         
-        DBPage page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
+        DBPage<EnumItem> page = enumService.getEnumItemByType(1, 20, "USER_RIGHT", getSiteNo());
         
         //阅读权限
-        List<DynaModel> user_right = null;
+        List<EnumItem> user_right = null;
         //目录星级
-        List<DynaModel> column_level = null;
+        List<EnumItem> column_level = null;
         
         if (page != null)
         {

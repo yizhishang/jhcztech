@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,9 @@ import com.yizhishang.plat.CatalogTreeManage;
 import com.yizhishang.plat.Constants;
 import com.yizhishang.plat.domain.Article;
 import com.yizhishang.plat.domain.ArticleKeyword;
+import com.yizhishang.plat.domain.Article_Source;
 import com.yizhishang.plat.domain.Catalog;
+import com.yizhishang.plat.domain.EnumItem;
 import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.domain.Review;
 import com.yizhishang.plat.service.ArticleKeywordService;
@@ -262,7 +265,7 @@ public class ArticleAction extends BaseAction
         }
         
         //取文章来源
-        List<DynaModel> sourceList = article_SourceService.findArticle_SourceBySiteNo(getSiteNo());
+        List<Article_Source> sourceList = article_SourceService.findArticle_SourceBySiteNo(getSiteNo());
         form.set("sourceList", sourceList);
         
         //查询数据字典，取行业类别 285206405@qq.com add
@@ -270,8 +273,8 @@ public class ArticleAction extends BaseAction
         form.set("industryList", enumDataList);
         
         //取栏目级别
-        DBPage page = enumService.getEnumItemByType(1, 20, "COLUMN_LEVEL", getSiteNo());
-        List<DynaModel> column_level = null;
+        DBPage<EnumItem> page = enumService.getEnumItemByType(1, 20, "COLUMN_LEVEL", getSiteNo());
+        List<EnumItem> column_level = null;
         if (page != null)
         {
             column_level = page.getData();
@@ -346,7 +349,7 @@ public class ArticleAction extends BaseAction
         }
         else if ("query".equals(type))//根据站点编号查询所有作者
         {
-            DBPage page = articleService.findAuthor(1, 100, getLoginSiteNo(), "");
+            DBPage<DynaModel> page = articleService.findAuthor(1, 100, getLoginSiteNo(), "");
             if (page != null && page.getData() != null)
             {
                 for (Iterator<DynaModel> iter = page.getData().iterator(); iter.hasNext();)
@@ -400,7 +403,7 @@ public class ArticleAction extends BaseAction
         
         Review review = new Review();
         review.setElemId(articleId);
-        DBPage page = commentService.getPageData(curPage, SysConfig.getRowOfPage(), 0, 0, 0, null, 0, null);
+        DBPage<DynaModel> page = commentService.getPageData(curPage, SysConfig.getRowOfPage(), 0, 0, 0, null, 0, null);
         dataMap.put("page", page);
         return "read_comment";
     }
@@ -484,35 +487,12 @@ public class ArticleAction extends BaseAction
     @RequestMapping("/ajaxReadCatalogTree.action")
     public ModelAndView doAjaxReadCatalogTree()
     {
-        //String siteNo = RequestHelper.getString(getRequest(), "siteNo");
         String siteNo = getSiteNo();
-        //		if (StringHelper.isEmpty(siteNo))
-        //		{
-        //			return NONE;
-        //		}
-        //		int roleId = RequestHelper.getInt(getRequest(), "roleId");
-        //		if (roleId == 0)
-        //		{
-        //			return NONE;
-        //		}
-        //		
-        //		RoleService service = (RoleService) getService(RoleService.class);
-        //		//查找角色信息
-        //		Role role = service.findRoleById(roleId, "");
-        //		if (role != null)
-        //		{
-        //			BeanHelper.beanToMap(role, form);
-        //		}
-        //		
-        
         DynaModel catalogRole = SysLibrary.getUserCatalogRight(getSession());
         
-        List<DynaModel> dataList = catalogService.findCatalogTrue(0, siteNo, SysLibrary.isSystemAdmin(getSession()), catalogRole);
+        @SuppressWarnings("rawtypes")
+		List<Map> dataList = catalogService.findCatalogTrue(0, siteNo, SysLibrary.isSystemAdmin(getSession()), catalogRole);
         dataMap.put("dataList", dataList);
-        
-        //		SiteService siteService = (SiteService) getService(SiteService.class);
-        //		List siteList = siteService.getAllSite();
-        //		dataMap.put("siteList", siteList);
         
         ModelAndView mv = new ModelAndView("/WEB-INF/views/article/read_catalog_tree.jsp");
         mv.addObject("data", dataMap);
@@ -874,7 +854,7 @@ public class ArticleAction extends BaseAction
             int catalogId = article.getCatalogId();
             form.set("catalogId", catalogId);
             
-            List<DynaModel> sourceList = article_SourceService.findArticle_SourceBySiteNo(getSiteNo());
+            List<Article_Source> sourceList = article_SourceService.findArticle_SourceBySiteNo(getSiteNo());
             form.set("sourceList", sourceList);
             
             //查询数据字典，取行业类别 285206405@qq.com add
@@ -882,8 +862,8 @@ public class ArticleAction extends BaseAction
             form.set("industryList", enumDataList);
             
             //取栏目级别
-            DBPage page = enumService.getEnumItemByType(1, 20, "COLUMN_LEVEL", getSiteNo());
-            List<DynaModel> column_level = null;
+            DBPage<EnumItem> page = enumService.getEnumItemByType(1, 20, "COLUMN_LEVEL", getSiteNo());
+            List<EnumItem> column_level = null;
             if (page != null)
             {
                 column_level = page.getData();
@@ -955,7 +935,7 @@ public class ArticleAction extends BaseAction
         {
             dataMap.put("catalogName", catalog.getName());
         }
-        DBPage page = articleService.getPageData(curPage, SysConfig.getRowOfPage(), siteno, catalogId, title, state, author, startDate, endDate);
+        DBPage<DynaModel> page = articleService.getPageData(curPage, SysConfig.getRowOfPage(), siteno, catalogId, title, state, author, startDate, endDate);
         dataMap.put("page", page);
         dataMap.put("isEndCode", new Boolean(articleService.isEndCode(catalogId)));
         
@@ -1294,7 +1274,7 @@ public class ArticleAction extends BaseAction
         int curPage = this.getIntParameter("page");
         curPage = (curPage <= 0) ? 1 : curPage;
         keyword = StringHelper.trim(keyword);
-        DBPage page = articleService.findAuthor(curPage, 15, getSiteNo(), keyword);
+        DBPage<DynaModel> page = articleService.findAuthor(curPage, 15, getSiteNo(), keyword);
         dataMap.put("page", page);
         ModelAndView mv = new ModelAndView();
         mv.addObject("data", dataMap);

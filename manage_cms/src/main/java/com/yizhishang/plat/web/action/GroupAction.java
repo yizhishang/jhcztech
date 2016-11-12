@@ -154,7 +154,7 @@ public class GroupAction extends BaseAction
         keyword = StringHelper.trim(keyword);
         //获得站点编号
         String siteno = getLoginSiteNo();
-        DBPage page = groupService.getPageData(curPage, SysConfig.getRowOfPage(), siteno, keyword);
+        DBPage<DynaModel> page = groupService.getPageData(curPage, SysConfig.getRowOfPage(), siteno, keyword);
         dataMap.put("page", page);
         ModelAndView mv = new ModelAndView("/WEB-INF/views/group/list_group.jsp");
         mv.addObject("data", dataMap);
@@ -252,7 +252,7 @@ public class GroupAction extends BaseAction
         int group_id = getIntParameter("group_id");
         String keyword = getStrParameter("keyword");
         Group group = groupService.findGroupById(group_id);
-        DBPage page = groupService.getPageData(curPage, SysConfig.getRowOfPage(), getSiteNo(), group_id, keyword);
+        DBPage<DynaModel> page = groupService.getPageData(curPage, SysConfig.getRowOfPage(), getSiteNo(), group_id, keyword);
         if (group != null)
         {
             dataMap.put("groupId", new Integer(group_id));

@@ -278,11 +278,7 @@ public class RoleDao extends BaseDao
             sql += " and siteno = ?";
             argList.add(siteNo);
         }
-        DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
-        if (dataRow == null)
-            return null;
-        Role role = new Role();
-        role.fromMap(dataRow);
+        Role role = getJdbcTemplateUtil().queryMap(sql, Role.class, argList.toArray());
         return role;
     }
     
@@ -304,10 +300,10 @@ public class RoleDao extends BaseDao
     * @param siteno
     * @return
     */
-    public List<DynaModel> findRoleBySiteno(String siteno)
+    public List<Role> findRoleBySiteno(String siteno)
     {
         String sql = "SELECT ID,ROLENO,NAME,IS_SYSTEM FROM T_ROLE WHERE SITENO = ? ORDER BY ID DESC";
-        return getJdbcTemplateUtil().queryForList(sql, DynaModel.class, new Object[] { siteno });
+        return getJdbcTemplateUtil().queryForList(sql, Role.class, new Object[] { siteno });
     }
     
     public List<Role> findRoleBySiteNo(String siteNo)
@@ -425,9 +421,9 @@ public class RoleDao extends BaseDao
         return hs;
     }
     
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, int roleId, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, int roleId, String keyword)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
@@ -471,9 +467,9 @@ public class RoleDao extends BaseDao
     * @param keyword
     * @return
     */
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();

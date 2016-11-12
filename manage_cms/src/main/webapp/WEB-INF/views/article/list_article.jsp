@@ -55,9 +55,9 @@ function copyFunction(name,type)
 		alert("请选择需要复制的数据！");
 	}
 }
-function saveDataFunction(url)
+function saveDataFunction(url, width, height)
 {
-	var returnValue = openDialogWithScroll(url, 1300, 800);
+	var returnValue = openDialogWithScroll(url, 1300, 1300);
     if (returnValue != null && returnValue.length > 0)
     {
     	var is_submit = getKeyword("is_submit", returnValue);
@@ -78,6 +78,12 @@ function saveDataFunction(url)
     		},"json");
     	}
     }
+}
+function addFunction(param){
+	saveDataFunction("doAdd.action?" + param);
+}
+function editFunction(param, width, height){
+	saveDataFunction("doEdit.action?"+param, width, height);
 }
 </script>
 <form id="qryparm" name="qryparm" action="doList.action" method="post">
@@ -156,6 +162,7 @@ function saveDataFunction(url)
                       <td class="tdhead">状态</td>
                       <td class="tdhead">操作</td>
                     </tr>
+                    <c:if test="${not empty data.page.data}">
                     <c:forEach var="item" items="${data.page.data}">
                       <tr style="cursor:pointer" onDblClick="javascript:editFunction('id=${item.id}&catalogId=${item.catalogId}');" title="双击编辑文章">
                         <td><input type="checkbox" name="id" id="check_<c:out value='${item.id}'/>" value="<c:out value='${item.id}'/>" onClick="setCheck(this)"></td>
@@ -187,6 +194,7 @@ function saveDataFunction(url)
                         </td>
                       </tr>
                     </c:forEach>
+                    </c:if>
                   </table>
                 </div>
                 <jsp:include flush="true" page="/WEB-INF/views/include/page.jsp"></jsp:include>

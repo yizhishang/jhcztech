@@ -11,7 +11,6 @@ package com.yizhishang.base.domain;
  */
 public class Right_Url extends DynaModel
 {
-	private static final long serialVersionUID = 1L;
     public String getRight_url()
     {
         return getString("right_url");

@@ -1,12 +1,13 @@
 package com.yizhishang.plat.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
@@ -75,7 +76,8 @@ public class CatalogService extends BaseService
 		catalogDao.deleteCatalog(catalogId);
 	}
 	
-    private void docToArr(List<DynaModel> catalogs, List<DynaModel> arrayList, boolean isSystemAdmin, DynaModel rights)
+    @SuppressWarnings("rawtypes")
+	private void docToArr(List<DynaModel> catalogs, List<Map> arrayList, boolean isSystemAdmin, DynaModel rights)
 	{
 		if (catalogs != null)
 		{
@@ -89,7 +91,7 @@ public class CatalogService extends BaseService
 				{
 					dataRow.set("rownum", StringHelper.count(route, '|'));
 					
-					arrayList.add(dataRow);
+					arrayList.add(dataRow.toMap());
                     @SuppressWarnings("unchecked")
                     List<DynaModel> children = (List<DynaModel>) dataRow.getObject("children");
 					if (children != null && children.size() > 0)
@@ -131,7 +133,6 @@ public class CatalogService extends BaseService
     */
 	public Catalog findCatalogById(int catalogId)
 	{
-		
 		return catalogDao.findCatalogById(catalogId);
 	}
 	
@@ -184,14 +185,11 @@ public class CatalogService extends BaseService
     * @时间：2011-3-12 上午08:48:02
     * @return
     */
-	public List<DynaModel> findCatalogTrue(int roleId, String siteNo, boolean isSystemAdmin, DynaModel catalogRole)
+	@SuppressWarnings("rawtypes")
+	public List<Map> findCatalogTrue(int roleId, String siteNo, boolean isSystemAdmin, DynaModel catalogRole)
 	{
-		
-		CatalogService catalogService = new CatalogService();
-        List<DynaModel> catalogs = catalogService.findWholeCatalogById(1, siteNo);
-		
-        ArrayList<DynaModel> dataList = new ArrayList<DynaModel>();
-		
+        List<DynaModel> catalogs = findWholeCatalogById(1, siteNo);
+        List<Map> dataList = Lists.newArrayList();
 		docToArr(catalogs, dataList, isSystemAdmin, catalogRole);
 		return dataList;
 		
@@ -257,14 +255,14 @@ public class CatalogService extends BaseService
     */
 	public List<DynaModel> findWholeCatalogById(int catalogId, String siteNo)
 	{
-		List<DynaModel> list = new ArrayList<DynaModel>();
+		List<DynaModel> list = Lists.newLinkedList();
 		
         List<DynaModel> catalogs = catalogDao.findRouteCatalogById(catalogId, siteNo);
-        DynaModel[] array = (DynaModel[]) catalogs.toArray();
-		Collections.addAll(list, array);
-		for (int i = 0; i < array.length; i++)
+
+        list.addAll(catalogs);
+		for (int i = 0; i < list.size(); i++)
 		{
-			DynaModel catalog = (DynaModel) array[i];
+			DynaModel catalog = (DynaModel) list.get(i);
             List<DynaModel> children = new ArrayList<DynaModel>();
 			for (int j = 0; j < list.size();)
 			{

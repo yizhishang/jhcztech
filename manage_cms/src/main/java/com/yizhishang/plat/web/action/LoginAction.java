@@ -115,7 +115,7 @@ public class LoginAction extends BaseAction
         List<Map<String, Object>> list1 = Lists.newArrayList();
         list1.add(map);
         model.addAttribute("list", list);
-        return "/WEB-INF/views/test.jsp";
+        return "/WEB-INF/views/login.jsp";
     }
     
     @RequestMapping("/loginOut.action")

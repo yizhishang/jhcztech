@@ -33,14 +33,11 @@ public class ReflectHelper
         {
             return Thread.currentThread().getContextClassLoader().loadClass(name);
         }
-
-        catch (ClassNotFoundException e)
+        catch (Exception e)
         {
+        	logger.error(e.getMessage());
+        	return Class.forName(name);
         }
-        catch (SecurityException e)
-        {
-        }
-        return Class.forName(name);
     }
 
     /**

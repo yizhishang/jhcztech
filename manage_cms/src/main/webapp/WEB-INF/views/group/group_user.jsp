@@ -4,7 +4,7 @@
 <script type="text/javascript">
 function addFunction()
 {
-	var returnValue = openDialogWithScroll("/admin/userAdmin/userList.action?group_id=" + ${param.group_id}, 500, 800);
+	var returnValue = openDialogWithScroll("${ctxPath }/admin/userAdmin/userList.action?group_id=" + ${param.group_id}, 500, 800);
     if (returnValue != null && returnValue.length > 0)
     {
 		 $(":input[name='userIdStr']").val(returnValue);

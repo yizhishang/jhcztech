@@ -43,7 +43,7 @@ public class ConfigService extends BaseService
 	*
 	* @return
 	*/
-	public DBPage getPageData(int curPage, int numPerPage, String keyword)
+	public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String keyword)
 	{
 		
 		return configDao.getPageData(curPage, numPerPage, keyword);
@@ -93,7 +93,7 @@ public class ConfigService extends BaseService
 	 * 获得分页数据
 	 * @return
 	 */
-	public DBPage getPageData(int curPage, int numPerPage, String keyword, String siteNo)
+	public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String keyword, String siteNo)
 	{
 		return configDao.getPageData(curPage, numPerPage, keyword, siteNo);
 	}

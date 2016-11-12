@@ -12,11 +12,10 @@ import java.util.Map;
  * 创建日期: 2015-12-18
  * 创建时间: 13:53:48
  */
-public class DynaModel extends HashMap<String, Object>
+public class DynaModel
 {
     
-	private static final long serialVersionUID = 1L;
-	private final HashMap<String, Object> innerMap = new HashMap<String, Object>();
+    private final HashMap<String, Object> innerMap = new HashMap<String, Object>();
 
     /**
      * 从Map中初始化动态Domain
@@ -27,17 +26,8 @@ public class DynaModel extends HashMap<String, Object>
         innerMap.putAll(map.toMap());
         return this;        
     }
-    
-    /**
-     * 把Domain模型转化为Map
-     * @return
-     */
-    public Map<String, Object> toMap()
-    {
-        return innerMap;
-    }
-    
-	public boolean getBoolean(String name)
+
+    public boolean getBoolean(String name)
     {
         if (name == null || name.equals(""))
             return false;
@@ -266,13 +256,41 @@ public class DynaModel extends HashMap<String, Object>
             innerMap.put(name, value);
     }
     
-//    @Override
-//    public String toString(){
-//        return innerMap.toString();
-//    }
+    public boolean containsKey(Object key){
+    	return innerMap.containsKey(key);
+    }
+    
+    public Object get(Object key) {
+        return innerMap.get(key);
+    }
+    
+    public void put(String key, Object value){
+    	innerMap.put(key, value);
+    }
+    
+    public void putAll(Map<String, Object> map) {
+        innerMap.putAll(map);
+    }
     
     public int size(){
     	return innerMap.size();
     }
     
+    public void clear(){
+    	innerMap.clear();
+    }
+    
+    /**
+     * 把Domain模型转化为Map
+     * @return
+     */
+    public Map<String, Object> toMap()
+    {
+        return innerMap;
+    }
+    
+//    @Override
+//    public String toString(){
+//        return innerMap.toString();
+//    }
 }

@@ -1,6 +1,7 @@
 package com.yizhishang.plat.web.action;
 
 import java.util.Date;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -105,7 +106,8 @@ public class TemplateVarAction extends BaseAction
         int curPage = getIntParameter("page");
         curPage = (curPage <= 0) ? 1 : curPage;
         
-        DBPage page = templateVarService.findTemplateVar(curPage, SysConfig.getRowOfPage(), keyword, getSiteNo());
+        @SuppressWarnings("rawtypes")
+		DBPage<Map> page = templateVarService.findTemplateVar(curPage, SysConfig.getRowOfPage(), keyword, getSiteNo());
         dataMap.put("page", page);
         mv.addObject("data", dataMap);
         mv.setViewName("/WEB-INF/views/template_var/list_template_var.jsp");

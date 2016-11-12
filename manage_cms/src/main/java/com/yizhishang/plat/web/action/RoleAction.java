@@ -253,7 +253,7 @@ public class RoleAction extends BaseAction
         {
             if (role.getIsSystem() == 1)
             {
-                result.setErrorInfo("【" + role.getRoleNo() + "】为系统角色，不能删除！");
+                result.setErrorInfo("【" + role.getRoleno() + "】为系统角色，不能删除！");
                 return result;
             }
             roleService.deleteRole(roleId);
@@ -378,11 +378,6 @@ public class RoleAction extends BaseAction
     public ModelAndView doEditSiteRoleRight(HttpServletRequest request)
     {
         int roleId = RequestHelper.getInt(request, "roleId");
-//        if (roleId == 0)
-//        {
-//            return mv;
-//        }
-        
         //查找角色信息
         Role role = roleService.findRoleById(roleId, "");
         if (role != null)
@@ -390,7 +385,7 @@ public class RoleAction extends BaseAction
             BeanHelper.beanToMap(role, form);
         }
         
-        List<DynaModel> siteList = roleService.findSiteRight(roleId);
+        List<Map<String, Object>> siteList = roleService.findSiteRight(roleId);
         dataMap.put("dataList", siteList);
         
         mv.addObject("form", form);
@@ -425,7 +420,7 @@ public class RoleAction extends BaseAction
             {
                 User user = (User) roleUser.get(j);
                 excelData = new DynaModel();
-                excelData.set("roleno", role.getRoleNo());//角色标识
+                excelData.set("roleno", role.getRoleno());//角色标识
                 excelData.set("roleName", role.getName());//角色名称
                 excelData.set("roleCreateDate", role.getCreateDate());//角色创建时间
                 excelData.set("userUid", user.getUid());//用户标识
@@ -616,7 +611,7 @@ public class RoleAction extends BaseAction
         
         //查找角色信息
         Role role = roleService.findRoleById(roleId, "");
-        DBPage page = roleService.getPageData(curPage, 10, "", roleId, keyword);
+        DBPage<DynaModel> page = roleService.getPageData(curPage, 10, "", roleId, keyword);
         if (role != null)
         {
             BeanHelper.beanToMap(role, form);
@@ -646,7 +641,7 @@ public class RoleAction extends BaseAction
         
         //查找角色信息
         Role role = roleService.findRoleById(roleId, "");
-        DBPage page = roleService.getPageData(curPage, SysConfig.getRowOfPage(), "", roleId, "");
+        DBPage<DynaModel> page = roleService.getPageData(curPage, SysConfig.getRowOfPage(), "", roleId, "");
         if (role != null)
         {
             dataMap.put("roleId", new Integer(roleId));
@@ -680,7 +675,7 @@ public class RoleAction extends BaseAction
         for (Iterator<Role> iter = roles.iterator(); iter.hasNext();)
         {
             Role role = (Role) iter.next();
-            buffer.append("   <tree text=\"" + role.getRoleNo() + "(" + role.getName() + ")\" target=\"roleRightFrame\" action=\"doList.action?&amp;roleId="
+            buffer.append("   <tree text=\"" + role.getRoleno() + "(" + role.getName() + ")\" target=\"roleRightFrame\" action=\"doList.action?&amp;roleId="
                     + role.getId() + "\" value=\"" + role.getId() + "\" src=\"\"  oncontextmenu=\"true\" />\n");
         }
         

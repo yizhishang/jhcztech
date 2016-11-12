@@ -57,7 +57,7 @@
                    <span>所在角色：<select name="roleid" id="roleid" >
                   <option value="">请选择</option>
                     <c:forEach var="item" items="${data.roles}">
-                      <option value="${item.role_id}">${item.roleno}</option>
+                      <option value="${item.id}">${item.roleno}</option>
                     </c:forEach>
                   </select>
                   <script type="text/javascript">

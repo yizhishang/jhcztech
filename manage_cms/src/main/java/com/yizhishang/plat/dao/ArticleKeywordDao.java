@@ -53,9 +53,9 @@ public class ArticleKeywordDao extends BaseDao
         return articleKeyword;
     }
 
-    public DBPage getPageData(int curPage, int numPerPage, String name)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String name)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<String> argList = new ArrayList<String>();
         sqlBuffer.append("select * from T_ARTICLE_KEYWORD where 1=1 ");

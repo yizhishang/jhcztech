@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,7 @@ import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.base.util.security.SecurityHelper;
 import com.yizhishang.plat.domain.Result;
+import com.yizhishang.plat.domain.Role;
 import com.yizhishang.plat.domain.Site;
 import com.yizhishang.plat.domain.User;
 import com.yizhishang.plat.domain.UserPasswordLog;
@@ -209,7 +211,8 @@ public class UserAction extends BaseAction
     * 列出所有的用户信息
     * @return
     */
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     @RequestMapping("doDefault.action")
     public ModelAndView doDefault()
     {
@@ -220,16 +223,15 @@ public class UserAction extends BaseAction
         curPage = (curPage <= 0) ? 1 : curPage;
         keyword = StringHelper.trim(keyword);
         String siteno = getSiteNo();
-        //		String siteno = "";
-        DBPage page = userService.getPageData(curPage, SysConfig.getRowOfPage(), siteno, keyword, branchno, roleid);
+        DBPage<Map> page = userService.getPageData(curPage, SysConfig.getRowOfPage(), siteno, keyword, branchno, roleid);
         /**
         * 查询用户所属的角色名称
         *  by 20130522
         */
         if (page != null)
         {
-            List<DynaModel> dataList = page.getData();
-            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
+            List<Map> dataList = page.getData();
+            for (Iterator<Map> iter = dataList.iterator(); iter.hasNext();)
             {
                 DynaModel userData = (DynaModel) iter.next();
                 List<DynaModel> roleInfo = roleService.findUserRoleById(userData.getInt("user_id"));
@@ -258,7 +260,7 @@ public class UserAction extends BaseAction
             dataMap.put("branchs", branchs);
         }
         //查询所有角色
-        List<DynaModel> roles = roleService.findRoleBySiteno(getSiteNo());
+        List<Role> roles = roleService.findRoleBySiteno(getSiteNo());
         if (roles != null)
         {
             dataMap.put("roles", roles);
@@ -388,7 +390,7 @@ public class UserAction extends BaseAction
         loanNo = StringHelper.trim(loanNo);
         keyword = StringHelper.trim(keyword);
         
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         if (group_id != 0 && roleId == 0)
         {
             page = userService.getPageData(curPage, 16, group_id, "", keyword, loanNo, false);

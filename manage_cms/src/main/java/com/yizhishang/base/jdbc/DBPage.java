@@ -2,8 +2,6 @@ package com.yizhishang.base.jdbc;
 
 import java.util.List;
 
-import com.yizhishang.base.domain.DynaModel;
-
 /**
  * 描述:	 数据页，方便分页数据存取
  * 版权:	 Copyright (c) 2015
@@ -13,7 +11,7 @@ import com.yizhishang.base.domain.DynaModel;
  * 创建日期: 2015-12-7
  * 创建时间: 17:19:45
  */
-public class DBPage
+public class DBPage<T>
 {
     
     //缺省时一页显示的记录数
@@ -38,7 +36,7 @@ public class DBPage
     private int lastIndex;
     
     //结果集存放List
-    private List<DynaModel> dataList;
+    private List<T> dataList;
     
     private boolean firstFlag = true;
     
@@ -116,7 +114,7 @@ public class DBPage
      * 获得分页数据
      * @return
      */
-    public List<DynaModel> getData()
+    public List<T> getData()
     {
         if (dataList != null && dataList.size() > getNumPerPage())
         {
@@ -275,7 +273,7 @@ public class DBPage
      * 设置分页对象的数据
      * @param dataList
      */
-    public void setData(List<DynaModel> dataList)
+    public void setData(List<T> dataList)
     {
         this.dataList = dataList;
     }

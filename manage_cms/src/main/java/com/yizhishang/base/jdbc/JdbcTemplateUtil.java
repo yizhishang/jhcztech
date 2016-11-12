@@ -5,9 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -204,9 +206,10 @@ public class JdbcTemplateUtil
 				if (t instanceof DynaModel)
 				{
 					((DynaModel) t).fromMap(dm);
-					list.add(t);
-					((DynaModel) t).clear();
+				}else{
+					BeanUtils.populate(t, dm.toMap());
 				}
+				list.add(t);
 			}
 			
 			long time = System.currentTimeMillis() - beginTime;
@@ -532,12 +535,16 @@ public class JdbcTemplateUtil
 			if(result instanceof DynaModel){
 				mark = true;
 			}
+			DynaModel temp = new DynaModel();
 			for (Iterator<String> keys = map.keySet().iterator(); keys.hasNext();)
 			{
 				String key = keys.next();
-				if(mark){
-					((DynaModel)result).set(key.toLowerCase(), map.get(key));
-				}
+				temp.set(key.toLowerCase(), map.get(key));
+			}
+			if(mark){
+				((DynaModel)result).putAll(temp.toMap());
+			}else{
+				BeanUtils.populate(result, temp.toMap());
 			}
 			
 			long time = System.currentTimeMillis() - beginTime;
@@ -548,6 +555,10 @@ public class JdbcTemplateUtil
 				logger.warn("执行 [sql= " + sql + "]时间过长，当前执行时间[time=" + time + " millisecond]");
 			}
 			return result;
+		}
+		catch (EmptyResultDataAccessException ex)
+		{
+			return null;
 		}
 		catch (Exception ex)
 		{
@@ -563,7 +574,7 @@ public class JdbcTemplateUtil
 	 * @param numPerPage 每页显示的记录数
 	 * @return 分页对象
 	 */
-	public DBPage queryPage(String sql, int curPage, int numPerPage)
+	public DBPage<DynaModel> queryPage(String sql, int curPage, int numPerPage)
 	{
 		return queryPage(sql, null, curPage, numPerPage);
 	}
@@ -577,7 +588,20 @@ public class JdbcTemplateUtil
 	 * @param numPerPage 每页显示的记录数
 	 * @return 分页对象
 	 */
-	public DBPage queryPage(String sql, Object[] args, int curPage, int numPerPage)
+	public DBPage<DynaModel> queryPage(String sql, Object[] args, int curPage, int numPerPage)
+	{
+		return queryPage(sql, DynaModel.class, args, curPage, numPerPage);
+	}
+	/**
+	 * 查询一个分页列表结果。
+	 *
+	 * @param sql        SQL语句
+	 * @param args       参数中的值
+	 * @param curPage    当前页数
+	 * @param numPerPage 每页显示的记录数
+	 * @return 分页对象
+	 */
+	public <T> DBPage<T> queryPage(String sql, Class<T> cls, Object[] args, int curPage, int numPerPage)
 	{
 		//计算总的记录数
 		String temp = sql;
@@ -593,7 +617,7 @@ public class JdbcTemplateUtil
 		int totalRows = queryInt(totalSQL.toString(), args);
 		
 		//构造分页对象
-		DBPage page = new DBPage(curPage, numPerPage);
+		DBPage<T> page = new DBPage<T>(curPage, numPerPage);
 		//设置总的记录数
 		page.setTotalRows(totalRows);
 		
@@ -603,7 +627,7 @@ public class JdbcTemplateUtil
 		int rows = endIndex - startIndex;
 		rows = (rows < 0) ? 0 : rows;
 		
-		List<DynaModel> list = queryForList(sql, DynaModel.class, args, startIndex, rows);
+		List<T> list = queryForList(sql, cls, args, startIndex, rows);
 		//设置数据
 		page.setData(list);
 		return page;

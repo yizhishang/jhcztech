@@ -2,6 +2,7 @@ package com.yizhishang.plat.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -83,10 +84,11 @@ public class TemplateVarService extends BaseService
     * 作者:	 
     * 创建日期: 2010-1-19
     * 创建时间: 下午03:56:22
-    * @return DBPage
+    * @return DBPage<DynaModel>
     * @throws
     */
-    public DBPage findTemplateVar(int curPage, int numPerPage, String keyword, String siteNo)
+    @SuppressWarnings("rawtypes")
+	public DBPage<Map> findTemplateVar(int curPage, int numPerPage, String keyword, String siteNo)
     {
         List<Object> argList = new ArrayList<Object>();
         StringBuffer strBuf = new StringBuffer("SELECT * FROM T_TEMPLATE_VAR WHERE 1 = 1");
@@ -101,7 +103,7 @@ public class TemplateVarService extends BaseService
             argList.add(siteNo);
         }
         strBuf.append(" ORDER BY ID DESC");
-        return getJdbcTemplateUtil().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
+        return getJdbcTemplateUtil().queryPage(strBuf.toString(), Map.class, argList.toArray(), curPage, numPerPage);
     }
     
     /**

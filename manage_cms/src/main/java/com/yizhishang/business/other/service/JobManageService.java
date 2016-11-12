@@ -1,6 +1,7 @@
 package com.yizhishang.business.other.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,8 @@ public class JobManageService extends BaseService
 	 * @param siteNo
 	 * @return
 	 */
-	public DBPage getPageData(int curPage, int rowOfPage, String position, String siteNo)
+	@SuppressWarnings("rawtypes")
+	public DBPage<Map> getPageData(int curPage, int rowOfPage, String position, String siteNo)
 	{
 		StringBuffer sqlBuf = new StringBuffer();
 		sqlBuf.append("SELECT * FROM T_B_JOB WHERE 1=1");
@@ -48,7 +50,7 @@ public class JobManageService extends BaseService
 			argList.add(siteNo);
 		}
 		sqlBuf.append(" ORDER BY JOBID DESC ");
-		return getJdbcTemplateUtil().queryPage(sqlBuf.toString(), argList.toArray(), curPage, rowOfPage);
+		return getJdbcTemplateUtil().queryPage(sqlBuf.toString(), Map.class, argList.toArray(), curPage, rowOfPage);
 	}
 	
 	/**

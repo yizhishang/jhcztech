@@ -133,9 +133,9 @@ public class GroupDao extends BaseDao
     /**
     * 列出该组下所有用户信息
     */
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, int groupId, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, int groupId, String keyword)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
         sqlBuffer.append("select * from T_USER where id in (select user_id from T_GROUP_USER where group_id=? )");
@@ -166,9 +166,9 @@ public class GroupDao extends BaseDao
         return page;
     }
     
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
         sqlBuffer.append("select * from T_GROUP where 1=1 ");

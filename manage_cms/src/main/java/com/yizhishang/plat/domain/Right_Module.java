@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Right_Module extends DynaModel
 {
-	private static final long serialVersionUID = 1L;
+	
       public String getName()
     {
         return getString("name");

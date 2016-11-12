@@ -1,7 +1,6 @@
 package com.yizhishang.plat.dao;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -84,12 +83,7 @@ public class CatalogDao extends BaseDao
 	public Catalog findCatalogById(int catalogId)
 	{
 		String sql = "select * from T_CATALOG where catalog_id=?";
-		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(catalogId) });
-		if (dataRow == null)
-			return null;
-		Catalog catalog = new Catalog();
-		catalog.fromMap(dataRow);
-		return catalog;
+		return getJdbcTemplateUtil().queryMap(sql, Catalog.class, new Object[] { new Integer(catalogId) });
 	}
 	
 	public Catalog findCatalogById(int catalogId, String siteno)
@@ -102,13 +96,7 @@ public class CatalogDao extends BaseDao
 			sql += " and siteno like ?";
 			argList.add("%" + siteno + "%");
 		}
-		//DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[]{new Integer(catalogId)});
-		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
-		if (dataRow == null)
-			return null;
-		Catalog catalog = new Catalog();
-		catalog.fromMap(dataRow);
-		return catalog;
+		return getJdbcTemplateUtil().queryMap(sql, Catalog.class, argList.toArray());
 	}
 	
 	/**
@@ -126,13 +114,7 @@ public class CatalogDao extends BaseDao
 		String sql = "SELECT * FROM T_CATALOG WHERE CATALOG_NO = ? AND SITENO = ?";
 		argList.add(catalogNo);
 		argList.add(siteNo);
-		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
-		
-		if (dataRow == null)
-			return null;
-		Catalog catalog = new Catalog();
-		catalog.fromMap(dataRow);
-		return catalog;
+		return getJdbcTemplateUtil().queryMap(sql, Catalog.class, argList.toArray());
 	}
 	
 	/**
@@ -148,26 +130,13 @@ public class CatalogDao extends BaseDao
 		ArrayList<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT * FROM T_CATALOG WHERE ROUTE LIKE ? ORDER BY CATALOG_ID ";
 		argList.add("%" + catalogId + "%");
-		List<DynaModel> dataList = getJdbcTemplateUtil().queryForList(sql, DynaModel.class, argList.toArray());
-		ArrayList<Catalog> newDataList = new ArrayList<Catalog>();
-		if (dataList != null)
-		{
-			for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
-			{
-				DynaModel dataRow = (DynaModel) iter.next();
-				Catalog catalog = new Catalog();
-				catalog.fromMap(dataRow);
-				newDataList.add(catalog);
-			}
-		}
-		return newDataList;
+		return getJdbcTemplateUtil().queryForList(sql, Catalog.class, argList.toArray());
 	}
 	
 	public List<Catalog> findChildrenById(int catalogId)
 	{
 		String sql = "select * from T_CATALOG where parent_id=? order by orderline";
-		List<Catalog> dataList = getJdbcTemplateUtil().queryForList(sql, Catalog.class, new Object[] { new Integer(catalogId) });
-		return dataList;
+		return getJdbcTemplateUtil().queryForList(sql, Catalog.class, new Object[] { new Integer(catalogId) });
 	}
 	
 	public List<Catalog> findChildrenById(int catalogId, String siteNo)

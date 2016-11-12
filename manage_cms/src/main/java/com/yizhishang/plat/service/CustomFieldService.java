@@ -187,7 +187,7 @@ public class CustomFieldService extends BaseService
 			if (dataRow != null)
 			{
                 HashSet<String> set = new HashSet<String>();
-                for (Iterator<String> iter = dataRow.keySet().iterator(); iter.hasNext();)
+                for (Iterator<String> iter = dataRow.toMap().keySet().iterator(); iter.hasNext();)
 				{
 					String key = iter.next();
 					Object obj = dataRow.get(key);

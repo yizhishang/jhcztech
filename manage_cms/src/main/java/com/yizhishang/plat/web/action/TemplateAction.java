@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.Configuration;
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
@@ -385,7 +386,7 @@ public class TemplateAction extends BaseAction
         int curPage = this.getIntParameter("page");
         curPage = (curPage <= 0) ? 1 : curPage;
         
-        DBPage page = templateService.findTemplate(curPage, SysConfig.getRowOfPage(), catalogId, keyword, templateState, startDate, endDate, getSiteNo());
+        DBPage<DynaModel> page = templateService.findTemplate(curPage, SysConfig.getRowOfPage(), catalogId, keyword, templateState, startDate, endDate, getSiteNo());
         dataMap.put("page", page);
         ModelAndView mv = new ModelAndView("/WEB-INF/views/template/list_template.jsp");
         mv.addObject("data", dataMap);

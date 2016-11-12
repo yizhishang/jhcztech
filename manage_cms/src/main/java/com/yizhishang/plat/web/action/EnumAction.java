@@ -21,6 +21,7 @@ import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.RequestHelper;
 import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.plat.domain.EnumItem;
 import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.service.EnumService;
 import com.yizhishang.plat.service.EnumTypeService;
@@ -237,7 +238,7 @@ public class EnumAction extends BaseAction
     public String doEditItem(Model model)
     {
         String id = getStrParameter("id");
-        DynaModel data = enumService.findItemByCode(id);
+        EnumItem data = enumService.findItemByCode(id);
         if (data != null)
         {
             model.addAttribute("form", data);
@@ -286,7 +287,7 @@ public class EnumAction extends BaseAction
         
         //String siteno = getSiteNo();
         String siteno = "";
-        DBPage page = enumService.getEnumItemByType(curPage, SysConfig.getRowOfPage(), type, siteno);
+        DBPage<EnumItem> page = enumService.getEnumItemByType(curPage, SysConfig.getRowOfPage(), type, siteno);
         dataMap.put("page", page);
         
         List<DynaModel> typeList = enumService.getEnumTypeList(siteno);

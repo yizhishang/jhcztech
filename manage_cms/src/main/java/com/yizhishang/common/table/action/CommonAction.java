@@ -340,7 +340,7 @@ public class CommonAction extends BaseAction
         curPage = (curPage <= 0) ? 1 : curPage;
         List<DynaModel> params = getParams();
         params = addBranchParam(params);
-        DBPage page = service.getPageData(table_name, orderby, orderbysort, curPage, 20, params);
+        DBPage<DynaModel> page = service.getPageData(table_name, orderby, orderbysort, curPage, 20, params);
         dataMap.put("page", page);
         dataMap.put("cols", cols);
         dataMap.put("searchcols", searchcols);

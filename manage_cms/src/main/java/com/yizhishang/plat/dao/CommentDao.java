@@ -110,9 +110,9 @@ public class CommentDao extends BaseDao
     * @param source   来源
     * @return
     */
-    public DBPage getPageData(int curPage, int numPerPage, int elemType, int elemId, int clientId, String quoteId, int state, String source)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, int elemType, int elemId, int clientId, String quoteId, int state, String source)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
         sqlBuffer.append("select * from T_B_COMMENT where 1=1 ");

@@ -41,7 +41,7 @@ public class TableAction extends BaseAction
         String table_name_en = getStrParameter("table_name_en", "").toLowerCase();
         String table_name_ch = getStrParameter("table_name_ch", "").toLowerCase();
         
-        DBPage page = tableService.getPageData(curPage, 20, table_name_en, table_name_ch);
+        DBPage<DynaModel> page = tableService.getPageData(curPage, 20, table_name_en, table_name_ch);
         
         dataMap.put("page", page);
         mv.addObject("data", dataMap);

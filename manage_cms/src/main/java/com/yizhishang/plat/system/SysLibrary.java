@@ -293,9 +293,9 @@ public class SysLibrary
     * @return
     */
     @SuppressWarnings("unchecked")
-    public static List<DynaModel> getSecurityCatalog(HttpSession session)
+    public static List<ManageCatalog> getSecurityCatalog(HttpSession session)
     {
-        return (List<DynaModel>) SessionHelper.getObject(Constants.USER_MENU_CATALOGS, session);
+        return (List<ManageCatalog>) SessionHelper.getObject(Constants.USER_MENU_CATALOGS, session);
     }
     
     /**

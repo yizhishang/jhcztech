@@ -40,7 +40,7 @@ public class TableService extends BaseService
         getJdbcTemplateUtil().delete("t_b_table", "id", new Integer(id));
     }
     
-    public DBPage getPageData(int curPage, int rowOfPage, String table_name_en, String table_name_ch)
+    public DBPage<DynaModel> getPageData(int curPage, int rowOfPage, String table_name_en, String table_name_ch)
     {
         StringBuffer sqlBuf = new StringBuffer();
         sqlBuf.append("select * from t_b_table where 1=1 ");

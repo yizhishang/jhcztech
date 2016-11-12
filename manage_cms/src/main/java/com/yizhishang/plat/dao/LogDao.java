@@ -72,9 +72,9 @@ public class LogDao extends BaseDao
 		
 	}
 	
-	public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword, String uid)
+	public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword, String uid)
 	{
-		DBPage page = null;
+		DBPage<DynaModel> page = null;
 		
 		StringBuffer sqlBuffer = new StringBuffer();
 		ArrayList<Object> argList = new ArrayList<Object>();

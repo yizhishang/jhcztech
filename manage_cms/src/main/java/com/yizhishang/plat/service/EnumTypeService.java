@@ -105,7 +105,7 @@ public class EnumTypeService extends BaseService
 	 * @param enum_value       枚举类型
 	 * @return
 	 */
-	public DBPage getEnumTypePage(int curPage, int numPerPage, String enum_value)
+	public DBPage<DynaModel> getEnumTypePage(int curPage, int numPerPage, String enum_value)
 	{
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("SELECT * FROM T_ENUM_TYPE");

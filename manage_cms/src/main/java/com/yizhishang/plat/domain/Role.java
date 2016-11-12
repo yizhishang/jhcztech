@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Role extends DynaModel
 {
-	private static final long serialVersionUID = 1L;
+	
 	
 	public int getId()
 	{
@@ -25,14 +25,14 @@ public class Role extends DynaModel
 		set("id", id);
 	}
 	
-	public String getRoleNo()
+	public String getRoleno()
 	{
 		return getString("roleno");
 	}
 	
-	public void setRoleNo(String roleNo)
+	public void setRoleno(String roleno)
 	{
-		set("roleno", roleNo);
+		set("roleno", roleno);
 	}
 	
 	public String getName()

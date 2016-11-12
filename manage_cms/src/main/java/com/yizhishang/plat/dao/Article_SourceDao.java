@@ -72,7 +72,7 @@ public class Article_SourceDao extends BaseDao
      * @param siteNo
      * @return
      */
-    public List<DynaModel> findArticle_SourceBySiteNo(String siteNo)
+    public List<Article_Source> findArticle_SourceBySiteNo(String siteNo)
     {
         ArrayList<String> argList = new ArrayList<String>();
         StringBuffer sqlBuf = new StringBuffer();
@@ -86,12 +86,12 @@ public class Article_SourceDao extends BaseDao
         }
         
         sqlBuf.append(" ORDER BY NAME,ID DESC");
-        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), DynaModel.class, argList.toArray());
+        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), Article_Source.class, argList.toArray());
     }
     
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
         sqlBuffer.append("select * from T_ARTICLE_SOURCE where 1=1 ");

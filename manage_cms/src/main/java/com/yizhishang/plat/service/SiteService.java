@@ -139,7 +139,7 @@ public class SiteService extends BaseService
     * @param keyword
     * @return
     */
-    public DBPage getPageData(int curPage, int numPerPage, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String keyword)
     {
         return siteDao.getPageData(curPage, numPerPage, keyword);
     }

@@ -9,6 +9,7 @@ import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.plat.domain.EnumItem;
 
 /**
  * 描述:
@@ -83,7 +84,7 @@ public class EnumService extends BaseService
      * @param siteNo
      * @return
      */
-	public DBPage findEnumItem(int curPage, int numPerPage, String siteNo)
+	public DBPage<DynaModel> findEnumItem(int curPage, int numPerPage, String siteNo)
 	{
 		List<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT * FROM T_ENUM_TYPE WHERE SITENO = ? ORDER BY ENUM_NAME";
@@ -98,12 +99,12 @@ public class EnumService extends BaseService
     * @param itemCode
     * @return
     */
-	public DynaModel findItemByCode(String itemCode)
+	public EnumItem findItemByCode(String itemCode)
 	{
 		String sql = "select * from T_ENUM_VALUE where ITEM_CODE=?";
 		ArrayList<Object> argList = new ArrayList<Object>();
 		argList.add(itemCode);
-		return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		return getJdbcTemplateUtil().queryMap(sql, EnumItem.class, argList.toArray());
 	}
 	
 	    /**
@@ -114,7 +115,7 @@ public class EnumService extends BaseService
      * @param type       枚举类型
      * @return
      */
-	public DBPage getEnumItemByType(int curPage, int numPerPage, String type, String siteno)
+	public DBPage<EnumItem> getEnumItemByType(int curPage, int numPerPage, String type, String siteno)
 	{
 		StringBuffer sqlBuffer = new StringBuffer();
 		sqlBuffer.append("select A.*,B.ENUM_NAME,B.ENUM_VALUE from T_ENUM_VALUE A,T_ENUM_TYPE B where A.ENUM_TYPE = B.ENUM_VALUE ");
@@ -130,7 +131,7 @@ public class EnumService extends BaseService
 			argList.add(siteno);
 		}
 		sqlBuffer.append(" order by A.enum_type desc,A.orderline desc ");
-		return getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
+		return getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), EnumItem.class, argList.toArray(), curPage, numPerPage);
 	}
 	
 	    /** 

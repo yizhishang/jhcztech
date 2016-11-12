@@ -140,7 +140,7 @@ public class ArticleDao extends BaseDao
      * @return 
      * @return
      */
-    public DBPage findAuthor(int curPage, int numPerPage, String siteno, String keyword)
+    public DBPage<DynaModel> findAuthor(int curPage, int numPerPage, String siteno, String keyword)
     {
         try
         {
@@ -219,10 +219,10 @@ public class ArticleDao extends BaseDao
         }
     }
     
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, int catalogId, String title, int state, String author, String startDate,
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, int catalogId, String title, int state, String author, String startDate,
             String endDate)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
@@ -286,9 +286,9 @@ public class ArticleDao extends BaseDao
         return page;
     }
     
-    public DBPage getPageDataByEmail(int curPage, int numPerPage, String siteNo, int catalogId, String title, int state, String author, String branchno)
+    public DBPage<DynaModel> getPageDataByEmail(int curPage, int numPerPage, String siteNo, int catalogId, String title, int state, String author, String branchno)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
         
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();

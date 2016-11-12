@@ -20,6 +20,8 @@ public class TestJDBC
     	DynaModel dm = new DynaModel();
     	dm.set("name", "main");
     	Site site = new Site();
+    	System.out.println(site);
+    	site.setName("main");
     	site.fromMap(dm);
     	System.out.println(site);
     	System.out.println(site.toMap());

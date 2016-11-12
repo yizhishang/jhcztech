@@ -2,6 +2,7 @@ package com.yizhishang.business.other.action;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
@@ -57,7 +57,7 @@ public class AdGroupAction extends BaseAction
         curPage = (curPage <= 0) ? 1 : curPage;
         keyword = StringHelper.trim(keyword);
         AdGroupService service = new AdGroupService();
-        DBPage page = service.getPageData(curPage, 20, siteno, keyword);
+        DBPage<Ad_Group> page = service.getPageData(curPage, 20, siteno, keyword);
         dataMap.put("page", page);
         mv.addObject("data", dataMap);
         mv.setViewName("/WEB-INF/views/adGroup/ad_group_list.jsp");
@@ -160,7 +160,6 @@ public class AdGroupAction extends BaseAction
      * 描述：删除广告组信息
      * @return
      */
-    @Override
     @ResponseBody
     @RequestMapping("/delete.action")
     public Result delete(HttpServletRequest request, HttpServletResponse response)
@@ -168,7 +167,8 @@ public class AdGroupAction extends BaseAction
         int[] idArray = getIntArrayParameter("id");
         for (int i = 0; i < idArray.length; i++)
         {
-            List<DynaModel> list = adGroupService.findAdById(idArray[i], getSiteNo());
+            @SuppressWarnings("rawtypes")
+			List<Map> list = adGroupService.findAdById(idArray[i], getSiteNo());
             if (list.size() > 0)
             {
                 request.setAttribute("error", "请删除该广告组下的广告在进行删除");

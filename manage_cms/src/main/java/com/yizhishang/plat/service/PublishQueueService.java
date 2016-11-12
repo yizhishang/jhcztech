@@ -70,9 +70,9 @@ public class PublishQueueService extends BaseService
 	/**
 	 * 
 	 * 查询发布队列  
-	 * @return DBPage
+	 * @return DBPage<DynaModel>
 	 */
-	public DBPage findPublishQueue(int curPage, int numPerPage, String startDate, String endDate, String siteNo)
+	public DBPage<DynaModel> findPublishQueue(int curPage, int numPerPage, String startDate, String endDate, String siteNo)
 	{
         List<String> argList = new ArrayList<String>();
 		StringBuffer strBuf = new StringBuffer("SELECT * FROM T_PUBLISH_QUEUE WHERE 1 = 1");

@@ -2,6 +2,7 @@ package com.yizhishang.business.other.action;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,8 @@ import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.ScriptHelper;
 import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.business.domain.Ad;
+import com.yizhishang.business.domain.Ad_Group;
 import com.yizhishang.business.other.service.AdManageService;
 import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.service.WebCatalogService;
@@ -115,11 +118,12 @@ public class AdManageAction extends BaseAction
         curPage = (curPage <= 0) ? 1 : curPage;
         keyword = StringHelper.trim(keyword);
         
-        DBPage page = adManageService.getPageData(curPage, 20, siteno, type, keyword);
+        @SuppressWarnings("rawtypes")
+		DBPage<Map> page = adManageService.getPageData(curPage, 20, siteno, type, keyword);
         dataMap.put("page", page);
         
         //查询广告组
-        List<DynaModel> groupList = adManageService.findAllAdGroup();
+        List<Ad_Group> groupList = adManageService.findAllAdGroup();
         dataMap.put("groupList", groupList);
         
         mv.addObject("data", dataMap);
@@ -137,7 +141,7 @@ public class AdManageAction extends BaseAction
     {
         int id = this.getIntParameter("id");
         String siteno = getSiteNo();
-        DynaModel data = adManageService.findAdById(id, siteno);
+        Ad data = adManageService.findAdById(id, siteno);
         
         if (data == null)
         {
@@ -145,7 +149,7 @@ public class AdManageAction extends BaseAction
             return null;
         }
         DynaForm form = new DynaForm();
-        form.putAll(data);
+        form.putAll(data.toMap());
         mv.addObject("form", form);
         mv.addObject("list", adManageService.findAllAdGroup());
         

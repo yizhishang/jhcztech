@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.plat.dao.GroupDao;
@@ -95,12 +96,12 @@ public class GroupService extends BaseService
     /**
     * 获取该组下的所有用户
     */
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, int groupId, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, int groupId, String keyword)
     {
         return groupDao.getPageData(curPage, numPerPage, siteNo, groupId, keyword);
     }
     
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword)
     {
         return groupDao.getPageData(curPage, numPerPage, siteNo, keyword);
     }

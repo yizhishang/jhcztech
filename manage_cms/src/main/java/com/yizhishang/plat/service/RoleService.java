@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.domain.Right_Url;
 import com.yizhishang.base.jdbc.DBPage;
@@ -232,7 +235,7 @@ public class RoleService extends BaseService
                 }
                 else
                 {
-                    dataRow.putAll(getDocRight(attribute));
+                    dataRow.putAll(getDocRight(attribute).toMap());
                     
                     dataRow.set("isLastTree", "true");
                 }
@@ -389,7 +392,7 @@ public class RoleService extends BaseService
      * @param siteno
      * @return
      */
-    public List<DynaModel> findRoleBySiteno(String siteno)
+    public List<Role> findRoleBySiteno(String siteno)
     {
         return roleDao.findRoleBySiteno(siteno);
     }
@@ -414,10 +417,8 @@ public class RoleService extends BaseService
      * @param siteNo
      * @return
      */
-    public List<DynaModel> findSiteRight(int roleId)
+    public List<Map<String, Object>> findSiteRight(int roleId)
     {
-        List<DynaModel> dataList = new ArrayList<DynaModel>();
-        
         Role_Site_Right roleSiteRight = getRoleSiteRight_by_id(roleId);
         
         HashSet<String> siteRight = new HashSet<String>();
@@ -432,21 +433,20 @@ public class RoleService extends BaseService
         }
         
         List<Site> siteList = siteDao.getAllSite();
-        
+        List<Map<String, Object>> dataList = Lists.newArrayList();
         if (siteList != null)
         {
-        	Site dataRow = null;
             for (Iterator<Site> iter = siteList.iterator(); iter.hasNext();)
             {
-                dataRow = new Site();
+                Map<String, Object> dataRow = Maps.newHashMap();
                 Site site = (Site)iter.next();
                 String no = site.getSiteNo();
                 String name = site.getName();
-                dataRow.set("siteNo", no);
-                dataRow.set("name", name);
+                dataRow.put("siteNo", no);
+                dataRow.put("name", name);
                 if (siteRight.contains(no))
                 {
-                    dataRow.set("show", "1");
+                    dataRow.put("show", "1");
                 }
                 dataList.add(dataRow);
             }
@@ -583,7 +583,7 @@ public class RoleService extends BaseService
      * @param roleId     角色ID
      * @return
      */
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, int roleId, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, int roleId, String keyword)
     {
         return roleDao.getPageData(curPage, numPerPage, siteNo, roleId, keyword);
     }
@@ -597,7 +597,7 @@ public class RoleService extends BaseService
      * @param keyword    关键词
      * @return
      */
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword)
     {
         return roleDao.getPageData(curPage, numPerPage, siteNo, keyword);
     }

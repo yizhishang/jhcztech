@@ -112,9 +112,9 @@ public class SiteDao extends BaseDao
         return getJdbcTemplateUtil().queryForList(GET_ALL, Site.class);
     }
 
-    public DBPage getPageData(int curPage, int numPerPage, String keyword)
+    public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String keyword)
     {
-        DBPage page = null;
+        DBPage<DynaModel> page = null;
 
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();

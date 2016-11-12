@@ -3,9 +3,11 @@ package com.yizhishang.business.other.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
@@ -25,9 +27,8 @@ import com.yizhishang.business.domain.Ad_Group;
 public class AdGroupService extends BaseService
 {
     
-    public DBPage getPageData(int curPage, int numPerPage, String siteNo, String keyword)
+    public DBPage<Ad_Group> getPageData(int curPage, int numPerPage, String siteNo, String keyword)
     {
-        DBPage page = null;
         ArrayList<Object> argList = new ArrayList<Object>();
         StringBuffer sqlBuf = new StringBuffer();
         sqlBuf.append("select * from t_ad_group where 1=1");
@@ -43,13 +44,13 @@ public class AdGroupService extends BaseService
             argList.add("%" + keyword + "%");
         }
         sqlBuf.append(" order by orderline");
-        page = getJdbcTemplateUtil().queryPage(sqlBuf.toString(), argList.toArray(), curPage, numPerPage);
+        DBPage<Ad_Group> page = getJdbcTemplateUtil().queryPage(sqlBuf.toString(), Ad_Group.class, argList.toArray(), curPage, numPerPage);
         
         if (page != null)
         {
-            List<DynaModel> dataList = page.getData();
-            ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
-            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
+            List<Ad_Group> dataList = page.getData();
+            ArrayList<Ad_Group> newDataList = Lists.newArrayList();
+            for (Iterator<Ad_Group> iter = dataList.iterator(); iter.hasNext();)
             {
                 Ad_Group ad_group = new Ad_Group();
                 DynaModel row = (DynaModel) iter.next();
@@ -131,7 +132,8 @@ public class AdGroupService extends BaseService
         return null;
     }
     
-    public List<DynaModel> findAdById(int id, String siteno)
+    @SuppressWarnings("rawtypes")
+	public List<Map> findAdById(int id, String siteno)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         StringBuffer sqlBuf = new StringBuffer();
@@ -147,6 +149,6 @@ public class AdGroupService extends BaseService
             sqlBuf.append(" AND B.SITENO = ?");
             argList.add(siteno);
         }
-        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), DynaModel.class, argList.toArray());
+        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), Map.class, argList.toArray());
     }
 }

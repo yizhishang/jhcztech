@@ -24,7 +24,7 @@
 	<form method="post" id="loginForm">
 		<select name="siteno" id="siteno">
         <c:forEach var="siteItem" items="${list }">
-            <option value="${siteItem.siteno }">${siteItem.name }</option>
+            <option value="${siteItem.siteNo }">${siteItem.name }</option>
         </c:forEach>
        	</select>
 		<input type="text" id="name" name="name" placeholder="请输入用户名"/>

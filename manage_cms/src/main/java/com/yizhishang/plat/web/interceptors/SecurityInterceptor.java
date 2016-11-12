@@ -85,11 +85,11 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter
         {
             DynaModel rights = new DynaModel();
             rights.set("all", "1");
-            request.setAttribute("catalogRights", rights);
+            request.setAttribute("catalogRights", rights.toMap());
             return true;
         }
         
-        List<DynaModel> listRightUrl = SysLibrary.getSecurityCatalog(session);
+        List<ManageCatalog> listRightUrl = SysLibrary.getSecurityCatalog(session);
         
         int codeRight = 0; //权限编码
         for (int i = 0; listRightUrl != null && i < listRightUrl.size(); i++) //如果请求的URL为权限列表中的URL则codeRight获得该URL权限编码

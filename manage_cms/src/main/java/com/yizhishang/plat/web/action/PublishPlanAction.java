@@ -163,7 +163,7 @@ public class PublishPlanAction extends BaseAction
         int curPage = getIntParameter("page");
         curPage = (curPage <= 0) ? 1 : curPage;
         
-        DBPage page = publishPlanService.findPublishPlan(curPage, SysConfig.getRowOfPage(), catalogId, name);
+        DBPage<DynaModel> page = publishPlanService.findPublishPlan(curPage, SysConfig.getRowOfPage(), catalogId, name);
         dataMap.put("page", page);
         ModelAndView mv = new ModelAndView("/WEB-INF/views/publish_plan/list_publish_plan.jsp");
         mv.addObject("data", dataMap);

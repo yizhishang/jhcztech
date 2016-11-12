@@ -4,21 +4,20 @@
 <jsp:directive.page import="com.yizhishang.base.util.RequestHelper" />
 <jsp:directive.page import="com.yizhishang.base.util.ScriptHelper"/>
 <jsp:directive.page import="com.yizhishang.base.util.StringHelper"/>
+<jsp:directive.page import="com.yizhishang.base.util.SpringContextHolder"/>
 <jsp:directive.page import="com.yizhishang.plat.service.CatalogService" />
-<jsp:directive.page import="com.yizhishang.plat.service.impl.CatalogService" />
 <jsp:directive.page import="com.yizhishang.plat.domain.Catalog" />
 <jsp:directive.page import="java.util.LinkedList"/>
-<jsp:directive.page import="com.yizhishang.base.jdbc.DataRow"/>
 <%
 	int catalogId = RequestHelper.getInt(request, "catalogId");
 	if (catalogId > 0)
 	{
-		CatalogService catalogService = new CatalogService();
+		CatalogService catalogService = SpringContextHolder.getBean("catalogService");
 		Catalog catalog = catalogService.findCatalogById(catalogId);
 		if(catalog == null || "".equals(catalog.getRoute()))
 		{
-	ScriptHelper.alert(response,"栏目不存在，请勿非法操作","close");
-	return;
+			ScriptHelper.alert(response,"栏目不存在，请勿非法操作","close");
+			return;
 		}
 		String route = catalog.getRoute();
 		String[] routes = route.split("\\|");
@@ -26,12 +25,12 @@
 		String temp = "";
 		for (int i = 0; i < routes.length; i++)
 		{
-	temp += routes[i] + "---";
-	Catalog paramCatalog = catalogService.findCatalogById(Integer.parseInt(routes[i]));
-	if (paramCatalog != null)
-	{
-		navCatalogs.add(paramCatalog);
-	}
+			temp += routes[i] + "---";
+			Catalog paramCatalog = catalogService.findCatalogById(Integer.parseInt(routes[i]));
+			if (paramCatalog != null)
+			{
+				navCatalogs.add(paramCatalog);
+			}
 		}
 		request.setAttribute("navCatalogs", navCatalogs);
 		request.setAttribute("catalogId", Integer.valueOf(catalogId));

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
@@ -47,7 +48,7 @@ public class Article_SourceAction extends BaseAction
 		String keyword = getStrParameter("keyword");
 		curPage = (curPage <= 0) ? 1 : curPage;
 		keyword = StringHelper.trim(keyword);
-		DBPage page = article_SourceService.getPageData(curPage, SysConfig.getRowOfPage(), getSiteNo(), keyword);
+		DBPage<DynaModel> page = article_SourceService.getPageData(curPage, SysConfig.getRowOfPage(), getSiteNo(), keyword);
 		dataMap.put("page", page);
 		ModelAndView mv = new ModelAndView("/WEB-INF/views/article_source/list_article_source.jsp");
 		mv.addObject("data", dataMap);
