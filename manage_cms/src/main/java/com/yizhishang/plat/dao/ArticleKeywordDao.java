@@ -1,5 +1,6 @@
 package com.yizhishang.plat.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -44,7 +45,16 @@ public class ArticleKeywordDao extends BaseDao
 
     public ArticleKeyword findById(int id)
     {
-        DynaModel dataRow = getJdbcTemplateUtil().queryMap("select * from T_ARTICLE_KEYWORD where id=? ", new Object[]{new Integer(id)});
+        DynaModel dataRow;
+		try
+		{
+			dataRow = getJdbcTemplateUtil().queryMap("select * from T_ARTICLE_KEYWORD where id=? ", new Object[]{new Integer(id)});
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
         if (dataRow == null)
             return null;
 

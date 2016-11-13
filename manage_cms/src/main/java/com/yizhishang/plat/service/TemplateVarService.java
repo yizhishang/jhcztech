@@ -1,5 +1,6 @@
 package com.yizhishang.plat.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -121,6 +122,14 @@ public class TemplateVarService extends BaseService
         String sql = "SELECT * FROM T_TEMPLATE_VAR WHERE ID = ? AND SITENO = ?";
         argList.add(new Integer(id));
         argList.add(siteNo);
-        return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
 }

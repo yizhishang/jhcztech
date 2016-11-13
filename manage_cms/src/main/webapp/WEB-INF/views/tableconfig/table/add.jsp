@@ -1,20 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
-<%@ page import="com.yizhishang.base.util.RequestHelper"%>
 <%@ include file="/admin/common/header.jsp" %>
 <style>
 select{width:120px;}
 </style>
 <body>
-<script type="text/javascript">
-$(document).ready(function(){  
-	$.formValidator.initConfig({formid:"tableForm",alertmessage:false,onerror:function(msg){alert(msg)}});
-	$("#name_en").formValidator().inputValidator({min:1,onerror:"英文名称不能为空,请确认"});
-	$("#action_url").formValidator().inputValidator({min:1,onerror:"ACTION地址不能为空,请确认"});
-	$("#pk_column").formValidator().inputValidator({min:1,onerror:"主键名称不能为空,请确认"});
-});
-</script>
 <form id="tableForm" action="add.action" target="hiddenFrame"  method="post">
-<input type="hidden" name="function" value="${param.function }"></input>
+<input type="hidden" name="function" value="add"></input>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" height="100%">
   <tr>
     <td>
@@ -105,8 +96,8 @@ $(document).ready(function(){
               <tr>
                 <td class="label">&nbsp;</td>
               <td>
-                	<input type="submit" name="button" id="button" value="提交" class="bt04"/>&nbsp;
-                	<input type="button" name="button" onClick="window.close();" id="button" value="关闭" class="bt04"/>
+                	<input type="button" name="button" id="enterForm" value="提交" class="bt04"/>&nbsp;
+                	<input type="button" name="button" id="close" value="关闭" class="bt04"/>
                 </td>
               </tr>
             </table>

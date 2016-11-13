@@ -1,5 +1,6 @@
 package com.yizhishang.business.other.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -105,7 +106,15 @@ public class AdManageService extends BaseService
         }
         sqlBuf.append(" order by ad_id desc");
         
-        return getJdbcTemplateUtil().queryMap(sqlBuf.toString(), Ad.class, argList.toArray());
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(sqlBuf.toString(), Ad.class, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     public void deteleAdInfo(int ad_id, String siteno)

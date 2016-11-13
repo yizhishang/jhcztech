@@ -8,7 +8,7 @@
 <uri></uri>
 <tag>
 	<name>dyninput</name>
-	<tagclass>com.yizhishang.common.tag.DynInputTag</tagclass>
+	<tagclass>com.yizhishang.common.table.tag.DynInputTag</tagclass>
 	<attribute>
 		<name>name</name>
 		<required>true</required>
@@ -57,7 +57,7 @@
 </tag>
 <tag>
 	<name>dynsearchinput</name>
-	<tagclass>com.yizhishang.common.tag.DynSearchInputTag</tagclass>
+	<tagclass>com.yizhishang.common.table.tag.DynSearchInputTag</tagclass>
 	<attribute>
 		<name>style</name>
 		<required>false</required>
@@ -91,7 +91,7 @@
 </tag>
 <tag>
 	<name>constselect</name>
-	<tagclass>com.yizhishang.common.tag.ConstSelectTag</tagclass>
+	<tagclass>com.yizhishang.common.table.tag.ConstSelectTag</tagclass>
 	<attribute>
 		<name>name</name>
 		<required>false</required>
@@ -130,7 +130,7 @@
 </tag>
 <tag>
 	<name>printvalue</name>
-	<tagclass>com.yizhishang.common.tag.PrintValueTag</tagclass>
+	<tagclass>com.yizhishang.common.table.tag.PrintValueTag</tagclass>
 	<attribute>
 		<name>colname</name>
 		<required>true</required>
@@ -155,7 +155,7 @@
 <!-- 
 <tag>
 	<name>ftenum</name>
-	<tagclass>com.yizhishang.common.tag.FtEnumValue</tagclass>
+	<tagclass>com.yizhishang.common.table.tag.FtEnumValue</tagclass>
 	<attribute>
 		<name>enum_type</name>
 		<required>true</required>

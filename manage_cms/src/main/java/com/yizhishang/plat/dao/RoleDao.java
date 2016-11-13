@@ -1,5 +1,6 @@
 package com.yizhishang.plat.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -278,18 +279,28 @@ public class RoleDao extends BaseDao
             sql += " and siteno = ?";
             argList.add(siteNo);
         }
-        Role role = getJdbcTemplateUtil().queryMap(sql, Role.class, argList.toArray());
-        return role;
+       try
+	{
+		return getJdbcTemplateUtil().queryMap(sql, Role.class, argList.toArray());
+	}
+	catch (SQLException e)
+	{
+		logger.error(e.getMessage());
+		return null;
+	}
     }
     
     public Role findRoleByRoleNo(String roleNo)
     {
-        DynaModel dataRow = getJdbcTemplateUtil().queryMap(FIND_ROLE_BY_ROLENO, new Object[] { roleNo });
-        if (dataRow == null)
-            return null;
-        Role role = new Role();
-        role.fromMap(dataRow);
-        return role;
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(FIND_ROLE_BY_ROLENO, Role.class, new Object[] { roleNo });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     /**
@@ -555,17 +566,9 @@ public class RoleDao extends BaseDao
         return drList;
     }
     
-    //"select * from T_RIGHT_MODULE where enable=1 order by module_code"
     public List<DynaModel> getRightModuleAll(String siteno)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
-        //        String sql = "select * from T_RIGHT_MODULE where enable=1";
-        //        if(StringHelper.isNotEmpty(siteno))
-        //        {
-        //            sql += " and siteno=?";
-        //            argList.add(siteno);
-        //        }
-        //        sql += " order by module_code";
         String sql = "SELECT * FROM T_RIGHT_MODULE A,T_MANAGE_CATALOG B WHERE A.MODULE_CODE = B.CATALOG_ID";
         if (StringHelper.isNotEmpty(siteno))
         {
@@ -588,26 +591,28 @@ public class RoleDao extends BaseDao
     
     public Role_Catalog_Right getRoleCatalogRight_by_id(int roleId, String siteNo)
     {
-        DynaModel dr = this.getJdbcTemplateUtil().queryMap(FIND_ROLE_CATALOG_RIGHT_BY_ID, new Object[] { new Integer(roleId), siteNo });
-        if (dr != null)
-        {
-            Role_Catalog_Right role_right = new Role_Catalog_Right();
-            role_right.fromMap(dr);
-            return role_right;
-        }
-        return null;
+        try
+		{
+			return this.getJdbcTemplateUtil().queryMap(FIND_ROLE_CATALOG_RIGHT_BY_ID, Role_Catalog_Right.class, new Object[] { new Integer(roleId), siteNo });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     public Role_Right getRoleRight_by_Id(int roleId)
     {
-        DynaModel dr = this.getJdbcTemplateUtil().queryMap(FIND_ROLE_RIGHT_BY_ID, new Object[] { new Integer(roleId) });
-        if (dr != null)
-        {
-            Role_Right role_right = new Role_Right();
-            role_right.fromMap(dr);
-            return role_right;
-        }
-        return null;
+        try
+		{
+			return this.getJdbcTemplateUtil().queryMap(FIND_ROLE_RIGHT_BY_ID, Role_Right.class, new Object[] { new Integer(roleId) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     public Role_Right getRoleRight_by_Id(int roleId, String siteNo)
@@ -620,26 +625,28 @@ public class RoleDao extends BaseDao
             sql += " and siteno=?";
             arrayList.add(siteNo);
         }
-        DynaModel dr = this.getJdbcTemplateUtil().queryMap(sql, arrayList.toArray());
-        if (dr != null)
-        {
-            Role_Right role_right = new Role_Right();
-            role_right.fromMap(dr);
-            return role_right;
-        }
-        return null;
+        try
+		{
+			return this.getJdbcTemplateUtil().queryMap(sql, Role_Right.class, arrayList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     public Role_Site_Right getRoleSiteRight_by_id(int roleId)
     {
-        DynaModel dr = this.getJdbcTemplateUtil().queryMap(FIND_ROLE_SITE_RIGHT_BY_ID, new Object[] { new Integer(roleId) });
-        if (dr != null)
-        {
-            Role_Site_Right role_right = new Role_Site_Right();
-            role_right.fromMap(dr);
-            return role_right;
-        }
-        return null;
+       try
+	{
+		return this.getJdbcTemplateUtil().queryMap(FIND_ROLE_SITE_RIGHT_BY_ID, Role_Site_Right.class, new Object[] { new Integer(roleId) });
+	}
+	catch (SQLException e)
+	{
+		logger.error(e.getMessage());
+		return null;
+	}
     }
     
     public List<DynaModel> getRoleUser(int roleId, String siteNo)

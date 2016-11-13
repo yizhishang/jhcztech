@@ -2,10 +2,6 @@
 <%@ include file="/admin/common/header.jsp" %>
 <body>
 <script type="text/javascript">
-$(document).ready(function(){  
-	
-});
-
 function deleteFunction(name,funcitonId){
 	if(isChecked(name)){
 		var source_function = $("#functionname").val();
@@ -18,7 +14,7 @@ function deleteFunction(name,funcitonId){
 }
  
 function editFunction(functionId,pkcol){
-	window.open("${data.tableinfo.action_url }?function="+functionId+"&pkcol="+pkcol);
+	window.open("${ctxPath }/admin/commonAdmin/doEdit.action?tableName=${data.tableinfo.name_en }&pkcol="+pkcol);
 }
 
 function addFunction(functionId){
@@ -55,9 +51,10 @@ function exportFunction(functionId){
 	window.open("${data.tableinfo.action_url }?function="+functionId);
 }
 </script>
-<form id="qryparm" name="qryparm" action="${data.tableinfo.action_url }" >
+<form id="qryparm" name="qryparm" action="${ctxPath }/admin/commonAdmin/doDefault.action?tableName=${data.tableinfo.name_en }" >
 <input type="hidden" name="pageUrl" value="${pageUrl}"></input>
-<input type="hidden" name="function" id="functionname" value="${param.function }"></input>
+<input type="hidden" name="tableName" id="tableName" value="${data.tableinfo.name_en }"></input>
+<input type="hidden" name="function" id="functionname" value="doDefault"></input>
 <input type="hidden" name="manageCatalogId" value="${param.manageCatalogId }"></input>
 <input type="hidden" name="subManageCatalogId" value="${param.subManageCatalogId }"></input>
 <div class="c_ie6_out">
@@ -90,29 +87,31 @@ function exportFunction(functionId){
                 <div>
                   <div style="width:980px;">
                   	<c:forEach var="colitem" items="${data.searchcols}">
-                    <span style="float:left;width:186px;display:block;text-align:right;"><yizhishang:dynsearchinput colname="${colitem.name_en }" param="${param }" colitem="${colitem }"/></span>
+                    <span style="float:left;width:186px;display:block;text-align:right;">
+                    <yizhishang:dynsearchinput colname="${colitem.name_en }" param="${param }" colitem="${colitem }"/></span>
                     </c:forEach>
-	                  
                   </div>
-                  <span>
-	                    <input type="submit" name="button" id="button" value="查询"  class="bt01" />
-                      </span> 
+                  <span><input type="submit" name="button" id="button" value="查询"  class="bt01" /></span> 
                 </div>
                </c:if>
               </div>
               <div class="space"></div>
-              <div class="databox2" style="height: 350px">
-                <table width="99%" border="0" cellpadding="0" cellspacing="0" class="tab1">
+              <div class="databox">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
                   <tr>
-                    <td class="td1"><input type="checkbox" id="check_all"  onclick="checkAll(this,'pkcol');" /></td>
+                    <td class="td1" width="60px;"><input type="checkbox" id="check_all"  onclick="checkAll(this,'pkcol');" /></td>
                     <c:forEach var="colitem" items="${data.cols}">
                     <td class="tdhead">${colitem.name_ch }</td>
                     </c:forEach>
                     <td class="tdhead">操作</td>
                   </tr>
+                </table>
+                </div>
+                <div class="databox2">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab1">
                 <c:forEach var="item" items="${data.page.data}">
 		              <tr>
-	                    <td><input type="checkbox" name="pkcol" id="check_<yizhishang:printvalue colname='${data.tableinfo.pk_column }' item='${item }' colitem='${colitem }' is_pk='Y'/>" value="<yizhishang:printvalue colname='${data.tableinfo.pk_column }' item='${item }' colitem='${colitem }' is_pk='Y'/>" onClick="setCheck(this)"/></td>
+	                    <td  width="60px;"><input type="checkbox" name="pkcol" id="check_<yizhishang:printvalue colname='${data.tableinfo.pk_column }' item='${item }' colitem='${colitem }' is_pk='Y'/>" value="<yizhishang:printvalue colname='${data.tableinfo.pk_column }' item='${item }' colitem='${colitem }' is_pk='Y'/>" onClick="setCheck(this)"/></td>
 	                    <c:forEach var="colitem" items="${data.cols}">
 	                    <td style="text-align:${colitem.align_in_list }">&nbsp;<yizhishang:printvalue colname="${colitem.name_en }" item="${item }" colitem="${colitem }"/></td>
 	                    </c:forEach>

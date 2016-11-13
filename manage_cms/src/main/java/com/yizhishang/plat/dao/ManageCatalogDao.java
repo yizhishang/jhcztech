@@ -1,5 +1,6 @@
 package com.yizhishang.plat.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,23 +53,29 @@ public class ManageCatalogDao extends BaseDao
 	public ManageCatalog findCatalogById(int catalogId)
 	{
 		String sql = "select * from T_MANAGE_CATALOG where catalog_id=?";
-		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(catalogId) });
-		if (dataRow == null)
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, ManageCatalog.class, new Object[] { new Integer(catalogId) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
 			return null;
-		ManageCatalog catalog = new ManageCatalog();
-		catalog.fromMap(dataRow);
-		return catalog;
+		}
 	}
 	
 	public ManageCatalog findCatalogById(int catalogId, String siteno)
 	{
 		String sql = "select * from T_MANAGE_CATALOG where catalog_id=?";
-		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(catalogId) });
-		if (dataRow == null)
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, ManageCatalog.class, new Object[] { new Integer(catalogId) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
 			return null;
-		ManageCatalog catalog = new ManageCatalog();
-		catalog.fromMap(dataRow);
-		return catalog;
+		}
 	}
 	
 	public List<ManageCatalog> findCatalogInfoByParentId(int parentId, String siteno)
@@ -171,13 +178,15 @@ public class ManageCatalogDao extends BaseDao
 		ArrayList<Object> argList = new ArrayList<Object>();
 		String sql = "select * from T_MANAGE_CATALOG where siteno like ? and parent_id=0";
 		argList.add("%" + siteNo + "%");
-		//DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[]{siteNo});
-		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
-		if (dataRow == null)
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, ManageCatalog.class, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
 			return null;
-		ManageCatalog catalog = new ManageCatalog();
-		catalog.fromMap(dataRow);
-		return catalog;
+		}
 	}
 	
 	public ManageCatalog getParent(int catalogId)

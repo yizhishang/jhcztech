@@ -1,5 +1,6 @@
 package com.yizhishang.plat.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -279,7 +280,15 @@ public class CustomFieldService extends BaseService
         List<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT ID,CATALOG_ID,INPUT_TYPE,NAME,CODE,ISMANDATORY,DEFAULT_VALUE,MAX_NUM,WIDTH,HEIGHT,EXTEND_CONTENT,ORDERLINE FROM T_ARTICLE_EXTEND_INFO WHERE CODE = ?";
 		argList.add(code);
-		return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
 	                                                                                                /**
@@ -295,7 +304,15 @@ public class CustomFieldService extends BaseService
         List<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT ID,CATALOG_ID,INPUT_TYPE,NAME,CODE,ISMANDATORY,DEFAULT_VALUE,MAX_NUM,WIDTH,HEIGHT,EXTEND_CONTENT,ORDERLINE,ALIAS FROM T_ARTICLE_EXTEND_INFO WHERE ID = ?";
 		argList.add(new Integer(id));
-		return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
 	                                                                                                /**

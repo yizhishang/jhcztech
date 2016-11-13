@@ -2,8 +2,6 @@ package com.yizhishang.plat.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -72,10 +70,8 @@ public class LogDao extends BaseDao
 		
 	}
 	
-	public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword, String uid)
+	public DBPage<Log> getPageData(int curPage, int numPerPage, String siteNo, String keyword, String uid)
 	{
-		DBPage<DynaModel> page = null;
-		
 		StringBuffer sqlBuffer = new StringBuffer();
 		ArrayList<Object> argList = new ArrayList<Object>();
 		sqlBuffer.append("select * from T_LOG where 1=1 ");
@@ -95,23 +91,7 @@ public class LogDao extends BaseDao
 			argList.add("%" + uid + "%");
 		}
 		sqlBuffer.append(" order by id desc ");
-		page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
-		
-		if (page != null)
-		{
-			List<DynaModel> dataList = page.getData();
-			ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
-			for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
-			{
-				Log log = new Log();
-				DynaModel row = (DynaModel) iter.next();
-				log.fromMap(row);
-				newDataList.add(log);
-			}
-			page.setData(newDataList);
-		}
-		
-		return page;
+		return getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), Log.class, argList.toArray(), curPage, numPerPage);
 	}
 	
 	    /**

@@ -1,5 +1,6 @@
 package com.yizhishang.plat.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -87,15 +88,15 @@ public class CommentDao extends BaseDao
     */
     public Review findCommentById(int id)
     {
-        DynaModel dw = this.getJdbcTemplateUtil().queryMap(" SELECT * FROM T_B_COMMENT WHERE ID = ? ", new Object[] { new Integer(id) });
-        if (dw != null)
-        {
-            Review review = new Review();
-            review.fromMap(dw);
-            
-            return review;
-        }
-        return null;
+    	try
+		{
+			return getJdbcTemplateUtil().queryMap(" SELECT * FROM T_B_COMMENT WHERE ID = ? ", Review.class, new Object[] { new Integer(id) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     /**

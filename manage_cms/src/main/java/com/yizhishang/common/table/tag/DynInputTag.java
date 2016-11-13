@@ -2,24 +2,27 @@ package com.yizhishang.common.table.tag;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.jsp.JspWriter;
 
+import com.google.common.collect.Maps;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.base.util.ToolKit;
 import com.yizhishang.common.table.consts.Consts;
 import com.yizhishang.common.table.service.TableColumnService;
+import com.yizhishang.plat.system.Application;
 
 public class DynInputTag extends CommonTag
 {
     
     private static final long serialVersionUID = -4495264469438501769L;
     
-    private DynaModel item = null;
+    private Map<String, Object> item = null;
     
-    private DynaModel colitem = null;
+    private Map<String, Object> colitem = null;
     
     private String colname = "";
     
@@ -35,14 +38,14 @@ public class DynInputTag extends CommonTag
         colname = ToolKit.nullTrans(colname, "");
         if (item == null)
         {
-            item = new DynaModel();
+            item = Maps.newHashMap();
         }
-        String defaultvalue = ToolKit.nullTrans(colitem.getString("default_value"), "");
-        value = ToolKit.nullTrans(item.getString(colname), defaultvalue);
-        String is_sys = colitem.getString("is_sys");
+        String defaultvalue = ToolKit.o2s(colitem.get("default_value"), "");
+        value = ToolKit.o2s(item.get(colname), defaultvalue);
+        String is_sys = ToolKit.o2s(colitem.get("is_sys"));
         if ("Y".equals(is_sys))
         {
-            String sys_type = colitem.getString("sys_type");
+            String sys_type = ToolKit.o2s(colitem.get("sys_type"));
             if (Consts.sys_col_time.equals(sys_type))
             {
                 value = DateHelper.formatDate(new Date(), "yyyy-MM-dd HH:mm:ss");
@@ -70,7 +73,7 @@ public class DynInputTag extends CommonTag
         {
             JspWriter out = pageContext.getOut();
             String htmlcontent = "";
-            String input_type = colitem.getString("input_type");
+            String input_type = ToolKit.o2s(colitem.get("input_type"));
             if (Consts.input_type_input.equals(input_type))
             {
                 htmlcontent = makeInputTextTag();
@@ -122,7 +125,7 @@ public class DynInputTag extends CommonTag
     private String makeReadonly()
     {
         String str = "";
-        String isreadonly = colitem.getString("is_readonly");
+        String isreadonly = ToolKit.o2s(colitem.get("is_readonly"));
         if ("Y".equals(isreadonly))
         {
             str = " readonly='readonly' ";
@@ -136,10 +139,11 @@ public class DynInputTag extends CommonTag
     private String makeVerificationStr()
     {
         String str = "";
-        String benull = colitem.getString("be_null");
-        String titlevar = colitem.getString("name_ch");
-        String is_special_format = colitem.getString("is_special_format");
-        String special_format = colitem.getString("special_format");
+        String benull = ToolKit.o2s(colitem.get("be_null"));
+        
+        String titlevar = ToolKit.o2s(colitem.get("name_ch"));
+        String is_special_format = ToolKit.o2s(colitem.get("is_special_format"));
+        String special_format = ToolKit.o2s(colitem.get("special_format"));
         if ("N".equals(benull))
         {
             str += " title_val='" + titlevar + "' isnotempty='Y' ";
@@ -177,7 +181,7 @@ public class DynInputTag extends CommonTag
         StringBuffer sb = new StringBuffer();
         sb.append("<input name='" + name + "' type='hidden' id='" + id + "' value='" + value + "' />\n");
         sb.append("<IFRAME ID='eWebEditor_" + id + "' name='eWebEditor_" + id + "' " + makeVerificationStr() + makeReadonly()
-                + " SRC='editor/ewebeditor/ewebeditor.htm?id=" + id + "&style=standard650' FRAMEBORDER='0' SCROLLING='no' WIDTH='99%' HEIGHT='500'></IFRAME>");
+                + " SRC='" + Application.getContextPath() + "/admin//editor/ewebeditor/ewebeditor.htm?id=" + id + "&style=standard650' FRAMEBORDER='0' SCROLLING='no' WIDTH='99%' HEIGHT='500'></IFRAME>");
         return sb.toString();
     }
     
@@ -205,8 +209,8 @@ public class DynInputTag extends CommonTag
     private String makeInputTextTag()
     {
         StringBuffer sb = new StringBuffer();
-        String is_special_format = colitem.getString("is_special_format");
-        String special_format = colitem.getString("special_format");
+        String is_special_format = ToolKit.o2s(colitem.get("is_special_format"));
+        String special_format = ToolKit.o2s(colitem.get("special_format"));
         if ("N".equals(is_special_format))
         {
             sb.append("<input type='text' id='" + id + "' name='" + name + "' value='" + value + "' " + makeVerificationStr() + makeReadonly() + "");
@@ -258,7 +262,7 @@ public class DynInputTag extends CommonTag
     private String makeTextAreaTag()
     {
         StringBuffer sb = new StringBuffer();
-        String is_single = colitem.getString("is_single");
+        String is_single = ToolKit.o2s(colitem.get("is_single"));
         sb.append("<textarea id='" + id + "' name='" + name + "' " + makeVerificationStr() + makeReadonly() + "");
         if ("Y".equals(is_single))
         {
@@ -285,7 +289,9 @@ public class DynInputTag extends CommonTag
      */
     private String makeRadioTag(String tagname)
     {
-        List<DynaModel> list = colservice.getOptionBeans(colitem); // 获得列表
+    	DynaModel bean = new DynaModel();
+    	bean.putAll(colitem);
+        List<DynaModel> list = colservice.getOptionBeans(bean); // 获得列表
         StringBuffer sb = new StringBuffer();
         for (int i = 0; list != null && i < list.size(); i++)
         {
@@ -295,21 +301,21 @@ public class DynInputTag extends CommonTag
             if ("radio".equals(tagname) && value.equals(tempValue))
             {
                 sb.append("<input type='" + tagname + "' id='" + id + "_" + i + "' name='" + name + "' " + makeVerificationStr() + makeReadonly()
-                        + " onclick=\"changeRadioTxt('" + tempText + "','" + colitem.getString("select_text_column")
+                        + " onclick=\"changeRadioTxt('" + tempText + "','" + ToolKit.o2s(colitem.get("select_text_column"))
                         + "')\" style='vertical-align:-3px;' value='" + tempValue + "' checked='checked'><span onclick=\"$('#" + id + "_" + i + "').click()\">"
                         + tempText + "</span>\n");
             }
             else if ("checkbox".equals(tagname) && ("," + value + ",").indexOf("," + tempValue + ",") != -1)
             {
                 sb.append("<input type='" + tagname + "' id='" + id + "_" + i + "' name='" + name + "' " + makeVerificationStr() + makeReadonly()
-                        + " onclick=\"changeRadioTxt('" + tempText + "','" + colitem.getString("select_text_column")
+                        + " onclick=\"changeRadioTxt('" + tempText + "','" + ToolKit.o2s(colitem.get("select_text_column"))
                         + "')\" style='vertical-align:-3px;' value='" + tempValue + "' checked='checked'><span onclick=\"$('#" + id + "_" + i + "').click()\">"
                         + tempText + "</span>\n");
             }
             else
             {
                 sb.append("<input type='" + tagname + "' id='" + id + "_" + i + "' name='" + name + "' " + makeVerificationStr() + makeReadonly()
-                        + " onclick=\"changeRadioTxt('" + tempText + "','" + colitem.getString("select_text_column")
+                        + " onclick=\"changeRadioTxt('" + tempText + "','" + ToolKit.o2s(colitem.get("select_text_column"))
                         + "')\" style='vertical-align:-3px;' value='" + tempValue + "'><span onclick=\"$('#" + id + "_" + i + "').click()\">" + tempText
                         + "</span>\n");
             }
@@ -323,9 +329,11 @@ public class DynInputTag extends CommonTag
      */
     private String makeOpenRadioTag(String tagname)
     {
-        List<DynaModel> list = colservice.getOptionBeans(colitem); // 获得列表
-        String select_text_column = colitem.getString("select_text_column");
-        String colid = colitem.getString("id");
+    	DynaModel bean = new DynaModel();
+    	bean.putAll(colitem);
+        List<DynaModel> list = colservice.getOptionBeans(bean); // 获得列表
+        String select_text_column = ToolKit.o2s(colitem.get("select_text_column"));
+        String colid = ToolKit.o2s(colitem.get("id"));
         String txtValue = "";
         StringBuffer sb = new StringBuffer();
         sb.append("<input name=\"" + name + "\" id=\"" + id + "\" value=\"" + value + "\" " + makeVerificationStr() + " type=\"hidden\">");
@@ -371,7 +379,9 @@ public class DynInputTag extends CommonTag
      */
     private String makeSelectTag()
     {
-        List<DynaModel> list = colservice.getOptionBeans(colitem); // 获得列表
+    	DynaModel bean = new DynaModel();
+    	bean.putAll(colitem);
+        List<DynaModel> list = colservice.getOptionBeans(bean); // 获得列表
         StringBuffer sb = new StringBuffer();
         sb.append("<select name='" + name + "' id='" + id + "' " + makeVerificationStr() + makeReadonly() + "");
         if (!StringHelper.isEmpty(css))
@@ -379,7 +389,7 @@ public class DynInputTag extends CommonTag
         if (!StringHelper.isEmpty(style))
             sb.append(" style='" + style + "'");
         if (!StringHelper.isEmpty(onChange))
-            sb.append(" onChange='" + onChange + "';changeTxt(this.id,'" + colitem.getString("select_text_column") + "')");
+            sb.append(" onChange='" + onChange + "';changeTxt(this.id,'" + ToolKit.o2s(colitem.get("select_text_column")) + "')");
         sb.append(">\n");
         sb.append("<option value=''>------</option>\n");
         for (int i = 0; list != null && i < list.size(); i++)
@@ -400,22 +410,22 @@ public class DynInputTag extends CommonTag
         return sb.toString();
     }
     
-    public DynaModel getItem()
+    public Map<String, Object> getItem()
     {
         return item;
     }
     
-    public void setItem(DynaModel item)
+    public void setItem(Map<String, Object> item)
     {
         this.item = item;
     }
     
-    public DynaModel getColitem()
+    public Map<String, Object> getColitem()
     {
         return colitem;
     }
     
-    public void setColitem(DynaModel colitem)
+    public void setColitem(Map<String, Object> colitem)
     {
         this.colitem = colitem;
     }

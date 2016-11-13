@@ -47,6 +47,19 @@ public class ToolKit
     /**
      * 将object转化为字符串
      */
+    public static String o2s(Object source)
+    {
+    	String result = "";
+    	if (source != null)
+    	{
+    		result = source.toString();
+    	}
+    	return result;
+    }
+    
+    /**
+     * 将object转化为字符串
+     */
     public static String o2s(Object source, String defaultvalue)
     {
         String result = defaultvalue;

@@ -1,5 +1,6 @@
 package com.yizhishang.base.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -111,12 +112,28 @@ public class ConfigDao extends BaseDao
 	
     public Config findConfigById(int id)
 	{
-		return getJdbcTemplateUtil().queryMap(GET_CONFIG_BY_ID, Config.class, new Object[] { new Integer(id) });
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(GET_CONFIG_BY_ID, Config.class, new Object[] { new Integer(id) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
     public Config findConfigByName(String name)
 	{
-    	return getJdbcTemplateUtil().queryMap(GET_CONFIG_BY_NAME, Config.class, new Object[] { name });
+    	try
+		{
+			return getJdbcTemplateUtil().queryMap(GET_CONFIG_BY_NAME, Config.class, new Object[] { name });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
     public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String keyword)

@@ -13,9 +13,8 @@ import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 import com.yizhishang.base.domain.Config;
-import com.yizhishang.base.jdbc.JdbcTemplateUtil;
 import com.yizhishang.base.service.ConfigService;
-import com.yizhishang.plat.domain.EnumItem;
+import com.yizhishang.base.service.SequenceGenerator;
 
 public class CaseControllerTest
 {
@@ -50,9 +49,11 @@ public class CaseControllerTest
 	@Test
     public void testJdbc() throws IllegalAccessException, InvocationTargetException
     {
-		String sql = "select A.*,B.ENUM_NAME,B.ENUM_VALUE from T_ENUM_VALUE A,T_ENUM_TYPE B where A.ENUM_TYPE = B.ENUM_VALUE  and A.enum_type='is_head'  order by A.enum_type desc,A.orderline desc ";
-        JdbcTemplateUtil jdbc = (JdbcTemplateUtil) ctx.getBean("jdbcTemplateUtil");
-        List<EnumItem> list = jdbc.queryForList(sql, EnumItem.class);
-        System.out.println(list);
+//		String sql = "select A.*,B.ENUM_NAME,B.ENUM_VALUE from T_ENUM_VALUE A,T_ENUM_TYPE B where A.ENUM_TYPE = B.ENUM_VALUE  and A.enum_type='is_head'  order by A.enum_type desc,A.orderline desc ";
+//        JdbcTemplateUtil jdbc = (JdbcTemplateUtil) ctx.getBean("jdbcTemplateUtil");
+//        List<EnumItem> list = jdbc.queryForList(sql, EnumItem.class);
+//        System.out.println(list);
+        
+        SequenceGenerator.getInstance().getNextSequence("t_b_table");
     }
 }

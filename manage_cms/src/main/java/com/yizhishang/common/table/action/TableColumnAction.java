@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -44,8 +45,9 @@ public class TableColumnAction extends BaseAction
         int table_id = this.getIntParameter("table_id", 0);
         String name_en = getStrParameter("name_en", "").toLowerCase();
         String name_ch = getStrParameter("name_ch", "").toLowerCase();
-        DynaModel tableBean = tableService.load(table_id);
-        List<DynaModel> list = tableColumnService.getListData(table_id, name_en, name_ch);
+        Map<String, Object> tableBean = tableService.load(table_id);
+        @SuppressWarnings("rawtypes")
+		List<Map> list = tableColumnService.getListData(table_id, name_en, name_ch);
         dataMap.put("tableBean", tableBean);
         dataMap.put("list", list);
         
@@ -59,7 +61,9 @@ public class TableColumnAction extends BaseAction
     public Result doImportCols()
     {
         int table_id = this.getIntParameter("table_id", 0);
-        DynaModel tableBean = tableService.load(table_id);
+        Map<String, Object> map = tableService.load(table_id);
+        DynaModel tableBean = new DynaModel();
+        tableBean.putAll(map);
         tableColumnService.importCols(tableBean);
         return new Result(0, "操作成功");
     }

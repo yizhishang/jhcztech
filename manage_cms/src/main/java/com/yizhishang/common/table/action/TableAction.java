@@ -2,6 +2,7 @@ package com.yizhishang.common.table.action;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.common.collect.Maps;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.DateHelper;
+import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.common.table.service.TableService;
 import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.web.action.BaseAction;
@@ -41,7 +44,8 @@ public class TableAction extends BaseAction
         String table_name_en = getStrParameter("table_name_en", "").toLowerCase();
         String table_name_ch = getStrParameter("table_name_ch", "").toLowerCase();
         
-        DBPage<DynaModel> page = tableService.getPageData(curPage, 20, table_name_en, table_name_ch);
+        @SuppressWarnings("rawtypes")
+		DBPage<Map> page = tableService.getPageData(curPage, 20, table_name_en, table_name_ch);
         
         dataMap.put("page", page);
         mv.addObject("data", dataMap);
@@ -49,11 +53,26 @@ public class TableAction extends BaseAction
         return mv;
     }
     
-    @Override
+    @ResponseBody
     @RequestMapping("/add.action")
     public Result add(HttpServletRequest request, HttpServletResponse response)
     {
-        normalize(form);
+        form = normalize(request);
+        Result result = new Result(-1);
+        String message = null;
+        if(StringHelper.isEmpty(form.getString("name_en"))){
+        	message = "英文名称不能为空,请确认";
+        }
+        if(StringHelper.isEmpty(form.getString("action_url"))){
+        	message = "ACTION地址不能为空,请确认";
+        }
+        if(StringHelper.isEmpty(form.getString("pk_column"))){
+        	message = "主键名称不能为空,请确认";
+        }
+        if(message != null){
+        	result.setErrorInfo(message);
+        	return result;
+        }
         DynaModel data = new DynaModel();
         data.putAll(form);
         data.set("create_time", DateHelper.formatDate(new Date(), "yyyy-MM-dd"));
@@ -78,7 +97,7 @@ public class TableAction extends BaseAction
     public ModelAndView doEdit(HttpServletResponse response)
     {
         int id = this.getIntParameter("id", 0);
-        DynaModel bean = new DynaModel();
+        Map<String, Object> bean = Maps.newHashMap();
         if (id > 0)
         {
             bean = tableService.load(id);
@@ -88,11 +107,26 @@ public class TableAction extends BaseAction
         return mv;
     }
     
-    @Override
+    @ResponseBody
     @RequestMapping("/edit.action")
     public Result edit(HttpServletRequest request, HttpServletResponse response)
     {
-        form = normalize(request);
+    	form = normalize(request);
+        Result result = new Result(-1);
+        String message = null;
+        if(StringHelper.isEmpty(form.getString("name_en"))){
+        	message = "英文名称不能为空,请确认";
+        }
+        if(StringHelper.isEmpty(form.getString("action_url"))){
+        	message = "ACTION地址不能为空,请确认";
+        }
+        if(StringHelper.isEmpty(form.getString("pk_column"))){
+        	message = "主键名称不能为空,请确认";
+        }
+        if(message != null){
+        	result.setErrorInfo(message);
+        	return result;
+        }
         DynaModel data = new DynaModel();
         data.putAll(form);
         data.set("update_time", DateHelper.formatDate(new Date(), "yyyy-MM-dd"));

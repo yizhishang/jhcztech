@@ -1,5 +1,7 @@
 package com.yizhishang.base.jdbc;
 
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,10 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.exception.JdbcException;
 
@@ -183,6 +187,7 @@ public class JdbcTemplateUtil
 	 * @param args 参数中的值
 	 * @return 查询所有结果。
 	 */
+	@SuppressWarnings("unchecked")
 	public <T> List<T> queryForList(String sql, Class<T> cls, Object[] args)
 	{
 		try
@@ -192,22 +197,27 @@ public class JdbcTemplateUtil
 			
 			List<T> list = Lists.newArrayList();
 			List<Map<String, Object>> list0 = jdbcTemplate.queryForList(sql, args);
+			
 			for (Iterator<Map<String, Object>> iterator = list0.iterator(); iterator.hasNext();)
 			{
 				Map<String, Object> map = (Map<String, Object>) iterator.next();
-				DynaModel dm = new DynaModel();
+				Map<String, Object> temp = Maps.newHashMap();
 				for (Iterator<String> keys = map.keySet().iterator(); keys.hasNext();)
 				{
 					String key = keys.next();
-					dm.set(key.toLowerCase(), map.get(key));
+					temp.put(key.toLowerCase(), map.get(key));
 					
+				}
+				if(cls.getName().equals(Map.class.getName())){
+					list.add((T) temp);
+					continue;
 				}
 				T t = cls.newInstance();
 				if (t instanceof DynaModel)
 				{
-					((DynaModel) t).fromMap(dm);
+					((DynaModel) t).putAll(temp);
 				}else{
-					BeanUtils.populate(t, dm.toMap());
+					BeanUtils.populate(t, temp);
 				}
 				list.add(t);
 			}
@@ -497,8 +507,9 @@ public class JdbcTemplateUtil
 	 *
 	 * @param sql SQL语句
 	 * @return 查询的第一行的结果,反回结果中的字段名都为小写
+	 * @throws SQLException 
 	 */
-	public DynaModel queryMap(String sql)
+	public DynaModel queryMap(String sql) throws SQLException
 	{
 		return queryMap(sql, DynaModel.class, null);
 	}
@@ -509,8 +520,9 @@ public class JdbcTemplateUtil
 	 * @param sql  SQL语句
 	 * @param args 参数中的值
 	 * @return 查询的第一行的结果,反回结果中的字段名都为小写。
+	 * @throws SQLException 
 	 */
-	public DynaModel queryMap(String sql, Object[] args)
+	public DynaModel queryMap(String sql, Object[] args) throws SQLException
 	{
 		return queryMap(sql, DynaModel.class, args);
 	}
@@ -522,48 +534,76 @@ public class JdbcTemplateUtil
 	 * @param args 参数中的值
 	 * @return 查询的第一行的结果,反回结果中的字段名都为小写。
 	 */
-	public <T>T queryMap(String sql, Class<T> cls, Object[] args)
+	@SuppressWarnings("unchecked")
+	public <T>T queryMap(String sql, Class<T> cls, Object[] args) throws SQLException
 	{
+		logger.debug("开始执行 [sql= " + sql + "]");
+		long beginTime = System.currentTimeMillis();
+		
+		Map<String, Object> map = null;
 		try
 		{
-			logger.debug("开始执行 [sql= " + sql + "]");
-			long beginTime = System.currentTimeMillis();
-			
-			Map<String, Object> map = jdbcTemplate.queryForMap(sql, args);
-			T result = cls.newInstance();
-			boolean mark = false;
-			if(result instanceof DynaModel){
-				mark = true;
-			}
-			DynaModel temp = new DynaModel();
-			for (Iterator<String> keys = map.keySet().iterator(); keys.hasNext();)
-			{
-				String key = keys.next();
-				temp.set(key.toLowerCase(), map.get(key));
-			}
-			if(mark){
-				((DynaModel)result).putAll(temp.toMap());
-			}else{
-				BeanUtils.populate(result, temp.toMap());
-			}
-			
-			long time = System.currentTimeMillis() - beginTime;
-			logger.debug("执行完成 [time=" + time + " millisecond]");
-			
-			if (time > 1000)
-			{
-				logger.warn("执行 [sql= " + sql + "]时间过长，当前执行时间[time=" + time + " millisecond]");
-			}
-			return result;
+			map = jdbcTemplate.queryForMap(sql, args);
 		}
-		catch (EmptyResultDataAccessException ex)
+		catch (EmptyResultDataAccessException e)
 		{
+			logger.error(e.getMessage());
 			return null;
 		}
-		catch (Exception ex)
+		catch (BadSqlGrammarException e)
 		{
-			throw new JdbcException("", ex);
+			logger.error(e.getMessage());
+			throw e.getSQLException();
 		}
+		
+		Map<String, Object> temp = Maps.newHashMap();
+		for (Iterator<String> keys = map.keySet().iterator(); keys.hasNext();)
+		{
+			String key = keys.next();
+			temp.put(key.toLowerCase(), map.get(key));
+		}
+		
+		if(cls.getName().equals(Map.class.getName())){
+			return (T)temp;
+		}
+		
+		T result;
+		try
+		{
+			result = cls.newInstance();
+		}
+		catch (InstantiationException | IllegalAccessException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
+		boolean mark = false;
+		if (result instanceof DynaModel)
+		{
+			mark = true;
+		}
+		if(mark){
+			((DynaModel)result).putAll(temp);
+		}else{
+			try
+			{
+				BeanUtils.populate(result, temp);
+			}
+			catch (IllegalAccessException | InvocationTargetException e)
+			{
+				logger.error(e.getMessage());
+				return null;
+			}
+		}
+		
+		long time = System.currentTimeMillis() - beginTime;
+		logger.debug("执行完成 [time=" + time + " millisecond]");
+		
+		if (time > 1000)
+		{
+			logger.warn("执行 [sql= " + sql + "]时间过长，当前执行时间[time=" + time + " millisecond]");
+		}
+		return result;
 	}
 	
 	/**

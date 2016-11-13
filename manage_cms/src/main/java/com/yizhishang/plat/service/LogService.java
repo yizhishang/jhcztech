@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.DateHelper;
@@ -67,7 +66,7 @@ public class LogService extends BaseService
 	 * @param uid        用户UID
 	 * @return
 	 */
-	public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword, String uid)
+	public DBPage<Log> getPageData(int curPage, int numPerPage, String siteNo, String keyword, String uid)
 	{
 		return logDao.getPageData(curPage, numPerPage, siteNo, keyword, uid);
 	}

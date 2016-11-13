@@ -4,7 +4,7 @@
 <script type="text/javascript">
 
 function updateCols(id){
-	window.open("/admin/TableColumnAdmin/doDefault.action?table_id="+id);
+	window.open("${ctxPath }/admin/TableColumnAdmin/doDefault.action?table_id="+id);
 } 
 
 function modifyPassword(functionId,id){

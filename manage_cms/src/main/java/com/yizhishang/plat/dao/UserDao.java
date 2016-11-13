@@ -1,5 +1,6 @@
 package com.yizhishang.plat.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -44,12 +45,15 @@ public class UserDao extends BaseDao
 	
 	public User findUserById(int id)
 	{
-		DynaModel dataRow = getJdbcTemplateUtil().queryMap(FIND_USER_BY_ID, new Object[] { new Integer(id) });
-		if (dataRow == null)
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(FIND_USER_BY_ID, User.class, new Object[] { new Integer(id) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
 			return null;
-		User user = new User();
-		user.fromMap(dataRow);
-		return user;
+		}
 	}
 	
 	public List<DynaModel> findUserBySiteNo(String siteNo)
@@ -71,7 +75,15 @@ public class UserDao extends BaseDao
 	
 	public User findUserByUID(String uid)
 	{
-		return getJdbcTemplateUtil().queryMap(FIND_USER_BY_UID, User.class, new Object[] { uid });
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(FIND_USER_BY_UID, User.class, new Object[] { uid });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
     public List<DynaModel> getAll()

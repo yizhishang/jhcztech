@@ -1,5 +1,6 @@
 package com.yizhishang.plat.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,7 +105,15 @@ public class EnumService extends BaseService
 		String sql = "select * from T_ENUM_VALUE where ITEM_CODE=?";
 		ArrayList<Object> argList = new ArrayList<Object>();
 		argList.add(itemCode);
-		return getJdbcTemplateUtil().queryMap(sql, EnumItem.class, argList.toArray());
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, EnumItem.class, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
 	    /**

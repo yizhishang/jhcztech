@@ -1,5 +1,6 @@
 package com.yizhishang.plat.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +72,15 @@ public class EnumTypeService extends BaseService
 	public DynaModel findItemByName(String enum_name)
 	{
 		String sql = "select * from T_ENUM_TYPE where enum_name=?";
-		return getJdbcTemplateUtil().queryMap(sql, new Object[] { enum_name });
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, new Object[] { enum_name });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
 	/**
@@ -84,7 +93,15 @@ public class EnumTypeService extends BaseService
 	public DynaModel findItemByVal(String enum_value)
 	{
 		String sql = "select * from T_ENUM_TYPE where enum_value=?";
-		return getJdbcTemplateUtil().queryMap(sql, new Object[] { enum_value });
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, new Object[] { enum_value });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
 	/**

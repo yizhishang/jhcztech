@@ -5,7 +5,7 @@
         <item name="workThreadNum" value="10" description="模板发布队列工作线程数量" />
         <item name="maxQueueLen" value="100" description="模板发布队列最大数量" />
         <item name="runMode" value="0" description="运行模式(0:开发环境 1:正式环境)"/>
-        <item name="isPublish" value="1" description="是否启动发布队列(0:不启动 1:启动)"/>
+        <item name="isPublish" value="0" description="是否启动发布队列(0:不启动 1:启动)"/>
         <item name="isPublishArticle" value="1" description="是否需要静态化文章(0:不需要 1:需要)"/>
         <item name="encoding" value="UTF-8" description="生成静态文件的编码，默认为UTF-8"/>
         <item name="isOracleSequence" value="1" description="是否使用oracle的sequence(0或空不使用 1使用)"/>
@@ -13,7 +13,7 @@
     </category>
     <category name="publish" description="发布引擎相关配置">
         <item name="showArticleUrl" value="/common/showArticle.jsp" description="用于显示发布文章的URL" />
-        <item name="checkInterval" value="5" description="发布引擎的检查间隔,缺省值为5秒" />
+        <item name="checkInterval" value="3600" description="发布引擎的检查间隔,缺省值为5秒" />
         <item name="viewPath" value="com/yizhishang/plat/template/webpart/" descript="获得部件的缺省视图，该文件应该和类文件放在同样的目录"/>
     </category>
     <category name="publishPlan" description="发布计划相关配置">

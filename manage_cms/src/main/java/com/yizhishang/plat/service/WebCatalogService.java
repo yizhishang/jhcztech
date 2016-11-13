@@ -1,5 +1,6 @@
 package com.yizhishang.plat.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,15 @@ public class WebCatalogService extends BaseService
 	public DynaModel findCatalogById(String catalogId)
 	{
 		String sql = "SELECT CATALOG_ID,NAME,CATALOG_NO, SITENO,LINK_URL,PARENT_ID,USER_RIGHT FROM T_CATALOG WHERE CATALOG_ID=? AND STATE=1 AND SITENO=? order  BY ORDERLINE";
-		return getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(ConvertHelper.strToInt(catalogId)), Constants.MAIN_SITENO });
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(ConvertHelper.strToInt(catalogId)), Constants.MAIN_SITENO });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
 	/**
@@ -48,7 +57,15 @@ public class WebCatalogService extends BaseService
 	public DynaModel findCatalogByNo(String catalogNo)
 	{
 	    String sql = "SELECT CATALOG_ID,NAME,CATALOG_NO, SITENO,LINK_URL,PARENT_ID,USER_RIGHT FROM T_CATALOG WHERE CATALOG_ID=? AND STATE=1 AND CATALOG_NO=? order  BY ORDERLINE";
-	    return getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(ConvertHelper.strToInt(catalogNo)), Constants.MAIN_SITENO });
+	    try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(ConvertHelper.strToInt(catalogNo)), Constants.MAIN_SITENO });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	                            
     /**

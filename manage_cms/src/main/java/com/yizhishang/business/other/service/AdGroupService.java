@@ -1,5 +1,6 @@
 package com.yizhishang.business.other.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -122,14 +123,15 @@ public class AdGroupService extends BaseService
             sqlBuf.append(" and siteno=?");
             argList.add(siteno);
         }
-        DynaModel dataRow = getJdbcTemplateUtil().queryMap(sqlBuf.toString(), argList.toArray());
-        if (dataRow != null)
-        {
-            Ad_Group ad_group = new Ad_Group();
-            ad_group.fromMap(dataRow);
-            return ad_group;
-        }
-        return null;
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(sqlBuf.toString(), Ad_Group.class, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     @SuppressWarnings("rawtypes")

@@ -1,7 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html;charset=UTF-8" %>
-<%@ page import="com.yizhishang.base.util.RequestHelper"%>
 <%@ include file="/admin/common/header.jsp" %>
-<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/validator.js"></script>
 <style>
 select{width:120px;}
 </style>

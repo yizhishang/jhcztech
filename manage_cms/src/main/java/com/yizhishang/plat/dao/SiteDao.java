@@ -1,5 +1,6 @@
 package com.yizhishang.plat.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -56,12 +57,15 @@ public class SiteDao extends BaseDao
      */
     public Site findSiteById(int id)
     {
-        DynaModel dataRow = getJdbcTemplateUtil().queryMap(FIND_SITE_BY_ID, new Object[]{new Integer(id)});
-        if (dataRow == null)
-            return null;
-        Site site = new Site();
-        site.fromMap(dataRow);
-        return site;
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_ID, Site.class, new Object[]{new Integer(id)});
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     /**
@@ -74,14 +78,15 @@ public class SiteDao extends BaseDao
      */
     public Site findSiteBySiteName(String siteName)
     {
-    	DynaModel row = getJdbcTemplateUtil().queryMap(FIND_SITE_BY_SITENAME, new Object[]{siteName});
-        if (row != null)
-        {
-            Site site = new Site();
-            site.fromMap(row);
-            return site;
-        }
-        return null;
+    	try
+		{
+			return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_SITENAME, Site.class, new Object[]{siteName});
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
 
     public List<DynaModel> findSiteBySiteno(String siteno)
@@ -93,7 +98,15 @@ public class SiteDao extends BaseDao
 
     public Site findSiteBySiteNO(String siteNO)
     {
-    	return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_SITENO, Site.class, new Object[]{siteNO});
+    	try
+		{
+			return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_SITENO, Site.class, new Object[]{siteNO});
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
 
     public boolean findSiteIsMain(String isMain)

@@ -1,7 +1,9 @@
 package com.yizhishang.common.table.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -99,7 +101,16 @@ public class TableColumnService extends BaseService
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(id);
         String sql = "select * from t_b_table_column where id=?";
-        DynaModel result = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+        DynaModel result;
+		try
+		{
+			result = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
         return result;
     }
     
@@ -151,7 +162,8 @@ public class TableColumnService extends BaseService
         return cols;
     }
     
-    public List<DynaModel> getListData(int table_id, String table_name_en, String table_name_ch)
+    @SuppressWarnings("rawtypes")
+	public List<Map> getListData(int table_id, String table_name_en, String table_name_ch)
     {
         StringBuffer sqlBuf = new StringBuffer();
         sqlBuf.append("select * from t_b_table_column where table_id=? ");
@@ -168,7 +180,7 @@ public class TableColumnService extends BaseService
             argList.add("%" + table_name_ch + "%");
         }
         sqlBuf.append(" order by orderno ");
-        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), DynaModel.class, argList.toArray());
+        return getJdbcTemplateUtil().queryForList(sqlBuf.toString(), Map.class, argList.toArray());
     }
     
     public List<DynaModel> getOptionBeans(DynaModel bean)

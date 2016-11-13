@@ -1,5 +1,6 @@
 package com.yizhishang.plat.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -115,7 +116,16 @@ public class ArticleDao extends BaseDao
     public Article findArticleById(int articleId)
     {
         String sql = "select * from T_ARTICLE where article_id=?";
-        DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(articleId) });
+        Article dataRow;
+		try
+		{
+			dataRow = getJdbcTemplateUtil().queryMap(sql, Article.class, new Object[] { new Integer(articleId) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
         if (dataRow == null)
         {
             return null;
@@ -388,14 +398,32 @@ public class ArticleDao extends BaseDao
     public boolean isEndNode(int catalogId)
     {
         String sql = "select * from T_Catalog where parent_id=?";
-        DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(catalogId) });
+        DynaModel dataRow;
+		try
+		{
+			dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { new Integer(catalogId) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return false;
+		}
         return (dataRow == null);
     }
     
     public boolean isTitleExist(String title)
     {
         String sql = "select * from T_ARTICLE where title=?";
-        DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { title });
+        DynaModel dataRow;
+		try
+		{
+			dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[] { title });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return false;
+		}
         return (dataRow != null);
     }
     
@@ -439,15 +467,23 @@ public class ArticleDao extends BaseDao
 	public DynaModel findUpAndDown(String curArticleId,String catalog_id)
 	{
 		String sql ="SELECT * FROM (SELECT ARTICLE_ID, LEAD(ARTICLE_ID, 1, 0) OVER(ORDER BY PUBLISH_DATE DESC) AS DOWN_ID, LAG(ARTICLE_ID, 1, 0) OVER(ORDER BY PUBLISH_DATE DESC) AS UP_ID FROM T_ARTICLE WHERE CATALOG_ID = ? AND STATE = 3) WHERE ARTICLE_ID = ?";
-		DynaModel row = getJdbcTemplateUtil().queryMap(sql, new Object[]{catalog_id,curArticleId});
-		DynaModel temp = new DynaModel();
-		sql = "select title,url from t_article where article_id = ?";
-		DynaModel down  = getJdbcTemplateUtil().queryMap(sql, new Object[]{row.getString("down_id")});
-		temp.set("downTitle", row.getString("down_id").equals("0")?"没有了":down.getString("title"));
-		temp.set("downUrl", row.getString("down_id").equals("0")?"javascript:":down.getString("url"));
-		DynaModel up  = getJdbcTemplateUtil().queryMap(sql, new Object[]{row.getString("up_id")});
-		temp.set("upTitle", row.getString("up_id").equals("0")?"没有了":up.getString("title"));
-		temp.set("upUrl", row.getString("up_id").equals("0")?"javascript:":up.getString("url"));
-		return temp;
+		try
+		{
+			DynaModel row = getJdbcTemplateUtil().queryMap(sql, new Object[]{catalog_id,curArticleId});
+			DynaModel temp = new DynaModel();
+			sql = "select title,url from t_article where article_id = ?";
+			DynaModel down  = getJdbcTemplateUtil().queryMap(sql, new Object[]{row.getString("down_id")});
+			temp.set("downTitle", row.getString("down_id").equals("0")?"没有了":down.getString("title"));
+			temp.set("downUrl", row.getString("down_id").equals("0")?"javascript:":down.getString("url"));
+			DynaModel up  = getJdbcTemplateUtil().queryMap(sql, new Object[]{row.getString("up_id")});
+			temp.set("upTitle", row.getString("up_id").equals("0")?"没有了":up.getString("title"));
+			temp.set("upUrl", row.getString("up_id").equals("0")?"javascript:":up.getString("url"));
+			return temp;
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 }

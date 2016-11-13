@@ -1,5 +1,6 @@
 package com.yizhishang.plat.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +71,15 @@ public class PublishPlanService extends BaseService
         ArrayList<Object> argList = new ArrayList<Object>();
 		String sql = "SELECT A.*,B.NAME FROM T_PUBLISH_PLAN A,T_CATALOG B WHERE A.CATALOG_ID = B.CATALOG_ID AND A.ID = ?";
 		argList.add(id);
-		return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
 	public List<DynaModel> findPublishPlanByType(String type)

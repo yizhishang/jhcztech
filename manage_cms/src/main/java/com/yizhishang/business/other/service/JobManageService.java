@@ -1,5 +1,6 @@
 package com.yizhishang.business.other.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -94,6 +95,14 @@ public class JobManageService extends BaseService
 	public DynaModel findJobById(String jobid)
 	{
 		String sql = "SELECT * FROM T_B_JOB WHERE JOBID = ?";
-		return getJdbcTemplateUtil().queryMap(sql, new Object[] { jobid });
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, new Object[] { jobid });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 }

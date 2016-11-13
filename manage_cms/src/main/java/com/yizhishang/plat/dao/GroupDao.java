@@ -1,5 +1,6 @@
 package com.yizhishang.plat.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -99,26 +100,28 @@ public class GroupDao extends BaseDao
     */
     public Group findGroupBygroupNo(String groupNo)
     {
-        DynaModel datarow = getJdbcTemplateUtil().queryMap(FIND_GROUP_USER_BY_NANE, new Object[] { groupNo });
-        if (datarow == null)
-        {
-            return null;
-        }
-        Group group = new Group();
-        group.fromMap(datarow);
-        return group;
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(FIND_GROUP_USER_BY_NANE, Group.class, new Object[] { groupNo });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     public Group findGroupById(int id)
     {
-        DynaModel datarow = getJdbcTemplateUtil().queryMap(FIND_GROUP_BY_ID, new Object[] { new Integer(id) });
-        if (datarow == null)
-        {
-            return null;
-        }
-        Group group = new Group();
-        group.fromMap(datarow);
-        return group;
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(FIND_GROUP_BY_ID, Group.class, new Object[] { new Integer(id) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     /**

@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -122,7 +123,7 @@ public class CommonAction extends BaseAction
      */
     public String getTablename()
     {
-        return "";
+        return getStrParameter("tableName");
     }
     
     /**
@@ -321,7 +322,8 @@ public class CommonAction extends BaseAction
     {
     }
     
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     @RequestMapping("/doDefault.action")
     public ModelAndView doDefault()
     {
@@ -330,24 +332,24 @@ public class CommonAction extends BaseAction
         String table_name = getTablenameLowerCase();
         String orderby = getOrderByLowerCase();
         String orderbysort = getOrderBySort();
-        CommonService service = new CommonService();
-        List<DynaModel> cols = service.getListColumns(table_name);
-        List<DynaModel> searchcols = service.getSearchColumns(table_name);
+        List<Map> cols = commonService.getListColumns(Map.class, table_name);
+        List<Map> searchcols = commonService.getSearchColumns(Map.class, table_name);
         // 获取配置的table的信息
-        DynaModel tableInfo = service.getTableInfo(table_name);
+        DynaModel tableInfo = commonService.getTableInfo(table_name);
         // 获取数据
         int curPage = this.getIntParameter("page");
         curPage = (curPage <= 0) ? 1 : curPage;
         List<DynaModel> params = getParams();
         params = addBranchParam(params);
-        DBPage<DynaModel> page = service.getPageData(table_name, orderby, orderbysort, curPage, 20, params);
+        DBPage<Map> page = commonService.getPageData(table_name, orderby, orderbysort, curPage, 20, params);
         dataMap.put("page", page);
         dataMap.put("cols", cols);
         dataMap.put("searchcols", searchcols);
-        dataMap.put("tableinfo", tableInfo);
+        dataMap.put("tableinfo", tableInfo.toMap());
         String uid = getUID();
         dataMap.put("uid", uid);
         afterDefault();
+        mv.addObject("data", dataMap);
         mv.setViewName("/WEB-INF/views/common/list.jsp");
         return mv;
     }
@@ -360,7 +362,7 @@ public class CommonAction extends BaseAction
     {
     }
     
-    @Override
+	@Override
     @ResponseBody
     @RequestMapping("/add.action")
     public Result add(HttpServletRequest request, HttpServletResponse response)
@@ -369,9 +371,8 @@ public class CommonAction extends BaseAction
         String table_name = getTablenameLowerCase();
         String orderno = getOrderNoByIdLowerCase();
         //        String forwardStr = "";
-        CommonService service = new CommonService();
         // 获取配置的table的信息
-        DynaModel tableInfo = service.getTableInfo(table_name);
+        DynaModel tableInfo = commonService.getTableInfo(table_name);
         String pkcol = tableInfo.getString("pk_column").toLowerCase();
         
         DynaModel bean = ToolKit.getCmsFormParams(getRequest());
@@ -380,7 +381,7 @@ public class CommonAction extends BaseAction
             orderno = "";
         }
         // 对系统取值字段设值
-        List<DynaModel> syscols = service.getSysColumns(table_name);
+        List<DynaModel> syscols = commonService.getSysColumns(DynaModel.class, table_name);
         for (int i = 0; syscols != null && i < syscols.size(); i++)
         {
             DynaModel syscol = (DynaModel) syscols.get(i);
@@ -393,12 +394,13 @@ public class CommonAction extends BaseAction
                 bean.set(syscol.getString("name_en"), getUID());
             }
         }
-        service.add(table_name, pkcol, orderno, bean);
+        commonService.add(table_name, pkcol, orderno, bean);
         addLog("增加" + table_name, "保存成功");
         return super.add(request, response);
     }
     
-    @Override
+    @SuppressWarnings("rawtypes")
+	@Override
     @RequestMapping("/doAdd.action")
     public ModelAndView doAdd()
     {
@@ -408,7 +410,7 @@ public class CommonAction extends BaseAction
         // 获取配置的table的信息
         DynaModel tableInfo = commonService.getTableInfo(table_name);
         //        String pkcol = tableInfo.getString("pk_column").toLowerCase();
-        List<DynaModel> cols = commonService.getInfoColumns(table_name);
+        List<Map> cols = commonService.getInfoColumns(Map.class, table_name);
         dataMap.put("cols", cols);
         dataMap.put("tableinfo", tableInfo);
         String uid = getUID();
@@ -428,7 +430,7 @@ public class CommonAction extends BaseAction
     {
     }
     
-    @Override
+	@Override
     @ResponseBody
     @RequestMapping("/edit.action")
     public Result edit(HttpServletRequest request, HttpServletResponse response)
@@ -441,7 +443,7 @@ public class CommonAction extends BaseAction
         //        String pkvalue = RequestHelper.getString(getRequest(), "pkcol", "0");
         //        String forwardStr = "";
         DynaModel bean = ToolKit.getCmsFormParams(getRequest());
-        List<DynaModel> infocols = commonService.getInfoColumns(table_name);
+        List<DynaModel> infocols = commonService.getInfoColumns(DynaModel.class, table_name);
         for (int i = 0; infocols != null && i < infocols.size(); i++)
         {
             DynaModel infocol = (DynaModel) infocols.get(i);
@@ -451,7 +453,7 @@ public class CommonAction extends BaseAction
             }
         }
         // 对系统取值字段设值
-        List<DynaModel> syscols = commonService.getSysColumns(table_name);
+        List<DynaModel> syscols = commonService.getSysColumns(DynaModel.class, table_name);
         for (int i = 0; syscols != null && i < syscols.size(); i++)
         {
             DynaModel syscol = (DynaModel) syscols.get(i);
@@ -470,23 +472,23 @@ public class CommonAction extends BaseAction
         return super.edit(request, response);
     }
     
-    @RequestMapping("/doEdit.action")
+    @SuppressWarnings("rawtypes")
+	@RequestMapping("/doEdit.action")
     public ModelAndView doEdit()
     {
         beforeEdit();
         String table_name = getTablenameLowerCase();
-        CommonService service = new CommonService();
         // 获取配置的table的信息
-        DynaModel tableInfo = service.getTableInfo(table_name);
+        DynaModel tableInfo = commonService.getTableInfo(table_name);
         String pkcol = tableInfo.getString("pk_column").toLowerCase();
         String pkvalue = RequestHelper.getString(getRequest(), "pkcol", "0");
-        List<DynaModel> cols = service.getInfoColumns(table_name);
-        DynaModel bean = service.loadBean(table_name, pkcol, pkvalue);
+        List<Map> cols = commonService.getInfoColumns(Map.class, table_name);
+        DynaModel bean = commonService.loadBean(table_name, pkcol, pkvalue);
         dataMap.put("cols", cols);
         dataMap.put("pkcol", pkcol);
         dataMap.put("pkvalue", pkvalue);
-        dataMap.put("bean", bean);
-        dataMap.put("tableinfo", tableInfo);
+        dataMap.put("bean", bean.toMap());
+        dataMap.put("tableinfo", tableInfo.toMap());
         String uid = getUID();
         dataMap.put("uid", uid);
         afterEdit();
@@ -581,7 +583,8 @@ public class CommonAction extends BaseAction
     {
     }
     
-    @ResponseBody
+    @SuppressWarnings("rawtypes")
+	@ResponseBody
     @RequestMapping("/importExcelConfig.action")
     public Result importExcelConfig(HttpServletRequest request)
     {
@@ -590,7 +593,6 @@ public class CommonAction extends BaseAction
         //        String forwardStr = "";
         needPostBack = true;
         String excel_path = RequestHelper.getString(request, "excel_path", "");
-        @SuppressWarnings("rawtypes")
         Enumeration ema = request.getParameterNames();
         DynaModel param = new DynaModel();
         List<String> fields = new ArrayList<String>();
@@ -639,7 +641,7 @@ public class CommonAction extends BaseAction
                 DynaModel data = (DynaModel) list.get(n);
                 DynaModel tempBean = new DynaModel();
                 // 对系统取值字段设值
-                List<DynaModel> allcols = commonService.getAllColumns(table_name);
+                List<DynaModel> allcols = commonService.getAllColumns(DynaModel.class, table_name);
                 for (int i = 0; allcols != null && i < allcols.size(); i++)
                 {
                     DynaModel colbean = (DynaModel) allcols.get(i);
@@ -707,7 +709,7 @@ public class CommonAction extends BaseAction
         beforeImportExcelConfig();
         needPostBack = true;
         String table_name = getTablenameLowerCase();
-        List cols = commonService.getAllColumns(table_name);
+        List<Map> cols = commonService.getAllColumns(Map.class, table_name);
         
         // 获取配置的table的信息
         DynaModel tableInfo = commonService.getTableInfo(table_name);
@@ -730,13 +732,12 @@ public class CommonAction extends BaseAction
     {
     }
     
-    public String doExportExcel()
+	public String doExportExcel()
     {
         beforeExportExcel();
         String forwardStr = "";
-        CommonService service = new CommonService();
         String table_name = getTablenameLowerCase();
-        DynaModel tableInfo = service.getTableInfo(table_name);
+        DynaModel tableInfo = commonService.getTableInfo(table_name);
         if (isPostBack() && needPostBack)
         {
             needPostBack = true;
@@ -744,7 +745,7 @@ public class CommonAction extends BaseAction
             try
             {
                 String call_name = tableInfo.getString("name_ch") + "导出.xls";
-                List<DynaModel> cols = service.getAllColumns(table_name);
+                List<DynaModel> cols = commonService.getAllColumns(DynaModel.class, table_name);
                 String[] colnames = new String[cols.size()];
                 for (int i = 0; cols != null && i < cols.size(); i++)
                 {

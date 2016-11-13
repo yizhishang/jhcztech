@@ -1,5 +1,7 @@
 package com.yizhishang.base.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.yizhishang.base.jdbc.JdbcTemplateUtil;
@@ -17,7 +19,8 @@ import com.yizhishang.base.util.SpringContextHolder;
 @Service
 public class BaseService
 {
-    
+	protected Logger logger = LoggerFactory.getLogger(getClass());
+	
     /**
     * 返回缺省数据源的数据操作对象
     * @return

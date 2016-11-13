@@ -17,7 +17,7 @@ public class DynSearchInputTag extends com.yizhishang.common.table.tag.CommonTag
     
     private static final long serialVersionUID = -4495264469438501769L;
     
-    private DynaModel colitem = null;
+    private Map<String, Object> colitem = null;
     
     private String colname = "";
     
@@ -38,7 +38,7 @@ public class DynSearchInputTag extends com.yizhishang.common.table.tag.CommonTag
         {
             JspWriter out = pageContext.getOut();
             String htmlcontent = "";
-            String input_type = colitem.getString("input_type");
+            String input_type = ToolKit.o2s(colitem.get("input_type"));
             if (Consts.input_type_select.equals(input_type))
             {
                 htmlcontent = makeSelectTag();
@@ -79,11 +79,11 @@ public class DynSearchInputTag extends com.yizhishang.common.table.tag.CommonTag
     private String makeInputTextTag()
     {
         StringBuffer sb = new StringBuffer();
-        String name_ch = colitem.getString("name_ch");
-        String name_en = colitem.getString("name_en");
+        String name_ch = ToolKit.o2s(colitem.get("name_ch"));;
+        String name_en = ToolKit.o2s(colitem.get("name_en"));;
         value = ToolKit.nullTrans((String) param.get("search_name_" + name_en), "");
-        String is_special_format = colitem.getString("is_special_format");
-        String special_format = colitem.getString("special_format");
+        String special_format = ToolKit.o2s(colitem.get("special_format"));
+        String is_special_format = ToolKit.o2s(colitem.get("is_special_format"));
         if ("N".equals(is_special_format))
         {
             sb.append(name_ch + "：<input type=\"text\" name=\"search_name_" + name_en + "\" value=\"" + value + "\" class=\"input01\" ");
@@ -141,10 +141,12 @@ public class DynSearchInputTag extends com.yizhishang.common.table.tag.CommonTag
      */
     private String makeSelectTag()
     {
-        String name_ch = colitem.getString("name_ch");
-        String name_en = colitem.getString("name_en");
+    	String name_ch = ToolKit.o2s(colitem.get("name_ch"));;
+        String name_en = ToolKit.o2s(colitem.get("name_en"));;
         value = ToolKit.nullTrans((String) param.get("eq_search_name_" + name_en), "");
-        List<DynaModel> list = colservice.getOptionBeans(colitem); // 获得列表
+        DynaModel bean = new DynaModel();
+    	bean.putAll(colitem);
+        List<DynaModel> list = colservice.getOptionBeans(bean); // 获得列表
         StringBuffer sb = new StringBuffer();
         sb.append(name_ch + "：<select name=\"eq_search_name_" + name_en + "\" id='" + id + "'  ");
         if (!StringHelper.isEmpty(css))
@@ -175,12 +177,12 @@ public class DynSearchInputTag extends com.yizhishang.common.table.tag.CommonTag
         return sb.toString();
     }
     
-    public DynaModel getColitem()
+    public Map<String, Object> getColitem()
     {
         return colitem;
     }
     
-    public void setColitem(DynaModel colitem)
+    public void setColitem(Map<String, Object> colitem)
     {
         this.colitem = colitem;
     }

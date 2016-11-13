@@ -1,5 +1,6 @@
 package com.yizhishang.plat.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,7 +60,15 @@ public class BranchService extends BaseService
         String sql = "select * from T_B_BRANCH where BranchId=?";
         ArrayList<Integer> argList = new ArrayList<Integer>();
         argList.add(new Integer(branchId));
-        return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     /**
@@ -83,7 +92,15 @@ public class BranchService extends BaseService
             sql += " and siteno=?";
             argList.add(siteNo);
         }
-        return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     /**
@@ -96,7 +113,15 @@ public class BranchService extends BaseService
         String sql = "select * from T_B_BRANCH where BranchNo=?";
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(branchNo);
-        return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     /**
@@ -120,7 +145,15 @@ public class BranchService extends BaseService
             sql += " and siteno=?";
             argList.add(siteNo);
         }
-        return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+        try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     /**
@@ -200,7 +233,15 @@ public class BranchService extends BaseService
         String sql = "select BranchNo from T_B_BRANCH where BranchNo=?";
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(branchNo);
-        return (getJdbcTemplateUtil().queryMap(sql, argList.toArray()) != null);
+        try
+		{
+			return (getJdbcTemplateUtil().queryMap(sql, argList.toArray()) != null);
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return false;
+		}
     }
     
     /**
@@ -224,7 +265,15 @@ public class BranchService extends BaseService
             sql += " and siteno=?";
             argList.add(siteNo);
         }
-        return (getJdbcTemplateUtil().queryMap(sql, argList.toArray()) != null);
+        try
+		{
+			return (getJdbcTemplateUtil().queryMap(sql, argList.toArray()) != null);
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return false;
+		}
     }
     
     /**

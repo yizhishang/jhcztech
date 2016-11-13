@@ -1,5 +1,6 @@
 package com.yizhishang.plat.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,15 @@ public class CatalogDao extends BaseDao
 	public Catalog findCatalogById(int catalogId)
 	{
 		String sql = "select * from T_CATALOG where catalog_id=?";
-		return getJdbcTemplateUtil().queryMap(sql, Catalog.class, new Object[] { new Integer(catalogId) });
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, Catalog.class, new Object[] { new Integer(catalogId) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
 	public Catalog findCatalogById(int catalogId, String siteno)
@@ -96,7 +105,15 @@ public class CatalogDao extends BaseDao
 			sql += " and siteno like ?";
 			argList.add("%" + siteno + "%");
 		}
-		return getJdbcTemplateUtil().queryMap(sql, Catalog.class, argList.toArray());
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, Catalog.class, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
 	/**
@@ -114,7 +131,15 @@ public class CatalogDao extends BaseDao
 		String sql = "SELECT * FROM T_CATALOG WHERE CATALOG_NO = ? AND SITENO = ?";
 		argList.add(catalogNo);
 		argList.add(siteNo);
-		return getJdbcTemplateUtil().queryMap(sql, Catalog.class, argList.toArray());
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, Catalog.class, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 	
 	/**
@@ -186,7 +211,16 @@ public class CatalogDao extends BaseDao
 		String sql = "select * from T_CATALOG where siteno like ? and parent_id=0";
 		argList.add("%" + siteNo + "%");
 		//DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, new Object[]{siteNo});
-		DynaModel dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		DynaModel dataRow;
+		try
+		{
+			dataRow = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
 		if (dataRow == null)
 			return null;
 		Catalog catalog = new Catalog();

@@ -2,9 +2,11 @@ package com.yizhishang.common.table.tag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.jsp.JspWriter;
 
+import com.google.common.collect.Maps;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
@@ -16,9 +18,9 @@ public class PrintValueTag extends CommonTag
     
     private static final long serialVersionUID = -5587142182111678087L;
     
-    private DynaModel item = null;
+    private Map<String, Object> item = null;
     
-    private DynaModel colitem = null;
+    private Map<String, Object> colitem = null;
     
     private String is_pk = "";
     
@@ -43,10 +45,10 @@ public class PrintValueTag extends CommonTag
         is_pk = ToolKit.nullTrans(is_pk, "N");
         if (colitem == null)
         {
-            colitem = new DynaModel();
+            colitem = Maps.newHashMap();
         }
-        input_type = ToolKit.nullTrans(colitem.getString("input_type"), Consts.input_type_input);
-        String reuslt = item.getString(colname);
+        input_type = ToolKit.o2s(colitem.get("input_type"), Consts.input_type_input);
+        String reuslt = ToolKit.o2s(item.get(colname), "");
         // 当不是作为主键值输出时，输入框类型是与其他表关联时，自动将展示文本展示到列表中
         if (!"Y".equals(is_pk))
         {
@@ -95,10 +97,10 @@ public class PrintValueTag extends CommonTag
     public String getOptionText(String colvalue, String input_type)
     {
         String result = colvalue;
-        select_value = ToolKit.nullTrans(colitem.getString("select_value"), "");
-        select_text = ToolKit.nullTrans(colitem.getString("select_text"), select_value);
-        select_table = ToolKit.nullTrans(colitem.getString("select_table"), "");
-        select_condition = ToolKit.nullTrans(colitem.getString("select_condition"), "");
+        select_value = ToolKit.nullTrans(colitem.get("select_value").toString(), "");
+        select_text = ToolKit.nullTrans(colitem.get("select_text").toString(), select_value);
+        select_table = ToolKit.nullTrans(colitem.get("select_table").toString(), "");
+        select_condition = ToolKit.nullTrans(colitem.get("select_condition").toString(), "");
         // 找出配置的字段的值列表
         if (!"".equals(select_table) && !"".equals(select_value))
         {
@@ -192,12 +194,12 @@ public class PrintValueTag extends CommonTag
         select_condition = selectCondition;
     }
     
-    public DynaModel getItem()
+    public Map<String, Object> getItem()
     {
         return item;
     }
     
-    public void setItem(DynaModel item)
+    public void setItem(Map<String, Object> item)
     {
         this.item = item;
     }
@@ -212,12 +214,12 @@ public class PrintValueTag extends CommonTag
         this.colname = colname;
     }
     
-    public DynaModel getColitem()
+    public Map<String, Object> getColitem()
     {
         return colitem;
     }
     
-    public void setColitem(DynaModel colitem)
+    public void setColitem(Map<String, Object> colitem)
     {
         this.colitem = colitem;
     }

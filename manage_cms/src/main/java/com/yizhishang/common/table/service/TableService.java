@@ -1,6 +1,8 @@
 package com.yizhishang.common.table.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -20,13 +22,21 @@ public class TableService extends BaseService
         getJdbcTemplateUtil().insert("t_b_table", data);
     }
     
-    public DynaModel load(int id)
+    @SuppressWarnings("unchecked")
+	public Map<String, Object> load(int id)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         argList.add(id);
         String sql = "select * from t_b_table where id=?";
-        DynaModel result = getJdbcTemplateUtil().queryMap(sql, argList.toArray());
-        return result;
+		try
+		{
+			return getJdbcTemplateUtil().queryMap(sql, Map.class, argList.toArray());
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
     }
     
     public void update(DynaModel data)
@@ -40,7 +50,8 @@ public class TableService extends BaseService
         getJdbcTemplateUtil().delete("t_b_table", "id", new Integer(id));
     }
     
-    public DBPage<DynaModel> getPageData(int curPage, int rowOfPage, String table_name_en, String table_name_ch)
+    @SuppressWarnings("rawtypes")
+	public DBPage<Map> getPageData(int curPage, int rowOfPage, String table_name_en, String table_name_ch)
     {
         StringBuffer sqlBuf = new StringBuffer();
         sqlBuf.append("select * from t_b_table where 1=1 ");
@@ -56,6 +67,6 @@ public class TableService extends BaseService
             argList.add("%" + table_name_ch + "%");
         }
         sqlBuf.append(" order by update_time desc ");
-        return getJdbcTemplateUtil().queryPage(sqlBuf.toString(), argList.toArray(), curPage, rowOfPage);
+        return getJdbcTemplateUtil().queryPage(sqlBuf.toString(), Map.class, argList.toArray(), curPage, rowOfPage);
     }
 }

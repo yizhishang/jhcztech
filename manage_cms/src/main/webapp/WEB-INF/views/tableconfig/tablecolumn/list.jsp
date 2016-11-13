@@ -7,31 +7,14 @@
     <title>yizhishangCMS后台管理系统</title>
     <%@ include file="/admin/common/meta.jsp" %>
     <link href="<%=request.getContextPath()%>/admin/styles/cms.css" rel="stylesheet" type="text/css" />
-    <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/ajax.js"></script>
-    <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/form_commons.js"></script>
-    <script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.min.js"></script>
-	<script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/datepicker/WdatePicker.js"></script>
-	<script language="javascript" src="<%=request.getContextPath()%>/admin/scripts/jqueryUI/jquery-ui-1.9.2.custom.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/ajax.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/layer/layer.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/common.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/form_commons.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/datepicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/admin/scripts/jqueryUI/jquery-ui-1.9.2.custom.min.js"></script>
 </head>
-<%
-	//这是主要包装了pageUrl
-	String queryStr= request.getQueryString() ;
-	StringBuffer pageUrl=new StringBuffer();
- 	if(queryStr!=null&&queryStr.length()>0){
- 		String[] queryArr=queryStr.split("&");
- 		for(int i=0;i<queryArr.length;i++){
- 			if(queryArr[i].startsWith("function=")||queryArr[i].startsWith("pageUrl=")||queryArr[i].startsWith("form.pageUrl=")){
- 				continue;
- 			}
- 			pageUrl.append(queryArr[i]);
- 			if(i!=queryArr.length-1){
- 				pageUrl.append("&");
- 			}
- 		}
- 		request.setAttribute("pageUrl",pageUrl);
- 	}
-%>
-
 <body>
 <style>
 input .list_input{border-left:0px;border-right:0px;border-top:0px;};
@@ -65,7 +48,7 @@ input .list_input{border-left:0px;border-right:0px;border-top:0px;};
 	
 	function doSelectConfig(){
 		var tempid = $("#temp_id").val();
-		window.open("/admin/TableColumnAdmin/configSelect.action?temp_id="+tempid);
+		window.open("${ctxPath }/admin/TableColumnAdmin/configSelect.action?temp_id="+tempid);
 	}
 	
 	function resortorder(){
@@ -74,11 +57,16 @@ input .list_input{border-left:0px;border-right:0px;border-top:0px;};
 		});
 	}
 	
-	function saveFunction(){
-		var functionname = $("#functionname").val();
-		//$("#functionname").val("edit");
-		$("#qryparm").submit();
-		$("#functionname").val("");
+	function reload(){
+		$.post("${ctxPath }/admin/TableColumnAdmin/doImportCols.action", 
+				{"table_id": '${param.table_id }'},
+				function(data){
+					if(data.errorNo == 0)
+	    			{
+	    				location.reload();
+	    			}
+			
+		},'json')
 	}
 	
 	function showEditor(id){
@@ -133,7 +121,7 @@ input .list_input{border-left:0px;border-right:0px;border-top:0px;};
               <ul class="menu"><li class="cur"><h2>${data.tableBean.name_ch }【${data.tableBean.name_en }】</h2></li></ul>
 
               <div class="label">
-                <a href="javascript:void(0)" onClick="window.location.reload();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>更新</a> 
+                <a href="javascript:void(0)" onClick="reload();"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>更新</a> 
                 <a href="javascript:void(0)" onClick="submitForm('qryparm',null, false);"><img src="${ctxPath }/admin/images/ico08.gif" border="0"/>保存</a>
                 <a href="javascript:void(0)" onClick="window.close();"><img src="${ctxPath }/admin/images/closeimg.gif" border="0"/>关闭</a>
               </div>

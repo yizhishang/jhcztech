@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.yizhishang.base.domain.DynaModel;
@@ -74,8 +75,13 @@ public class OracleSequenceGenerator
 				throw new SQLException("fail to get sequence");
 			}
 		}
+		catch (BadSqlGrammarException e)
+		{
+			logger.error(e.getMessage());
+		}
 		catch (SQLException e)
 		{
+			
 			if (e.getErrorCode() == 2289)//序列不存在
 			{
 				String sql = "create sequence " + seqName;

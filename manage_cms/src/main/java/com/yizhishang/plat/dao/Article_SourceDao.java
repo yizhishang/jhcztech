@@ -1,5 +1,6 @@
 package com.yizhishang.plat.dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -53,7 +54,16 @@ public class Article_SourceDao extends BaseDao
      */
     public Article_Source findArticle_SourceById(int id)
     {
-        DynaModel dw = this.getJdbcTemplateUtil().queryMap(FIND_ARTICLE_SOURCE_ID, new Object[] { new Integer(id) });
+        DynaModel dw;
+		try
+		{
+			dw = this.getJdbcTemplateUtil().queryMap(FIND_ARTICLE_SOURCE_ID, new Object[] { new Integer(id) });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return null;
+		}
         if (dw != null)
         {
             Article_Source as = new Article_Source();

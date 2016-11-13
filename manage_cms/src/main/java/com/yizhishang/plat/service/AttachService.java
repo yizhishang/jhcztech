@@ -1,6 +1,7 @@
 package com.yizhishang.plat.service;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,7 +77,16 @@ public class AttachService extends BaseService
 	public void deleteAttach(int source, int sourceId, String save_filename)
 	{
 		String sql = "SELECT ATTACH_NO,URL FROM T_ATTACH_INFO WHERE SOURCE = ? AND SOURCE_ID = ? AND SAVE_FILENAME = ?";
-		DynaModel attachData = getJdbcTemplateUtil().queryMap(sql, new Object[] { source, sourceId, save_filename });
+		DynaModel attachData;
+		try
+		{
+			attachData = getJdbcTemplateUtil().queryMap(sql, new Object[] { source, sourceId, save_filename });
+		}
+		catch (SQLException e)
+		{
+			logger.error(e.getMessage());
+			return;
+		}
 		if (attachData != null)
 		{
 			int id = attachData.getInt("attach_no");
