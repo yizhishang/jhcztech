@@ -6,19 +6,6 @@
 <body>
 <script type="text/javascript">
 
-	if (window.frameElement != null && document.all != null)
-	{
-	    window.frameElement.attachEvent("onresize", winResize);
-	}
-	else if (document.all != null)
-	{
-	    window.attachEvent("onresize", winResize);
-	}
-	else
-	{
-	    window.onresize = winResize;
-	}
-
 	function publishCatalog()
 	{
 	    hideContextMenu();
