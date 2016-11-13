@@ -181,7 +181,7 @@ public class DynInputTag extends CommonTag
         StringBuffer sb = new StringBuffer();
         sb.append("<input name='" + name + "' type='hidden' id='" + id + "' value='" + value + "' />\n");
         sb.append("<IFRAME ID='eWebEditor_" + id + "' name='eWebEditor_" + id + "' " + makeVerificationStr() + makeReadonly()
-                + " SRC='" + Application.getContextPath() + "/admin//editor/ewebeditor/ewebeditor.htm?id=" + id + "&style=standard650' FRAMEBORDER='0' SCROLLING='no' WIDTH='99%' HEIGHT='500'></IFRAME>");
+                + " SRC='" + Application.getContextPath() + "/admin/editor/ewebeditor/ewebeditor.htm?id=" + id + "&style=standard650' FRAMEBORDER='0' SCROLLING='no' WIDTH='99%' HEIGHT='500'></IFRAME>");
         return sb.toString();
     }
     
