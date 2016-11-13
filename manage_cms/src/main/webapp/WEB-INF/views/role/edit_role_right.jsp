@@ -133,8 +133,8 @@ $(function(){
               <div class="content">
                 <jsp:include page="/WEB-INF/views/role/include/menu.jsp" flush="true">
 					<jsp:param name="index" value="2"/>
-					<jsp:param name="roleId" value="<%=RequestHelper.getString(request,"roleId") %>"/>
-					<jsp:param name="siteNo" value="<%=RequestHelper.getString(request,"siteNo") %>"/>
+					<jsp:param name="roleId" value="${roleId}"/>
+                    <jsp:param name="siteNo" value="${siteNo}"/>
 				</jsp:include>
                 <div class="space"></div>
                 <div id="content">
