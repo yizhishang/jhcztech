@@ -74,5 +74,6 @@
 	    <property name="dataSource" ref="dataSource" />  
 	</bean>
 
+    <bean id="springContextHolder" class="com.yizhishang.base.util.SpringContextHolder" />
 
 </beans>

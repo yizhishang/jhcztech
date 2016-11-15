@@ -99,6 +99,6 @@
     	<bean class="com.yizhishang.plat.web.interceptors.SecurityInterceptor" />
     </mvc:interceptors>
     
-    <bean id="springContextHolder" class="com.yizhishang.base.util.SpringContextHolder" />
+
         
 </beans>
