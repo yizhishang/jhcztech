@@ -79,8 +79,7 @@
 	    	<value>2000</value> 
 	    </property> 
 	</bean>
-	
-	
+
 	<bean id="timerFactoryBean" class="org.springframework.scheduling.timer.TimerFactoryBean"> 
 	    <property name="scheduledTimerTasks"> 
 	     <list> 
@@ -98,7 +97,5 @@
     <mvc:interceptors>
     	<bean class="com.yizhishang.plat.web.interceptors.SecurityInterceptor" />
     </mvc:interceptors>
-    
 
-        
 </beans>
