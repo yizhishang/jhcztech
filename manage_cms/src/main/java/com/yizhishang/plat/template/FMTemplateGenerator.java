@@ -1,13 +1,12 @@
 package com.yizhishang.plat.template;
 
-import java.io.StringWriter;
-import java.util.Map;
-
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import freemarker.template.Configuration;
-import freemarker.template.Template;
+import java.io.StringWriter;
+import java.util.Map;
 
 /**
  * 描述:
@@ -20,38 +19,36 @@ import freemarker.template.Template;
  */
 public final class FMTemplateGenerator
 {
-    
+
     private static Logger logger = LoggerFactory.getLogger(FMTemplateGenerator.class);
-    
+
     /**
-    * 解析模板字串内容
-    * @param model       模型数据
-    * @param templateStr 需要解析的模板字串
-    * @return 解析后的结果
-    */
+     * 解析模板字串内容
+     *
+     * @param model       模型数据
+     * @param templateStr 需要解析的模板字串
+     * @return 解析后的结果
+     */
     public static String parseTemplate(Map<String, Object> model, String templateStr)
     {
         String result = "";
-        try
-        {
+        try {
             Configuration cfg = new Configuration();
             StringTemplateLoader templateLoader = new StringTemplateLoader();
             templateLoader.AddTemplate("view", templateStr);
             cfg.setTemplateLoader(templateLoader);
             String encoding = com.yizhishang.base.config.Configuration.getString("system.encoding", "UTF-8");
             cfg.setDefaultEncoding(encoding);
-            
+
             Template template = cfg.getTemplate("view");
             StringWriter writer = new StringWriter();
             template.process(model, writer);
             result = writer.toString();
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             logger.error("ErrorMode:" + model);
             logger.error("", ex);
         }
-        
+
         return result;
     }
 }

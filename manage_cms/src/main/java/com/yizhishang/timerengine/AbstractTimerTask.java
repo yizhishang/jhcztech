@@ -1,19 +1,19 @@
 package com.yizhishang.timerengine;
 
+import com.yizhishang.timerengine.util.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Date;
 import java.util.TimerTask;
 
-import org.slf4j.Logger;import org.slf4j.LoggerFactory;
-
-import com.yizhishang.timerengine.util.Util;
-
-
 public abstract class AbstractTimerTask extends TimerTask
 {
+
     private static Logger logger = LoggerFactory.getLogger(AbstractTimerTask.class);
+
     //任务记录
     public TaskEntry taskEntry;
-
 
     public AbstractTimerTask(TaskEntry taskEntry)
     {

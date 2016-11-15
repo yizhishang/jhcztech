@@ -1,4 +1,3 @@
-
 package com.yizhishang.timerengine;
 
 import java.util.Date;
@@ -16,7 +15,6 @@ public abstract class AbstractTimePlan implements TimePlan
     {
         return (currentDate != null);
     }
-
 
     public Date getStartDate()
     {

@@ -13,6 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Article_Source extends DynaModel
 {
+
     public int getId()
     {
         return getInt("id");
@@ -100,6 +101,5 @@ public class Article_Source extends DynaModel
     {
         set("modified_date", modified_date);
     }
-
 
 }

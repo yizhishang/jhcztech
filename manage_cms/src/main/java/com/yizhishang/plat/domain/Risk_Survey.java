@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Risk_Survey extends DynaModel
 {
-	
+
     public int getId()
     {
         return getInt("survey_id");
@@ -31,7 +31,7 @@ public class Risk_Survey extends DynaModel
 
     public void setClientId(String client_id)
     {
-        set("client_id",  client_id);
+        set("client_id", client_id);
     }
 
     public int getBranchNum()
@@ -134,7 +134,7 @@ public class Risk_Survey extends DynaModel
         set("field9", field9);
     }
 
-     public String getField10()
+    public String getField10()
     {
         return getString("field10");
     }

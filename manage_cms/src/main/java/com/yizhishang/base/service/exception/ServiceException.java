@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  */
 public class ServiceException extends RuntimeException
 {
-    
+
     private static final long serialVersionUID = 1L;
 
     public ServiceException()
@@ -22,18 +22,15 @@ public class ServiceException extends RuntimeException
         super();
     }
 
-
     public ServiceException(String message)
     {
         super(message);
     }
 
-
     public ServiceException(String message, Throwable cause)
     {
         super(message, cause);
     }
-
 
     public ServiceException(Throwable cause)
     {
@@ -57,8 +54,7 @@ public class ServiceException extends RuntimeException
     {
         super.printStackTrace(writer);
 
-        if (getCause() != null)
-        {
+        if (getCause() != null) {
             getCause().printStackTrace(writer);
         }
         writer.flush();

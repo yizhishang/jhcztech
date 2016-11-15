@@ -11,9 +11,9 @@ import com.yizhishang.base.domain.DynaModel;
  * 创建日期: 2015-4-7
  * 创建时间: 13:05:01
  */
-public class SurveyLog  extends DynaModel
+public class SurveyLog extends DynaModel
 {
-	
+
     public int getId()
     {
         return getInt("log_num");

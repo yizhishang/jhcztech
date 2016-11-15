@@ -13,8 +13,9 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Site extends DynaModel
 {
-	
-	public static int STATE_CLOSE = 0;
+
+    public static int STATE_CLOSE = 0;
+
     public static int STATE_OPEN = 1;
 
     public int getId()
@@ -74,7 +75,7 @@ public class Site extends DynaModel
 
     public void setPublishPath(String path)
     {
-        set("publish_path",path); 
+        set("publish_path", path);
     }
 
     public String getDescription()

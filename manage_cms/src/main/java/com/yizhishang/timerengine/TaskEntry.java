@@ -1,21 +1,21 @@
 package com.yizhishang.timerengine;
 
+import com.yizhishang.timerengine.util.Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Date;
 import java.util.Timer;
 
-import org.slf4j.Logger;import org.slf4j.LoggerFactory;
-
-import com.yizhishang.timerengine.util.Util;
-
 public class TaskEntry
 {
-
-   private static Logger logger = LoggerFactory.getLogger(TaskEntry.class);
 
     //定义两个表示任务记录状态常量
     public static final int TASK_START = 0;
 
     public static final int TASK_STOP = 1;
+
+    private static Logger logger = LoggerFactory.getLogger(TaskEntry.class);
 
     /*
      * 任务ID号，唯一
@@ -62,14 +62,29 @@ public class TaskEntry
         return description;
     }
 
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
     public String getId()
     {
         return id;
     }
 
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
     public String getName()
     {
         return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
     String getTaskInfo()
@@ -82,39 +97,24 @@ public class TaskEntry
         return timePlan;
     }
 
-    public Timer getTimer()
-    {
-        return timer;
-    }
-
-    public AbstractTimerTask getTimerTask()
-    {
-        return timerTask;
-    }
-
-    public void setDescription(String description)
-    {
-        this.description = description;
-    }
-
-    public void setId(String id)
-    {
-        this.id = id;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
     public void setTimePlan(TimePlan timePlan)
     {
         this.timePlan = timePlan;
     }
 
+    public Timer getTimer()
+    {
+        return timer;
+    }
+
     public void setTimer(Timer timer)
     {
         this.timer = timer;
+    }
+
+    public AbstractTimerTask getTimerTask()
+    {
+        return timerTask;
     }
 
     public void setTimerTask(AbstractTimerTask timerTask)
@@ -127,14 +127,12 @@ public class TaskEntry
      */
     public void start()
     {
-   	 if (timePlan.haveNext())
-        {
+        if (timePlan.haveNext()) {
             //得到任务计划时间
             Date date = timePlan.nextDate();
 
             //得到的当前任务计划时间比当前时间早，计划时间存在错误，不能正常启动
-            if (Util.isDateBeforeCurrentDate(date))
-            {
+            if (Util.isDateBeforeCurrentDate(date)) {
                 logger.info(getTaskInfo() + "计划时间为：" + Util.dateToLongStr(date) + ",比当前时间早，不能正常启动！");
             }
 
@@ -147,9 +145,7 @@ public class TaskEntry
             date = new Date(runTimerTask.scheduledExecutionTime());
 
             logger.info(Util.dateToLongStr(date) + " 将运行" + getTaskInfo());
-        }
-        else
-        {
+        } else {
             //            state = TASK_STOP;
             logger.info(getTaskInfo() + " 结束");
         }
@@ -160,17 +156,14 @@ public class TaskEntry
      */
     public void stop()
     {
-        if (runTimerTask != null)
-        {
+        if (runTimerTask != null) {
             //打印信息
             Date date = new Date(runTimerTask.scheduledExecutionTime());
             logger.info("计划于:" + Util.dateToLongStr(date) + "运行的" + getTaskInfo() + "被终止");
 
             //终止本任务, 调用Timer.cancel()是终止Timer的所有任务。
             runTimerTask.cancel();
-        }
-        else
-        {
+        } else {
             logger.info(getTaskInfo() + "未进入执行计划");
         }
     }

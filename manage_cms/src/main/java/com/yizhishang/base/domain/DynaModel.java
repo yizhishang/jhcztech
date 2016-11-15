@@ -14,17 +14,18 @@ import java.util.Map;
  */
 public class DynaModel
 {
-    
+
     private final HashMap<String, Object> innerMap = new HashMap<String, Object>();
 
     /**
      * 从Map中初始化动态Domain
+     *
      * @param map
      */
     public DynaModel fromMap(DynaModel map)
     {
         innerMap.putAll(map.toMap());
-        return this;        
+        return this;
     }
 
     public boolean getBoolean(String name)
@@ -39,8 +40,7 @@ public class DynaModel
         if (obj == null)
             return false;
 
-        if (obj instanceof Boolean)
-        {
+        if (obj instanceof Boolean) {
             return ((Boolean) obj).booleanValue();
         }
 
@@ -62,19 +62,13 @@ public class DynaModel
         if (obj == null)
             return 0;
 
-        if (!(obj instanceof Double))
-        {
-            try
-            {
+        if (!(obj instanceof Double)) {
+            try {
                 value = Double.parseDouble(obj.toString());
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 value = 0;
             }
-        }
-        else
-        {
+        } else {
             value = ((Double) obj).doubleValue();
             obj = null;
         }
@@ -95,19 +89,13 @@ public class DynaModel
         if (obj == null)
             return 0;
 
-        if (!(obj instanceof Float))
-        {
-            try
-            {
+        if (!(obj instanceof Float)) {
+            try {
                 value = Float.parseFloat(obj.toString());
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 value = 0;
             }
-        }
-        else
-        {
+        } else {
             value = ((Float) obj).floatValue();
             obj = null;
         }
@@ -128,19 +116,13 @@ public class DynaModel
         if (obj == null)
             return 0;
 
-        if (!(obj instanceof Integer))
-        {
-            try
-            {
+        if (!(obj instanceof Integer)) {
+            try {
                 value = Integer.parseInt(obj.toString());
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 value = 0;
             }
-        }
-        else
-        {
+        } else {
             value = ((Integer) obj).intValue();
             obj = null;
         }
@@ -161,19 +143,13 @@ public class DynaModel
         if (obj == null)
             return 0;
 
-        if (!(obj instanceof Long))
-        {
-            try
-            {
+        if (!(obj instanceof Long)) {
+            try {
                 value = Long.parseLong(obj.toString());
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 value = 0;
             }
-        }
-        else
-        {
+        } else {
             value = ((Long) obj).longValue();
             obj = null;
         }
@@ -212,18 +188,15 @@ public class DynaModel
         innerMap.remove(name);
     }
 
-
     public void set(String name, boolean value)
     {
         innerMap.put(name, new Boolean(value));
     }
 
-
     public void set(String name, double value)
     {
         innerMap.put(name, new Double(value));
     }
-
 
     public void set(String name, float value)
     {
@@ -255,42 +228,49 @@ public class DynaModel
         else
             innerMap.put(name, value);
     }
-    
-    public boolean containsKey(Object key){
-    	return innerMap.containsKey(key);
+
+    public boolean containsKey(Object key)
+    {
+        return innerMap.containsKey(key);
     }
-    
-    public Object get(Object key) {
+
+    public Object get(Object key)
+    {
         return innerMap.get(key);
     }
-    
-    public void put(String key, Object value){
-    	innerMap.put(key, value);
+
+    public void put(String key, Object value)
+    {
+        innerMap.put(key, value);
     }
-    
-    public void putAll(Map<String, Object> map) {
+
+    public void putAll(Map<String, Object> map)
+    {
         innerMap.putAll(map);
     }
-    
-    public int size(){
-    	return innerMap.size();
+
+    public int size()
+    {
+        return innerMap.size();
     }
-    
-    public void clear(){
-    	innerMap.clear();
+
+    public void clear()
+    {
+        innerMap.clear();
     }
-    
+
     /**
      * 把Domain模型转化为Map
+     *
      * @return
      */
     public Map<String, Object> toMap()
     {
         return innerMap;
     }
-    
-//    @Override
-//    public String toString(){
-//        return innerMap.toString();
-//    }
+
+    //    @Override
+    //    public String toString(){
+    //        return innerMap.toString();
+    //    }
 }

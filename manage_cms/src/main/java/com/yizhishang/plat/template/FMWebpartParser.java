@@ -1,11 +1,11 @@
 package com.yizhishang.plat.template;
 
-import java.util.Map;
-
 import com.yizhishang.base.util.SpringContextHolder;
 import com.yizhishang.plat.service.ArticleService;
 import com.yizhishang.plat.service.CatalogService;
 import com.yizhishang.plat.service.SeoService;
+
+import java.util.Map;
 
 /**
  * 描述:
@@ -18,14 +18,16 @@ import com.yizhishang.plat.service.SeoService;
  */
 public abstract class FMWebpartParser implements WebpartParser
 {
-	protected static CatalogService catalogService = (CatalogService) SpringContextHolder.getBean("catalogService");
-	
-	protected static ArticleService articleService = (ArticleService) SpringContextHolder.getBean("articleService");
-	
-	protected static SeoService seoService = (SeoService) SpringContextHolder.getBean("seoService");
-	
+
+    protected static CatalogService catalogService = (CatalogService) SpringContextHolder.getBean("catalogService");
+
+    protected static ArticleService articleService = (ArticleService) SpringContextHolder.getBean("articleService");
+
+    protected static SeoService seoService = (SeoService) SpringContextHolder.getBean("seoService");
+
     /**
      * 使用FreeMarket解析器解析视图
+     *
      * @param model   模型数据
      * @param viewStr 视图字串
      * @return
@@ -39,6 +41,7 @@ public abstract class FMWebpartParser implements WebpartParser
 
     /**
      * 对部件进行解析，得到对应部件的HTML
+     *
      * @param context     解析上下文参数
      * @param webpartProp 部件的属性
      * @param viewStr     模板中的部件视图字串

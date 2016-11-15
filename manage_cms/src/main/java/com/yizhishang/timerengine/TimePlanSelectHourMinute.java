@@ -1,11 +1,11 @@
 package com.yizhishang.timerengine;
 
+import com.yizhishang.timerengine.util.Util;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
-
-import com.yizhishang.timerengine.util.Util;
 
 /**
  * 选择一天的某些时间点运行，必须设定一个时间点
@@ -27,11 +27,9 @@ public class TimePlanSelectHourMinute extends AbstractTimePlan
     {
         int timeListLength = timeList.size();
         int i = 0;
-        for (i = 0; i < timeListLength; i++)
-        {
+        for (i = 0; i < timeListLength; i++) {
             Date tDate = timeList.get(i);
-            if (tDate.getTime() > date.getTime())
-            {
+            if (tDate.getTime() > date.getTime()) {
                 break;
             }
         }
@@ -48,8 +46,7 @@ public class TimePlanSelectHourMinute extends AbstractTimePlan
         cal.setTime(currentDate);
 
         //到了下一天，则时间上要加上24小时,且计数器回到时间点的起点
-        if (curPos >= timeListLength)
-        {
+        if (curPos >= timeListLength) {
             cal.add(Calendar.HOUR_OF_DAY, 24);
             curPos = 0;
         }
@@ -70,12 +67,9 @@ public class TimePlanSelectHourMinute extends AbstractTimePlan
     private boolean isSelectHourMinute(Date date)
     {
         Iterator<Date> iter = timeList.iterator();
-        while (iter.hasNext())
-        {
+        while (iter.hasNext()) {
             Date tDate = iter.next();
-            if ((tDate.getHours() == date.getHours()) &&
-                    (tDate.getMinutes() == date.getMinutes()))
-            {
+            if ((tDate.getHours() == date.getHours()) && (tDate.getMinutes() == date.getMinutes())) {
                 return true;
             }
         }
@@ -87,14 +81,12 @@ public class TimePlanSelectHourMinute extends AbstractTimePlan
     {
         Date returnDate = null;
         //如果当前时间的HH:mm不是用户设定的
-        if (!isSelectHourMinute(currentDate))
-        {
+        if (!isSelectHourMinute(currentDate)) {
             currentDate = getNextDate();
         }
 
         //若得到的时间比当前的时间还早，则继续获得下一个启动时间
-        while (Util.isDateBeforeCurrentDate(currentDate))
-        {
+        while (Util.isDateBeforeCurrentDate(currentDate)) {
             currentDate = getNextDate();
         }
 

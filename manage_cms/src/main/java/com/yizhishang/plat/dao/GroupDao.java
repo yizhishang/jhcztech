@@ -1,12 +1,5 @@
 package com.yizhishang.plat.dao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
-
 import com.yizhishang.base.dao.BaseDao;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
@@ -14,6 +7,12 @@ import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Group;
 import com.yizhishang.plat.domain.User;
+import org.springframework.stereotype.Repository;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 描述: GroupDaoImpl.java
@@ -27,28 +26,29 @@ import com.yizhishang.plat.domain.User;
 @Repository
 public class GroupDao extends BaseDao
 {
-    
+
     private static String FIND_GROUP_BY_ID = "select * from T_GROUP where group_id=?";
-    
+
     private static String FIND_GROUP_USER_BY_NANE = "select * from T_GROUP where name=?";
-    
+
     private static String INSERT_GROUP_USER = "insert into T_GROUP_USER values(?,?,?,?)";
-    
-    private static String FIND_GROUP_USER_ALL = "select * from T_USER where id in (select user_id from T_GROUP_USER where group_id=? ) order by id desc";
-    
+
+    private static String FIND_GROUP_USER_ALL = "select * from T_USER where id in (select user_id from T_GROUP_USER "
+            + "where group_id=? ) order by id desc";
+
     private static String DELETE_GROUP_USER = "delete from T_GROUP_USER where GROUP_ID=? and USER_ID=?";
-    
+
     private static String DELETE_GROUP_ALL_USER = "delete from T_GROUP_USER where GROUP_ID=?";
-    
+
     private static String DELETE_GROUP_USER_BY_GROUP = "delete from T_GROUP_USER where GROUP_ID=?";
-    
+
     public void addGroup(Group group)
     {
         DynaModel dateRow = new DynaModel();
         dateRow.putAll(group.toMap());
         getJdbcTemplateUtil().insert("T_GROUP", dateRow);
     }
-    
+
     public void addGroupUser(int groupId, int userId, String siteno)
     {
         String id = BaseService.getSequenceGenerator().getNextSequence("T_GROUP_USER");
@@ -60,11 +60,12 @@ public class GroupDao extends BaseDao
         list.add(siteno);
         getJdbcTemplateUtil().update(INSERT_GROUP_USER, list.toArray());
     }
-    
+
     /**
-    * 删除组
-    * @param groupId
-    */
+     * 删除组
+     *
+     * @param groupId
+     */
     public void deleteGroup(int groupId)
     {
         getJdbcTemplateUtil().delete("T_GROUP", "GROUP_ID", new Integer(groupId));
@@ -72,21 +73,22 @@ public class GroupDao extends BaseDao
         list.add(new Integer(groupId));
         getJdbcTemplateUtil().update(DELETE_GROUP_USER_BY_GROUP, list.toArray());
     }
-    
+
     public void deleteGroupRight(int groupId)
     {
-        
+
     }
-    
+
     /**
-    * 删除该组下所有用户
-    * @param groupId
-    */
+     * 删除该组下所有用户
+     *
+     * @param groupId
+     */
     public void deleteGroupUser(int groupId)
     {
-        getJdbcTemplateUtil().update(DELETE_GROUP_ALL_USER, new Object[] { new Integer(groupId) });
+        getJdbcTemplateUtil().update(DELETE_GROUP_ALL_USER, new Object[] {new Integer(groupId)});
     }
-    
+
     public void deleteGroupUser(int groupId, int userId)
     {
         ArrayList<Object> list = new ArrayList<Object>();
@@ -94,48 +96,43 @@ public class GroupDao extends BaseDao
         list.add(new Integer(userId));
         getJdbcTemplateUtil().update(DELETE_GROUP_USER, list.toArray());
     }
-    
+
     /**
-    * 根据组名查找组
-    */
+     * 根据组名查找组
+     */
     public Group findGroupBygroupNo(String groupNo)
     {
-        try
-		{
-			return getJdbcTemplateUtil().queryMap(FIND_GROUP_USER_BY_NANE, Group.class, new Object[] { groupNo });
-		}
-		catch (SQLException e)
-		{
-			logger.error(e.getMessage());
-			return null;
-		}
+        try {
+            return getJdbcTemplateUtil().queryMap(FIND_GROUP_USER_BY_NANE, Group.class, new Object[] {groupNo});
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
     }
-    
+
     public Group findGroupById(int id)
     {
-        try
-		{
-			return getJdbcTemplateUtil().queryMap(FIND_GROUP_BY_ID, Group.class, new Object[] { new Integer(id) });
-		}
-		catch (SQLException e)
-		{
-			logger.error(e.getMessage());
-			return null;
-		}
+        try {
+            return getJdbcTemplateUtil().queryMap(FIND_GROUP_BY_ID, Group.class, new Object[] {new Integer(id)});
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
     }
-    
+
     /**
-    * 返回该组下的所有用户
-    */
+     * 返回该组下的所有用户
+     */
     public List<User> getGroupUser(int groupId)
     {
-        List<User> list_gruop_user = getJdbcTemplateUtil().queryForList(FIND_GROUP_USER_ALL, User.class, new Object[] { new Integer(groupId) });
+        List<User> list_gruop_user = getJdbcTemplateUtil().queryForList(FIND_GROUP_USER_ALL, User.class, new Object[]
+                {new Integer(groupId)});
         return list_gruop_user;
     }
-    
+
     /**
-    * 列出该组下所有用户信息
-    */
+     * 列出该组下所有用户信息
+     */
     public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, int groupId, String keyword)
     {
         DBPage<DynaModel> page = null;
@@ -143,22 +140,19 @@ public class GroupDao extends BaseDao
         ArrayList<Object> argList = new ArrayList<Object>();
         sqlBuffer.append("select * from T_USER where id in (select user_id from T_GROUP_USER where group_id=? )");
         argList.add(new Integer(groupId));
-        if (!StringHelper.isEmpty(keyword))
-        {
+        if (!StringHelper.isEmpty(keyword)) {
             sqlBuffer.append(" and (uid2 like ? or name like ?) ");
             argList.add("%" + keyword + "%");
             argList.add("%" + keyword + "%");
         }
-        
+
         sqlBuffer.append(" order by id desc ");
-        
+
         page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
-        if (page != null)
-        {
+        if (page != null) {
             List<DynaModel> dataList = page.getData();
             ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
-            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
-            {
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext(); ) {
                 User user = new User();
                 DynaModel row = (DynaModel) iter.next();
                 user.fromMap(row);
@@ -168,33 +162,29 @@ public class GroupDao extends BaseDao
         }
         return page;
     }
-    
+
     public DBPage<DynaModel> getPageData(int curPage, int numPerPage, String siteNo, String keyword)
     {
         DBPage<DynaModel> page = null;
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
         sqlBuffer.append("select * from T_GROUP where 1=1 ");
-        if (!StringHelper.isEmpty(siteNo))
-        {
+        if (!StringHelper.isEmpty(siteNo)) {
             sqlBuffer.append(" and siteno = ? ");
             argList.add(siteNo);
         }
-        if (!StringHelper.isEmpty(keyword))
-        {
+        if (!StringHelper.isEmpty(keyword)) {
             sqlBuffer.append(" and (description like ? or name like ?) ");
             argList.add("%" + keyword + "%");
             argList.add("%" + keyword + "%");
         }
         sqlBuffer.append(" order by group_id desc ");
         page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
-        
-        if (page != null)
-        {
+
+        if (page != null) {
             List<DynaModel> dataList = page.getData();
             ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
-            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
-            {
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext(); ) {
                 Group group = new Group();
                 DynaModel row = (DynaModel) iter.next();
                 group.fromMap(row);
@@ -204,12 +194,12 @@ public class GroupDao extends BaseDao
         }
         return page;
     }
-    
+
     public void updateGroup(Group group)
     {
         DynaModel dataRow = new DynaModel();
         dataRow.putAll(group.toMap());
         getJdbcTemplateUtil().update("T_GROUP", dataRow, "group_Id", new Integer(group.getGroup_Id()));
     }
-    
+
 }

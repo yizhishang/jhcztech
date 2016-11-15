@@ -13,20 +13,15 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Right_Module extends DynaModel
 {
-	
-      public String getName()
+
+    public String getName()
     {
         return getString("name");
     }
 
-     public void setName(String name)
+    public void setName(String name)
     {
         set("name", name);
-    }
-
-    public void setModule_code(String module_code)
-    {
-        set("module_code", module_code);
     }
 
     public String getModule_code()
@@ -34,9 +29,9 @@ public class Right_Module extends DynaModel
         return getString("module_code");
     }
 
-    public void setEname(String ename)
+    public void setModule_code(String module_code)
     {
-        set("ename", ename);
+        set("module_code", module_code);
     }
 
     public String getEname()
@@ -44,9 +39,9 @@ public class Right_Module extends DynaModel
         return getString("ename");
     }
 
-    public void setOrderline(int orderline)
+    public void setEname(String ename)
     {
-        set("orderline", orderline);
+        set("ename", ename);
     }
 
     public int getOrderline()
@@ -54,14 +49,19 @@ public class Right_Module extends DynaModel
         return getInt("orderline");
     }
 
-    public void setSiteno(String siteno)
+    public void setOrderline(int orderline)
     {
-        set("siteno", siteno);
+        set("orderline", orderline);
     }
 
     public String getSiteno()
     {
         return getString("siteno");
+    }
+
+    public void setSiteno(String siteno)
+    {
+        set("siteno", siteno);
     }
 
     public void setEnable(String enable)

@@ -1,18 +1,5 @@
 package com.yizhishang.business.other.action;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.DateHelper;
@@ -25,6 +12,17 @@ import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.service.WebCatalogService;
 import com.yizhishang.plat.web.action.BaseAction;
 import com.yizhishang.plat.web.form.DynaForm;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 描述:  首页广告信息发布管理类
@@ -39,13 +37,13 @@ import com.yizhishang.plat.web.form.DynaForm;
 @RequestMapping("/admin/adManageAdmin")
 public class AdManageAction extends BaseAction
 {
-    
+
     @Resource
     AdManageService adManageService;
-    
+
     @Resource
     WebCatalogService WebCatalogService;
-    
+
     @Override
     @ResponseBody
     @RequestMapping("/add.action")
@@ -53,7 +51,7 @@ public class AdManageAction extends BaseAction
     {
         //对提交上来的form进行处理
         DynaForm form = normalize(request);
-        
+
         DynaModel data = new DynaModel();
         data.putAll(form);
         data.set("group_no", data.getString("type"));
@@ -67,9 +65,10 @@ public class AdManageAction extends BaseAction
         publishAdCatalog("software");
         return super.add(request, response);
     }
-    
+
     /**
      * 描述：删除广告信息
+     *
      * @return
      */
     @Override
@@ -78,8 +77,7 @@ public class AdManageAction extends BaseAction
     public Result delete(HttpServletRequest request, HttpServletResponse response)
     {
         int[] idArray = getIntArrayParameter("id");
-        for (int i = 0; i < idArray.length; i++)
-        {
+        for (int i = 0; i < idArray.length; i++) {
             adManageService.deteleAdInfo(idArray[i], getSiteNo());
             addLog("删除广告信息", "删除广告信息[id=" + idArray[i] + "]");
         }
@@ -88,9 +86,10 @@ public class AdManageAction extends BaseAction
         publishAdCatalog("software");
         return super.delete(request, response);
     }
-    
+
     /**
      * 描述：添加广告发布信息
+     *
      * @return
      */
     @Override
@@ -101,10 +100,11 @@ public class AdManageAction extends BaseAction
         mv.setViewName("/WEB-INF/views/adManage/ad_add.jsp");
         return mv;
     }
-    
+
     /**
      * 缺省的操作(function=""时调用)
      * 列出所有的广告信息
+     *
      * @return
      */
     @Override
@@ -117,22 +117,23 @@ public class AdManageAction extends BaseAction
         String siteno = getSiteNo();
         curPage = (curPage <= 0) ? 1 : curPage;
         keyword = StringHelper.trim(keyword);
-        
-        @SuppressWarnings("rawtypes")
-		DBPage<Map> page = adManageService.getPageData(curPage, 20, siteno, type, keyword);
+
+        @SuppressWarnings(
+                "rawtypes") DBPage<Map> page = adManageService.getPageData(curPage, 20, siteno, type, keyword);
         dataMap.put("page", page);
-        
+
         //查询广告组
         List<Ad_Group> groupList = adManageService.findAllAdGroup();
         dataMap.put("groupList", groupList);
-        
+
         mv.addObject("data", dataMap);
         mv.setViewName("/WEB-INF/views/adManage/ad_list.jsp");
         return mv;
     }
-    
+
     /**
      * 描述：编辑广告发布信息
+     *
      * @return
      */
     @Override
@@ -142,9 +143,8 @@ public class AdManageAction extends BaseAction
         int id = this.getIntParameter("id");
         String siteno = getSiteNo();
         Ad data = adManageService.findAdById(id, siteno);
-        
-        if (data == null)
-        {
+
+        if (data == null) {
             ScriptHelper.alert(response, "该栏目不存在或已经被删除", "close");
             return null;
         }
@@ -152,13 +152,14 @@ public class AdManageAction extends BaseAction
         form.putAll(data.toMap());
         mv.addObject("form", form);
         mv.addObject("list", adManageService.findAllAdGroup());
-        
+
         mv.setViewName("/WEB-INF/views/adManage/ad_edit.jsp");
         return mv;
     }
-    
+
     /**
      * 描述：链接状态无效
+     *
      * @return
      */
     @ResponseBody
@@ -166,8 +167,7 @@ public class AdManageAction extends BaseAction
     public void doLinkNo(HttpServletResponse response)
     {
         int[] idArray = getIntArrayParameter("id");
-        for (int i = 0; i < idArray.length; i++)
-        {
+        for (int i = 0; i < idArray.length; i++) {
             adManageService.linkNo(idArray[i], getSiteNo());
             addLog("修改广告链接无效状态", "修改广告链接无效状态[id=" + idArray[i] + "]");
         }
@@ -177,17 +177,17 @@ public class AdManageAction extends BaseAction
         String successPage = getStrParameter("successPage");
         ScriptHelper.redirect(response, successPage);
     }
-    
+
     /**
      * 描述：链接状态有效
+     *
      * @return
      */
     @RequestMapping("/linkYes.action")
     public void doLinkYes(HttpServletResponse response)
     {
         int[] idArray = getIntArrayParameter("id");
-        for (int i = 0; i < idArray.length; i++)
-        {
+        for (int i = 0; i < idArray.length; i++) {
             adManageService.linkYes(idArray[i], getSiteNo());
             addLog("修改广告链接有效状态", "修改广告链接有效状态[id=" + idArray[i] + "]");
         }
@@ -197,16 +197,16 @@ public class AdManageAction extends BaseAction
         String successPage = getStrParameter("successPage");
         ScriptHelper.redirect(response, successPage);
     }
-    
+
     /**
      * 描述：设置展示状态无效
+     *
      * @return
      */
     public void doShowNo(HttpServletResponse response)
     {
         int[] idArray = getIntArrayParameter("id");
-        for (int i = 0; i < idArray.length; i++)
-        {
+        for (int i = 0; i < idArray.length; i++) {
             adManageService.showNo(idArray[i], getSiteNo());
             addLog("修改广告展示无效状态", "修改广告展示无效状态[id=" + idArray[i] + "]");
         }
@@ -216,9 +216,10 @@ public class AdManageAction extends BaseAction
         String successPage = getStrParameter("successPage");
         ScriptHelper.redirect(response, successPage);
     }
-    
+
     /**
      * 描述：设置展示状态无效
+     *
      * @return
      */
     @ResponseBody
@@ -226,8 +227,7 @@ public class AdManageAction extends BaseAction
     public void doShowYes(HttpServletResponse response)
     {
         int[] idArray = getIntArrayParameter("id");
-        for (int i = 0; i < idArray.length; i++)
-        {
+        for (int i = 0; i < idArray.length; i++) {
             adManageService.showYes(idArray[i], getSiteNo());
             addLog("修改广告展示有效状态", "修改广告展示有效状态[id=" + idArray[i] + "]");
         }
@@ -237,7 +237,7 @@ public class AdManageAction extends BaseAction
         String successPage = getStrParameter("successPage");
         ScriptHelper.redirect(response, successPage);
     }
-    
+
     @Override
     @ResponseBody
     @RequestMapping("/edit.action")
@@ -258,15 +258,14 @@ public class AdManageAction extends BaseAction
         publishAdCatalog("software");
         return super.edit(request, response);
     }
-    
+
     /**
      * @描述：发布广告下栏目
      */
     private void publishAdCatalog(String name)
     {
         DynaModel catalog = WebCatalogService.findCatalogByNo(name);
-        if (catalog != null)
-        {
+        if (catalog != null) {
             addToPublishQueue(catalog.getInt("catalog_id"), "C");
         }
     }

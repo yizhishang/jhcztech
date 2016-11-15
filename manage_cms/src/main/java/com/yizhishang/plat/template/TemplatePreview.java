@@ -13,22 +13,22 @@ import java.util.Map;
  */
 public class TemplatePreview
 {
-    
+
     private int templateId = 0;
-    
+
     private int catalogId = 0;
-    
+
     private int articleId = 0;
-    
+
     private Map<String, Object> variables = null;
-    
+
     /**
-    * 0:根据文章ID预览模板
-    * 1:根据栏目ID预览模板
-    * 2:根据模板ID预览模板
-    */
+     * 0:根据文章ID预览模板
+     * 1:根据栏目ID预览模板
+     * 2:根据模板ID预览模板
+     */
     private int type = 0;
-    
+
     public TemplatePreview(int templateId)
     {
         this.templateId = templateId;
@@ -39,26 +39,33 @@ public class TemplatePreview
     {
         this.catalogId = catalogId;
         this.articleId = articleId;
-        if (catalogId > 0)
-        {
+        if (catalogId > 0) {
             type = 1;
-        }
-        else
-        {
+        } else {
             type = 0;
         }
     }
-    
+
     public int getArticleId()
     {
         return articleId;
     }
-    
+
+    public void setArticleId(int articleId)
+    {
+        this.articleId = articleId;
+    }
+
     public int getCatalogId()
     {
         return catalogId;
     }
-    
+
+    public void setCatalogId(int catalogId)
+    {
+        this.catalogId = catalogId;
+    }
+
     public int getTemplateId()
     {
         return templateId;
@@ -68,22 +75,12 @@ public class TemplatePreview
     {
         return type;
     }
-    
+
     public Map<String, Object> getVariables()
     {
         return variables;
     }
-    
-    public void setArticleId(int articleId)
-    {
-        this.articleId = articleId;
-    }
-    
-    public void setCatalogId(int catalogId)
-    {
-        this.catalogId = catalogId;
-    }
-    
+
     public void setVariables(Map<String, Object> variables)
     {
         this.variables = variables;

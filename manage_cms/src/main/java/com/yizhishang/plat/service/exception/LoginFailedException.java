@@ -11,7 +11,7 @@ package com.yizhishang.plat.service.exception;
  */
 public class LoginFailedException extends BaseException
 {
-    
+
     private static final long serialVersionUID = 1L;
 
     public LoginFailedException()
@@ -19,18 +19,15 @@ public class LoginFailedException extends BaseException
         super();
     }
 
-
     public LoginFailedException(String message)
     {
         super(message);
     }
 
-
     public LoginFailedException(String message, Throwable cause)
     {
         super(message, cause);
     }
-
 
     public LoginFailedException(Throwable cause)
     {

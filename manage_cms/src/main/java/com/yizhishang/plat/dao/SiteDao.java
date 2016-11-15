@@ -1,17 +1,16 @@
 package com.yizhishang.plat.dao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
-
 import com.yizhishang.base.dao.BaseDao;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.Site;
+import org.springframework.stereotype.Repository;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 描述:
@@ -25,11 +24,14 @@ import com.yizhishang.plat.domain.Site;
 @Repository
 public class SiteDao extends BaseDao
 {
-    private static String GET_ALL = "select * from T_SITE order by id";
-    private static String FIND_SITE_BY_SITENO = "select * from T_SITE where siteno=?";
-    private static String FIND_SITE_BY_SITENAME = "select * from T_SITE where name=?";
-    private static String FIND_SITE_BY_ID = "select * from T_SITE where id=?";
 
+    private static String GET_ALL = "select * from T_SITE order by id";
+
+    private static String FIND_SITE_BY_SITENO = "select * from T_SITE where siteno=?";
+
+    private static String FIND_SITE_BY_SITENAME = "select * from T_SITE where name=?";
+
+    private static String FIND_SITE_BY_ID = "select * from T_SITE where id=?";
 
     public void addSite(Site site)
     {
@@ -52,41 +54,35 @@ public class SiteDao extends BaseDao
 
     /**
      * 描述：根据ID查找站点信息
+     *
      * @param id
      * @return
      */
     public Site findSiteById(int id)
     {
-        try
-		{
-			return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_ID, Site.class, new Object[]{new Integer(id)});
-		}
-		catch (SQLException e)
-		{
-			logger.error(e.getMessage());
-			return null;
-		}
+        try {
+            return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_ID, Site.class, new Object[] {new Integer(id)});
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
     }
-    
+
     /**
-     * 
+     * @param siteName
+     * @return
      * @描述：
      * @作者：袁永君
      * @时间：2012-3-2 下午03:09:52
-     * @param siteName
-     * @return
      */
     public Site findSiteBySiteName(String siteName)
     {
-    	try
-		{
-			return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_SITENAME, Site.class, new Object[]{siteName});
-		}
-		catch (SQLException e)
-		{
-			logger.error(e.getMessage());
-			return null;
-		}
+        try {
+            return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_SITENAME, Site.class, new Object[] {siteName});
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
     }
 
     public List<DynaModel> findSiteBySiteno(String siteno)
@@ -98,23 +94,19 @@ public class SiteDao extends BaseDao
 
     public Site findSiteBySiteNO(String siteNO)
     {
-    	try
-		{
-			return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_SITENO, Site.class, new Object[]{siteNO});
-		}
-		catch (SQLException e)
-		{
-			logger.error(e.getMessage());
-			return null;
-		}
+        try {
+            return getJdbcTemplateUtil().queryMap(FIND_SITE_BY_SITENO, Site.class, new Object[] {siteNO});
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
     }
 
     public boolean findSiteIsMain(String isMain)
     {
         String sql = "select is_main from t_site where is_main=?";
-        List<DynaModel> list = getJdbcTemplateUtil().queryForList(sql, DynaModel.class, new Object[] { isMain });
-        if(list.size() == 0)
-        {
+        List<DynaModel> list = getJdbcTemplateUtil().queryForList(sql, DynaModel.class, new Object[] {isMain});
+        if (list.size() == 0) {
             return false;
         }
         return true;
@@ -137,8 +129,7 @@ public class SiteDao extends BaseDao
             sqlBuffer.append(" and siteno = ? ");
             argList.add(siteNo);
         }*/
-        if (!StringHelper.isEmpty(keyword))
-        {
+        if (!StringHelper.isEmpty(keyword)) {
             sqlBuffer.append(" and (siteno like ? or name like ?) ");
             argList.add("%" + keyword + "%");
             argList.add("%" + keyword + "%");
@@ -146,12 +137,10 @@ public class SiteDao extends BaseDao
         sqlBuffer.append(" order by id desc ");
         page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 
-        if (page != null)
-        {
+        if (page != null) {
             List<DynaModel> dataList = page.getData();
             ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
-            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
-            {
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext(); ) {
                 Site site = new Site();
                 DynaModel row = (DynaModel) iter.next();
                 site.fromMap(row);
@@ -165,6 +154,7 @@ public class SiteDao extends BaseDao
 
     /**
      * 描述：更新站点信息
+     *
      * @param site
      */
     public void updateSite(Site site)

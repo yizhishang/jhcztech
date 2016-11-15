@@ -11,11 +11,17 @@ package com.yizhishang.plat.web.form;
  */
 public class ConfigForm
 {
+
     private int id = 0;
+
     private String name = "";
+
     private String caption = "";
+
     private String value = "";
+
     private String description = "";
+
     private int isSystem = 0;
 
     public int getId()

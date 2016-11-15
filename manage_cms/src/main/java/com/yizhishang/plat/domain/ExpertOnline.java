@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class ExpertOnline extends DynaModel
 {
-	
+
     public String getT_question_id()
     {
         return getString("t_question_id");
@@ -21,7 +21,7 @@ public class ExpertOnline extends DynaModel
 
     public void setT_question_id(String t_question_id)
     {
-        set("t_question_id",t_question_id);
+        set("t_question_id", t_question_id);
     }
 
     public String getQuestion_title()
@@ -31,7 +31,7 @@ public class ExpertOnline extends DynaModel
 
     public void setQuestion_title(String question_title)
     {
-        set("question_title",question_title);
+        set("question_title", question_title);
     }
 
     public String getQuestion_content()
@@ -41,7 +41,7 @@ public class ExpertOnline extends DynaModel
 
     public void setQuestion_content(String question_content)
     {
-        set("question_content",question_content);
+        set("question_content", question_content);
     }
 
     public String getQuestion_author()
@@ -51,7 +51,7 @@ public class ExpertOnline extends DynaModel
 
     public void setQuestion_author(String question_author)
     {
-        set("question_author",question_author);
+        set("question_author", question_author);
     }
 
     public String getQuestion_datetime()
@@ -61,7 +61,7 @@ public class ExpertOnline extends DynaModel
 
     public void setQuestion_datetime(String question_datetime)
     {
-        set("question_datetime",question_datetime);
+        set("question_datetime", question_datetime);
     }
 
     public String getAnswer_expert_id()
@@ -71,7 +71,7 @@ public class ExpertOnline extends DynaModel
 
     public void setAnswer_expert_id(String answer_expert_id)
     {
-        set("answer_expert_id",answer_expert_id);
+        set("answer_expert_id", answer_expert_id);
     }
 
     public String getAnswer_datetime()
@@ -81,7 +81,7 @@ public class ExpertOnline extends DynaModel
 
     public void setAnswer_datetime(String answer_datetime)
     {
-        set("answer_datetime",answer_datetime);
+        set("answer_datetime", answer_datetime);
     }
 
     public String getAnswer_content()
@@ -91,7 +91,7 @@ public class ExpertOnline extends DynaModel
 
     public void setAnswer_content(String answer_content)
     {
-        set("answer_content",answer_content);
+        set("answer_content", answer_content);
     }
 
     public String getAnswer_state()
@@ -101,8 +101,7 @@ public class ExpertOnline extends DynaModel
 
     public void setAnswer_state(String answer_state)
     {
-        set("answer_state",answer_state);
+        set("answer_state", answer_state);
     }
-
 
 }

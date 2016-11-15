@@ -11,6 +11,11 @@ package com.yizhishang.plat.web.form;
  */
 public class LoginForm
 {
+
+    private String name = "";
+
+    private String password = "";
+
     public String getName()
     {
         return name;
@@ -30,8 +35,5 @@ public class LoginForm
     {
         this.password = password;
     }
-
-    private String name = "";
-    private String password = "";
 
 }

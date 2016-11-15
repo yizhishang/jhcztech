@@ -1,19 +1,18 @@
 package com.yizhishang.business.other.service;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.stereotype.Service;
-
 import com.google.common.collect.Lists;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.business.domain.Ad_Group;
+import org.springframework.stereotype.Service;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 描述:
@@ -27,32 +26,29 @@ import com.yizhishang.business.domain.Ad_Group;
 @Service
 public class AdGroupService extends BaseService
 {
-    
+
     public DBPage<Ad_Group> getPageData(int curPage, int numPerPage, String siteNo, String keyword)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         StringBuffer sqlBuf = new StringBuffer();
         sqlBuf.append("select * from t_ad_group where 1=1");
-        if (StringHelper.isNotEmpty(siteNo))
-        {
+        if (StringHelper.isNotEmpty(siteNo)) {
             sqlBuf.append(" and siteno=?");
             argList.add(siteNo);
         }
-        
-        if (StringHelper.isNotEmpty(keyword))
-        {
+
+        if (StringHelper.isNotEmpty(keyword)) {
             sqlBuf.append(" and name like ?");
             argList.add("%" + keyword + "%");
         }
         sqlBuf.append(" order by orderline");
-        DBPage<Ad_Group> page = getJdbcTemplateUtil().queryPage(sqlBuf.toString(), Ad_Group.class, argList.toArray(), curPage, numPerPage);
-        
-        if (page != null)
-        {
+        DBPage<Ad_Group> page = getJdbcTemplateUtil().queryPage(sqlBuf.toString(), Ad_Group.class, argList.toArray(),
+                curPage, numPerPage);
+
+        if (page != null) {
             List<Ad_Group> dataList = page.getData();
             ArrayList<Ad_Group> newDataList = Lists.newArrayList();
-            for (Iterator<Ad_Group> iter = dataList.iterator(); iter.hasNext();)
-            {
+            for (Iterator<Ad_Group> iter = dataList.iterator(); iter.hasNext(); ) {
                 Ad_Group ad_group = new Ad_Group();
                 DynaModel row = (DynaModel) iter.next();
                 ad_group.fromMap(row);
@@ -62,9 +58,10 @@ public class AdGroupService extends BaseService
         }
         return page;
     }
-    
+
     /**
      * 添加广告组
+     *
      * @param ad_group
      */
     public void addAdGroup(Ad_Group ad_group)
@@ -76,9 +73,10 @@ public class AdGroupService extends BaseService
         dataRow.set("orderline", id);
         getJdbcTemplateUtil().insert("T_AD_GROUP", dataRow);
     }
-    
+
     /**
      * 修改广告组
+     *
      * @param ad_group
      */
     public void updateAdGroup(Ad_Group ad_group)
@@ -87,67 +85,58 @@ public class AdGroupService extends BaseService
         dataRow.putAll(ad_group.toMap());
         getJdbcTemplateUtil().update("T_AD_GROUP", dataRow, "id", new Integer(ad_group.getId()));
     }
-    
+
     public void deleteAdGroup(int id, String siteno)
     {
         StringBuffer sqlBuf = new StringBuffer();
         ArrayList<Object> argList = new ArrayList<Object>();
         sqlBuf.append("delete t_ad_group where 1=1");
-        if (id != 0)
-        {
+        if (id != 0) {
             sqlBuf.append(" and id=?");
             argList.add(new Integer(id));
         }
-        
-        if (StringHelper.isNotEmpty(siteno))
-        {
+
+        if (StringHelper.isNotEmpty(siteno)) {
             sqlBuf.append(" and siteno=?");
             argList.add(siteno);
         }
         getJdbcTemplateUtil().update(sqlBuf.toString(), argList.toArray());
     }
-    
+
     public Ad_Group findAdGroupById(int id, String siteno)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         StringBuffer sqlBuf = new StringBuffer();
         sqlBuf.append("select * from t_ad_group where 1=1");
-        if (id != 0)
-        {
+        if (id != 0) {
             sqlBuf.append(" and id=?");
             argList.add(new Integer(id));
         }
-        
-        if (StringHelper.isNotEmpty(siteno))
-        {
+
+        if (StringHelper.isNotEmpty(siteno)) {
             sqlBuf.append(" and siteno=?");
             argList.add(siteno);
         }
-        try
-		{
-			return getJdbcTemplateUtil().queryMap(sqlBuf.toString(), Ad_Group.class, argList.toArray());
-		}
-		catch (SQLException e)
-		{
-			logger.error(e.getMessage());
-			return null;
-		}
+        try {
+            return getJdbcTemplateUtil().queryMap(sqlBuf.toString(), Ad_Group.class, argList.toArray());
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
     }
-    
+
     @SuppressWarnings("rawtypes")
-	public List<Map> findAdById(int id, String siteno)
+    public List<Map> findAdById(int id, String siteno)
     {
         ArrayList<Object> argList = new ArrayList<Object>();
         StringBuffer sqlBuf = new StringBuffer();
         sqlBuf.append("SELECT * FROM T_AD A INNER JOIN T_AD_GROUP B ON A.GROUP_NO = B.ID WHERE 1=1");
-        if (id != 0)
-        {
+        if (id != 0) {
             sqlBuf.append(" AND B.ID = ?");
             argList.add(new Integer(id));
         }
-        
-        if (StringHelper.isNotEmpty(siteno))
-        {
+
+        if (StringHelper.isNotEmpty(siteno)) {
             sqlBuf.append(" AND B.SITENO = ?");
             argList.add(siteno);
         }

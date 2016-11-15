@@ -39,7 +39,8 @@ import java.security.SecureRandom;
  * have a version value of 1, 2, 3 and 4, respectively.
  * <p/>
  * <p>For more information including algorithms used to create <tt>UUID</tt>s,
- * see the Internet-Draft <a href="http://www.ietf.org/internet-drafts/draft-mealling-uuid-urn-03.txt">UUIDs and GUIDs</a>
+ * see the Internet-Draft <a href="http://www.ietf.org/internet-drafts/draft-mealling-uuid-urn-03.txt">UUIDs and
+ * GUIDs</a>
  * or the standards body definition at
  * <a href="http://www.iso.ch/cate/d2229.html">ISO/IEC 11578:1996</a>.
  *
@@ -48,12 +49,94 @@ import java.security.SecureRandom;
  */
 public final class UUID implements java.io.Serializable
 {
-    
+
     /**
      * Explicit serialVersionUID for interoperability.
      */
     private static final long serialVersionUID = -4856846361193249489L;
-    
+
+    /*
+     * The random number generator used by this class to create random
+     * based UUIDs.
+     */
+    private static volatile SecureRandom numberGenerator = null;
+
+    /*
+     * The most significant 64 bits of this UUID.
+     *
+     * @serial
+     */
+    private final long mostSigBits;
+
+    /**
+     * The least significant 64 bits of this UUID.
+     *
+     * @serial
+     */
+    private final long leastSigBits;
+
+    /*
+     * The version number associated with this UUID. Computed on demand.
+     */
+    private transient int version = -1;
+
+    /*
+     * The variant number associated with this UUID. Computed on demand.
+     */
+    private transient int variant = -1;
+
+    /*
+     * The timestamp associated with this UUID. Computed on demand.
+     */
+    private transient volatile long timestamp = -1;
+
+    /*
+     * The clock sequence associated with this UUID. Computed on demand.
+     */
+    private transient int sequence = -1;
+
+    /*
+     * The node number associated with this UUID. Computed on demand.
+     */
+    private transient long node = -1;
+
+    /*
+     * The hashcode of this UUID. Computed on demand.
+     */
+    private transient int hashCode = -1;
+
+    // Constructors and Factories
+
+    /*
+     * Private constructor which uses a byte array to construct the new UUID.
+     */
+    private UUID(byte[] data)
+    {
+        long msb = 0;
+        long lsb = 0;
+        for (int i = 0; i < 8; i++)
+            msb = (msb << 8) | (data[i] & 0xff);
+        for (int i = 8; i < 16; i++)
+            lsb = (lsb << 8) | (data[i] & 0xff);
+        mostSigBits = msb;
+        leastSigBits = lsb;
+    }
+
+    /**
+     * Constructs a new <tt>UUID</tt> using the specified data.
+     * <tt>mostSigBits</tt> is used for the most significant 64 bits
+     * of the <tt>UUID</tt> and <tt>leastSigBits</tt> becomes the
+     * least significant 64 bits of the <tt>UUID</tt>.
+     *
+     * @param mostSigBits
+     * @param leastSigBits
+     */
+    public UUID(long mostSigBits, long leastSigBits)
+    {
+        this.mostSigBits = mostSigBits;
+        this.leastSigBits = leastSigBits;
+    }
+
     /**
      * Returns val represented by the specified number of hex digits.
      */
@@ -62,7 +145,7 @@ public final class UUID implements java.io.Serializable
         long hi = 1L << (digits * 4);
         return Long.toHexString(hi | (val & (hi - 1))).substring(1);
     }
-    
+
     /**
      * Creates a <tt>UUID</tt> from the string standard representation as
      * described in the {@link #toString} method.
@@ -79,95 +162,40 @@ public final class UUID implements java.io.Serializable
             throw new IllegalArgumentException("Invalid UUID string: " + name);
         for (int i = 0; i < 5; i++)
             components[i] = "0x" + components[i];
-        
+
         long mostSigBits = Long.decode(components[0]).longValue();
         mostSigBits <<= 16;
         mostSigBits |= Long.decode(components[1]).longValue();
         mostSigBits <<= 16;
         mostSigBits |= Long.decode(components[2]).longValue();
-        
+
         long leastSigBits = Long.decode(components[3]).longValue();
         leastSigBits <<= 48;
         leastSigBits |= Long.decode(components[4]).longValue();
-        
+
         return new UUID(mostSigBits, leastSigBits);
     }
-    
+
     public static String getUUIDString(String str)
     {
         if (str == null)
             return null;
         String result = "";
         str = str.replaceAll("-", "");
-        if (result != null)
-        {
-            for (int i = 0; i < str.length(); i++)
-            {
-                if (!str.substring(i, i + 1).equals("-"))
-                {
+        if (result != null) {
+            for (int i = 0; i < str.length(); i++) {
+                if (!str.substring(i, i + 1).equals("-")) {
                     result += str.substring(i, i + 1);
-                }
-                else
-                {
-                    
+                } else {
+
                 }
             }
         }
         return result.toLowerCase();
     }
-    
-    /*
-     * The most significant 64 bits of this UUID.
-     *
-     * @serial
-     */
-    private final long mostSigBits;
-    
-    /**
-     * The least significant 64 bits of this UUID.
-     *
-     * @serial
-     */
-    private final long leastSigBits;
-    
-    /*
-     * The version number associated with this UUID. Computed on demand.
-     */
-    private transient int version = -1;
-    
-    /*
-     * The variant number associated with this UUID. Computed on demand.
-     */
-    private transient int variant = -1;
-    
-    /*
-     * The timestamp associated with this UUID. Computed on demand.
-     */
-    private transient volatile long timestamp = -1;
-    
-    /*
-     * The clock sequence associated with this UUID. Computed on demand.
-     */
-    private transient int sequence = -1;
-    
-    // Constructors and Factories
-    
-    /*
-     * The node number associated with this UUID. Computed on demand.
-     */
-    private transient long node = -1;
-    
-    /*
-     * The hashcode of this UUID. Computed on demand.
-     */
-    private transient int hashCode = -1;
-    
-    /*
-     * The random number generator used by this class to create random
-     * based UUIDs.
-     */
-    private static volatile SecureRandom numberGenerator = null;
-    
+
+    // Field Accessor Methods
+
     /**
      * Static factory to retrieve a type 3 (name based) <tt>UUID</tt> based on
      * the specified byte array.
@@ -178,12 +206,9 @@ public final class UUID implements java.io.Serializable
     public static UUID nameUUIDFromBytes(byte[] name)
     {
         MessageDigest md;
-        try
-        {
+        try {
             md = MessageDigest.getInstance("MD5");
-        }
-        catch (NoSuchAlgorithmException nsae)
-        {
+        } catch (NoSuchAlgorithmException nsae) {
             throw new InternalError("MD5 not supported");
         }
         byte[] md5Bytes = md.digest(name);
@@ -193,7 +218,7 @@ public final class UUID implements java.io.Serializable
         md5Bytes[8] |= 0x80; /* set to IETF variant  */
         return new UUID(md5Bytes);
     }
-    
+
     /**
      * Static factory to retrieve a type 4 (pseudo randomly generated) UUID.
      * <p/>
@@ -205,11 +230,10 @@ public final class UUID implements java.io.Serializable
     public static UUID randomUUID()
     {
         SecureRandom ng = numberGenerator;
-        if (ng == null)
-        {
+        if (ng == null) {
             numberGenerator = ng = new SecureRandom();
         }
-        
+
         byte[] randomBytes = new byte[16];
         ng.nextBytes(randomBytes);
         randomBytes[6] &= 0x0f; /* clear version        */
@@ -218,39 +242,7 @@ public final class UUID implements java.io.Serializable
         randomBytes[8] |= 0x80; /* set to IETF variant  */
         return new UUID(randomBytes);
     }
-    
-    // Field Accessor Methods
-    
-    /*
-     * Private constructor which uses a byte array to construct the new UUID.
-     */
-    private UUID(byte[] data)
-    {
-        long msb = 0;
-        long lsb = 0;
-        for (int i = 0; i < 8; i++)
-            msb = (msb << 8) | (data[i] & 0xff);
-        for (int i = 8; i < 16; i++)
-            lsb = (lsb << 8) | (data[i] & 0xff);
-        mostSigBits = msb;
-        leastSigBits = lsb;
-    }
-    
-    /**
-     * Constructs a new <tt>UUID</tt> using the specified data.
-     * <tt>mostSigBits</tt> is used for the most significant 64 bits
-     * of the <tt>UUID</tt> and <tt>leastSigBits</tt> becomes the
-     * least significant 64 bits of the <tt>UUID</tt>.
-     *
-     * @param mostSigBits
-     * @param leastSigBits
-     */
-    public UUID(long mostSigBits, long leastSigBits)
-    {
-        this.mostSigBits = mostSigBits;
-        this.leastSigBits = leastSigBits;
-    }
-    
+
     /**
      * The clock sequence value associated with this UUID.
      * <p/>
@@ -268,17 +260,15 @@ public final class UUID implements java.io.Serializable
      */
     public int clockSequence()
     {
-        if (version() != 1)
-        {
+        if (version() != 1) {
             throw new UnsupportedOperationException("Not a time-based UUID");
         }
-        if (sequence < 0)
-        {
+        if (sequence < 0) {
             sequence = (int) ((leastSigBits & 0x3FFF000000000000L) >>> 48);
         }
         return sequence;
     }
-    
+
     /**
      * Compares this UUID with the specified UUID.
      * <p/>
@@ -287,16 +277,16 @@ public final class UUID implements java.io.Serializable
      *
      * @param val <tt>UUID</tt> to which this <tt>UUID</tt> is to be compared.
      * @return -1, 0 or 1 as this <tt>UUID</tt> is less than, equal
-     *         to, or greater than <tt>val</tt>.
+     * to, or greater than <tt>val</tt>.
      */
     public int compareTo(UUID val)
     {
         // The ordering is intentionally set up so that the UUIDs
         // can simply be numerically compared as two numbers
-        return (mostSigBits < val.mostSigBits ? -1 : (mostSigBits > val.mostSigBits ? 1 : (leastSigBits < val.leastSigBits ? -1
-                : (leastSigBits > val.leastSigBits ? 1 : 0))));
+        return (mostSigBits < val.mostSigBits ? -1 : (mostSigBits > val.mostSigBits ? 1 : (leastSigBits < val
+                .leastSigBits ? -1 : (leastSigBits > val.leastSigBits ? 1 : 0))));
     }
-    
+
     /**
      * Compares this object to the specified object.  The result is
      * <tt>true</tt> if and only if the argument is not
@@ -305,7 +295,7 @@ public final class UUID implements java.io.Serializable
      *
      * @param obj the object to compare with.
      * @return <code>true</code> if the objects are the same;
-     *         <code>false</code> otherwise.
+     * <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj)
@@ -317,7 +307,7 @@ public final class UUID implements java.io.Serializable
         UUID id = (UUID) obj;
         return (mostSigBits == id.mostSigBits && leastSigBits == id.leastSigBits);
     }
-    
+
     /**
      * Returns the least significant 64 bits of this UUID's 128 bit value.
      *
@@ -327,7 +317,7 @@ public final class UUID implements java.io.Serializable
     {
         return leastSigBits;
     }
-    
+
     /**
      * Returns the most significant 64 bits of this UUID's 128 bit value.
      *
@@ -337,9 +327,9 @@ public final class UUID implements java.io.Serializable
     {
         return mostSigBits;
     }
-    
+
     // Object Inherited Methods
-    
+
     /**
      * Returns a hash code for this <code>UUID</code>.
      *
@@ -348,13 +338,12 @@ public final class UUID implements java.io.Serializable
     @Override
     public int hashCode()
     {
-        if (hashCode == -1)
-        {
+        if (hashCode == -1) {
             hashCode = (int) ((mostSigBits >> 32) ^ mostSigBits ^ (leastSigBits >> 32) ^ leastSigBits);
         }
         return hashCode;
     }
-    
+
     /**
      * The node value associated with this UUID.
      * <p/>
@@ -373,17 +362,15 @@ public final class UUID implements java.io.Serializable
      */
     public long node()
     {
-        if (version() != 1)
-        {
+        if (version() != 1) {
             throw new UnsupportedOperationException("Not a time-based UUID");
         }
-        if (node < 0)
-        {
+        if (node < 0) {
             node = leastSigBits & 0x0000FFFFFFFFFFFFL;
         }
         return node;
     }
-    
+
     /**
      * Reconstitute the <tt>UUID</tt> instance from a stream (that is,
      * deserialize it). This is necessary to set the transient fields
@@ -392,9 +379,9 @@ public final class UUID implements java.io.Serializable
      */
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException
     {
-        
+
         in.defaultReadObject();
-        
+
         // Set "cached computation" fields to their initial values
         version = -1;
         variant = -1;
@@ -403,7 +390,7 @@ public final class UUID implements java.io.Serializable
         node = -1;
         hashCode = -1;
     }
-    
+
     /**
      * The timestamp value associated with this UUID.
      * <p/>
@@ -421,13 +408,11 @@ public final class UUID implements java.io.Serializable
      */
     public long timestamp()
     {
-        if (version() != 1)
-        {
+        if (version() != 1) {
             throw new UnsupportedOperationException("Not a time-based UUID");
         }
         long result = timestamp;
-        if (result < 0)
-        {
+        if (result < 0) {
             result = (mostSigBits & 0x0000000000000FFFL) << 48;
             result |= ((mostSigBits >> 16) & 0xFFFFL) << 32;
             result |= mostSigBits >>> 32;
@@ -435,9 +420,9 @@ public final class UUID implements java.io.Serializable
         }
         return result;
     }
-    
+
     // Comparison Operations
-    
+
     /**
      * Returns a <code>String</code> object representing this
      * <code>UUID</code>.
@@ -465,10 +450,10 @@ public final class UUID implements java.io.Serializable
     @Override
     public String toString()
     {
-        return (digits(mostSigBits >> 32, 8) + "-" + digits(mostSigBits >> 16, 4) + "-" + digits(mostSigBits, 4) + "-" + digits(leastSigBits >> 48, 4) + "-" + digits(
-                leastSigBits, 12));
+        return (digits(mostSigBits >> 32, 8) + "-" + digits(mostSigBits >> 16, 4) + "-" + digits(mostSigBits, 4) +
+                "-" + digits(leastSigBits >> 48, 4) + "-" + digits(leastSigBits, 12));
     }
-    
+
     /**
      * The variant number associated with this <tt>UUID</tt>. The variant
      * number describes the layout of the <tt>UUID</tt>.
@@ -485,25 +470,19 @@ public final class UUID implements java.io.Serializable
      */
     public int variant()
     {
-        if (variant < 0)
-        {
+        if (variant < 0) {
             // This field is composed of a varying number of bits
-            if ((leastSigBits >>> 63) == 0)
-            {
+            if ((leastSigBits >>> 63) == 0) {
                 variant = 0;
-            }
-            else if ((leastSigBits >>> 62) == 2)
-            {
+            } else if ((leastSigBits >>> 62) == 2) {
                 variant = 2;
-            }
-            else
-            {
+            } else {
                 variant = (int) (leastSigBits >>> 61);
             }
         }
         return variant;
     }
-    
+
     /**
      * The version number associated with this <tt>UUID</tt>. The version
      * number describes how this <tt>UUID</tt> was generated.
@@ -520,8 +499,7 @@ public final class UUID implements java.io.Serializable
      */
     public int version()
     {
-        if (version < 0)
-        {
+        if (version < 0) {
             // Version is bits masked by 0x000000000000F000 in MS long
             version = (int) ((mostSigBits >> 12) & 0x0f);
         }

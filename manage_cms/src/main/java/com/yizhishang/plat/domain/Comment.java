@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Comment extends DynaModel
 {
-	
+
     //文章评论类型
     public int ARTICLE_TYPE = 0;
 

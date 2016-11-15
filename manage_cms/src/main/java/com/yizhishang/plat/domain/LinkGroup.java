@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class LinkGroup extends DynaModel
 {
-	
+
     public int getId()
     {
         return getInt("id");
@@ -23,7 +23,6 @@ public class LinkGroup extends DynaModel
     {
         set("id", id);
     }
-
 
     public String getSiteno()
     {

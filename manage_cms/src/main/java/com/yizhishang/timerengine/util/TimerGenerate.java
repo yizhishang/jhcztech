@@ -17,7 +17,13 @@ import java.util.Timer;
  */
 public class TimerGenerate
 {
+
     private static TimerGenerate instance = new TimerGenerate();
+
+    private TimerGenerate()
+    {
+        super();
+    }
 
     public static TimerGenerate getInstance()
     {
@@ -27,11 +33,6 @@ public class TimerGenerate
     public Timer getTimer()
     {
         return new Timer();
-    }
-
-    private TimerGenerate()
-    {
-        super();
     }
 
 }

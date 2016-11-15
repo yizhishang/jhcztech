@@ -1,10 +1,9 @@
 package com.yizhishang.base.util;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * 描述:	 Session工具类
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpSession;
  */
 public final class SessionHelper
 {
+
     /**
      * 向SESSION中设置字符串
      *
@@ -26,8 +26,7 @@ public final class SessionHelper
      */
     public static void setString(String name, String value, HttpSession session)
     {
-        if (StringHelper.isEmpty(name))
-        {
+        if (StringHelper.isEmpty(name)) {
             return;
         }
 
@@ -43,13 +42,12 @@ public final class SessionHelper
      */
     public static void setInt(String name, int value, HttpSession session)
     {
-        if (StringHelper.isEmpty(name))
-        {
+        if (StringHelper.isEmpty(name)) {
             return;
         }
         session.setAttribute(name, new Integer(value));
     }
-    
+
     /**
      * 向SESSION中设置数字
      *
@@ -59,13 +57,12 @@ public final class SessionHelper
      */
     public static void setLong(String name, long value, HttpSession session)
     {
-    	if (StringHelper.isEmpty(name))
-    	{
-    		return;
-    	}
-    	session.setAttribute(name, new Long(value));
+        if (StringHelper.isEmpty(name)) {
+            return;
+        }
+        session.setAttribute(name, new Long(value));
     }
-    
+
     /**
      * 向SESSION中设置数字
      *
@@ -75,11 +72,10 @@ public final class SessionHelper
      */
     public static void setDouble(String name, double value, HttpSession session)
     {
-    	if (StringHelper.isEmpty(name))
-    	{
-    		return;
-    	}
-    	session.setAttribute(name, new Double(value));
+        if (StringHelper.isEmpty(name)) {
+            return;
+        }
+        session.setAttribute(name, new Double(value));
     }
 
     /**
@@ -91,8 +87,7 @@ public final class SessionHelper
      */
     public static void setObject(String name, Object value, HttpSession session)
     {
-        if (StringHelper.isEmpty(name))
-        {
+        if (StringHelper.isEmpty(name)) {
             return;
         }
         session.setAttribute(name, value);
@@ -107,8 +102,7 @@ public final class SessionHelper
      */
     public static void setBoolean(String name, boolean value, HttpSession session)
     {
-        if (StringHelper.isEmpty(name))
-        {
+        if (StringHelper.isEmpty(name)) {
             return;
         }
         session.setAttribute(name, Boolean.valueOf(value));
@@ -124,8 +118,7 @@ public final class SessionHelper
     public static String getString(String name, HttpSession session)
     {
         Object value = session.getAttribute(name);
-        if (value == null)
-        {
+        if (value == null) {
             return "";
         }
         return value.toString().trim();
@@ -141,13 +134,12 @@ public final class SessionHelper
     public static int getInt(String name, HttpSession session)
     {
         Object value = session.getAttribute(name);
-        if (value == null)
-        {
+        if (value == null) {
             return 0;
         }
         return ((Integer) value).intValue();
     }
-    
+
     /**
      * 从SESSION中提取数值
      *
@@ -157,14 +149,13 @@ public final class SessionHelper
      */
     public static long getLong(String name, HttpSession session)
     {
-    	Object value = session.getAttribute(name);
-    	if (value == null)
-    	{
-    		return 0;
-    	}
-    	return ((Long) value).longValue();
+        Object value = session.getAttribute(name);
+        if (value == null) {
+            return 0;
+        }
+        return ((Long) value).longValue();
     }
-    
+
     /**
      * 从SESSION中提取数值
      *
@@ -174,12 +165,11 @@ public final class SessionHelper
      */
     public static double getDouble(String name, HttpSession session)
     {
-    	Object value = session.getAttribute(name);
-    	if (value == null)
-    	{
-    		return 0;
-    	}
-    	return ((Double) value).doubleValue();
+        Object value = session.getAttribute(name);
+        if (value == null) {
+            return 0;
+        }
+        return ((Double) value).doubleValue();
     }
 
     /**
@@ -204,8 +194,7 @@ public final class SessionHelper
     public static boolean getBoolean(String name, HttpSession session)
     {
         Object object = session.getAttribute(name);
-        if (object == null)
-        {
+        if (object == null) {
             return false;
         }
         return ((Boolean) object).booleanValue();
@@ -215,21 +204,19 @@ public final class SessionHelper
      * 描述：清除session中的所有值
      * 作者：
      * 时间：Oct 29, 2015 4:24:34 PM
+     *
      * @param session session
      */
     public static void removeAllAttribute(HttpSession session)
     {
-        @SuppressWarnings("unchecked")
-		Enumeration<String> e = session.getAttributeNames();
+        @SuppressWarnings("unchecked") Enumeration<String> e = session.getAttributeNames();
         List<String> attrName = new ArrayList<String>();
-        while (e.hasMoreElements())
-        {
+        while (e.hasMoreElements()) {
             String name = e.nextElement();
             attrName.add(name);
         }
-        for (String name : attrName)
-		{
-        	session.removeAttribute(name);
-		}
+        for (String name : attrName) {
+            session.removeAttribute(name);
+        }
     }
 }

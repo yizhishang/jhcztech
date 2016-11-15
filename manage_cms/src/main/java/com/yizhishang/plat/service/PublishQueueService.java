@@ -1,17 +1,16 @@
 package com.yizhishang.plat.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.base.util.DateHelper;
 import com.yizhishang.base.util.StringHelper;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 描述:
@@ -25,131 +24,126 @@ import com.yizhishang.base.util.StringHelper;
 @Service
 public class PublishQueueService extends BaseService
 {
-	
-	/**
-	 * 添加一条发布队列信息
-	 * @param data
-	 */
-	public void add(DynaModel data)
-	{
-		data.set("id", getSeqValue("T_PUBLISH_QUEUE"));
-		getJdbcTemplateUtil().insert("T_PUBLISH_QUEUE", data);
-	}
-	
-	/**
-	 * 删除队列信息
-	 * @param queueId
-	 */
-	public void delete(int queueId)
-	{
+
+    /**
+     * 添加一条发布队列信息
+     *
+     * @param data
+     */
+    public void add(DynaModel data)
+    {
+        data.set("id", getSeqValue("T_PUBLISH_QUEUE"));
+        getJdbcTemplateUtil().insert("T_PUBLISH_QUEUE", data);
+    }
+
+    /**
+     * 删除队列信息
+     *
+     * @param queueId
+     */
+    public void delete(int queueId)
+    {
         ArrayList<Integer> argList = new ArrayList<Integer>();
-		argList.add(new Integer(queueId));
-		getJdbcTemplateUtil().update("delete from T_PUBLISH_QUEUE where id=?", argList.toArray());
-	}
-	
-	/**
-	 * 删除所有队列信息
-	 */
-	public void deleteAllLog()
-	{
-		getJdbcTemplateUtil().update("delete from T_PUBLISH_QUEUE WHERE STATE != 1");
-	}
-	
-	/**
-	 * 根据队列ID，寻找命令字串
-	 * @param queueId
-	 * @return
-	 */
-	public String findCmdStrByQueueId(int queueId)
-	{
+        argList.add(new Integer(queueId));
+        getJdbcTemplateUtil().update("delete from T_PUBLISH_QUEUE where id=?", argList.toArray());
+    }
+
+    /**
+     * 删除所有队列信息
+     */
+    public void deleteAllLog()
+    {
+        getJdbcTemplateUtil().update("delete from T_PUBLISH_QUEUE WHERE STATE != 1");
+    }
+
+    /**
+     * 根据队列ID，寻找命令字串
+     *
+     * @param queueId
+     * @return
+     */
+    public String findCmdStrByQueueId(int queueId)
+    {
         ArrayList<Integer> argList = new ArrayList<Integer>();
-		argList.add(new Integer(queueId));
-		return getJdbcTemplateUtil().queryString("select cmd_str from T_PUBLISH_QUEUE where id=?", argList.toArray());
-	}
-	
-	/**
-	 * 
-	 * 查询发布队列  
-	 * @return DBPage<DynaModel>
-	 */
-	public DBPage<DynaModel> findPublishQueue(int curPage, int numPerPage, String startDate, String endDate, String siteNo)
-	{
+        argList.add(new Integer(queueId));
+        return getJdbcTemplateUtil().queryString("select cmd_str from T_PUBLISH_QUEUE where id=?", argList.toArray());
+    }
+
+    /**
+     * 查询发布队列
+     *
+     * @return DBPage<DynaModel>
+     */
+    public DBPage<DynaModel> findPublishQueue(int curPage, int numPerPage, String startDate, String endDate, String
+            siteNo)
+    {
         List<String> argList = new ArrayList<String>();
-		StringBuffer strBuf = new StringBuffer("SELECT * FROM T_PUBLISH_QUEUE WHERE 1 = 1");
-		if (StringHelper.isNotEmpty(startDate))
-		{
-			strBuf.append(" AND CREATE_DATE >= ?");
-			argList.add(startDate);
-		}
-		
-		if (StringHelper.isNotEmpty(endDate))
-		{
-			strBuf.append(" AND CREATE_DATE <= ?");
-			argList.add(endDate);
-		}
-		if (StringHelper.isNotEmpty(siteNo))
-		{
-			strBuf.append(" AND SITENO = ?");
-			argList.add(siteNo);
-		}
-		strBuf.append(" ORDER BY ID DESC");
-		return getJdbcTemplateUtil().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
-	}
-	
-	public void resetExceptionQueue()
-	{
+        StringBuffer strBuf = new StringBuffer("SELECT * FROM T_PUBLISH_QUEUE WHERE 1 = 1");
+        if (StringHelper.isNotEmpty(startDate)) {
+            strBuf.append(" AND CREATE_DATE >= ?");
+            argList.add(startDate);
+        }
+
+        if (StringHelper.isNotEmpty(endDate)) {
+            strBuf.append(" AND CREATE_DATE <= ?");
+            argList.add(endDate);
+        }
+        if (StringHelper.isNotEmpty(siteNo)) {
+            strBuf.append(" AND SITENO = ?");
+            argList.add(siteNo);
+        }
+        strBuf.append(" ORDER BY ID DESC");
+        return getJdbcTemplateUtil().queryPage(strBuf.toString(), argList.toArray(), curPage, numPerPage);
+    }
+
+    public void resetExceptionQueue()
+    {
         List<String> argList = new ArrayList<String>();
-		String sql = "SELECT ID,CREATE_DATE FROM T_PUBLISH_QUEUE WHERE STATE = 1 ORDER BY ID";
+        String sql = "SELECT ID,CREATE_DATE FROM T_PUBLISH_QUEUE WHERE STATE = 1 ORDER BY ID";
         List<DynaModel> queueList = getJdbcTemplateUtil().queryForList(sql);
-        for (Iterator<DynaModel> iter = queueList.iterator(); iter.hasNext();)
-		{
-			DynaModel dataRow = (DynaModel) iter.next();
-			String id = dataRow.getString("id");
-			Date publishDate = DateHelper.parseString(dataRow.getString("create_date"));
-			if (publishDate != null)
-			{
-				long differTime = DateHelper.getDateMiliDispersion(new Date(), publishDate);
-				if ((differTime / 1000 / 60) > 10)//判断队列处理时间是否大于10分钟
-				{
-					argList.add(id);
-				}
-			}
-			else
-			{
-				//将附件的创建时间更改为正确格式
-				getJdbcTemplateUtil().update("UPDATE T_PUBLISH_QUEUE SET CREATE_DATE = ? WHERE ID = ?", new Object[] { DateHelper.formatDate(new Date()), id });
-				argList.add(id);
-			}
-		}
-		
-		if (argList != null && argList.size() > 0)
-		{
-			StringBuffer buffer = new StringBuffer("UPDATE T_PUBLISH_QUEUE SET STATE = 0 WHERE ID IN (");
-			for (int i = 0; i < argList.size(); i++)
-			{
-				buffer.append("?");
-				if (i < argList.size() - 1)
-				{
-					buffer.append(",");
-				}
-			}
-			buffer.append(")");
-			getJdbcTemplateUtil().update(buffer.toString(), argList.toArray());
-		}
-		
-	}
-	
-	/**
-	 * 更新队列中某条记录的状态
-	 *
-	 * @param queueId
-	 * @param state
-	 */
-	public void updateState(int queueId, int state)
-	{
+        for (Iterator<DynaModel> iter = queueList.iterator(); iter.hasNext(); ) {
+            DynaModel dataRow = (DynaModel) iter.next();
+            String id = dataRow.getString("id");
+            Date publishDate = DateHelper.parseString(dataRow.getString("create_date"));
+            if (publishDate != null) {
+                long differTime = DateHelper.getDateMiliDispersion(new Date(), publishDate);
+                if ((differTime / 1000 / 60) > 10)//判断队列处理时间是否大于10分钟
+                {
+                    argList.add(id);
+                }
+            } else {
+                //将附件的创建时间更改为正确格式
+                getJdbcTemplateUtil().update("UPDATE T_PUBLISH_QUEUE SET CREATE_DATE = ? WHERE ID = ?", new Object[]
+                        {DateHelper.formatDate(new Date()), id});
+                argList.add(id);
+            }
+        }
+
+        if (argList != null && argList.size() > 0) {
+            StringBuffer buffer = new StringBuffer("UPDATE T_PUBLISH_QUEUE SET STATE = 0 WHERE ID IN (");
+            for (int i = 0; i < argList.size(); i++) {
+                buffer.append("?");
+                if (i < argList.size() - 1) {
+                    buffer.append(",");
+                }
+            }
+            buffer.append(")");
+            getJdbcTemplateUtil().update(buffer.toString(), argList.toArray());
+        }
+
+    }
+
+    /**
+     * 更新队列中某条记录的状态
+     *
+     * @param queueId
+     * @param state
+     */
+    public void updateState(int queueId, int state)
+    {
         ArrayList<Integer> argList = new ArrayList<Integer>();
-		argList.add(new Integer(state));
-		argList.add(new Integer(queueId));
-		getJdbcTemplateUtil().update("update T_PUBLISH_QUEUE set state=? where id=?", argList.toArray());
-	}
+        argList.add(new Integer(state));
+        argList.add(new Integer(queueId));
+        getJdbcTemplateUtil().update("update T_PUBLISH_QUEUE set state=? where id=?", argList.toArray());
+    }
 }

@@ -14,64 +14,53 @@ import com.yizhishang.base.domain.DynaModel;
 public class Role_Catalog_Right extends DynaModel
 {
 
-	
-	
-	public int getId()
-	{
-		return getInt("id");
-	}
-	
-	
-	public void setId(int id)
-	{
-		set("id", id);
-	}
-	
-	
-	public int getRole_id()
-	{
-		return getInt("role_id");
-	}
-	
-	
-	public void setRole_id(int role_id)
-	{
-		set("role_id", role_id);
-	}
-	
-	
-	public String getCatalogIdList()
-	{
-		return getString("catalog_id_list");
-	}
-	
-	
-	public void setCatalogIdList(String catalog_id_list)
-	{
-		set("catalog_id_list", catalog_id_list);
-	}
-	
-	
-	public String getSiteNo()
-	{
-		return getString("siteno");
-	}
-	
-	
-	public void setSiteNo(String siteno)
-	{
-		set("siteno", siteno);
-	}
-	
-	
-	public String getType()
-	{
-		return getString("type");
-	}
-	
-	
-	public void setType(String type)
-	{
-		set("type", type);
-	}
+    public int getId()
+    {
+        return getInt("id");
+    }
+
+    public void setId(int id)
+    {
+        set("id", id);
+    }
+
+    public int getRole_id()
+    {
+        return getInt("role_id");
+    }
+
+    public void setRole_id(int role_id)
+    {
+        set("role_id", role_id);
+    }
+
+    public String getCatalogIdList()
+    {
+        return getString("catalog_id_list");
+    }
+
+    public void setCatalogIdList(String catalog_id_list)
+    {
+        set("catalog_id_list", catalog_id_list);
+    }
+
+    public String getSiteNo()
+    {
+        return getString("siteno");
+    }
+
+    public void setSiteNo(String siteno)
+    {
+        set("siteno", siteno);
+    }
+
+    public String getType()
+    {
+        return getString("type");
+    }
+
+    public void setType(String type)
+    {
+        set("type", type);
+    }
 }

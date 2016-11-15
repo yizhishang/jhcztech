@@ -1,11 +1,13 @@
 package com.yizhishang.timerengine;
 
-import org.slf4j.Logger;import org.slf4j.LoggerFactory;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TimerTaskImpl extends AbstractTimerTask
 {
+
     private static Logger logger = LoggerFactory.getLogger(TimerTaskImpl.class);
+
     //需要执行的任务
     private Task task = null;
 
@@ -20,15 +22,11 @@ public class TimerTaskImpl extends AbstractTimerTask
         return new TimerTaskImpl(taskEntry, task);
     }
 
-
     public void execute()
     {
-        try
-        {
+        try {
             task.execute();
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             logger.error("", ex);
         }
     }

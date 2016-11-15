@@ -11,7 +11,7 @@ package com.yizhishang.base.jdbc.exception;
  */
 public class JdbcException extends RuntimeException
 {
-    
+
     private static final long serialVersionUID = 1L;
 
     public JdbcException()
@@ -19,18 +19,15 @@ public class JdbcException extends RuntimeException
         super();
     }
 
-
     public JdbcException(String message)
     {
         super(message);
     }
 
-
     public JdbcException(String message, Throwable cause)
     {
         super(message, cause);
     }
-
 
     public JdbcException(Throwable cause)
     {

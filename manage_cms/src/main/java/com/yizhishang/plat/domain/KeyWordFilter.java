@@ -13,15 +13,15 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class KeyWordFilter extends DynaModel
 {
-	
-    public void setId(int filter_id)
-    {
-        set("filter_id", filter_id);
-    }
 
     public int getId()
     {
         return getInt("filter_id");
+    }
+
+    public void setId(int filter_id)
+    {
+        set("filter_id", filter_id);
     }
 
     public void setKeyword(String keyword)
@@ -34,19 +34,14 @@ public class KeyWordFilter extends DynaModel
         return getString("keyword");
     }
 
-    public void setSiteNo(String siteno)
-    {
-        set("siteno", siteno);
-    }
-
     public String getSiteNo()
     {
         return getString("siteno");
     }
 
-    public void setCreateBy(String create_by)
+    public void setSiteNo(String siteno)
     {
-        set("create_by", create_by);
+        set("siteno", siteno);
     }
 
     public String getCreateBy()
@@ -54,9 +49,9 @@ public class KeyWordFilter extends DynaModel
         return getString("create_by");
     }
 
-    public void setCreateDate(String create_date)
+    public void setCreateBy(String create_by)
     {
-        set("create_date", create_date);
+        set("create_by", create_by);
     }
 
     public String getCreateDate()
@@ -64,9 +59,9 @@ public class KeyWordFilter extends DynaModel
         return getString("create_date");
     }
 
-    public void setModifiedBy(String modified_by)
+    public void setCreateDate(String create_date)
     {
-        set("modified_by", modified_by);
+        set("create_date", create_date);
     }
 
     public String getModifiedBy()
@@ -74,9 +69,9 @@ public class KeyWordFilter extends DynaModel
         return getString("modified_by");
     }
 
-    public void setModifiedDate(String modified_date)
+    public void setModifiedBy(String modified_by)
     {
-        set("modified_date", modified_date);
+        set("modified_by", modified_by);
     }
 
     public String getModifiedDate()
@@ -84,13 +79,18 @@ public class KeyWordFilter extends DynaModel
         return getString("modified_date");
     }
 
-    public void setState(String state)
+    public void setModifiedDate(String modified_date)
     {
-        set("state", state);
+        set("modified_date", modified_date);
     }
 
     public String getState()
     {
         return getString("state");
+    }
+
+    public void setState(String state)
+    {
+        set("state", state);
     }
 }

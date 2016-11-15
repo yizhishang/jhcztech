@@ -11,26 +11,32 @@ package com.yizhishang.base.jdbc;
  */
 public final class DatabaseType
 {
+
     /**
      * 其它数据库
      */
     public static int OTHER = 0;
+
     /**
      * ORACLE数据库
      */
     public static int ORACLE = 1;
+
     /**
      * MYSQL数据库
      */
     public static int MYSQL = 2;
+
     /**
      * MSSQL数据库
      */
     public static int MSSQL = 3;
+
     /**
      * DB2数据库
      */
     public static int DB2 = 4;
+
     /**
      * POSTGRESQL数据库
      */

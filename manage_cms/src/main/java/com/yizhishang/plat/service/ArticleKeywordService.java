@@ -1,15 +1,14 @@
 package com.yizhishang.plat.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.plat.dao.ArticleKeywordDao;
 import com.yizhishang.plat.domain.ArticleKeyword;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 描述:
@@ -23,15 +22,15 @@ import com.yizhishang.plat.domain.ArticleKeyword;
 @Service
 public class ArticleKeywordService extends BaseService
 {
-	
-	@Autowired
-	ArticleKeywordDao articleKeywordDao;
-	
+
+    @Autowired
+    ArticleKeywordDao articleKeywordDao;
+
     public void addArticleKeyword(ArticleKeyword articleKeyword)
     {
         String id = getSeqValue("T_ARTICLE_KEYWORD");
         articleKeyword.setId(Integer.parseInt(id));
-        
+
         articleKeywordDao.addArticleKeyword(articleKeyword);
     }
 

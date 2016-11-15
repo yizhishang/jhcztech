@@ -1,17 +1,16 @@
 package com.yizhishang.plat.dao;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
-
 import com.yizhishang.base.dao.BaseDao;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.plat.domain.ArticleKeyword;
+import org.springframework.stereotype.Repository;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 描述:
@@ -25,6 +24,7 @@ import com.yizhishang.plat.domain.ArticleKeyword;
 @Repository
 public class ArticleKeywordDao extends BaseDao
 {
+
     public void addArticleKeyword(ArticleKeyword articleKeyword)
     {
         DynaModel dataRow = new DynaModel();
@@ -39,22 +39,21 @@ public class ArticleKeywordDao extends BaseDao
 
     public List<ArticleKeyword> findAll()
     {
-        List<ArticleKeyword> dataList = getJdbcTemplateUtil().queryForList("select * from T_ARTICLE_KEYWORd", ArticleKeyword.class);
+        List<ArticleKeyword> dataList = getJdbcTemplateUtil().queryForList("select * from T_ARTICLE_KEYWORd",
+                ArticleKeyword.class);
         return dataList;
     }
 
     public ArticleKeyword findById(int id)
     {
         DynaModel dataRow;
-		try
-		{
-			dataRow = getJdbcTemplateUtil().queryMap("select * from T_ARTICLE_KEYWORD where id=? ", new Object[]{new Integer(id)});
-		}
-		catch (SQLException e)
-		{
-			logger.error(e.getMessage());
-			return null;
-		}
+        try {
+            dataRow = getJdbcTemplateUtil().queryMap("select * from T_ARTICLE_KEYWORD where id=? ", new Object[] {new
+                    Integer(id)});
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+            return null;
+        }
         if (dataRow == null)
             return null;
 
@@ -69,20 +68,17 @@ public class ArticleKeywordDao extends BaseDao
         StringBuffer sqlBuffer = new StringBuffer();
         ArrayList<String> argList = new ArrayList<String>();
         sqlBuffer.append("select * from T_ARTICLE_KEYWORD where 1=1 ");
-        if (!StringHelper.isEmpty(name))
-        {
+        if (!StringHelper.isEmpty(name)) {
             sqlBuffer.append(" and name like ? ");
             argList.add("%" + name + "%");
         }
         sqlBuffer.append(" order by id desc ");
         page = getJdbcTemplateUtil().queryPage(sqlBuffer.toString(), argList.toArray(), curPage, numPerPage);
 
-        if (page != null)
-        {
+        if (page != null) {
             List<DynaModel> dataList = page.getData();
             ArrayList<DynaModel> newDataList = new ArrayList<DynaModel>();
-            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
-            {
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext(); ) {
                 ArticleKeyword articleKeyword = new ArticleKeyword();
                 DynaModel row = (DynaModel) iter.next();
                 articleKeyword.fromMap(row);

@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Right_Function extends DynaModel
 {
-	
+
     public String getName()
     {
         return getString("name");
@@ -24,20 +24,14 @@ public class Right_Function extends DynaModel
         set("name", name);
     }
 
-    public void setEname(String ename)
-    {
-        set("ename", ename);
-    }
-
     public String getEname()
     {
         return getString("ename");
     }
 
-
-    public void setFunction_code(String function_code)
+    public void setEname(String ename)
     {
-        set("function_code", function_code);
+        set("ename", ename);
     }
 
     public String getFunction_code()
@@ -45,9 +39,9 @@ public class Right_Function extends DynaModel
         return getString("function_code");
     }
 
-    public void setModule_code(String module_code)
+    public void setFunction_code(String function_code)
     {
-        set("module_code", module_code);
+        set("function_code", function_code);
     }
 
     public String getModule_code()
@@ -55,13 +49,18 @@ public class Right_Function extends DynaModel
         return getString("module_code");
     }
 
-    public void setSiteno(String siteno)
+    public void setModule_code(String module_code)
     {
-        set("siteno", siteno);
+        set("module_code", module_code);
     }
 
     public String getSiteno()
     {
         return getString("siteno");
+    }
+
+    public void setSiteno(String siteno)
+    {
+        set("siteno", siteno);
     }
 }

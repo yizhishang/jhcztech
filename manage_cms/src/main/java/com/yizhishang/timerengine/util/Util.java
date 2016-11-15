@@ -4,9 +4,9 @@
 
 package com.yizhishang.timerengine.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 /**
  * 描述:
@@ -30,7 +30,7 @@ public class Util
     {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        Calendar now=Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
         return cal.before(now);
     }
 
@@ -87,8 +87,7 @@ public class Util
      */
     public static String which(String className)
     {
-        if (!className.startsWith("/"))
-        {
+        if (!className.startsWith("/")) {
             className = "/" + className;
         }
         className = className.replace('.', '/');
@@ -105,46 +104,38 @@ public class Util
         StringBuffer buffer = new StringBuffer();
 
         n = Util.getDayFromMilliSecond(spareMSecond);
-        if (n > 0)
-        {
+        if (n > 0) {
             buffer.append("" + n + "天");
         }
         spareMSecond = Util.getDaySpareFromMilliSecond(spareMSecond);
-        if (spareMSecond == 0)
-        {
+        if (spareMSecond == 0) {
             return buffer.toString();
         }
 
         n = Util.getHourFromMilliSecond(spareMSecond);
-        if (n > 0)
-        {
+        if (n > 0) {
             buffer.append("" + n + "小时");
         }
         spareMSecond = Util.getHourSpareFromMilliSecond(spareMSecond);
-        if (spareMSecond == 0)
-        {
+        if (spareMSecond == 0) {
             return buffer.toString();
         }
 
         n = Util.getMinuteFromMilliSecond(spareMSecond);
-        if (n > 0)
-        {
+        if (n > 0) {
             buffer.append("" + n + "分");
         }
         spareMSecond = Util.getMinuteSpareFromMilliSecond(spareMSecond);
-        if (spareMSecond == 0)
-        {
+        if (spareMSecond == 0) {
             return buffer.toString();
         }
 
         n = Util.getSecondFromMilliSecond(spareMSecond);
-        if (n > 0)
-        {
+        if (n > 0) {
             buffer.append("" + n + "秒");
         }
         spareMSecond = Util.getSecondSpareFromMilliSecond(spareMSecond);
-        if (spareMSecond == 0)
-        {
+        if (spareMSecond == 0) {
             return buffer.toString();
         }
 

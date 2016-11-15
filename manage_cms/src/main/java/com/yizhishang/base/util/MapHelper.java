@@ -13,32 +13,29 @@ import java.util.Map;
  */
 public class MapHelper
 {
-    
+
     /**
      * 获取Bool值
+     *
      * @param name 键值名称
      * @return 若不存在，或转换失败，则返回false
      */
     public static boolean getBoolean(Map<String, Object> map, String name)
     {
-        if (name == null || name.equals(""))
-        {
+        if (name == null || name.equals("")) {
             return false;
         }
 
         boolean value = false;
-        if (map.containsKey(name) == false)
-        {
+        if (map.containsKey(name) == false) {
             return false;
         }
         Object obj = map.get(name);
-        if (obj == null)
-        {
+        if (obj == null) {
             return false;
         }
 
-        if (obj instanceof Boolean)
-        {
+        if (obj instanceof Boolean) {
             return ((Boolean) obj).booleanValue();
         }
 
@@ -49,41 +46,33 @@ public class MapHelper
 
     /**
      * 获取Double型值
+     *
      * @param name 键值名称
      * @return 若不存在，或转换失败，则返回0
      */
     public static double getDouble(Map<String, Object> map, String name)
     {
-        if (name == null || name.equals(""))
-        {
+        if (name == null || name.equals("")) {
             return 0;
         }
 
         double value = 0;
-        if (map.containsKey(name) == false)
-        {
+        if (map.containsKey(name) == false) {
             return 0;
         }
 
         Object obj = map.get(name);
-        if (obj == null)
-        {
+        if (obj == null) {
             return 0;
         }
 
-        if (!(obj instanceof Double))
-        {
-            try
-            {
+        if (!(obj instanceof Double)) {
+            try {
                 value = Double.parseDouble(obj.toString());
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 value = 0;
             }
-        }
-        else
-        {
+        } else {
             value = ((Double) obj).doubleValue();
             obj = null;
         }
@@ -99,36 +88,27 @@ public class MapHelper
      */
     public static float getFloat(Map<String, Object> map, String name)
     {
-        if (name == null || name.equals(""))
-        {
+        if (name == null || name.equals("")) {
             return 0;
         }
 
         float value = 0;
-        if (map.containsKey(name) == false)
-        {
+        if (map.containsKey(name) == false) {
             return 0;
         }
 
         Object obj = map.get(name);
-        if (obj == null)
-        {
+        if (obj == null) {
             return 0;
         }
 
-        if (!(obj instanceof Float))
-        {
-            try
-            {
+        if (!(obj instanceof Float)) {
+            try {
                 value = Float.parseFloat(obj.toString());
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 value = 0;
             }
-        }
-        else
-        {
+        } else {
             value = ((Float) obj).floatValue();
             obj = null;
         }
@@ -138,41 +118,33 @@ public class MapHelper
 
     /**
      * 返回整型值
+     *
      * @param name 键值名称
      * @return 若不存在，或转换失败，则返回0
      */
     public static int getInt(Map<String, Object> map, String name)
     {
-        if (name == null || name.equals(""))
-        {
+        if (name == null || name.equals("")) {
             return 0;
         }
 
         int value = 0;
-        if (map.containsKey(name) == false)
-        {
+        if (map.containsKey(name) == false) {
             return 0;
         }
 
         Object obj = map.get(name);
-        if (obj == null)
-        {
+        if (obj == null) {
             return 0;
         }
 
-        if (!(obj instanceof Integer))
-        {
-            try
-            {
+        if (!(obj instanceof Integer)) {
+            try {
                 value = Integer.parseInt(obj.toString());
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 value = 0;
             }
-        }
-        else
-        {
+        } else {
             value = ((Integer) obj).intValue();
             obj = null;
         }
@@ -182,41 +154,33 @@ public class MapHelper
 
     /**
      * 获取长整型值
+     *
      * @param name 键值名称
      * @return 若不存在，或转换失败，则返回0
      */
     public static long getLong(Map<String, Object> map, String name)
     {
-        if (name == null || name.equals(""))
-        {
+        if (name == null || name.equals("")) {
             return 0;
         }
 
         long value = 0;
-        if (map.containsKey(name) == false)
-        {
+        if (map.containsKey(name) == false) {
             return 0;
         }
 
         Object obj = map.get(name);
-        if (obj == null)
-        {
+        if (obj == null) {
             return 0;
         }
 
-        if (!(obj instanceof Long))
-        {
-            try
-            {
+        if (!(obj instanceof Long)) {
+            try {
                 value = Long.parseLong(obj.toString());
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 value = 0;
             }
-        }
-        else
-        {
+        } else {
             value = ((Long) obj).longValue();
             obj = null;
         }
@@ -232,19 +196,16 @@ public class MapHelper
      */
     public static String getString(Map<String, Object> map, String name)
     {
-        if (name == null || name.equals(""))
-        {
+        if (name == null || name.equals("")) {
             return "";
         }
 
         String value = "";
-        if (map.containsKey(name) == false)
-        {
+        if (map.containsKey(name) == false) {
             return "";
         }
         Object obj = map.get(name);
-        if (obj != null)
-        {
+        if (obj != null) {
             value = obj.toString();
         }
         obj = null;

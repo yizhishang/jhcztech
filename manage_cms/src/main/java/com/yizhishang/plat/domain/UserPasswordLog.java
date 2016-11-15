@@ -13,55 +13,54 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class UserPasswordLog extends DynaModel
 {
-	
-	
-	public int getLogId()
-	{
-		return getInt("log_id");
-	}
-	
-	public void setLogId(int id)
-	{
-		set("log_id",id);
-	}
-	
-	public String getPassword()
-	{
-		return getString("password");
-	}
-	
-	public void setPassword(String password)
-	{
-		set("password",password);
-	}
-	
-	public String getCreateDate()
-	{
-		return getString("create_date");
-	}
-	
-	public void setCreateDate(String create_date)
-	{
-		set("create_date",create_date);
-	}
-	
-	public String getDescription()
-	{
-		return getString("description");
-	}
-	
-	public void setDescription(String description)
-	{
-		set("description",description);
-	}
 
-	public String getCreateBy()
-	{
-		return getString("create_by");
-	}
+    public int getLogId()
+    {
+        return getInt("log_id");
+    }
 
-	public void setCreateBy(String create_by)
-	{
-		set("create_by",create_by);
-	}
+    public void setLogId(int id)
+    {
+        set("log_id", id);
+    }
+
+    public String getPassword()
+    {
+        return getString("password");
+    }
+
+    public void setPassword(String password)
+    {
+        set("password", password);
+    }
+
+    public String getCreateDate()
+    {
+        return getString("create_date");
+    }
+
+    public void setCreateDate(String create_date)
+    {
+        set("create_date", create_date);
+    }
+
+    public String getDescription()
+    {
+        return getString("description");
+    }
+
+    public void setDescription(String description)
+    {
+        set("description", description);
+    }
+
+    public String getCreateBy()
+    {
+        return getString("create_by");
+    }
+
+    public void setCreateBy(String create_by)
+    {
+        set("create_by", create_by);
+    }
 }

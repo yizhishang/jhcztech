@@ -1,10 +1,9 @@
 package com.yizhishang.base.dao;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.yizhishang.base.jdbc.JdbcTemplateUtil;
 import com.yizhishang.base.util.SpringContextHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 描述:
@@ -17,9 +16,9 @@ import com.yizhishang.base.util.SpringContextHolder;
  */
 public class BaseDao
 {
-	
-	protected Logger logger = LoggerFactory.getLogger(getClass());
-    
+
+    protected Logger logger = LoggerFactory.getLogger(getClass());
+
     /**
      * 返回数据操作对象
      *
@@ -29,5 +28,5 @@ public class BaseDao
     {
         return SpringContextHolder.getBean("jdbcTemplateUtil");
     }
-    
+
 }

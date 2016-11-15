@@ -1,10 +1,9 @@
 package com.yizhishang.plat.web.listener;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import java.util.ArrayList;
 
 /**
  * 描述:
@@ -17,24 +16,23 @@ import javax.servlet.http.HttpSessionListener;
  */
 public class SessionLifecycleListener implements HttpSessionListener
 {
-    
+
     private static ArrayList<Object> sessionList = new ArrayList<Object>();
+
+    public SessionLifecycleListener()
+    {
+    }
 
     public static ArrayList<Object> getSessionList()
     {
         return sessionList;
     }
 
-    public SessionLifecycleListener()
-    {
-    }
-
     @Override
     public void sessionCreated(HttpSessionEvent se)
     {
         HttpSession session = se.getSession();
-        synchronized (sessionList)
-        {
+        synchronized (sessionList) {
             sessionList.add(session);
         }
     }
@@ -44,9 +42,8 @@ public class SessionLifecycleListener implements HttpSessionListener
     {
 
         HttpSession session = se.getSession();
-        synchronized (sessionList)
-        {
-           sessionList.remove(session);
+        synchronized (sessionList) {
+            sessionList.remove(session);
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.yizhishang.plat.service.exception;
 
 /**
- * 描述:  
+ * 描述:
  * 版权:	 Copyright (c) 2009
  * 公司:	 285206405@qq.com
  * 作者:	 袁永君
@@ -11,26 +11,26 @@ package com.yizhishang.plat.service.exception;
  */
 public class PasswordErrorException extends BaseException
 {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     public PasswordErrorException()
-	{
-		super();
-	}
-	
-	public PasswordErrorException(String message)
-	{
-		super(message);
-	}
-	
-	public PasswordErrorException(String message, Throwable cause)
-	{
-		super(message, cause);
-	}
-	
-	public PasswordErrorException(Throwable cause)
-	{
-		super(cause);
-	}
+    {
+        super();
+    }
+
+    public PasswordErrorException(String message)
+    {
+        super(message);
+    }
+
+    public PasswordErrorException(String message, Throwable cause)
+    {
+        super(message, cause);
+    }
+
+    public PasswordErrorException(Throwable cause)
+    {
+        super(cause);
+    }
 }

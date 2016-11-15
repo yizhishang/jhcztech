@@ -1,14 +1,13 @@
-
 package com.yizhishang.timerengine;
+
+import com.yizhishang.timerengine.util.TimerGenerate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.StringTokenizer;
-
-import org.slf4j.Logger;import org.slf4j.LoggerFactory;
-
-import com.yizhishang.timerengine.util.TimerGenerate;
 
 public class TaskSelectHourMinuteBuilder extends AbstractTaskBuilder
 {
@@ -31,45 +30,36 @@ public class TaskSelectHourMinuteBuilder extends AbstractTaskBuilder
         String intervalStr = getString("task-interval");
 
         //若没有任务名称，则返回空
-        if (taskName.length() == 0)
-        {
+        if (taskName.length() == 0) {
             showConfigErrMsg(taskId, "task-name必须设定");
             return null;
         }
 
         //若没有task-interval，则返回
-        if (intervalStr.length() == 0)
-        {
+        if (intervalStr.length() == 0) {
             showConfigErrMsg(taskId, "task-interval必须设定，且至少必须指定一个时间");
             return null;
         }
 
-
         Task task = taskObjectFromClassName(taskClass);
         //若对象不能建立，则返回空
-        if (task == null)
-        {
+        if (task == null) {
             showConfigErrMsg(taskId, "task-class的设置存在问题，不能建立相应的对象");
             return null;
         }
 
-
         Date startDate = null;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try
-        {
+        try {
             startDate = dateFormat.parse(startDateStr);
-        }
-        catch (ParseException ex)
-        {
+        } catch (ParseException ex) {
         }
 
         TimePlanSelectHourMinute timePlan = new TimePlanSelectHourMinute();
         timePlan.setStartDate(generateStartDate(startDate));
 
         //若没有一天中的任何一个时间点，则返回空
-        if (setSelectHourMinute(timePlan, intervalStr) == 0)
-        {
+        if (setSelectHourMinute(timePlan, intervalStr) == 0) {
             showConfigErrMsg(taskId, "task-interval的格式设定不正确");
             timePlan = null;
             return null;
@@ -94,18 +84,14 @@ public class TaskSelectHourMinuteBuilder extends AbstractTaskBuilder
 
         //记录设定了几个时间点
         int i = 0;
-        while (token.hasMoreElements())
-        {
-            try
-            {
+        while (token.hasMoreElements()) {
+            try {
 
                 Date date = dateFormat.parse(token.nextToken());
                 timePlan.addSatrtHourMinute(date);
                 i++;
-            }
-            catch (ParseException ex)
-            {
-                logger.error("",ex);
+            } catch (ParseException ex) {
+                logger.error("", ex);
             }
         }
         return i;

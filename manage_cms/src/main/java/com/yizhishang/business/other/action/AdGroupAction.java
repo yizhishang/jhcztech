@@ -1,18 +1,5 @@
 package com.yizhishang.business.other.action;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.util.BeanHelper;
 import com.yizhishang.base.util.DateHelper;
@@ -23,6 +10,17 @@ import com.yizhishang.business.other.service.AdGroupService;
 import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.web.action.BaseAction;
 import com.yizhishang.plat.web.form.DynaForm;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 描述:  广告组Action处理类
@@ -37,14 +35,15 @@ import com.yizhishang.plat.web.form.DynaForm;
 @RequestMapping("/admin/adGroupAdmin")
 public class AdGroupAction extends BaseAction
 {
-    
+
+    private final DynaForm form = new DynaForm();
+
     @Resource
     AdGroupService adGroupService;
-    
-    private final DynaForm form = new DynaForm();
-    
+
     /**
      * 描述：默认分页处理方法
+     *
      * @return
      */
     @Override
@@ -63,9 +62,10 @@ public class AdGroupAction extends BaseAction
         mv.setViewName("/WEB-INF/views/adGroup/ad_group_list.jsp");
         return mv;
     }
-    
+
     /**
      * 描述：添加广告组信息
+     *
      * @return
      */
     @Override
@@ -75,7 +75,7 @@ public class AdGroupAction extends BaseAction
         mv.setViewName("/WEB-INF/views/adGroup/ad_group_add.jsp");
         return mv;
     }
-    
+
     @Override
     @ResponseBody
     @RequestMapping("/add.action")
@@ -83,30 +83,30 @@ public class AdGroupAction extends BaseAction
     {
         DynaForm form = normalize(request);
         String message = "";
-        if (StringHelper.isEmpty(form.getString("name")))
-        {
+        if (StringHelper.isEmpty(form.getString("name"))) {
             message = "广告组名称不为空";
             result.setErrorInfo(message);
             result.setErrorNo(-1);
             return result;
         }
-        
+
         Ad_Group ad_group = new Ad_Group();
         BeanHelper.mapToBean(form, ad_group);
-        
+
         ad_group.setSiteNo(getSiteNo());
         ad_group.setCreateBy(getUID());
         ad_group.setCreateDate(DateHelper.formatDate(new Date()));
         ad_group.setModifiedBy(getUID());
         ad_group.setModifiedDate(DateHelper.formatDate(new Date()));
-        
+
         adGroupService.addAdGroup(ad_group);
         addLog("添加广告信息", "添加广告信息[ID=" + ad_group.getId() + ",name=" + ad_group.getName() + "]");
         return super.edit(request, response);
     }
-    
+
     /**
      * 描述：修改广告组信息
+     *
      * @return
      */
     @Override
@@ -115,11 +115,10 @@ public class AdGroupAction extends BaseAction
     {
         int id = this.getIntParameter("id");
         String siteno = getSiteNo();
-        
+
         Ad_Group ad_group = adGroupService.findAdGroupById(id, siteno);
-        
-        if (id == 0 || ad_group == null)
-        {
+
+        if (id == 0 || ad_group == null) {
             ScriptHelper.alert(response, "该栏目不存在或已经被删除", "close");
             return null;
         }
@@ -128,7 +127,7 @@ public class AdGroupAction extends BaseAction
         mv.setViewName("/WEB-INF/views/adGroup/ad_group_edit.jsp");
         return mv;
     }
-    
+
     @Override
     @ResponseBody
     @RequestMapping("/edit.action")
@@ -136,28 +135,28 @@ public class AdGroupAction extends BaseAction
     {
         DynaForm form = normalize(request);
         String message = "";
-        if (StringHelper.isEmpty(form.getString("name")))
-        {
+        if (StringHelper.isEmpty(form.getString("name"))) {
             message = "广告组名称不为空";
             result.setErrorInfo(message);
             result.setErrorNo(-1);
             return result;
         }
-        
+
         Ad_Group ad_group = new Ad_Group();
         BeanHelper.mapToBean(form, ad_group);
-        
+
         ad_group.setSiteNo(getSiteNo());
         ad_group.setModifiedBy(getUID());
         ad_group.setModifiedDate(DateHelper.formatDate(new Date()));
-        
+
         adGroupService.updateAdGroup(ad_group);
         addLog("修改广告信息", "修改广告信息[ID=" + ad_group.getId() + ",name=" + ad_group.getName() + "]");
         return super.edit(request, response);
     }
-    
+
     /**
      * 描述：删除广告组信息
+     *
      * @return
      */
     @ResponseBody
@@ -165,12 +164,9 @@ public class AdGroupAction extends BaseAction
     public Result delete(HttpServletRequest request, HttpServletResponse response)
     {
         int[] idArray = getIntArrayParameter("id");
-        for (int i = 0; i < idArray.length; i++)
-        {
-            @SuppressWarnings("rawtypes")
-			List<Map> list = adGroupService.findAdById(idArray[i], getSiteNo());
-            if (list.size() > 0)
-            {
+        for (int i = 0; i < idArray.length; i++) {
+            @SuppressWarnings("rawtypes") List<Map> list = adGroupService.findAdById(idArray[i], getSiteNo());
+            if (list.size() > 0) {
                 request.setAttribute("error", "请删除该广告组下的广告在进行删除");
                 return new Result(-1, "请删除该广告组下的广告在进行删除!");
             }

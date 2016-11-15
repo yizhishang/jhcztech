@@ -2,9 +2,9 @@ package com.yizhishang.timerengine;
 
 import java.util.Date;
 
-
 public interface TimePlan
 {
+
     /**
      * 判断还有没有下一个计划时间
      *

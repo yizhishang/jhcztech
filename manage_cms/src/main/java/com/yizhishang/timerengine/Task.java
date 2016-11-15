@@ -7,5 +7,6 @@ package com.yizhishang.timerengine;
 
 public interface Task
 {
+
     public void execute();
 }

@@ -13,7 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Link extends DynaModel
 {
-	
+
     public int getLinkid()
     {
         return getInt("lnk_id");
@@ -34,15 +34,14 @@ public class Link extends DynaModel
         set("siteno", siteno);
     }
 
-
     public int getGroup_id()
     {
         return getInt("group_id");
     }
 
-public void setGroup_id(int group_id)
+    public void setGroup_id(int group_id)
     {
-         set("group_id",group_id);
+        set("group_id", group_id);
     }
 
     public String getName()
@@ -134,6 +133,5 @@ public void setGroup_id(int group_id)
     {
         set("modified_date", modified_date);
     }
-
 
 }

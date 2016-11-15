@@ -13,106 +13,105 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class Role extends DynaModel
 {
-	
-	
-	public int getId()
-	{
-		return getInt("id");
-	}
-	
-	public void setId(int id)
-	{
-		set("id", id);
-	}
-	
-	public String getRoleno()
-	{
-		return getString("roleno");
-	}
-	
-	public void setRoleno(String roleno)
-	{
-		set("roleno", roleno);
-	}
-	
-	public String getName()
-	{
-		return getString("name");
-	}
-	
-	public void setName(String name)
-	{
-		set("name", name);
-	}
-	
-	public String getSiteNo()
-	{
-		return getString("siteno");
-	}
-	
-	public void setSiteNo(String siteNo)
-	{
-		set("siteno", siteNo);
-	}
-	
-	public int getIsSystem()
-	{
-		return getInt("is_system");
-	}
-	
-	public void setIsSystem(int isSystem)
-	{
-		set("is_system", isSystem);
-	}
-	
-	public String getCreateBy()
-	{
-		return getString("create_by");
-	}
-	
-	public void setCreateBy(String createBy)
-	{
-		set("create_by", createBy);
-	}
-	
-	public String getCreateDate()
-	{
-		return getString("create_date");
-	}
-	
-	public void setCreateDate(String createDate)
-	{
-		set("create_date", createDate);
-	}
-	
-	public String getModifiedBy()
-	{
-		return getString("modified_by");
-	}
-	
-	public void setModifiedBy(String modifiedBy)
-	{
-		set("modified_by", modifiedBy);
-	}
-	
-	public String getModifiedDate()
-	{
-		return getString("modified_date");
-	}
-	
-	public void setModifiedDate(String modifiedDate)
-	{
-		set("modified_date", modifiedDate);
-	}
-	
-	public String getDescription()
-	{
-		return getString("description");
-	}
-	
-	public void setDescription(String description)
-	{
-		set("description", description);
-	}
-	
+
+    public int getId()
+    {
+        return getInt("id");
+    }
+
+    public void setId(int id)
+    {
+        set("id", id);
+    }
+
+    public String getRoleno()
+    {
+        return getString("roleno");
+    }
+
+    public void setRoleno(String roleno)
+    {
+        set("roleno", roleno);
+    }
+
+    public String getName()
+    {
+        return getString("name");
+    }
+
+    public void setName(String name)
+    {
+        set("name", name);
+    }
+
+    public String getSiteNo()
+    {
+        return getString("siteno");
+    }
+
+    public void setSiteNo(String siteNo)
+    {
+        set("siteno", siteNo);
+    }
+
+    public int getIsSystem()
+    {
+        return getInt("is_system");
+    }
+
+    public void setIsSystem(int isSystem)
+    {
+        set("is_system", isSystem);
+    }
+
+    public String getCreateBy()
+    {
+        return getString("create_by");
+    }
+
+    public void setCreateBy(String createBy)
+    {
+        set("create_by", createBy);
+    }
+
+    public String getCreateDate()
+    {
+        return getString("create_date");
+    }
+
+    public void setCreateDate(String createDate)
+    {
+        set("create_date", createDate);
+    }
+
+    public String getModifiedBy()
+    {
+        return getString("modified_by");
+    }
+
+    public void setModifiedBy(String modifiedBy)
+    {
+        set("modified_by", modifiedBy);
+    }
+
+    public String getModifiedDate()
+    {
+        return getString("modified_date");
+    }
+
+    public void setModifiedDate(String modifiedDate)
+    {
+        set("modified_date", modifiedDate);
+    }
+
+    public String getDescription()
+    {
+        return getString("description");
+    }
+
+    public void setDescription(String description)
+    {
+        set("description", description);
+    }
+
 }

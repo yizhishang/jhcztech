@@ -13,43 +13,44 @@ import java.util.List;
  */
 public class DBPage<T>
 {
-    
+
     //缺省时一页显示的记录数
     public static final int NUMBERS_PER_PAGE = 10;
-    
+
     //一页显示的记录数
     private final int numPerPage;
-    
+
     //记录总数
     private int totalRows;
-    
+
     //总页数
     private int totalPages;
-    
+
     //当前页码
     private int currentPage;
-    
+
     //起始行数
     private int startIndex;
-    
+
     //结束行数
     private int lastIndex;
-    
+
     //结果集存放List
     private List<T> dataList;
-    
+
     private boolean firstFlag = true;
-    
+
     private boolean prevFlag = true;
-    
+
     private boolean nextFlag = true;
-    
+
     private boolean lastFlag = true;
-    
+
     private String buttonType = "";
-    
+
     /**
      * 分页构造函数
+     *
      * @param currentPage 当前页
      * @param numPerPage  每页记录数
      */
@@ -60,80 +61,85 @@ public class DBPage<T>
         //设置要显示的页数
         this.currentPage = currentPage;
     }
-    
+
     private void calcLastIndex()
     {
-        if (totalRows < numPerPage)
-        {
+        if (totalRows < numPerPage) {
             lastIndex = totalRows;
-        }
-        else if ((totalRows % numPerPage == 0) || (totalRows % numPerPage != 0 && currentPage < totalPages))
-        {
+        } else if ((totalRows % numPerPage == 0) || (totalRows % numPerPage != 0 && currentPage < totalPages)) {
             lastIndex = currentPage * numPerPage;
-        }
-        else if (totalRows % numPerPage != 0 && currentPage == totalPages)
-        {
+        } else if (totalRows % numPerPage != 0 && currentPage == totalPages) {
             lastIndex = totalRows;
         }
     }
-    
+
     private void calcStartIndex()
     {
         startIndex = (currentPage - 1) * numPerPage;
     }
-    
+
     private void calcTotalPages()
     {
-        if (totalRows % numPerPage == 0)
-        {
+        if (totalRows % numPerPage == 0) {
             totalPages = totalRows / numPerPage;
-        }
-        else
-        {
+        } else {
             totalPages = (totalRows / numPerPage) + 1;
         }
     }
-    
+
     public String first(String show)
     {
         if (firstFlag == false)
             return renderButton(show, true, 0);
         return renderButton(show, false, 1);
     }
-    
+
     /**
      * 获得当前页码
+     *
      * @return
      */
     public int getCurrentPage()
     {
         return currentPage;
     }
-    
+
     /**
      * 获得分页数据
+     *
      * @return
      */
     public List<T> getData()
     {
-        if (dataList != null && dataList.size() > getNumPerPage())
-        {
+        if (dataList != null && dataList.size() > getNumPerPage()) {
             return dataList.subList(getStartIndex(), getLastIndex());
         }
         return dataList;
     }
-    
+
+    /**
+     * 设置分页对象的数据
+     *
+     * @param dataList
+     */
+    public void setData(List<T> dataList)
+    {
+        this.dataList = dataList;
+    }
+
     /**
      * 获得当前分页记录最后记录位置
+     *
      * @return
      */
     public int getLastIndex()
     {
         return lastIndex;
     }
-    
+
     /**
      * 根据url构造分页字符串
+     *
      * @param url url
      * @return 分页字符串
      */
@@ -141,176 +147,94 @@ public class DBPage<T>
     {
         String linkStr = "";
         String scriptTmp = "";
-        
+
         int pageNumber = currentPage;
         int pages = totalPages;
         int total = totalRows;
-        
+
         linkStr += "共 <b>" + total + "</b> 条&nbsp;当前 <b>" + pageNumber + "</b>/<b>" + pages + "</b> 页&nbsp;&nbsp;";
-        if (url.indexOf("?") > 0)
-        { //已经带有一个参数
+        if (url.indexOf("?") > 0) { //已经带有一个参数
             url = url + "&";
-        }
-        else
-        {
+        } else {
             url = url + "?";
         }
-        if ((pageNumber == 1) && (pageNumber < pages))
-        {
-            linkStr += "首页&nbsp;上一页&nbsp;<a href='" + url + "&pageNumber=" + (pageNumber + 1) + "'>下一页</a>&nbsp;<a href='" + url + "&pageNumber=" + pages
-                    + "'>尾页</a>&nbsp;跳到<input type=text name=jump id=jump size=3 style=\"text-align:center\" value='" + pageNumber
-                    + "'>页&nbsp;<img border=\"0\" src=\"" + path
-                    + "/images/button020.gif\" width=\"20\" height=\"18\"  style=\"cursor:hand;\" onclick=\"javascript:checkPage();\">";
+        if ((pageNumber == 1) && (pageNumber < pages)) {
+            linkStr += "首页&nbsp;上一页&nbsp;<a href='" + url + "&pageNumber=" + (pageNumber + 1) + "'>下一页</a>&nbsp;" +
+                    "<a href='" + url + "&pageNumber=" + pages + "'>尾页</a>&nbsp;跳到<input type=text name=jump id=jump " +
+                    "size=3 style=\"text-align:center\" value='" + pageNumber + "'>页&nbsp;<img border=\"0\" src=\"" +
+                    path + "/images/button020.gif\" width=\"20\" height=\"18\"  style=\"cursor:hand;\" " +
+                    "onclick=\"javascript:checkPage();\">";
+        } else if ((pageNumber > 1) && (pageNumber < pages)) {
+
+            linkStr += "<a href='" + url + "&pageNumber=1'>首页</a>&nbsp;" +
+                    "<a href='" + url + "&pageNumber=" + (pageNumber - 1) + "'>上一页</a>&nbsp;" +
+                    "<a href='" + url + "&pageNumber=" + (pageNumber + 1) + "'>下一页&nbsp;" +
+                    "<a href='" + url + "&pageNumber=" + pages + "'>尾页</a>&nbsp;跳到<input type=text name=jump id=jump " +
+                    "size=3 style=\"text-align:center\" value='" + pageNumber + "'>页&nbsp;<img border=\"0\" src=\"" +
+                    path + "/images/button020.gif\" width=\"20\" height=\"18\"  style=\"cursor:hand;\" " +
+                    "onclick=\"javascript:checkPage();\">";
+        } else if ((pageNumber == pages) && (pages > 1)) {
+            linkStr += "<a href='" + url + "&pageNumber=1'>首页</a>&nbsp;" +
+                    "<a href='" + url + "&pageNumber=" + (pageNumber - 1) + "'>上一页</a>&nbsp;下一页&nbsp;尾页&nbsp;跳到<input" +
+                    " type=text name=jump id=jump size=3 style=\"text-align:center\" value='" + pageNumber +
+                    "'>页&nbsp;<img border=\"0\" src=\"" + path + "/images/button020.gif\" width=\"20\" height=\"18\" " +
+                    "style=\"cursor:hand;\" onclick=\"javascript:checkPage();\">";
         }
-        else if ((pageNumber > 1) && (pageNumber < pages))
-        {
-            
-            linkStr += "<a href='" + url + "&pageNumber=1'>首页</a>&nbsp;<a href='" + url + "&pageNumber=" + (pageNumber - 1) + "'>上一页</a>&nbsp;<a href='" + url
-                    + "&pageNumber=" + (pageNumber + 1) + "'>下一页&nbsp;<a href='" + url + "&pageNumber=" + pages
-                    + "'>尾页</a>&nbsp;跳到<input type=text name=jump id=jump size=3 style=\"text-align:center\" value='" + pageNumber
-                    + "'>页&nbsp;<img border=\"0\" src=\"" + path
-                    + "/images/button020.gif\" width=\"20\" height=\"18\"  style=\"cursor:hand;\" onclick=\"javascript:checkPage();\">";
-        }
-        else if ((pageNumber == pages) && (pages > 1))
-        {
-            linkStr += "<a href='" + url + "&pageNumber=1'>首页</a>&nbsp;<a href='" + url + "&pageNumber=" + (pageNumber - 1)
-                    + "'>上一页</a>&nbsp;下一页&nbsp;尾页&nbsp;跳到<input type=text name=jump id=jump size=3 style=\"text-align:center\" value='" + pageNumber
-                    + "'>页&nbsp;<img border=\"0\" src=\"" + path
-                    + "/images/button020.gif\" width=\"20\" height=\"18\" style=\"cursor:hand;\" onclick=\"javascript:checkPage();\">";
-        }
-        scriptTmp += "<SCRIPT LANGUAGE=\"JavaScript\">\n<!--\nfunction checkPage()\n {\n if(document.getElementById(\"jump\").value > "
-                + pages
-                + ") {\n alert('您输入的页码超出范围，请重新输入！');\n document.getElementById('jump').focus();\n return false;\n} else if(document.getElementById('jump').value < 1) {\n alert('您输入的页码超出范围，请重新输入！');\n document.getElementById('jump').focus();\n return false;\n} else {\n jumpTo('"
-                + url + "');\n}\n}\n//-->\n</SCRIPT>";
-        scriptTmp += "<SCRIPT LANGUAGE=\"JavaScript\">\n<!--\nfunction jumpTo(url)\n {\n self.location.href=\"" + url + "&pageNumber=\"+"
-                + "document.getElementById(\"jump\").value;\n}\n//-->\n</SCRIPT>";
+        scriptTmp += "<SCRIPT LANGUAGE=\"JavaScript\">\n<!--\nfunction checkPage()\n {\n if(document.getElementById" +
+                "(\"jump\").value > " + pages + ") {\n alert('您输入的页码超出范围，请重新输入！');\n document.getElementById('jump')" +
+                ".focus();\n return false;\n} else if(document.getElementById('jump').value < 1) {\n alert" +
+                "('您输入的页码超出范围，请重新输入！');\n document.getElementById('jump').focus();\n return false;\n} else {\n jumpTo" +
+                "('" + url + "');\n}\n}\n//-->\n</SCRIPT>";
+        scriptTmp += "<SCRIPT LANGUAGE=\"JavaScript\">\n<!--\nfunction jumpTo(url)\n {\n self.location.href=\"" + url
+                + "&pageNumber=\"+" + "document.getElementById(\"jump\").value;\n}\n//-->\n</SCRIPT>";
         linkStr += scriptTmp;
         //System.out.println(linkStr);
         return linkStr;
     }
-    
+
     /**
      * 获得每页显示的记录数
+     *
      * @return
      */
     public int getNumPerPage()
     {
         return numPerPage;
     }
-    
+
     /**
      * 获得当前分页记录开始位置
+     *
      * @return
      */
     public int getStartIndex()
     {
         return startIndex;
     }
-    
+
     /**
      * 获得总页数
+     *
      * @return
      */
     public int getTotalPages()
     {
         return totalPages;
     }
-    
+
     /**
      * 获得总记录数
+     *
      * @return
      */
     public int getTotalRows()
     {
         return totalRows;
     }
-    
-    public String last(String show)
-    {
-        if (lastFlag == false)
-            return renderButton(show, true, 0);
-        return renderButton(show, false, totalPages);
-    }
-    
-    public String next(String show)
-    {
-        if (nextFlag == false)
-            return renderButton(show, true, 0);
-        return renderButton(show, false, (currentPage + 1));
-    }
-    
-    public String preview(String show)
-    {
-        if (prevFlag == false)
-            return renderButton(show, true, 0);
-        return renderButton(show, false, (currentPage - 1));
-    }
-    
-    private String renderButton(String show, boolean disabled, int page)
-    {
-        if (buttonType.equalsIgnoreCase("text"))
-            return renderText(show, disabled, page);
-        
-        String temp = "";
-        if (disabled == true)
-            temp = "disabled";
-        return "<input type=\"submit\" class=\"pageButton\" value=\"" + show + "\" onclick=\"goToPage(" + page + ",this.form)\" " + temp + ">\n";
-    }
-    
-    private String renderText(String show, boolean disabled, int page)
-    {
-        if (disabled == true)
-            return show;
-        return "<a class=\"pageLink\" href=\"javascript:toPage(" + page + ")\">" + show + "</a>";
-    }
-    
-    public void setButtonType(String buttonType)
-    {
-        this.buttonType = buttonType;
-    }
-    
-    /**
-     * 设置分页对象的数据
-     * @param dataList
-     */
-    public void setData(List<T> dataList)
-    {
-        this.dataList = dataList;
-    }
-    
-    /**
-     * 设置分页按钮信息
-     */
-    private void setPageButton()
-    {
-        if (totalPages == 0 || totalPages == 1)
-        {
-            firstFlag = false;
-            prevFlag = false;
-            nextFlag = false;
-            lastFlag = false;
-            return;
-        }
-        
-        if (currentPage > totalPages)
-        {
-            currentPage = totalPages;
-        }
-        
-        if (currentPage <= 1 || currentPage == 0)
-        {
-            firstFlag = false;
-            prevFlag = false;
-        }
-        if (currentPage >= totalPages || totalPages == 0)
-        {
-            lastFlag = false;
-            nextFlag = false;
-        }
-    }
-    
+
     /**
      * 设置总的记录数，设置此数据后，此方法会计算其它的数值
+     *
      * @param totalRows 总的记录数
      * @param totalRows
      */
@@ -326,5 +250,77 @@ public class DBPage<T>
         calcLastIndex();
         //计算分页按钮信息
         setPageButton();
+    }
+
+    public String last(String show)
+    {
+        if (lastFlag == false)
+            return renderButton(show, true, 0);
+        return renderButton(show, false, totalPages);
+    }
+
+    public String next(String show)
+    {
+        if (nextFlag == false)
+            return renderButton(show, true, 0);
+        return renderButton(show, false, (currentPage + 1));
+    }
+
+    public String preview(String show)
+    {
+        if (prevFlag == false)
+            return renderButton(show, true, 0);
+        return renderButton(show, false, (currentPage - 1));
+    }
+
+    private String renderButton(String show, boolean disabled, int page)
+    {
+        if (buttonType.equalsIgnoreCase("text"))
+            return renderText(show, disabled, page);
+
+        String temp = "";
+        if (disabled == true)
+            temp = "disabled";
+        return "<input type=\"submit\" class=\"pageButton\" value=\"" + show + "\" onclick=\"goToPage(" + page + "," +
+                "this.form)\" " + temp + ">\n";
+    }
+
+    private String renderText(String show, boolean disabled, int page)
+    {
+        if (disabled == true)
+            return show;
+        return "<a class=\"pageLink\" href=\"javascript:toPage(" + page + ")\">" + show + "</a>";
+    }
+
+    public void setButtonType(String buttonType)
+    {
+        this.buttonType = buttonType;
+    }
+
+    /**
+     * 设置分页按钮信息
+     */
+    private void setPageButton()
+    {
+        if (totalPages == 0 || totalPages == 1) {
+            firstFlag = false;
+            prevFlag = false;
+            nextFlag = false;
+            lastFlag = false;
+            return;
+        }
+
+        if (currentPage > totalPages) {
+            currentPage = totalPages;
+        }
+
+        if (currentPage <= 1 || currentPage == 0) {
+            firstFlag = false;
+            prevFlag = false;
+        }
+        if (currentPage >= totalPages || totalPages == 0) {
+            lastFlag = false;
+            nextFlag = false;
+        }
     }
 }

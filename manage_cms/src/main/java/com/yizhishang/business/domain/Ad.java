@@ -14,233 +14,233 @@ import com.yizhishang.base.domain.DynaModel;
 public class Ad extends DynaModel
 {
 
-    public void setId(int id)
-    {
-        set("ad_id", id);
-    }
-    
     public int getId()
     {
         return getInt("ad_id");
     }
-    
-    public void setSiteno(String siteno)
+
+    public void setId(int id)
     {
-        set("siteno", siteno);
+        set("ad_id", id);
     }
-    
+
     public String getSiteno()
     {
         return getString("siteno");
     }
-    
-    public void setGroupId(String group_id)
+
+    public void setSiteno(String siteno)
     {
-        set("group_id", group_id);
+        set("siteno", siteno);
     }
-    
+
     public String getGroupId()
     {
         return getString("group_id");
     }
-    
-    public void setType(String type)
+
+    public void setGroupId(String group_id)
     {
-        set("type", type);
+        set("group_id", group_id);
     }
-    
+
     public String getType()
     {
         return getString("type");
     }
-    
-    public void setName(String name)
+
+    public void setType(String type)
     {
-        set("name", name);
+        set("type", type);
     }
-    
+
     public String getName()
     {
         return getString("name");
     }
-    
-    public void setUrl(String url)
+
+    public void setName(String name)
     {
-        set("url", url);
+        set("name", name);
     }
-    
+
     public String getUrl()
     {
         return getString("url");
     }
-    
-    public void setPicture(String picture)
+
+    public void setUrl(String url)
     {
-        set("picture", picture);
+        set("url", url);
     }
-    
+
     public String getPicture()
     {
         return getString("picture");
     }
-    
-    public void setDescription(String description)
+
+    public void setPicture(String picture)
     {
-        set("description", description);
+        set("picture", picture);
     }
-    
+
     public String getDescription()
     {
         return getString("description");
     }
-    
-    public void setWidth(int width)
+
+    public void setDescription(String description)
     {
-        set("width", width);
+        set("description", description);
     }
-    
+
     public int getWidth()
     {
         return getInt("width");
     }
-    
-    public void setHeight(int height)
+
+    public void setWidth(int width)
     {
-        set("height", height);
+        set("width", width);
     }
-    
+
     public int getHeight()
     {
         return getInt("height");
     }
-    
-    public void setStartTime(String start_time)
+
+    public void setHeight(int height)
     {
-        set("start_time", start_time);
+        set("height", height);
     }
-    
+
     public String getStartTime()
     {
         return getString("start_time");
     }
-    
-    public void setEndTime(String end_time)
+
+    public void setStartTime(String start_time)
     {
-        set("end_time", end_time);
+        set("start_time", start_time);
     }
-    
+
     public String getEndTime()
     {
         return getString("end_time");
     }
-    
-    public void setFileType(String file_type)
+
+    public void setEndTime(String end_time)
     {
-        set("file_type", file_type);
+        set("end_time", end_time);
     }
-    
+
     public String getFileType()
     {
         return getString("file_type");
     }
-    
-    public void setOrderline(String orderline)
+
+    public void setFileType(String file_type)
     {
-        set("orderline", orderline);
+        set("file_type", file_type);
     }
-    
+
     public String getOrderline()
     {
         return getString("orderline");
     }
-    
-    public void setState(int state)
+
+    public void setOrderline(String orderline)
     {
-        set("state", state);
+        set("orderline", orderline);
     }
-    
+
     public int getState()
     {
         return getInt("state");
     }
-    
-    public void setCreateBy(String create_by)
+
+    public void setState(int state)
     {
-        set("create_by", create_by);
+        set("state", state);
     }
-    
+
     public String getCreateBy()
     {
         return getString("create_by");
     }
-    
-    public void setCreateDate(String create_date)
+
+    public void setCreateBy(String create_by)
     {
-        set("create_date", create_date);
+        set("create_by", create_by);
     }
-    
+
     public String getCreateDate()
     {
         return getString("create_date");
     }
-    
-    public void setModifiedBy(String modified_by)
+
+    public void setCreateDate(String create_date)
     {
-        set("modified_by", modified_by);
+        set("create_date", create_date);
     }
-    
+
     public String getModifiedBy()
     {
         return getString("modified_by");
     }
-    
-    public void setModifiedDate(String modified_date)
+
+    public void setModifiedBy(String modified_by)
     {
-        set("modified_date", modified_date);
+        set("modified_by", modified_by);
     }
-    
+
     public String getModifiedDate()
     {
         return getString("modified_date");
     }
-    
-    public void setFileState(String file_state)
+
+    public void setModifiedDate(String modified_date)
     {
-        set("file_state", file_state);
+        set("modified_date", modified_date);
     }
-    
+
     public String getFileState()
     {
         return getString("file_state");
     }
-    
-    public void setTemplate(String template)
+
+    public void setFileState(String file_state)
     {
-        set("template", template);
+        set("file_state", file_state);
     }
-    
+
     public String getTemplate()
     {
         return getString("template");
     }
-    
-    public void setTemplateSize(String template_size)
+
+    public void setTemplate(String template)
     {
-        set("template_size", template_size);
+        set("template", template);
     }
-    
+
     public String getTemplateSize()
     {
         return getString("template_size");
     }
-    
-    public void setGroupName(String groupName)
+
+    public void setTemplateSize(String template_size)
     {
-        set("groupname", groupName);
+        set("template_size", template_size);
     }
-    
+
     public String getGroupName()
     {
         return getString("groupname");
+    }
+
+    public void setGroupName(String groupName)
+    {
+        set("groupname", groupName);
     }
 }

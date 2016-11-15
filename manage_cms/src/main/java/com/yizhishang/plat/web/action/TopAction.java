@@ -1,15 +1,14 @@
 package com.yizhishang.plat.web.action;
 
-import java.util.List;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.yizhishang.base.util.SessionHelper;
 import com.yizhishang.base.util.UserHelper;
 import com.yizhishang.plat.Constants;
 import com.yizhishang.plat.system.SysLibrary;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * 描述:
@@ -24,30 +23,31 @@ import com.yizhishang.plat.system.SysLibrary;
 @RequestMapping("/admin/topAdmin")
 public class TopAction extends BaseAction
 {
-	
-	    /**
+
+    /**
      * 缺省的操作(function=""时调用)
+     *
      * @return
      */
     @SuppressWarnings("rawtypes")
     @RequestMapping("/default.action")
-	public String doDefault(Model model)
-	{
-		List list = SysLibrary.getSecurityCatalogTree(getSession());
-		dataMap.put("rootMenus", list);
-		dataMap.put("userName", UserHelper.getUserName());
-		
+    public String doDefault(Model model)
+    {
+        List list = SysLibrary.getSecurityCatalogTree(getSession());
+        dataMap.put("rootMenus", list);
+        dataMap.put("userName", UserHelper.getUserName());
+
         //允许访问的站点信息
-		List sites = (List) SessionHelper.getObject(Constants.USER_ALL_SITENO, getSession());
-		dataMap.put("sites", sites);
-		
+        List sites = (List) SessionHelper.getObject(Constants.USER_ALL_SITENO, getSession());
+        dataMap.put("sites", sites);
+
         //当前站点编号
-		String siteno = getSiteNo();
-		dataMap.put("siteNo", siteno);
-		
-		model.addAttribute("data", dataMap);
-		
+        String siteno = getSiteNo();
+        dataMap.put("siteNo", siteno);
+
+        model.addAttribute("data", dataMap);
+
         //获得相关数据并放主dataMap中
-		return "/WEB-INF/views/top.jsp";
-	}
+        return "/WEB-INF/views/top.jsp";
+    }
 }

@@ -1,8 +1,7 @@
 package com.yizhishang.base.util;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 描述:	 Response工具类
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ResponseHelper
 {
+
     /**
      * 把内容打印到HttpServletResponse中
      *
@@ -23,15 +23,12 @@ public class ResponseHelper
      */
     public static void print(HttpServletResponse response, String content)
     {
-        try
-        {
+        try {
             response.getWriter().print(content);
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
         }
     }
-    
+
     /**
      * 把内容打印到HttpServletResponse中
      *
@@ -40,31 +37,25 @@ public class ResponseHelper
      */
     public static void print(HttpServletResponse response, Object content)
     {
-    	try
-    	{
-    		response.getWriter().print(content);
-    	}
-    	catch (IOException ex)
-    	{
-    	}
+        try {
+            response.getWriter().print(content);
+        } catch (IOException ex) {
+        }
     }
-    
+
     /**
      * 把内容打印到HttpServletResponse中
      *
-     * @param response HttpServletResponse对象
-     * @param content  需要输出的内容
-     * @param contentType  http输出类型内容
+     * @param response    HttpServletResponse对象
+     * @param content     需要输出的内容
+     * @param contentType http输出类型内容
      */
     public static void print(HttpServletResponse response, Object content, String contentType)
     {
-        try
-        {
-        	response.setContentType(contentType);
+        try {
+            response.setContentType(contentType);
             response.getWriter().print(content);
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
         }
     }
 
@@ -76,15 +67,12 @@ public class ResponseHelper
      */
     public static void println(HttpServletResponse response, Object content)
     {
-        try
-        {
+        try {
             response.getWriter().print(content);
-        }
-        catch (IOException ex)
-        {
+        } catch (IOException ex) {
         }
     }
-    
+
     /**
      * 把内容打印到HttpServletResponse中
      *
@@ -93,12 +81,9 @@ public class ResponseHelper
      */
     public static void println(HttpServletResponse response, String content)
     {
-    	try
-    	{
-    		response.getWriter().print(content);
-    	}
-    	catch (IOException ex)
-    	{
-    	}
+        try {
+            response.getWriter().print(content);
+        } catch (IOException ex) {
+        }
     }
 }

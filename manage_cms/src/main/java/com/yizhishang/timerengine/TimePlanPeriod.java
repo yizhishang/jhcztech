@@ -1,15 +1,15 @@
 package com.yizhishang.timerengine;
 
+import com.yizhishang.timerengine.util.Util;
 
 import java.util.Date;
-
-import com.yizhishang.timerengine.util.Util;
 
 /**
  * "周期性间隔"的时间计划方案类
  */
 public class TimePlanPeriod extends AbstractTimePlan
 {
+
     /**
      * 间隔时间,单位毫秒
      */
@@ -21,8 +21,7 @@ public class TimePlanPeriod extends AbstractTimePlan
         Date returnDate = this.currentDate;
 
         //若得到的时间比当前的时间还早，则继续获得下一个启动时间
-        while (Util.isDateBeforeCurrentDate(returnDate))
-        {
+        while (Util.isDateBeforeCurrentDate(returnDate)) {
             returnDate = Util.dateAddSpaceMilliSecond(returnDate, spaceTime);
         }
 
@@ -31,7 +30,6 @@ public class TimePlanPeriod extends AbstractTimePlan
 
         return returnDate;
     }
-
 
     public String getTimePlanString()
     {
@@ -51,17 +49,14 @@ public class TimePlanPeriod extends AbstractTimePlan
         return Util.getMSecondDescribe(spaceTime);
     }
 
-
     public int getSpaceTime()
     {
         return spaceTime;
     }
 
-
     public void setSpaceTime(int MilliSecond)
     {
         spaceTime = MilliSecond;
     }
-
 
 }

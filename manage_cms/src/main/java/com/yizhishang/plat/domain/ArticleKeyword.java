@@ -13,6 +13,7 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class ArticleKeyword extends DynaModel
 {
+
     public int getId()
     {
         return getInt("id");

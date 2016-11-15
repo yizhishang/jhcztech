@@ -1,13 +1,12 @@
 package com.yizhishang.base.jdbc.connection;
 
+import com.yizhishang.base.jdbc.exception.JdbcException;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
-
-import javax.sql.DataSource;
-
-import com.yizhishang.base.jdbc.exception.JdbcException;
 
 /**
  * 描述:	 数据库连接管理
@@ -21,66 +20,57 @@ import com.yizhishang.base.jdbc.exception.JdbcException;
 
 public final class ConnManager
 {
-    
+
     private static Configure configure = Configure.getInstance();
-    
+
     /**
      * 开始数据库事务
+     *
      * @param conn
      */
     public static void begin(Connection conn)
     {
-        try
-        {
-            if (conn != null && !conn.isClosed())
-            {
+        try {
+            if (conn != null && !conn.isClosed()) {
                 conn.setAutoCommit(false);
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new JdbcException(ex);
         }
     }
-    
+
     /**
      * 关闭数据库连接
+     *
      * @param conn
      */
     public static void close(Connection conn)
     {
-        try
-        {
-            if (conn != null && !conn.isClosed())
-            {
+        try {
+            if (conn != null && !conn.isClosed()) {
                 conn.close();
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new JdbcException("", ex);
         }
     }
-    
+
     /**
      * 提交数据库事务
+     *
      * @param conn
      */
     public static void commit(Connection conn)
     {
-        try
-        {
-            if (conn != null && !conn.isClosed())
-            {
+        try {
+            if (conn != null && !conn.isClosed()) {
                 conn.commit();
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new JdbcException("", ex);
         }
     }
-    
+
     /**
      * 获得缺省的数据源的数据库连接
      *
@@ -88,18 +78,15 @@ public final class ConnManager
      */
     public static Connection getConnection()
     {
-        try
-        {
+        try {
             DataSource dataSource = configure.getDataSource();
             Connection conn = dataSource.getConnection();
             return conn;
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new JdbcException(ex);
         }
     }
-    
+
     /**
      * 根据datasource.xml文件中配置的数据源ID，得到对应的数据库连接
      *
@@ -108,29 +95,26 @@ public final class ConnManager
      */
     public static Connection getConnection(String id)
     {
-        try
-        {
+        try {
             DataSource dataSource = configure.getDataSource(id);
             Connection conn = dataSource.getConnection();
             return conn;
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new JdbcException(ex);
         }
     }
-    
+
     /**
      * 描述：获得数据库单连接
      * 作者：刘宝
      * 时间：2011-11-14 下午01:17:35
+     *
      * @param id
      * @return
      */
     public static Connection getSingleConn(String id)
     {
-        try
-        {
+        try {
             HashMap<String, Object> xmlMap = configure.getDbConnXmlMap(id);
             String driverName = (String) xmlMap.get("driver-name");
             String url = (String) xmlMap.get("url");
@@ -139,30 +123,25 @@ public final class ConnManager
             Class.forName(driverName).newInstance();
             Connection conn = DriverManager.getConnection(url, user, password);
             return conn;
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new JdbcException(ex);
         }
     }
-    
+
     /**
      * 回滚数据库事务
+     *
      * @param conn
      */
     public static void rollback(Connection conn)
     {
-        try
-        {
-            if (conn != null && !conn.isClosed())
-            {
+        try {
+            if (conn != null && !conn.isClosed()) {
                 conn.rollback();
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             throw new JdbcException("", ex);
         }
     }
-    
+
 }

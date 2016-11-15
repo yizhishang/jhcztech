@@ -1,7 +1,11 @@
 package com.yizhishang.plat.web.action;
 
-import javax.annotation.Resource;
-
+import com.yizhishang.base.config.SysConfig;
+import com.yizhishang.base.jdbc.DBPage;
+import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.plat.domain.Log;
+import com.yizhishang.plat.domain.Result;
+import com.yizhishang.plat.service.LogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,12 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.yizhishang.base.config.SysConfig;
-import com.yizhishang.base.jdbc.DBPage;
-import com.yizhishang.base.util.StringHelper;
-import com.yizhishang.plat.domain.Log;
-import com.yizhishang.plat.domain.Result;
-import com.yizhishang.plat.service.LogService;
+import javax.annotation.Resource;
 
 /**
  * 描述:  系统日志管理
@@ -29,12 +28,13 @@ import com.yizhishang.plat.service.LogService;
 @RequestMapping("/admin/logAdmin")
 public class LogAction extends BaseAction
 {
-    
+
     @Resource
     LogService logService;
-    
+
     /**
      * 列出相应的日志信息
+     *
      * @return
      */
     @RequestMapping("/doDefault.action")
@@ -54,54 +54,50 @@ public class LogAction extends BaseAction
         String siteno = getLoginSiteNo();
         DBPage<Log> page = logService.getPageData(curPage, SysConfig.getRowOfPage(), siteno, keyword, uid);
         dataMap.put("page", page);
-        
+
         model.addAttribute("data", dataMap);
         return "/WEB-INF/views/log/list_log.jsp";
     }
-    
+
     /**
      * 删除日志信息
+     *
      * @return
      */
     @SuppressWarnings("finally")
-	@ResponseBody
+    @ResponseBody
     @RequestMapping("/delete.action")
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false, rollbackFor = Exception.class)
     public Result doDelete()
     {
-    	Result result = new Result();
-        try
-        {
+        Result result = new Result();
+        try {
             int[] idArray = getIntArrayParameter("id");
-            for (int i = 0; i < idArray.length; i++)
-            {
+            for (int i = 0; i < idArray.length; i++) {
                 logService.deleteLog(idArray[i]);
             }
             MESSAGE = "删除日志成功";
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             MESSAGE = "删除日志失败";
             result.setErrorNo(-1);
             throw new Exception();
-        }
-        finally
-        {
+        } finally {
             addLog("删除日志", MESSAGE);
             result.setErrorInfo(MESSAGE);
             return result;
         }
     }
-    
+
     /**
      * 删除全部日志
+     *
      * @return
      */
     @ResponseBody
     @RequestMapping("/deleteAll.action")
     public Result doDeleteAll()
     {
-    	Result result = new Result();
+        Result result = new Result();
         logService.deleteAllLog();
         MESSAGE = "删除所有日志成功";
         addLog("删除所有日志", MESSAGE);

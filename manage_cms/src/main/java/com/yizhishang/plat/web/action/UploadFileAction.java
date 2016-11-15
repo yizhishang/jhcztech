@@ -1,13 +1,8 @@
 package com.yizhishang.plat.web.action;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.yizhishang.base.util.FileHelper;
+import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.plat.domain.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,9 +13,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.yizhishang.base.util.FileHelper;
-import com.yizhishang.base.util.StringHelper;
-import com.yizhishang.plat.domain.Result;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 描述: UploadFileAction.java文件传输
@@ -35,16 +33,17 @@ import com.yizhishang.plat.domain.Result;
 @RequestMapping("/admin/UploadFileAdmin")
 public class UploadFileAction extends BaseAction
 {
-    
+
     private final Logger logger = LoggerFactory.getLogger(UploadFileAction.class);
-    
+
     /**
      * 描述: fileUpload  上传文件
      * 作者: 袁永君
      * 创建日期: 2016-1-7
      * 创建时间: 上午1:31:27
+     *
      * @param request
-     * @return  result
+     * @return result
      * @throws IOException
      */
     @ResponseBody
@@ -52,20 +51,15 @@ public class UploadFileAction extends BaseAction
     public Result fileUpload(HttpServletRequest request) throws IOException
     {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        
-        // 获得文件：   
+
+        // 获得文件：
         List<MultipartFile> uploadfile = multipartRequest.getFiles("uploadfile");
-        if (uploadfile != null && uploadfile.size() > 0)
-        {
+        if (uploadfile != null && uploadfile.size() > 0) {
             String realPath = request.getSession().getServletContext().getRealPath("/");
-            for (MultipartFile file : uploadfile)
-            {
-                if (file.isEmpty())
-                {
+            for (MultipartFile file : uploadfile) {
+                if (file.isEmpty()) {
                     return new Result(-1, "请选择文件后上传");
-                }
-                else
-                {
+                } else {
                     String fileName = file.getOriginalFilename();
                     String name = file.getName();
                     String type = file.getContentType();
@@ -75,24 +69,21 @@ public class UploadFileAction extends BaseAction
                     System.out.println("文件长度: " + size);
                     System.out.println("文件类型: " + type);
                     System.out.println("========================================");
-                    try
-                    {
+                    try {
                         String savePath = realPath + "/upload/" + fileName;
-                        
+
                         FileCopyUtils.copy(file.getBytes(), new File(savePath));
                         result.setErrorNo(0);
                         result.setErrorInfo("上传成功!");
-                        
+
                         Map<String, Object> fileData = new HashMap<String, Object>();
                         fileData.put("name", name);
                         fileData.put("path", "/upload/" + fileName);
                         fileData.put("size", size);
                         fileData.put("type", type);
-                        
+
                         result.setObj(fileData);
-                    }
-                    catch (IOException e)
-                    {
+                    } catch (IOException e) {
                         logger.error(e.getMessage());
                         addLog("上传图片失败", e.getMessage());
                         result.setErrorNo(-1);
@@ -101,18 +92,17 @@ public class UploadFileAction extends BaseAction
                 }
             }
             return result;
-        }
-        else
-        {
+        } else {
             return new Result(-1, "请选择文件后上传");
         }
     }
-    
+
     /**
      * 描述: deleteFile删除文件
      * 作者: 袁永君
      * 创建日期: 2016-1-7
      * 创建时间: 上午1:29:08
+     *
      * @return
      */
     @ResponseBody
@@ -120,28 +110,27 @@ public class UploadFileAction extends BaseAction
     public Result deleteFile()
     {
         String filePath = getStrParameter("filePath");
-        if (StringHelper.isEmpty(filePath))
-        {
+        if (StringHelper.isEmpty(filePath)) {
             return new Result(-1, "需要删除的文件不存在");
         }
-        
+
         String realPath = getSession().getServletContext().getRealPath("/");
         String fileAbsPath = realPath + filePath;
         fileAbsPath = FileHelper.normalize(fileAbsPath);
-        if (!FileHelper.isFile(fileAbsPath))
-        {
+        if (!FileHelper.isFile(fileAbsPath)) {
             return new Result(-1, "需要删除的文件不存在");
         }
-        
+
         FileHelper.deleteFile(fileAbsPath);
         result.setErrorNo(0);
         result.setErrorInfo("成功删除文件" + fileAbsPath);
         return result;
     }
-    
-    /*** 
-     * 读取上传文件中得所有文件并返回 
-     * @return 
+
+    /***
+     * 读取上传文件中得所有文件并返回
+     *
+     * @return
      */
     @RequestMapping("list")
     public ModelAndView list(HttpServletRequest request)
@@ -150,9 +139,8 @@ public class UploadFileAction extends BaseAction
         ModelAndView mav = new ModelAndView("list");
         File uploadDest = new File(filePath);
         String[] fileNames = uploadDest.list();
-        for (int i = 0; i < fileNames.length; i++)
-        {
-            //打印出文件名  
+        for (int i = 0; i < fileNames.length; i++) {
+            //打印出文件名
             System.out.println(fileNames[i]);
         }
         return mav;

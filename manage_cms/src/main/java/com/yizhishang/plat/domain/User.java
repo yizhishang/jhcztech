@@ -13,8 +13,9 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class User extends DynaModel
 {
-	
+
     public static int STATE_CLOSE = 0;
+
     public static int STATE_OPEN = 1;
 
     public int getId()

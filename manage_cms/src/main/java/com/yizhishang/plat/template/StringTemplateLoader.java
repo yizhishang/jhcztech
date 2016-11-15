@@ -2,13 +2,13 @@ package com.yizhishang.plat.template;/*
  * Copyright (c) 2009 Your Corporation. All Rights Reserved.
  */
 
+import freemarker.cache.TemplateLoader;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
-
-import freemarker.cache.TemplateLoader;
 
 /**
  * 描述:
@@ -21,8 +21,9 @@ import freemarker.cache.TemplateLoader;
  */
 public class StringTemplateLoader implements TemplateLoader
 {
+
     private static final String DEFAULT_TEMPLATE_KEY = "_default_template_key";
-    
+
     private final Map<String, String> templates = new HashMap<String, String>();
 
     public StringTemplateLoader()
@@ -32,20 +33,17 @@ public class StringTemplateLoader implements TemplateLoader
 
     public StringTemplateLoader(String defaultTemplate)
     {
-        if (defaultTemplate != null && !defaultTemplate.equals(""))
-        {
+        if (defaultTemplate != null && !defaultTemplate.equals("")) {
             templates.put(DEFAULT_TEMPLATE_KEY, defaultTemplate);
         }
     }
 
     public void AddTemplate(String name, String template)
     {
-        if (name == null || template == null || name.equals("") || template.equals(""))
-        {
+        if (name == null || template == null || name.equals("") || template.equals("")) {
             return;
         }
-        if (!templates.containsKey(name))
-        {
+        if (!templates.containsKey(name)) {
             templates.put(name, template);
         }
     }
@@ -58,8 +56,7 @@ public class StringTemplateLoader implements TemplateLoader
     @Override
     public Object findTemplateSource(String name) throws IOException
     {
-        if (name == null || name.equals(""))
-        {
+        if (name == null || name.equals("")) {
             name = DEFAULT_TEMPLATE_KEY;
         }
         return templates.get(name);

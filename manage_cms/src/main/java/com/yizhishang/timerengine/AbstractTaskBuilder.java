@@ -1,15 +1,16 @@
 package com.yizhishang.timerengine;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.slf4j.Logger;import org.slf4j.LoggerFactory;
-
-
 public abstract class AbstractTaskBuilder implements TaskBuilder
 {
+
     private static Logger logger = LoggerFactory.getLogger(AbstractTaskBuilder.class);
 
     //保存每一个任务属性的Map，此处用Map保存，主要是为了以后扩充的需要
@@ -27,8 +28,7 @@ public abstract class AbstractTaskBuilder implements TaskBuilder
     protected Date generateStartDate(Date startDate)
     {
         //若启动时间为空，则产生一个启动时间,在当前的时间上加5秒
-        if (startDate == null)
-        {
+        if (startDate == null) {
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.SECOND, 5);
             startDate = cal.getTime();
@@ -36,17 +36,13 @@ public abstract class AbstractTaskBuilder implements TaskBuilder
         return startDate;
     }
 
-
     public int getInt(String name)
     {
         int intRet = 0;
         String intStr = (String) propMap.get(name);
-        try
-        {
+        try {
             intRet = Integer.parseInt(intStr);
-        }
-        catch (NumberFormatException ex)
-        {
+        } catch (NumberFormatException ex) {
         }
 
         return intRet;
@@ -61,8 +57,7 @@ public abstract class AbstractTaskBuilder implements TaskBuilder
     public void setTaskProperty(HashMap<String, String> taskPropMap)
     {
         Iterator<String> iter = taskPropMap.keySet().iterator();
-        while (iter.hasNext())
-        {
+        while (iter.hasNext()) {
             Object key = iter.next();
             propMap.put(key, taskPropMap.get(key));
         }
@@ -76,26 +71,18 @@ public abstract class AbstractTaskBuilder implements TaskBuilder
     protected Task taskObjectFromClassName(String className)
     {
         Task task = null;
-        try
-        {
+        try {
 
             Object object = Class.forName(className).newInstance();
-            if (object instanceof Task)
-            {
+            if (object instanceof Task) {
                 task = (Task) object;
             }
-        }
-        catch (InstantiationException ex)
-        {
-            logger.error("",ex);
-        }
-        catch (IllegalAccessException ex)
-        {
-            logger.error("",ex);
-        }
-        catch (ClassNotFoundException ex)
-        {
-            logger.error("",ex);
+        } catch (InstantiationException ex) {
+            logger.error("", ex);
+        } catch (IllegalAccessException ex) {
+            logger.error("", ex);
+        } catch (ClassNotFoundException ex) {
+            logger.error("", ex);
         }
 
         return task;

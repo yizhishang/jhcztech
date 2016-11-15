@@ -13,9 +13,10 @@ import java.util.Map;
  */
 public interface WebpartParser
 {
-    
+
     /**
      * 对部件进行解析，得到对应部件的HTML
+     *
      * @param context     解析上下文参数
      * @param webpartProp 部件的属性
      * @param viewStr     部件的视图字串

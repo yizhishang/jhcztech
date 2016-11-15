@@ -1,21 +1,5 @@
 package com.yizhishang.plat.web.action;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.StringTokenizer;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.yizhishang.base.config.SysConfig;
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
@@ -28,6 +12,20 @@ import com.yizhishang.plat.domain.Result;
 import com.yizhishang.plat.domain.User;
 import com.yizhishang.plat.service.GroupService;
 import com.yizhishang.plat.web.form.DynaForm;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * 描述: 用户组管理
@@ -42,26 +40,24 @@ import com.yizhishang.plat.web.form.DynaForm;
 @RequestMapping("/admin/groupAdmin")
 public class GroupAction extends BaseAction
 {
-    
+
     @Resource
     GroupService groupService;
-    
+
     @ResponseBody
     @RequestMapping("add.action")
     public Result add(HttpServletRequest request)
     {
-        
+
         Result result = new Result();
         DynaForm form = normalize(request);
-        if (StringHelper.isEmpty(form.getString("name")))
-        {
+        if (StringHelper.isEmpty(form.getString("name"))) {
             MESSAGE = "名字不能为空";
             result.setErrorNo(-1);
             result.setErrorInfo(MESSAGE);
             return result;
         }
-        if (groupService.isGroupExist(form.getString("name")))
-        {
+        if (groupService.isGroupExist(form.getString("name"))) {
             MESSAGE = "相同标志的组已经存在";
             result.setErrorNo(-1);
             result.setErrorInfo(MESSAGE);
@@ -76,17 +72,18 @@ public class GroupAction extends BaseAction
         group.setModified_date(DateHelper.formatDate(new Date()));
         group.setCreate_by(getUID());
         groupService.addGroup(group);
-        
+
         MESSAGE = "添加组[name=" + group.getName() + "]";
         addLog("添加组", MESSAGE);
         result.setErrorInfo(MESSAGE);
         return result;
     }
-    
+
     /**
-    * 添加组
-    * @return
-    */
+     * 添加组
+     *
+     * @return
+     */
     @Override
     @RequestMapping("doAdd.action")
     public ModelAndView doAdd()
@@ -94,9 +91,10 @@ public class GroupAction extends BaseAction
         mv.setViewName("/WEB-INF/views/group/add_group.jsp");
         return mv;
     }
-    
+
     /**
      * 添加组用户
+     *
      * @return String
      */
     @ResponseBody
@@ -105,26 +103,21 @@ public class GroupAction extends BaseAction
     {
         int group_Id = getIntParameter("group_id");
         String userIdStr = getStrParameter("userIdStr");
-        try
-        {
+        try {
             userIdStr = URLDecoder.decode(userIdStr, "utf-8");
-        }
-        catch (UnsupportedEncodingException e)
-        {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return null;
         }
         StringTokenizer tokenizer = new StringTokenizer(userIdStr, "|");
         List<User> userList = groupService.getGroupUser(group_Id);
         DynaModel existIdMap = new DynaModel();
-        for (Iterator<User> iter = userList.iterator(); iter.hasNext();)
-        {
+        for (Iterator<User> iter = userList.iterator(); iter.hasNext(); ) {
             User user = (User) iter.next();
             existIdMap.set(String.valueOf(user.getId()), user.getId());
         }
-        
-        while (tokenizer.hasMoreTokens())
-        {
+
+        while (tokenizer.hasMoreTokens()) {
             String userId = tokenizer.nextToken();
             if (!(existIdMap.containsKey(userId))) //若当前用户不在当前角色的用户，则需要添加此用户
             {
@@ -132,18 +125,19 @@ public class GroupAction extends BaseAction
             }
         }
         addLog("添加组用户", "添加组[id=" + group_Id + "]的用户[" + userIdStr + "]");
-        
+
         Result result = new Result();
         MESSAGE = "添加用户成功";
         result.setErrorInfo(MESSAGE);
         return result;
     }
-    
+
     /**
-    * 缺省的操作(function=""时调用)
-    * 列出所有的组信息
-    * @return
-    */
+     * 缺省的操作(function=""时调用)
+     * 列出所有的组信息
+     *
+     * @return
+     */
     @Override
     @RequestMapping("doDefault.action")
     public ModelAndView doDefault()
@@ -160,21 +154,20 @@ public class GroupAction extends BaseAction
         mv.addObject("data", dataMap);
         return mv;
     }
-    
+
     /**
-    * 删除组
-    * @return
-    */
+     * 删除组
+     *
+     * @return
+     */
     @ResponseBody
     @RequestMapping("delete.action")
     public Result doDelete()
     {
-        
-        if (isPostBack())
-        {
+
+        if (isPostBack()) {
             int[] idArray = getIntArrayParameter("id");
-            for (int i = 0; i < idArray.length; i++)
-            {
+            for (int i = 0; i < idArray.length; i++) {
                 groupService.deleteGroup(idArray[i]);
                 groupService.deleteGroupUser(idArray[i]);
                 addLog("删除组", "删除组[id=" + idArray[i] + "]");
@@ -183,14 +176,15 @@ public class GroupAction extends BaseAction
         }
         Result result = new Result();
         result.setErrorInfo("删除成功");
-        
+
         return result;
     }
-    
+
     /**
-    * 删除该组用户
-    * @return
-    */
+     * 删除该组用户
+     *
+     * @return
+     */
     @ResponseBody
     @RequestMapping("deleteGroupUser.action")
     public Result doDeleteGroupUser()
@@ -199,23 +193,22 @@ public class GroupAction extends BaseAction
         int groupId = getIntParameter("group_id");
         int[] idArray = getIntArrayParameter("id");
         String str = "";
-        for (int i = 0; i < idArray.length; i++)
-        {
+        for (int i = 0; i < idArray.length; i++) {
             groupService.deleteGroupUser(groupId, idArray[i]);
             str = str + idArray[i] + ",";
-            
+
         }
         addLog("删除组用户", "删除组[id=" + groupId + "]的用户[" + str + "]");
         MESSAGE = "删除组用户成功";
         result.setErrorInfo(MESSAGE);
         return result;
     }
-    
+
     /**
-    * 编辑组信息
-    *
-    * @return
-    */
+     * 编辑组信息
+     *
+     * @return
+     */
     @Override
     @RequestMapping("doEdit.action")
     public ModelAndView doEdit(HttpServletResponse response)
@@ -223,70 +216,66 @@ public class GroupAction extends BaseAction
         ModelAndView mv = new ModelAndView();
         int id = getIntParameter("id");
         Group group = groupService.findGroupById(id);
-        if (group != null)
-        {
+        if (group != null) {
             BeanHelper.beanToMap(group, form);
             mv.addObject("form", form);
-        }
-        else
-        {
+        } else {
             ScriptHelper.alert(response, "用户组信息不存在，请勿非法操作", "close");
             return mv;
         }
         mv.setViewName("/WEB-INF/views/group/edit_group.jsp");
         return mv;
     }
-    
+
     /**
-    * 查看组的所有用户
-    * @return
-    */
+     * 查看组的所有用户
+     *
+     * @return
+     */
     @RequestMapping("listGroupUser.action")
     public ModelAndView doListGroupUser(HttpServletResponse reponse)
     {
         ModelAndView mv = new ModelAndView();
-        
+
         int curPage = this.getIntParameter("page");
         curPage = (curPage <= 0) ? 1 : curPage;
-        
+
         int group_id = getIntParameter("group_id");
         String keyword = getStrParameter("keyword");
         Group group = groupService.findGroupById(group_id);
-        DBPage<DynaModel> page = groupService.getPageData(curPage, SysConfig.getRowOfPage(), getSiteNo(), group_id, keyword);
-        if (group != null)
-        {
+        DBPage<DynaModel> page = groupService.getPageData(curPage, SysConfig.getRowOfPage(), getSiteNo(), group_id,
+                keyword);
+        if (group != null) {
             dataMap.put("groupId", new Integer(group_id));
             dataMap.put("groupName", group.getName());
             dataMap.put("page", page);
             mv.addObject("data", dataMap);
-        }
-        else
-        {
+        } else {
             ScriptHelper.alert(reponse, "该组不存在或已经被删除", "close");
             return mv;
         }
         mv.setViewName("/WEB-INF/views/group/group_user.jsp");
         return mv;
     }
-    
+
     /**
-    * 查看组信息
-    * @return
-    */
+     * 查看组信息
+     *
+     * @return
+     */
     @RequestMapping("view.action")
     public ModelAndView doView()
     {
-    	ModelAndView mv = new ModelAndView("/WEB-INF/views/group/view_group.jsp");
+        ModelAndView mv = new ModelAndView("/WEB-INF/views/group/view_group.jsp");
         int id = getIntParameter("id");
-        if (id > 0)
-        {
+        if (id > 0) {
             Group group = groupService.findGroupById(id);
             BeanHelper.beanToMap(group, form);
             mv.addObject("form", form);
         }
         return mv;
     }
-    
+
     @ResponseBody
     @RequestMapping("edit.action")
     public Result edit(HttpServletRequest request)
@@ -294,24 +283,23 @@ public class GroupAction extends BaseAction
         //对提交上来的form进行处理
         Result result = new Result();
         DynaForm form = normalize(request);
-        if (StringHelper.isEmpty(form.getString("name")))
-        {
+        if (StringHelper.isEmpty(form.getString("name"))) {
             MESSAGE = "组名称不能为空";
             result.setErrorNo(-1);
             result.setErrorInfo(MESSAGE);
             return result;
         }
-        
+
         Group group = new Group();
         BeanHelper.mapToBean(form, group);
         group.setModified_by(getUID());
         group.setModified_by(DateHelper.formatDate(new Date()));
         groupService.updateGroup(group);
-        
+
         addLog("编辑组", "编辑组[name=" + group.getName() + "]");
         MESSAGE = "编辑组成功";
         result.setErrorInfo(MESSAGE);
         return result;
     }
-    
+
 }

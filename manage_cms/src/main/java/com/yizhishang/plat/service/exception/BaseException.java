@@ -22,18 +22,15 @@ public class BaseException extends Exception
         super();
     }
 
-
     public BaseException(String message)
     {
         super(message);
     }
 
-
     public BaseException(String message, Throwable cause)
     {
         super(message, cause);
     }
-
 
     public BaseException(Throwable cause)
     {
@@ -57,8 +54,7 @@ public class BaseException extends Exception
     {
         super.printStackTrace(writer);
 
-        if (getCause() != null)
-        {
+        if (getCause() != null) {
             getCause().printStackTrace(writer);
         }
         writer.flush();

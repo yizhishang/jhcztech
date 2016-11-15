@@ -11,6 +11,7 @@ package com.yizhishang.plat.system;
  */
 public class Application
 {
+
     private static String rootPath = "";
 
     private static String contextPath = "";
@@ -30,11 +31,13 @@ public class Application
         Application.rootPath = rootPath;
     }
 
-    public static String getContextPath() {
+    public static String getContextPath()
+    {
         return contextPath;
     }
 
-    public static void setContextPath(String contextPath) {
+    public static void setContextPath(String contextPath)
+    {
         Application.contextPath = contextPath;
     }
 }

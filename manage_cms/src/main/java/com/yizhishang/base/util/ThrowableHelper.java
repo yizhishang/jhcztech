@@ -14,6 +14,7 @@ import java.io.StringWriter;
  */
 public class ThrowableHelper
 {
+
     /**
      * 把异常和错误的信息转化为字串
      *
@@ -34,8 +35,7 @@ public class ThrowableHelper
     public static void getCaller()
     {
         StackTraceElement stack[] = (new Throwable()).getStackTrace();
-        for (int i = 0; i < stack.length; i++)
-        {
+        for (int i = 0; i < stack.length; i++) {
             StackTraceElement ste = stack[i];
             System.out.println(ste.getClassName() + "." + ste.getMethodName() + "(...)");
             System.out.println(i + "--" + ste.getMethodName());

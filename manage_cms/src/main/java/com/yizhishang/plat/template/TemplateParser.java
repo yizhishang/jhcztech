@@ -1,5 +1,16 @@
 package com.yizhishang.plat.template;
 
+import com.yizhishang.base.config.Configuration;
+import com.yizhishang.base.domain.DynaModel;
+import com.yizhishang.base.util.MapHelper;
+import com.yizhishang.base.util.ReflectHelper;
+import com.yizhishang.base.util.SpringContextHolder;
+import com.yizhishang.base.util.StringHelper;
+import com.yizhishang.plat.service.TemplateVarService;
+import com.yizhishang.plat.system.Application;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,18 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.yizhishang.base.config.Configuration;
-import com.yizhishang.base.domain.DynaModel;
-import com.yizhishang.base.util.MapHelper;
-import com.yizhishang.base.util.ReflectHelper;
-import com.yizhishang.base.util.SpringContextHolder;
-import com.yizhishang.base.util.StringHelper;
-import com.yizhishang.plat.service.TemplateVarService;
-import com.yizhishang.plat.system.Application;
 
 /**
  * 描述:
@@ -36,7 +35,6 @@ public final class TemplateParser
 
     private final Logger logger = LoggerFactory.getLogger(TemplateParser.class);
 
-
     /**
      * 模板解析上下文
      */
@@ -49,6 +47,7 @@ public final class TemplateParser
 
     /**
      * 分析属性字串到Map对象中
+     *
      * @param propStr 需要分解的属性字串
      * @return 分解后的Map对象
      */
@@ -61,8 +60,7 @@ public final class TemplateParser
 
         //开始正则表达式匹配
         matcher = pattern.matcher(propStr);
-        while (matcher.find())
-        {
+        while (matcher.find()) {
             String name = matcher.group(1);
             String value = matcher.group(2);
             propMap.put(name, value);
@@ -73,6 +71,7 @@ public final class TemplateParser
 
     /**
      * 获得部件的缺省视图，该文件应该和类文件放在同样的目录,名称为"部件名.view"
+     *
      * @param webpartName
      * @return
      */
@@ -80,35 +79,24 @@ public final class TemplateParser
     {
         StringBuffer buffer = new StringBuffer();
         InputStream inStream = null;
-        try
-        {
+        try {
             String path = Configuration.getString("publish.viewPath") + webpartName + ".view";
             inStream = TemplateParser.class.getResourceAsStream(path);
-            if (inStream != null)
-            {
+            if (inStream != null) {
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inStream));
                 String lineStr = "";
-                while ((lineStr = reader.readLine()) != null)
-                {
+                while ((lineStr = reader.readLine()) != null) {
                     buffer.append(lineStr + "\r\n");
                 }
             }
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             logger.error("", ex);
-        }
-        finally
-        {
-            if (inStream != null)
-            {
-                try
-                {
+        } finally {
+            if (inStream != null) {
+                try {
                     inStream.close();
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                 }
             }
         }
@@ -118,6 +106,7 @@ public final class TemplateParser
 
     /**
      * 分析Webpart的内容
+     *
      * @param webpartProp
      * @param viewStr
      * @return
@@ -132,26 +121,24 @@ public final class TemplateParser
 
         //生成部件解析类的实例
         WebpartParser parser = null;
-        String clazz = Configuration.getString("publish.viewPath").replace("/",".") + webpartName;
+        String clazz = Configuration.getString("publish.viewPath").replace("/", ".") + webpartName;
         parser = (WebpartParser) ReflectHelper.objectForName(clazz);
-        if (parser == null)
-        {
+        if (parser == null) {
             throw new RuntimeException("无法实例化具体的部件处理类[" + clazz + "]，不能解析此部件！");
         }
-
 
         return parser.parse(context, webpartProp, viewStr);
     }
 
     /**
      * 对模板进行解析
+     *
      * @param template 需要解析的模板字串
      * @return 解析的模板内容
      */
     public String parse(String template)
     {
-        if (StringHelper.isEmpty(template))
-        {
+        if (StringHelper.isEmpty(template)) {
             //throw new RuntimeException("模板内容为空!");
             context.addErrMsg("模版内容为空!");
             return "";
@@ -162,10 +149,8 @@ public final class TemplateParser
         //从数据库中提取模板变量
         TemplateVarService templateVarService = (TemplateVarService) SpringContextHolder.getBean("templateVarService");
         List<DynaModel> dataList = templateVarService.findAllUsableItem();
-        if (dataList != null && dataList.size() > 0)
-        {
-            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext();)
-            {
+        if (dataList != null && dataList.size() > 0) {
+            for (Iterator<DynaModel> iter = dataList.iterator(); iter.hasNext(); ) {
                 DynaModel var = (DynaModel) iter.next();
                 String name = var.getString("item_name").trim();
                 String value = var.getString("item_value").trim();
@@ -180,8 +165,7 @@ public final class TemplateParser
 
         //获取设置的系统变量
         Map<String, Object> varsMap = context.getAllVariable();
-        for (Iterator<String> iter = varsMap.keySet().iterator(); iter.hasNext();)
-        {
+        for (Iterator<String> iter = varsMap.keySet().iterator(); iter.hasNext(); ) {
             String name = iter.next();
             String value = (String) varsMap.get(name);
             templateVars.put("@" + name, value);
@@ -193,6 +177,7 @@ public final class TemplateParser
 
     /**
      * 解析具体的模板内容
+     *
      * @param templateVars 需要全局替换的系统变量
      * @param template     具体模板内容
      * @return 处理后的模板内容
@@ -207,15 +192,15 @@ public final class TemplateParser
         //第二步：处理模板中的部件标记
         result = parseWebpart(result);
 
-        //增加转义符  modify by 20120317 
+        //增加转义符  modify by 20120317
         result = StringHelper.replace(result, "&frasl;", "/");
-        
+
         return result;
     }
 
-
     /**
      * 分析模板，替换模板中的系统变量标记
+     *
      * @param templateVars 系统变量数据
      * @param template     模板内容
      * @return
@@ -233,8 +218,7 @@ public final class TemplateParser
 
         //开始正则表达式匹配
         matcher = pattern.matcher(template);
-        while (matcher.find())
-        {
+        while (matcher.find()) {
             //匹配到的webpart的内容的开始位置
             start = matcher.start();
 
@@ -260,6 +244,7 @@ public final class TemplateParser
 
     /**
      * 分析模板,替换模板中的webpart部件标记
+     *
      * @param template 模板内容
      * @return
      */
@@ -278,6 +263,7 @@ public final class TemplateParser
 
     /**
      * 分析模板,替换模板中的webpart部件标记(，如:<web:listWebpart catalogId=1000 .... />)
+     *
      * @param template
      * @return
      */
@@ -294,8 +280,7 @@ public final class TemplateParser
 
         //开始正则表达式匹配
         matcher = pattern.matcher(template);
-        while (matcher.find())
-        {
+        while (matcher.find()) {
             //匹配到的webpart的内容的开始位置
             start = matcher.start();
 
@@ -312,12 +297,9 @@ public final class TemplateParser
             Map<String, Object> webpartProp = decodePropStr(propStr);
 
             //解析部件，获取部件的内容
-            try
-            {
+            try {
                 buffer.append(getWebpartContent(webpartName, webpartProp, ""));
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 String strMsg = "解析部件出错：[" + webpartStr + "]";
                 logger.error(strMsg, ex);
                 context.addErrMsg(strMsg);
@@ -333,12 +315,14 @@ public final class TemplateParser
 
     /**
      * 分析模板,替换模板中的webpart部件标记(如:<web:listWebpart catalogId=1000 ...> ..... </web:listWebpart>)
+     *
      * @param template
      * @return
      */
     private String parseWebpartType2(String template)
     {
-        Pattern pattern = Pattern.compile("<web:([a-z]*)([^/>]*?)>([\\s\\S]*?)</([a-z]*):([a-z]*)>", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("<web:([a-z]*)([^/>]*?)>([\\s\\S]*?)</([a-z]*):([a-z]*)>", Pattern
+                .CASE_INSENSITIVE);
         Matcher matcher = null;
 
         StringBuffer buffer = new StringBuffer();
@@ -349,8 +333,7 @@ public final class TemplateParser
 
         //开始正则表达式匹配
         matcher = pattern.matcher(template);
-        while (matcher.find())
-        {
+        while (matcher.find()) {
             //匹配到的webpart的内容的开始位置
             start = matcher.start();
 
@@ -368,12 +351,9 @@ public final class TemplateParser
             Map<String, Object> webpartProp = decodePropStr(propStr);
 
             //获取每一个部件替换后的内容
-            try
-            {
+            try {
                 buffer.append(getWebpartContent(webpartName, webpartProp, viewStr));
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 String strMsg = "解析部件出错：[" + webpartStr + "]";
                 logger.error(strMsg, ex);
                 context.addErrMsg(strMsg);

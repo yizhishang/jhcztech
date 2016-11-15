@@ -1,8 +1,8 @@
 package com.yizhishang.plat.web.form;
 
-import java.util.HashMap;
-
 import com.yizhishang.base.domain.DynaModel;
+
+import java.util.HashMap;
 
 /**
  * 描述:
@@ -15,11 +15,12 @@ import com.yizhishang.base.domain.DynaModel;
  */
 public class DynaForm extends HashMap<String, Object>
 {
-    
+
     private static final long serialVersionUID = 1L;
 
     /**
      * 返回boolean值
+     *
      * @param name 键值名称
      * @return 若不存在，或转换失败，则返回FALSE
      */
@@ -36,19 +37,13 @@ public class DynaForm extends HashMap<String, Object>
         if (obj == null)
             return false;
 
-        if (!(obj instanceof Boolean))
-        {
-            try
-            {
+        if (!(obj instanceof Boolean)) {
+            try {
                 value = Boolean.valueOf(obj.toString()).booleanValue();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 value = false;
             }
-        }
-        else
-        {
+        } else {
             value = ((Boolean) obj).booleanValue();
             obj = null;
         }
@@ -75,19 +70,13 @@ public class DynaForm extends HashMap<String, Object>
         if (obj == null)
             return 0;
 
-        if (!(obj instanceof Integer))
-        {
-            try
-            {
+        if (!(obj instanceof Integer)) {
+            try {
                 value = Integer.parseInt(obj.toString());
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 value = 0;
             }
-        }
-        else
-        {
+        } else {
             value = ((Integer) obj).intValue();
             obj = null;
         }
@@ -96,43 +85,37 @@ public class DynaForm extends HashMap<String, Object>
     }
 
     /**
-         * 返回长整型值
-         *
-         * @param name 键值名称
-         * @return 若不存在，或转换失败，则返回0
-         */
-        public long getLong(String name)
-        {
-            if (name == null || name.equals(""))
-                return 0;
-    
-            long value = 0;
-            if (containsKey(name) == false)
-                return 0;
-    
-            Object obj = get(name);
-            if (obj == null)
-                return 0;
-    
-            if (!(obj instanceof Long))
-            {
-                try
-                {
-                    value = Long.parseLong(obj.toString());
-                }
-                catch (Exception ex)
-                {
-                    value = 0;
-                }
+     * 返回长整型值
+     *
+     * @param name 键值名称
+     * @return 若不存在，或转换失败，则返回0
+     */
+    public long getLong(String name)
+    {
+        if (name == null || name.equals(""))
+            return 0;
+
+        long value = 0;
+        if (containsKey(name) == false)
+            return 0;
+
+        Object obj = get(name);
+        if (obj == null)
+            return 0;
+
+        if (!(obj instanceof Long)) {
+            try {
+                value = Long.parseLong(obj.toString());
+            } catch (Exception ex) {
+                value = 0;
             }
-            else
-            {
-                value = ((Long) obj).longValue();
-                obj = null;
-            }
-    
-            return value;
+        } else {
+            value = ((Long) obj).longValue();
+            obj = null;
         }
+
+        return value;
+    }
 
     /**
      * 获得对象
@@ -150,7 +133,6 @@ public class DynaForm extends HashMap<String, Object>
         return get(name);
     }
 
-
     /**
      * 根据给定的名字返回一个字符串数组,若具体的值是string数组，则直接返回
      * 若是其它的对象，则把该对象转换为字串，然后返回只有一个元素的string数组
@@ -161,12 +143,9 @@ public class DynaForm extends HashMap<String, Object>
     public String[] getStrArray(String name)
     {
         Object value = getObject(name);
-        if (value instanceof String[])
-        {
+        if (value instanceof String[]) {
             return (String[]) value;
-        }
-        else
-        {
+        } else {
             String[] strArray = new String[1];
             strArray[0] = value.toString();
             return strArray;
@@ -206,7 +185,6 @@ public class DynaForm extends HashMap<String, Object>
         put(name, new Boolean(value));
     }
 
-
     /**
      * 向Map中添加整数
      *
@@ -219,15 +197,15 @@ public class DynaForm extends HashMap<String, Object>
     }
 
     /**
-    * 向Map中添加长整型
-    *
-    * @param name  键值名称
-    * @param value 整型值
-    */
-public void set(String name, long value)
-{
-    put(name, new Long(value));
-}
+     * 向Map中添加长整型
+     *
+     * @param name  键值名称
+     * @param value 整型值
+     */
+    public void set(String name, long value)
+    {
+        put(name, new Long(value));
+    }
 
     /**
      * 向Map中添加Object值
@@ -256,8 +234,9 @@ public void set(String name, long value)
         else
             put(name, value);
     }
-    
-    public void putAll(DynaModel map){
-    	putAll(map.toMap());
+
+    public void putAll(DynaModel map)
+    {
+        putAll(map.toMap());
     }
 }

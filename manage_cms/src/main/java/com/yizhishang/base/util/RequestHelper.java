@@ -1,18 +1,17 @@
 package com.yizhishang.base.util;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.util.Enumeration;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Enumeration;
 
 /**
  * 描述: Request工具类
@@ -25,14 +24,16 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 public final class RequestHelper
 {
-    
+
     /**
      * 转发请求.
+     *
      * @param request  HTTP请求.
      * @param response HTTP响应.
      * @param url      需转发到的URL.
      */
-    public static void dispatchRequest(HttpServletRequest request, HttpServletResponse response, String url) throws IOException, ServletException
+    public static void dispatchRequest(HttpServletRequest request, HttpServletResponse response, String url) throws
+            IOException, ServletException
     {
         RequestDispatcher rd = request.getRequestDispatcher(url);
         rd.forward(request, response);
@@ -41,6 +42,7 @@ public final class RequestHelper
 
     /**
      * 从HttpServletRequest中提取属性值
+     *
      * @param request       HttpServletRequest对象
      * @param attributeName 属性名称
      * @return
@@ -50,43 +52,40 @@ public final class RequestHelper
         Object value = request.getAttribute(attributeName);
         return value == null ? null : value;
     }
-    
+
     /**
      * 描述：从表单是提取数值，如果不存在，返回0
      * 时间：Oct 29, 2015 4:11:13 PM
-     * @param request request
+     *
+     * @param request   request
      * @param fieldName 表单名称
      * @return 数值，如果不存在，返回0
      */
     public static double getDouble(HttpServletRequest request, String fieldName)
     {
         String value = request.getParameter(fieldName);
-        if (StringHelper.isEmpty(value))
-        {
+        if (StringHelper.isEmpty(value)) {
             return 0;
         }
-        try
-        {
+        try {
             return new Double(value).doubleValue();
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             return 0;
         }
     }
 
     /**
      * 描述：从表单是提取数值，如果不存在，返回0
-     * @param request request
-     * @param fieldName 表单名称
+     *
+     * @param request      request
+     * @param fieldName    表单名称
      * @param defaultValue 缺省值
      * @return 数值，如果不存在，返回缺省值
      */
     public static double getDouble(HttpServletRequest request, String fieldName, double defaultValue)
     {
         double value = getDouble(request, fieldName);
-        if (value == 0)
-        {
+        if (value == 0) {
             value = defaultValue;
         }
         return value;
@@ -94,39 +93,36 @@ public final class RequestHelper
 
     /**
      * 从表单是提取数值，如果不存在，返回0
-     * @param request request
+     *
+     * @param request   request
      * @param fieldName 表单名称
      * @return 数值，如果不存在，返回0
      */
     public static int getInt(HttpServletRequest request, String fieldName)
     {
         String value = getString(request, fieldName);
-        if (StringHelper.isEmpty(value))
-        {
+        if (StringHelper.isEmpty(value)) {
             return 0;
         }
-        try
-        {
+        try {
             return new Integer(value).intValue();
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             return 0;
         }
     }
 
     /**
      * 描述：从表单是提取数值，如果不存在，返回0
-     * @param request request
-     * @param fieldName 表单名称
+     *
+     * @param request      request
+     * @param fieldName    表单名称
      * @param defaultValue 缺省值
      * @return 数值，如果不存在，返回缺省值
      */
     public static int getInt(HttpServletRequest request, String fieldName, int defaultValue)
     {
         int value = getInt(request, fieldName);
-        if (value == 0)
-        {
+        if (value == 0) {
             value = defaultValue;
         }
         return value;
@@ -136,25 +132,24 @@ public final class RequestHelper
      * 描述：提取数字数组
      * 作者：
      * 时间：Oct 29, 2015 4:16:00 PM
-     * @param request request
+     *
+     * @param request   request
      * @param fieldName 字段名
      * @return
      */
     public static int[] getIntArray(HttpServletRequest request, String fieldName)
     {
         String[] array = RequestHelper.getStringArray(request, fieldName);
-        if (array == null || array.length == 0)
-        {
+        if (array == null || array.length == 0) {
             return null;
         }
         int[] value = new int[array.length];
-        for (int i = 0; i < array.length; i++)
-        {
+        for (int i = 0; i < array.length; i++) {
             value[i] = Integer.parseInt(array[i]);
         }
         return value;
     }
-    
+
     /**
      * 从HttpServletRequest中提取属性值
      *
@@ -165,20 +160,16 @@ public final class RequestHelper
     public static int getIntAttribute(HttpServletRequest request, String attributeName)
     {
         String value = getStrAttribute(request, attributeName);
-        if (StringHelper.isEmpty(value))
-        {
+        if (StringHelper.isEmpty(value)) {
             return 0;
         }
-        try
-        {
+        try {
             return new Integer(value).intValue();
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             return 0;
         }
     }
-    
+
     /**
      * 从HttpServletRequest中提取属性值
      *
@@ -190,8 +181,7 @@ public final class RequestHelper
     public static int getIntAttribute(HttpServletRequest request, String attributeName, int defaultValue)
     {
         int value = getIntAttribute(request, attributeName);
-        if (value == 0)
-        {
+        if (value == 0) {
             value = defaultValue;
         }
         return value;
@@ -201,23 +191,20 @@ public final class RequestHelper
      * 描述：从表单是提取数值，如果不存在，返回0
      * 作者：
      * 时间：Oct 29, 2015 4:11:13 PM
-     * @param request request
+     *
+     * @param request   request
      * @param fieldName 表单名称
      * @return 数值，如果不存在，返回0
      */
     public static long getLong(HttpServletRequest request, String fieldName)
     {
         String value = getString(request, fieldName);
-        if (StringHelper.isEmpty(value))
-        {
+        if (StringHelper.isEmpty(value)) {
             return 0;
         }
-        try
-        {
+        try {
             return new Long(value).longValue();
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             return 0;
         }
     }
@@ -226,16 +213,16 @@ public final class RequestHelper
      * 描述：从表单是提取数值，如果不存在，返回0
      * 作者：
      * 时间：Oct 29, 2015 4:13:17 PM
-     * @param request request
-     * @param fieldName 表单名称
+     *
+     * @param request      request
+     * @param fieldName    表单名称
      * @param defaultValue 缺省值
      * @return 数值，如果不存在，返回缺省值
      */
     public static long getLong(HttpServletRequest request, String fieldName, long defaultValue)
     {
         long value = getLong(request, fieldName);
-        if (value == 0)
-        {
+        if (value == 0) {
             value = defaultValue;
         }
         return value;
@@ -250,6 +237,7 @@ public final class RequestHelper
 
     /**
      * 从HttpServletRequest中提取属性值
+     *
      * @param request       HttpServletRequest对象
      * @param attributeName 属性名称
      * @return
@@ -305,22 +293,17 @@ public final class RequestHelper
      * @param request      HttpServletRequest对象
      * @param fieldName    表单字段名称
      * @param defaultValue 缺省值
-     * @param encoding 解码所需编码 如：gbk、utf-8
+     * @param encoding     解码所需编码 如：gbk、utf-8
      * @return
      */
     public static String getString(HttpServletRequest request, String fieldName, String defaultValue, String encoding)
     {
         String value = request.getParameter(fieldName);
-        if (value != null && value.length() > 0)
-        {
-            if (encoding != null && encoding.length() > 0)
-            {
-                try
-                {
+        if (value != null && value.length() > 0) {
+            if (encoding != null && encoding.length() > 0) {
+                try {
                     value = URLDecoder.decode(value, encoding);
-                }
-                catch (UnsupportedEncodingException e)
-                {
+                } catch (UnsupportedEncodingException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -331,7 +314,8 @@ public final class RequestHelper
 
     /**
      * 时间：Oct 29, 2015 4:14:18 PM
-     * @param request request
+     *
+     * @param request   request
      * @param fieldName 字段名称
      * @return 字符串数组
      */
@@ -343,30 +327,30 @@ public final class RequestHelper
     /**
      * 描述：判断是否是提交回来
      * 时间：Oct 29, 2015 4:15:19 PM
+     *
      * @param request request
      * @return
      */
     public static boolean isPostBack(HttpServletRequest request)
     {
         String method = request.getMethod();
-        if ("POST".equalsIgnoreCase(method))
-        {
+        if ("POST".equalsIgnoreCase(method)) {
             return true;
         }
         return false;
     }
-    
+
     /**
      * 描述：删除request中的所有attribute值
      * 时间：Oct 29, 2015 4:16:23 PM
+     *
      * @param request request
      */
     @SuppressWarnings("rawtypes")
     public static void removeAllAttribute(HttpServletRequest request)
     {
         Enumeration enumeration = request.getAttributeNames();
-        while (enumeration.hasMoreElements())
-        {
+        while (enumeration.hasMoreElements()) {
             String name = (String) enumeration.nextElement();
             request.removeAttribute(name);
         }
@@ -374,9 +358,10 @@ public final class RequestHelper
 
     /**
      * 向HttpServletRequest中设置属性值
-     * @param request         HttpServletRequest对象
-     * @param attributeName   属性名称
-     * @param value           属性值
+     *
+     * @param request       HttpServletRequest对象
+     * @param attributeName 属性名称
+     * @param value         属性值
      */
     public static void setAttribute(HttpServletRequest request, String attributeName, Object value)
     {
@@ -385,6 +370,7 @@ public final class RequestHelper
 
     /**
      * 向HttpServletRequest中设置属性值
+     *
      * @param request       HttpServletRequest对象
      * @param attributeName 属性名称
      * @param value         属性值
@@ -393,12 +379,13 @@ public final class RequestHelper
     {
         request.setAttribute(attributeName, new Integer(value));
     }
-    
+
     /**
      * 向HttpServletRequest中设置属性值
-     * @param request         HttpServletRequest对象
-     * @param attributeName   属性名称
-     * @param value           属性值
+     *
+     * @param request       HttpServletRequest对象
+     * @param attributeName 属性名称
+     * @param value         属性值
      */
     public static void setStrAttribute(HttpServletRequest request, String attributeName, String value)
     {

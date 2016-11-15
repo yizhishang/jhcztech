@@ -1,10 +1,6 @@
 package com.yizhishang.plat.template;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 描述:
@@ -17,17 +13,6 @@ import java.util.Map;
  */
 public class Context
 {
-    
-    /**
-     * 当前目录的ID
-     */
-    private int catalogId = 0;
-
-
-    /**
-     * 当前发布的文章ID，只有在发布文章时才会传入此参数
-     */
-    private int articleId = 0;
 
     /**
      * 属性数据，可以附加
@@ -43,6 +28,16 @@ public class Context
      * 变量数据
      */
     private final Map<String, Object> variables = new HashMap<String, Object>();
+
+    /**
+     * 当前目录的ID
+     */
+    private int catalogId = 0;
+
+    /**
+     * 当前发布的文章ID，只有在发布文章时才会传入此参数
+     */
+    private int articleId = 0;
 
     /**
      * 添加错误码消息
@@ -67,6 +62,7 @@ public class Context
 
     /**
      * 获取所有变量
+     *
      * @return
      */
     public Map<String, Object> getAllVariable()
@@ -82,6 +78,16 @@ public class Context
     public int getArticleId()
     {
         return articleId;
+    }
+
+    /**
+     * 设置当前文章ID
+     *
+     * @param articleId
+     */
+    public void setArticleId(int articleId)
+    {
+        this.articleId = articleId;
     }
 
     /**
@@ -106,6 +112,16 @@ public class Context
     }
 
     /**
+     * 设置当前栏目ID
+     *
+     * @param catalogId
+     */
+    public void setCatalogId(int catalogId)
+    {
+        this.catalogId = catalogId;
+    }
+
+    /**
      * 获得错误消息
      *
      * @return
@@ -113,8 +129,7 @@ public class Context
     public String getErrMsg()
     {
         StringBuffer buffer = new StringBuffer();
-        for (Iterator<Object> iter = errList.iterator(); iter.hasNext();)
-        {
+        for (Iterator<Object> iter = errList.iterator(); iter.hasNext(); ) {
             String msg = (String) iter.next();
             buffer.append(msg + "\r\n");
         }
@@ -134,16 +149,6 @@ public class Context
     }
 
     /**
-     * 设置当前文章ID
-     *
-     * @param articleId
-     */
-    public void setArticleId(int articleId)
-    {
-        this.articleId = articleId;
-    }
-
-    /**
      * 设置属性对象
      *
      * @param name
@@ -152,15 +157,5 @@ public class Context
     public void setAttribute(String name, Object object)
     {
         attributes.put(name, object);
-    }
-
-    /**
-     * 设置当前栏目ID
-     *
-     * @param catalogId
-     */
-    public void setCatalogId(int catalogId)
-    {
-        this.catalogId = catalogId;
     }
 }

@@ -1,5 +1,20 @@
 package com.yizhishang.common.table.action;
 
+import com.yizhishang.base.domain.DynaModel;
+import com.yizhishang.base.util.RequestHelper;
+import com.yizhishang.common.table.consts.Consts;
+import com.yizhishang.common.table.service.TableColumnService;
+import com.yizhishang.common.table.service.TableService;
+import com.yizhishang.plat.domain.Result;
+import com.yizhishang.plat.web.action.BaseAction;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -8,36 +23,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.yizhishang.base.domain.DynaModel;
-import com.yizhishang.base.util.RequestHelper;
-import com.yizhishang.common.table.consts.Consts;
-import com.yizhishang.common.table.service.TableColumnService;
-import com.yizhishang.common.table.service.TableService;
-import com.yizhishang.plat.domain.Result;
-import com.yizhishang.plat.web.action.BaseAction;
-
 @Controller
 @RequestMapping("/admin/TableColumnAdmin")
 public class TableColumnAction extends BaseAction
 {
-    
+
     private final HashMap<String, Object> dataMap = new HashMap<String, Object>();
-    
+
     @Resource
     TableService tableService;
-    
+
     @Resource
     TableColumnService tableColumnService;
-    
+
     @Override
     @RequestMapping("/doDefault.action")
     public ModelAndView doDefault()
@@ -46,16 +44,15 @@ public class TableColumnAction extends BaseAction
         String name_en = getStrParameter("name_en", "").toLowerCase();
         String name_ch = getStrParameter("name_ch", "").toLowerCase();
         Map<String, Object> tableBean = tableService.load(table_id);
-        @SuppressWarnings("rawtypes")
-		List<Map> list = tableColumnService.getListData(table_id, name_en, name_ch);
+        @SuppressWarnings("rawtypes") List<Map> list = tableColumnService.getListData(table_id, name_en, name_ch);
         dataMap.put("tableBean", tableBean);
         dataMap.put("list", list);
-        
+
         mv.addObject("data", dataMap);
         mv.setViewName("/WEB-INF/views/tableconfig/tablecolumn/list.jsp");
         return mv;
     }
-    
+
     @ResponseBody
     @RequestMapping("/doImportCols.action")
     public Result doImportCols()
@@ -67,7 +64,7 @@ public class TableColumnAction extends BaseAction
         tableColumnService.importCols(tableBean);
         return new Result(0, "操作成功");
     }
-    
+
     @Override
     @ResponseBody
     @RequestMapping("/edit.action")
@@ -76,14 +73,13 @@ public class TableColumnAction extends BaseAction
         //        DynaForm form = normalize(request);
         //        DynaModel[] beans = TableColumnBean.getTableColumnBeanArray(form);
         DynaModel[] beans = normalizeList(request);
-        for (DynaModel dataRow : beans)
-        {
+        for (DynaModel dataRow : beans) {
             dataRow.remove("pageUrl");
         }
         tableColumnService.update(beans);
         return super.edit(request, response);
     }
-    
+
     @RequestMapping("/configSelect.action")
     public ModelAndView doConfigSelect()
     {
@@ -92,26 +88,21 @@ public class TableColumnAction extends BaseAction
         List<DynaModel> cols = tableColumnService.getTableCols(temp_id);
         DynaModel colBean = tableColumnService.load(temp_id);
         String input_type = colBean.getString("input_type");
-        if (Consts.input_type_open_select_checkbox.equals(input_type) || Consts.input_type_open_select_radio.equals(input_type)
-                || Consts.input_type_checkbox.equals(input_type) || Consts.input_type_radio.equals(input_type) || Consts.input_type_select.equals(input_type))
-        { // 不是可配置的输入框不陪你玩儿
+        if (Consts.input_type_open_select_checkbox.equals(input_type) || Consts.input_type_open_select_radio.equals
+                (input_type) || Consts.input_type_checkbox.equals(input_type) || Consts.input_type_radio.equals
+                (input_type) || Consts.input_type_select.equals(input_type)) { // 不是可配置的输入框不陪你玩儿
             String select_table = colBean.getString("select_table");
             String select_text_column = colBean.getString("select_text_column");
-            if ("t_enum_value".equals(select_table))
-            { // 数据字典
+            if ("t_enum_value".equals(select_table)) { // 数据字典
                 String select_condition = colBean.getString("select_condition");
                 String selected = tableColumnService.getEnumTypeSelected(select_condition);
                 dataMap.put("select_type", "sjzd");
                 dataMap.put("selected", selected);
-            }
-            else if ("t_b_dictionary".equals(select_table))
-            { // 手动配置
+            } else if ("t_b_dictionary".equals(select_table)) { // 手动配置
                 dataMap.put("select_type", "sdsr");
                 List<DynaModel> table_cols = tableColumnService.getSdsrList(colBean.getString("id"));
                 dataMap.put("dic_cols", table_cols);
-            }
-            else
-            { // 直接表关联
+            } else { // 直接表关联
                 String select_condition = colBean.getString("select_condition");
                 dataMap.put("select_type", "zdy");
                 dataMap.put("selected_table", select_table);
@@ -126,12 +117,12 @@ public class TableColumnAction extends BaseAction
         dataMap.put("list", enumList);
         dataMap.put("cols", cols);
         dataMap.put("temp_id", temp_id);
-        
+
         mv.addObject("data", dataMap);
         mv.setViewName("/WEB-INF/views/tableconfig/tablecolumn/select_config.jsp");
         return mv;
     }
-    
+
     @RequestMapping("/doSelectPageVal.action")
     public ModelAndView doSelectPageVal()
     {
@@ -141,16 +132,11 @@ public class TableColumnAction extends BaseAction
         String selected = getStrParameter("selected", "");
         DynaModel colBean = tableColumnService.load(colid);
         String input_type = colBean.getString("input_type");
-        if (Consts.input_type_open_select_checkbox.equals(input_type))
-        {
+        if (Consts.input_type_open_select_checkbox.equals(input_type)) {
             input_type = "checkbox";
-        }
-        else if (Consts.input_type_open_select_radio.equals(input_type))
-        {
+        } else if (Consts.input_type_open_select_radio.equals(input_type)) {
             input_type = "radio";
-        }
-        else
-        {
+        } else {
             input_type = "";
         }
         List<DynaModel> list = tableColumnService.getOptionBeans(colBean);
@@ -159,11 +145,11 @@ public class TableColumnAction extends BaseAction
         this.setAttribute("list", list);
         this.setAttribute("input_type", input_type);
         this.setAttribute("selected", selected);
-        
+
         mv.setViewName("/WEB-INF/views/common/select.jsp");
         return mv;
     }
-    
+
     @RequestMapping("/doAjaxSelectTable.action")
     public ModelAndView doAjaxSelectTable()
     {
@@ -174,49 +160,39 @@ public class TableColumnAction extends BaseAction
         dataMap.put("list", cols);
         dataMap.put("select_value", select_value);
         dataMap.put("select_text", select_text);
-        
+
         mv.addObject("data", dataMap);
         mv.setViewName("/WEB-INF/views/tableconfig/tablecolumn/select_table_config.jsp");
         return mv;
     }
-    
+
     public String doAjaxUpdateManualOption()
     {
         String temp_id = RequestHelper.getString(getRequest(), "temp_id", "");
         String item_value = RequestHelper.getString(getRequest(), "item_value", "");
         String item_text = "";
-        try
-        {
+        try {
             item_text = URLDecoder.decode(RequestHelper.getString(getRequest(), "item_text", ""), "utf-8");
-        }
-        catch (UnsupportedEncodingException e1)
-        {
+        } catch (UnsupportedEncodingException e1) {
             e1.printStackTrace();
         }
         String reusltStr = "suc";
-        if (!"".equals(temp_id))
-        {
+        if (!"".equals(temp_id)) {
             String[] values = item_value.split("\\,");
             String[] texts = item_text.split("\\,");
-            if (values.length == texts.length || values.length + 1 == texts.length)
-            {
+            if (values.length == texts.length || values.length + 1 == texts.length) {
                 tableColumnService.updateSdsr(temp_id, values, texts);
-            }
-            else
-            {
+            } else {
                 reusltStr = "error:wrong index!";
             }
         }
         PrintWriter writer = null;
-        try
-        {
+        try {
             writer = getResponse().getWriter();
             writer.print(reusltStr);
             writer.flush();
             writer.close();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;

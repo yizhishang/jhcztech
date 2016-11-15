@@ -17,20 +17,13 @@ public class TaskBuilderFactory
 
     public AbstractTaskBuilder getTaskBuilder(String taskType)
     {
-        if ("1".equalsIgnoreCase(taskType))
-        {
+        if ("1".equalsIgnoreCase(taskType)) {
             return new TaskOnceBuilder();
-        }
-        else if ("2".equalsIgnoreCase(taskType))
-        {
+        } else if ("2".equalsIgnoreCase(taskType)) {
             return new TaskPeriodBuilder();
-        }
-        else if ("3".equalsIgnoreCase(taskType))
-        {
+        } else if ("3".equalsIgnoreCase(taskType)) {
             return new TaskSelectWeekBuilder();
-        }
-        else if ("4".equalsIgnoreCase(taskType))
-        {
+        } else if ("4".equalsIgnoreCase(taskType)) {
             return new TaskSelectHourMinuteBuilder();
         }
 

@@ -1,15 +1,14 @@
 package com.yizhishang.plat.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.yizhishang.base.domain.DynaModel;
 import com.yizhishang.base.jdbc.DBPage;
 import com.yizhishang.base.service.BaseService;
 import com.yizhishang.plat.dao.Article_SourceDao;
 import com.yizhishang.plat.domain.Article_Source;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 描述:
@@ -23,12 +22,13 @@ import com.yizhishang.plat.domain.Article_Source;
 @Service
 public class Article_SourceService extends BaseService
 {
-	
-	@Autowired
-	Article_SourceDao dao;
 
-	/**
+    @Autowired
+    Article_SourceDao dao;
+
+    /**
      * 添加信息来源
+     *
      * @param article_source 组对象
      */
     public void addArticle_Source(Article_Source article_source)
@@ -59,6 +59,7 @@ public class Article_SourceService extends BaseService
 
     /**
      * 根据站点标识，查找该站点的所有信息来源
+     *
      * @param siteNo 站点编号
      * @return
      */

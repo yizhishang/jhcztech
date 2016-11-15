@@ -19,6 +19,7 @@ import com.yizhishang.plat.service.PublishLogService;
  */
 public class BasePromulgate
 {
+
     /**
      * 记录发布日志信息
      *

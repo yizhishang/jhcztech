@@ -14,83 +14,83 @@ import com.yizhishang.base.domain.DynaModel;
 public class Ad_Group extends DynaModel
 {
 
-	public void setId(int id)
-	{
-		set("id", id);
-	}
-	
-	public int getId()
-	{
-		return getInt("id");
-	}
-	
-	public void setName(String name)
-	{
-		set("name", name);
-	}
-	
-	public String getName()
-	{
-		return getString("name");
-	}
-	
-	public void setSiteNo(String siteno)
-	{
-		set("siteno", siteno);
-	}
-	
-	public String getSiteNo()
-	{
-		return getString("siteno");
-	}
-	
-	public void setCreateBy(String create_by)
-	{
-		set("create_by", create_by);
-	}
-	
-	public String getCreateBy()
-	{
-		return getString("create_by");
-	}
-	
-	public void setCreateDate(String create_date)
-	{
-		set("create_date", create_date);
-	}
-	
-	public String getCreateDate()
-	{
-		return getString("create_date");
-	}
-	
-	public void setModifiedBy(String modified_by)
-	{
-		set("modified_by", modified_by);
-	}
-	
-	public String getModifiedBy()
-	{
-		return getString("modified_by");
-	}
-	
-	public void setModifiedDate(String modified_date)
-	{
-		set("modified_date", modified_date);
-	}
-	
-	public String getModifiedDate()
-	{
-		return getString("modified_date");
-	}
-	
-	public void setOrderline(String orderline)
-	{
-		set("orderline", orderline);
-	}
-	
-	public String getOrderline()
-	{
-		return getString("orderline");
-	}
+    public int getId()
+    {
+        return getInt("id");
+    }
+
+    public void setId(int id)
+    {
+        set("id", id);
+    }
+
+    public String getName()
+    {
+        return getString("name");
+    }
+
+    public void setName(String name)
+    {
+        set("name", name);
+    }
+
+    public String getSiteNo()
+    {
+        return getString("siteno");
+    }
+
+    public void setSiteNo(String siteno)
+    {
+        set("siteno", siteno);
+    }
+
+    public String getCreateBy()
+    {
+        return getString("create_by");
+    }
+
+    public void setCreateBy(String create_by)
+    {
+        set("create_by", create_by);
+    }
+
+    public String getCreateDate()
+    {
+        return getString("create_date");
+    }
+
+    public void setCreateDate(String create_date)
+    {
+        set("create_date", create_date);
+    }
+
+    public String getModifiedBy()
+    {
+        return getString("modified_by");
+    }
+
+    public void setModifiedBy(String modified_by)
+    {
+        set("modified_by", modified_by);
+    }
+
+    public String getModifiedDate()
+    {
+        return getString("modified_date");
+    }
+
+    public void setModifiedDate(String modified_date)
+    {
+        set("modified_date", modified_date);
+    }
+
+    public String getOrderline()
+    {
+        return getString("orderline");
+    }
+
+    public void setOrderline(String orderline)
+    {
+        set("orderline", orderline);
+    }
 }

@@ -1,21 +1,21 @@
 package com.yizhishang.common.table.tag;
 
-import javax.servlet.jsp.JspWriter;
-
 import com.yizhishang.base.util.StringHelper;
 import com.yizhishang.base.util.ToolKit;
 import com.yizhishang.common.table.consts.Consts;
+
+import javax.servlet.jsp.JspWriter;
 
 /**
  * 专门用于配置页面动态生成下拉框
  */
 public class ConstSelectTag extends CommonTag
 {
-    
+
     private static final long serialVersionUID = -4495264469438501769L;
-    
+
     private String prefix = ""; // 前缀
-    
+
     public int doEndTag()
     {
         onChange = ToolKit.nullTrans(onChange, "");
@@ -23,8 +23,7 @@ public class ConstSelectTag extends CommonTag
         prefix = ToolKit.nullTrans(prefix, "input_type_");
         // 获取字段配置信息
         String optionStr = Consts.getInputTypeOptions(prefix, value);
-        try
-        {
+        try {
             JspWriter out = pageContext.getOut();
             StringBuffer sb = new StringBuffer();
             sb.append("<select name='" + name + "' id='" + id + "'");
@@ -38,19 +37,17 @@ public class ConstSelectTag extends CommonTag
             sb.append(optionStr);
             sb.append("</select>");
             out.print(sb.toString());
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return EVAL_PAGE;
     }
-    
+
     public String getPrefix()
     {
         return prefix;
     }
-    
+
     public void setPrefix(String prefix)
     {
         this.prefix = prefix;

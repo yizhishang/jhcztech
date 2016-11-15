@@ -11,7 +11,9 @@ package com.yizhishang.base.domain;
  */
 public class Config extends DynaModel
 {
-	public static int IS_SYSTEM_VALUE = 1;
+
+    public static int IS_SYSTEM_VALUE = 1;
+
     public static int IS_NOT_SYSTEM_VALUE = 0;
 
     public int getId()
@@ -74,13 +76,13 @@ public class Config extends DynaModel
         set("is_system", isSystem);
     }
 
-    public void setSiteNo(String siteNo)
-    {
-        set("siteno", siteNo);
-    }
-
     public String getSiteNo()
     {
         return getString("siteno");
+    }
+
+    public void setSiteNo(String siteNo)
+    {
+        set("siteno", siteNo);
     }
 }
